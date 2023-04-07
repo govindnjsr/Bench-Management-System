@@ -38,3 +38,52 @@
     width: 590px;
   }
   
+
+/* CSS for SideBar */
+
+  .fixed{
+    display: flex;
+    flex-direction: row; 
+    margin-right: 20px;
+   
+    
+}
+.left-panel{
+    background-color: rgb(110, 104, 104);
+    height:fit-content;
+    width:20%;
+    margin-left: 0%;
+}
+
+.logo{
+    background-color: rgb(110, 104, 104);
+    height: 8%;
+    position: fixed;
+    width: 19.7%;
+    color: white;
+}
+.filter-heading{
+    background-color: blanchedalmond;
+    height: 8%;
+    position: fixed;
+    margin-top: 3.5%;
+    width: 19.7%;
+}
+.filters{
+  display: flex;
+  flex-direction: column;
+  margin-top: 37%;
+  position:static;
+  color: white;
+  overflow-y: scroll;
+}
+
+.right-panel{
+    background-color: blanchedalmond;
+    height:100vh;
+    width:80%;
+    position: fixed;
+    margin-left: 20.5%;
+    margin-right: 30%;
+   
+}
