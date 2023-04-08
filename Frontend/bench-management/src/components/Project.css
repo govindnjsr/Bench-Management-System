@@ -77,7 +77,7 @@
   color: white;
   overflow-y: scroll;
 }
-
+/* 
 .right-panel{
     background-color: blanchedalmond;
     height:100vh;
@@ -86,6 +86,58 @@
     margin-left: 20.5%;
     margin-right: 30%;
    
+} */
+
+
+/* CSS for Cards_Tables */
+
+
+.component{
+  display:flex;
+  flex-direction: row;
+  margin-right: 2;
+  
+}
+
+
+.cards-table{
+  background-color: rgb(210, 216, 216);;
+  height: 100vh;
+  width:80.3%;
+  margin-left: 19.7%;
+  margin-top: 0%;
+  margin-right: 0%;
+  position: fixed;
+
+}
+
+.search{
+  background-color: rgb(64, 62, 62);
+  color: white;
+  height: 7.2%;
+}
+
+.cards-heading{
+  background-color: rgb(210, 216, 216);;
+  height: 8%;
+  color:black;
+}
+.cards{
+  background-color:rgb(44, 42, 42);
+  /* position: fixed; */
+}
+
+.table-heading{
+  background-color: rgb(210, 216, 216);
+  height: 8%;
+}
+
+.table-subheading{
+  height: 6%;
+  background-color: rgb(115, 114, 117);
+  display:flex;
+  flex-direction: row;
+  gap: 2%;
 }
 .hr-text {
   line-height: 1em;

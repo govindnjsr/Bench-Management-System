@@ -16,21 +16,18 @@ import java.util.Date;
 public class IntDetails {
 
     @Id
-    @GeneratedValue
-    public long SrNo;
-    public String Result;
-    public String Client;
-    public Date Date;
-
-
-//    @ManyToOne(
-//            cascade = CascadeType.ALL
-//    )
-//    @JoinColumn(
-//            name="teacher_id",
-//            referencedColumnName = "teacherId"
-//
-//    )
-//    private Teacher teacher;
+    @SequenceGenerator(
+            name = "intdetails_seq",
+            sequenceName = "intdetails_seq",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "intdetails_seq"
+    )
+    private long srNo;
+    private String result;
+    private String client;
+    private Date date;
 
 }

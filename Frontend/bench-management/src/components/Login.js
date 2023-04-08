@@ -11,7 +11,7 @@ export default function Login() {
     var userObject = jwt_decode(response.credential);
     // console.log(userObject);
     // setUser(userObject);
-    if (userObject.email === "bansaldhruv0809@gmail.com") { // if user is verified then hide the button 
+    if (userObject.email === "bansaldhruv0809@gmail.com") { // if user is verified then render to next page
       document.getElementById("googleLoginButton").hidden = true;
     }
   }

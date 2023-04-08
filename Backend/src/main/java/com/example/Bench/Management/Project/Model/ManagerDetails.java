@@ -5,9 +5,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -17,16 +19,31 @@ import javax.persistence.Id;
 public class ManagerDetails {
 
     @Id
-    @GeneratedValue
-    public long Id;
-    public String Name;
-    public String Address;
-    public long Phone;
-    public long WorkExp;
-    public String LocationD;
-    public String LoginId;
-    public String LoginPass;
-    public String LocationFirst;
-    public String LocationSecond;
+    @SequenceGenerator(
+            name = "mngdetails_seq",
+            sequenceName = "mngdetails_seq",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "mngdetails_seq"
+    )
+    private long id;
+    private String mName;
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "locationmanagertable",
+            joinColumns = {
+                    @JoinColumn(name="locationxid",referencedColumnName = "id")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(
+                            name="managerxid",
+                            referencedColumnName = "id"
+                    )
+            }
+    )
+    private List<Location>assignedLocation=new ArrayList<>();
 
 }
