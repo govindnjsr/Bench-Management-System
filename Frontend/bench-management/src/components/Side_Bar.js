@@ -127,9 +127,9 @@ export default function Side_Bar() {
         </div>
       </div> 
 
-      <div className="right-panel">
+      {/* <div className="right-panel">
         <h1>Rendering Area</h1>
-      </div>
+      </div> */}
     </div>
   )
 }
