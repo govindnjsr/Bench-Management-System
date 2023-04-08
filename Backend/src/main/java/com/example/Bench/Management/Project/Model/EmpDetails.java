@@ -1,7 +1,8 @@
 package com.example.Bench.Management.Project.Model;
 
-import lombok.*;
-import org.hibernate.annotations.GenerationTime;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -11,38 +12,36 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 public class EmpDetails {
-   @Id
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
-     public long id;
-     public String Name;
-     public String Address;
-     public long PhoneNo;
-     public String WorkExp;
-     public Date BenchDate;
-     public Date BillableDate;
-     public String Location;
-     public Boolean BenchStatus;
-     public String Skills;
 
-      @OneToMany(
-              cascade = CascadeType.ALL
-      )
-  @JoinColumn(
-          name="EmpIntvId",
-          referencedColumnName = "id"
-  )
-  private List<IntDetails> InterviewDetails;
+    @Id
+    @SequenceGenerator(
+            name = "empdetails_seq",
+            sequenceName = "empdetails_seq",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "empdetails_seq"
+    )
+     private long id;
+    private String name;
+    private String address;
+    private long phoneNo;
+    private String workExp;
+    private Date benchDate;
+    private Date billableDate;
+    private Boolean benchStatus;
+    private String skills;
 
-  @OneToMany(
-          cascade = CascadeType.ALL
-  )
-  @JoinColumn(
-          name="EmpProjId",
-          referencedColumnName = "id"
-  )
-  private List<ProjDetails> projectDetails;
+    @OneToMany(
+            cascade = CascadeType.ALL
+    )
+    @JoinColumn(
+            name="EmpIntvId",
+            referencedColumnName = "id"
+    )
+    private List<IntDetails> InterviewDetails;
 
 
 }
