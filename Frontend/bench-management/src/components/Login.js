@@ -1,71 +1,47 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Project.css';
 import { useEffect } from 'react';
-import img from './Images/LoginImage.jpg';
+import img from './Images/loginBackgroundImage.jpg';
+import jwt_decode from "jwt-decode";
 export default function Login() {
 
-  function handleCallbackResponse(response){
-    console.log("Encoded JWT ID token: " + response.credential)
+  const [user, setUser] = useState({}) // eslint-disable-line
+  function handleCallbackResponse(response) {
+    //console.log("Encoded JWT ID token: " + response.credential);
+    var userObject = jwt_decode(response.credential);
+    // console.log(userObject);
+    // setUser(userObject);
+    if (userObject.email === "bansaldhruv0809@gmail.com") { // if user is verified then hide the button 
+      document.getElementById("googleLoginButton").hidden = true;
+    }
   }
-
   useEffect(() => {
-    // global google
-     // eslint-disable-line no-use-before-define
+    const google = window.google;
     google.accounts.id.initialize({
-      client_id : "305985372566-gu0rl4u8sm3ceu06m92tc52t0v8um5ne.apps.googleusercontent.com",
+      client_id: "305985372566-gu0rl4u8sm3ceu06m92tc52t0v8um5ne.apps.googleusercontent.com",
       callback: handleCallbackResponse
     });
 
     google.accounts.id.renderButton(
       document.getElementById("googleLoginButton"),
-      {theme: "outline", size : "large"}
+      { theme: "outline", size: "large", shape: "pill", width: "400", height: "300" }
     );
   }, []);
 
   return (
     <>
-      <div style={{ display: "flex", flexDirection: "row", position: "fixed" }}>
-        <div className='left' >
-          <img id="left-img" src={img} alt="backimg" />
-        </div>
-        <div className='right'>
-          <h2>
-            Login
-          </h2>
-          <p>Please login to continue..</p>
-          <p>Login as</p>
-          <button type="button" className="admin btn-light">
-            <div className="form-check form-check-inline">
-              <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Admin" />
-              <label className="form-check-label" for="inlineRadio1">Amin</label>
-            </div>
-          </button>
-          <button type="button" className="manager btn-light mx-3 ">
-            <div className="form-check form-check-inline">
-              <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="Manager" />
-              <label className="form-check-label" for="inlineRadio2">Manager</label>
-            </div>
-          </button>
-          <div className="form_entry my-4">
-            <div className="mb-3">
-              <label for="exampleFormControlInput1" className="form-label">Email Address</label>
-              <input type="email" className="form-control" id="exampleFormControlInput1" placeholder="Enter your Email" />
-            </div>
-            <div className="mb-3">
-              <label for="inputPassword5" className="form-label">Password</label>
-              <input type="password" id="inputPassword5" className="form-control" placeholder="Enter your Password" />
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" />
-              <label class="form-check-label" for="flexCheckChecked"> Show Password</label>
-            </div>
-          </div>
-          <div className="div.btn" style={{ display: "flex", flexDirection: "column", position: "fixed" }}>
-            <button type="button" id="btn1" className="LoginButton">Get Started</button>
-            <div id='googleLoginButton'></div>
-          </div>
+      <div className='parent' style={{ backgroundImage: `url(${img})`, height: "100vh", width: '100vw', backgroundSize: 'cover' }}>
+        <div style={{ color: 'white', textAlign: 'center', display:"flex", justifyContent:'center', flexDirection:'column' }}>
+          <h5 className='LoginPageHeading' style={{ paddingTop: '9%', paddingBottom: '0px', opacity: '0.7' }}>Welcome Back To,</h5>
+          <h1 className='LoginPageHeading' style={{ paddingBottom: '5%' }}>Bench Management</h1>
+
+          <b>
+          <hr className="hr-text" data-content="One Tap to Sign-in" />
+          </b>
+          <div id='googleLoginButton' style={{paddingTop: "3%", margin: "auto"}}></div>
         </div>
       </div>
+
     </>
   )
 }

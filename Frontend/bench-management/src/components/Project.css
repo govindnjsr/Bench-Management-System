@@ -87,3 +87,35 @@
     margin-right: 30%;
    
 }
+.hr-text {
+  line-height: 1em;
+  position: relative;
+  outline: 0;
+  border: 0;
+  color: black;
+  
+  text-align: center;
+  height: 1.5em;
+  opacity: 0.6;
+}
+.hr-text::before {
+  content: "";
+  /* // use the linear-gradient for the fading effect
+    // use a solid background color for a solid bar */
+  background: linear-gradient(to right, transparent, white, transparent);
+  position: absolute;
+  left: 0;
+  top: 40%;
+  width: 100%;
+  height: 3px;
+}
+.hr-text::after {
+  content: attr(data-content);
+  position: relative;
+  display: inline-block;
+  padding: 0 0.5em;
+  line-height: 1.5em;
+  /* // this is really the only tricky part, you need to specify the background color of the container element... */
+  color: black;
+  background-color: #fcfcfa;
+}
