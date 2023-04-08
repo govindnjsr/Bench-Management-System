@@ -1,11 +1,31 @@
 import React from 'react'
 import './Project.css';
+import { useEffect } from 'react';
 import img from './Images/LoginImage.jpg';
 export default function Login() {
+
+  function handleCallbackResponse(response){
+    console.log("Encoded JWT ID token: " + response.credential)
+  }
+
+  useEffect(() => {
+    // global google
+     // eslint-disable-line no-use-before-define
+    google.accounts.id.initialize({
+      client_id : "305985372566-gu0rl4u8sm3ceu06m92tc52t0v8um5ne.apps.googleusercontent.com",
+      callback: handleCallbackResponse
+    });
+
+    google.accounts.id.renderButton(
+      document.getElementById("googleLoginButton"),
+      {theme: "outline", size : "large"}
+    );
+  }, []);
+
   return (
     <>
       <div style={{ display: "flex", flexDirection: "row", position: "fixed" }}>
-        <div className='left'>
+        <div className='left' >
           <img id="left-img" src={img} alt="backimg" />
         </div>
         <div className='right'>
@@ -42,9 +62,7 @@ export default function Login() {
           </div>
           <div className="div.btn" style={{ display: "flex", flexDirection: "column", position: "fixed" }}>
             <button type="button" id="btn1" className="LoginButton">Get Started</button>
-            <button type="button" id="btn2" className="my-2 LoginButton">
-              <i className="fa-brands fa-google mx-3" style={{color: '#186eaf'}}></i>
-              Login with Google</button>
+            <div id='googleLoginButton'></div>
           </div>
         </div>
       </div>
