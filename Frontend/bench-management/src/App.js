@@ -6,8 +6,8 @@ import Side_Bar from './components/Side_Bar';
 function App() {
   return (
     <div className="App">
-      {/* <Login/> */}
-      <Side_Bar/>
+      <Login/>
+      {/* <Side_Bar/> */}
     </div>
   );
 }
