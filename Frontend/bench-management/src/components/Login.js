@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import './Project.css';
 import { useEffect } from 'react';
 import img from './Images/loginBackgroundImage.jpg';
+import logoImage from './Images/accoliteLogo.png';
 import jwt_decode from "jwt-decode";
 export default function Login() {
 
@@ -31,14 +32,17 @@ export default function Login() {
   return (
     <>
       <div className='parent' style={{ backgroundImage: `url(${img})`, height: "100vh", width: '100vw', backgroundSize: 'cover' }}>
-        <div style={{ color: 'white', textAlign: 'center', display:"flex", justifyContent:'center', flexDirection:'column' }}>
-          <h5 className='LoginPageHeading' style={{ paddingTop: '9%', paddingBottom: '0px', opacity: '0.7' }}>Welcome Back To,</h5>
-          <h1 className='LoginPageHeading' style={{ paddingBottom: '5%' }}>Bench Management</h1>
+        <div>
+          <img style={{height:"10%", objectFit:'contain', width:'18%', paddingTop:"1%", paddingLeft:"1%"}} src={logoImage} alt="accoliteLogo" />
+        </div>
+        <div style={{ color: 'white', textAlign: 'center', display: "flex", justifyContent: 'center', flexDirection: 'column' }}>
+          <h5 style={{ paddingTop: '7%', paddingBottom: '0px', opacity: '0.7' }}>Welcome Back To</h5>
+          <h1 style={{ paddingBottom: '5%' }}>Bench Management</h1>
 
           <b>
-          <hr className="hr-text" data-content="One Tap to Sign-in" />
+            <hr className="hr-text" data-content="One Tap Below to Sign-in" />
           </b>
-          <div id='googleLoginButton' style={{paddingTop: "3%", margin: "auto"}}></div>
+          <div id='googleLoginButton' style={{ paddingTop: "3%", margin: "auto" }}></div>
         </div>
       </div>
 
