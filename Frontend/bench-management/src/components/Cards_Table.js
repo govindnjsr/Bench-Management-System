@@ -9,11 +9,16 @@ export default function Cards_Table() {
     <>
       <div className='cardsTableMain'>
         <SideBar />
-        <div style={{ height: "100vh", borderRight: "0.1px inset black" }}></div>
+        <div className='profileBar'>
+        </div>
+        <div style={{ height: "100vh", borderRight: "3px inset lightgrey", margin:'0px', padding:'0px', opacity:'0.25' }}></div>
         <div className='cards-table'>
+          
+          <hr style={{color:'grey', borderWidth:'3px' , marginBottom:'0px', marginTop: '0px'}}/>
           <div className='search'>
-            <nav className="navbar"  style={{justifyContent:'flex-end'}}>
+            <nav className="navbar">
               <div className="container-fluid">
+              <h5>EMPLOYEES</h5>
                 <form className="d-flex" role="search">
                   <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
                   <button className="btn btn-outline-warning" type="submit">Search</button>
@@ -21,51 +26,13 @@ export default function Cards_Table() {
               </div>
             </nav>
           </div>
-          <hr style={{color:'white', marginBottom:'0px'}}/>
-          <div className='cards-heading'>
-          <h5>STATISTICS</h5>
-        </div>
 
-          <div className='cards my-2'>
-            <div className="row mx-3">
-              <div className="col-sm-3 mb-3 my-3 mx-5">
-                <div className="card">
-                  <div className="card-body">
-                    <h5 className="card-title">Total Employees</h5>
-                    <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
-
-                  </div>
-                </div>
-              </div>
-              <div className="col-sm-3 my-3">
-                <div className="card">
-                  <div className="card-body">
-                    <h5 className="card-title">Active Employees</h5>
-                    <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
-
-                  </div>
-                </div>
-              </div>
-              <div className="col-sm-3 mx-5 my-3">
-                <div className="card">
-                  <div className="card-body">
-                    <h5 className="card-title">Benched Employees</h5>
-                    <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
-
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <h5>EMPLOYEES</h5>
-
-          <div className='table-subheading'>
+          {/* <div className='tableSubHeading'>
             <h6>All</h6>
             <h6>Active</h6>
             <h6>Benched</h6>
-          </div>
-          {/* <div className='table-format'>
+          </div> */}
+          <div className='table-format'>
           <table className="table table-dark table-striped">
             <thead>
               <tr>
@@ -114,7 +81,7 @@ export default function Cards_Table() {
               </tr>
             </tbody>
           </table>
-        </div> */}
+        </div>
         </div>
       </div>
     </>
