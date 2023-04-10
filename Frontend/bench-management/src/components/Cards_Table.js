@@ -1,5 +1,4 @@
 import React from 'react'
-import SideBar from './Side_Bar'
 import profile from './Images/user.png'
 
 export default function Cards_Table() {
@@ -9,9 +8,6 @@ export default function Cards_Table() {
   return (
     <>
       <div className='cardsTableMain'>
-        <div className='left-dashboard'>
-        <SideBar />
-        </div>
         <div className='right-dashboard'>
                 
                                                             {/* <div style={{ height: "90vh", borderRight: "3px inset lightgrey", margin:'0px', padding:'0px', opacity:'0.25' }}></div> */}

@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import './Project.css'
-import logoImage from './Images/accoliteLogo.png';
 
 export default function SideBar() {
 

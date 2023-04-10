@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import logoImage from './Images/accoliteLogo.png'
 import SideBar from './Side_Bar'
-export default function Navbar() {
+import Dropdown from 'react-bootstrap/Dropdown';
+import AuthContext from './AuthContext';
+export default function NavBar() {
+    const authData = useContext(AuthContext);
+
     return (
         <>
 
@@ -17,9 +21,21 @@ export default function Navbar() {
 
                 <div className='profile'>
 
-                    <i className="fa-solid fa-user"></i>
                     <div className='NavbarDropDown'>
-                        <span className='profileUserName'>username</span>
+                        <Dropdown>
+                            <Dropdown.Toggle variant="warning" id="dropdown-basic">
+                                <i className="fa-solid fa-user userIcon" ></i>
+                                username
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu align="end" className='NavbarDropDownMenu'>
+                                <Dropdown.Item href="" onClick={authData.handleLogin}>
+                                    <span style={{ fontSize: '15px' }}>
+                                        Logout
+                                    </span>
+                                </Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
                     </div>
 
                 </div>

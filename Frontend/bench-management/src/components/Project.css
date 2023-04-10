@@ -1,3 +1,67 @@
+/* login page CSS */
+.loginContainer {
+  background-image: url(Images/loginBackgroundImage.jpg);
+  height: 100vh;
+  width: 100vw;
+  background-size: cover;
+}
+.loginPageContent {
+  color: white;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.welcomeHeading {
+  padding-top: 7%;
+  padding-bottom: 0px;
+  opacity: 0.7;
+}
+
+.projectHeading {
+  padding-bottom: 5%;
+}
+
+.hr-text {
+  line-height: 1em;
+  position: relative;
+  outline: 0;
+  border: 0;
+  color: black;
+  text-align: center;
+  height: 1.5em;
+  opacity: 0.4;
+  font-size:medium;
+  font-weight:bold;
+}
+.hr-text::before {
+  content: "";
+  /* // use the linear-gradient for the fading effect
+    // use a solid background color for a solid bar */
+  background: linear-gradient(to right, transparent, white, transparent);
+  position: absolute;
+  left: 0;
+  top: 40%;
+  width: 100%;
+  height: 3px;
+}
+.hr-text::after {
+  content: attr(data-content);
+  position: relative;
+  display: inline-block;
+  padding: 0 0.5em;
+  line-height: 1.5em;
+  /* // this is really the only tricky part, you need to specify the background color of the container element... */
+  color: black;
+  background-color: #fcfcfa;
+}
+
+#loginButton {
+  padding-top: 3%;
+  margin: auto;
+}
+
 /* CSS for SideBar */
 
 .left-panel {
@@ -41,7 +105,6 @@
 
 .profile {
   background-color: #0d091f;
-  opacity: 0.5;
   width: 10%;
   display: flex;
   justify-content: center;
@@ -51,6 +114,20 @@
 .profileUserName {
   margin-left: 10%;
 }
+
+.dropdown-menu {
+  margin: 0px;
+  padding: 0px;
+  min-width: 6vw !important;
+  max-height: 6vh !important;
+}
+
+.userIcon {
+  margin-right: 6%;
+}
+.NavbarDropDownMenu {
+}
+
 .filterContainer {
   padding-left: 3%;
 }
@@ -166,39 +243,4 @@
   display: flex;
   flex-direction: row;
   gap: 2%;
-}
-
-/* login page CSS */
-
-.hr-text {
-  line-height: 1em;
-  position: relative;
-  outline: 0;
-  border: 0;
-  color: black;
-
-  text-align: center;
-  height: 1.5em;
-  opacity: 0.4;
-}
-.hr-text::before {
-  content: "";
-  /* // use the linear-gradient for the fading effect
-    // use a solid background color for a solid bar */
-  background: linear-gradient(to right, transparent, white, transparent);
-  position: absolute;
-  left: 0;
-  top: 40%;
-  width: 100%;
-  height: 3px;
-}
-.hr-text::after {
-  content: attr(data-content);
-  position: relative;
-  display: inline-block;
-  padding: 0 0.5em;
-  line-height: 1.5em;
-  /* // this is really the only tricky part, you need to specify the background color of the container element... */
-  color: black;
-  background-color: #fcfcfa;
 }
