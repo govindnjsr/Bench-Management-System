@@ -1,32 +1,70 @@
-
 /* CSS for SideBar */
 
 .left-panel {
-  background-color: #0D091F;
-  height: 100vh;
-  overflow-y: auto;
-  width: 17vw;
-  margin-left:0%;
+  background-color: #0d091f;
+  height: 84.5vh;
+  overflow: auto;
+  width: 18vw;
+  margin-left: 0%;
   color: white;
 }
-.logoContainer{
-  padding: 5% 3%;
+
+.NavbarComponent {
+  display: flex;
+  flex-direction: row;
+  margin: 0px;
+  padding: 0px;
+  height: 10%;
+  width: 100%;
+  background-color: #0d091f;
+  color: white;
 }
 
-.logoImageClass{
+.logoContainer {
+  height: 10%;
+  object-fit: contain;
+  width: 18%;
+  padding-top: 1%;
+  padding-left: 1%;
+}
+.logoImageClass {
   height: 100%;
   width: 85%;
   object-fit: contain;
 }
+.NavbarHeading {
+  margin-left: 28%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-.filterContainer{
-  padding-top: 10%;
+.profile {
+  background-color: #0d091f;
+  opacity: 0.5;
+  width: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 28%;
+}
+.profileUserName {
+  margin-left: 10%;
+}
+.filterContainer {
   padding-left: 3%;
 }
-.filterByExperience{
-  padding-top: 1%;
+.filterHeading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 18vw;
+  margin-left: 0%;
+  color: white;
+  background-color: #0d091f;
+  height: 8vh;
 }
-.form-range{
+.form-range {
   width: 80%;
   padding-left: 10%;
   padding-top: 0px;
@@ -34,7 +72,7 @@
   display: block;
 }
 .form-range::-webkit-slider-thumb {
-  background: #B26700;
+  background: #b26700;
 }
 
 .form-range::-moz-range-thumb {
@@ -44,8 +82,9 @@
 .form-range::-ms-thumb {
   background: gray;
 }
-.sliderParaLeft, .sliderParaRightExpereince
-,.sliderParaRightBench {
+.sliderParaLeft,
+.sliderParaRightExpereince,
+.sliderParaRightBench {
   margin: 0%;
   padding: 0px 12%;
   font-size: 12px;
@@ -53,16 +92,17 @@
   opacity: 0.5;
   display: inline;
 }
-.sliderParaRightExpereince{
+.sliderParaRightExpereince {
   padding-left: 18%;
 }
-.sliderParaRightBench{
+.sliderParaRightBench {
   padding-left: 14%;
 }
-.filterByBenchTime,.filterBySkills {
+.filterByBenchTime,
+.filterBySkills {
   margin-top: 10%;
 }
-.skillsLabel{
+.skillsLabel {
   font-weight: 500;
   opacity: 0.8;
 }
@@ -72,17 +112,36 @@
 .cardsTableMain {
   display: flex;
   flex-direction: row;
-  background-color: #161032;
+  background-color: #160f32;
   color: white;
 }
-.profileBar{
-  height: 7%;
+
+.right-dashboard {
+  /* display: flex;
+  flex-direction:column; */
+}
+.profileBar {
+  height: 8.3%;
+  background-color: #b26700;
+  margin-right: 0%;
+  width: 584%;
+  position: fixed;
+}
+
+.nav-heading {
+  inline-size: 10%;
+  background: rgb(21, 137, 238);
+}
+
+.dropdown {
+  margin-left: 12%;
+  margin-top: 0%;
 }
 .cards-table {
   height: 100vh;
   width: 83%;
-  margin-left: 17%;
-  margin-top: 0%;
+  margin-left: 0%;
+  margin-top: 8%;
   margin-right: 0%;
   position: fixed;
 }
@@ -90,7 +149,7 @@
 .search {
   color: white;
   height: 5.7%;
-  align-items:end;
+  align-items: end;
 }
 
 .cards-heading {
@@ -105,10 +164,9 @@
   padding-top: 1%;
   height: 6%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 2%;
 }
-
 
 /* login page CSS */
 

@@ -2,12 +2,14 @@
 import './App.css';
 import Cards_Table from './components/Cards_Table';
 import Login from './components/Login';
+import Navbar from './components/Navbar';
 
 function App() {
   return (
     <div className="App">
+    <Navbar/>
       {/* <Login/> */}
-      <Cards_Table/>
+      {/* <Cards_Table/> */}
     </div>
   );
 }
