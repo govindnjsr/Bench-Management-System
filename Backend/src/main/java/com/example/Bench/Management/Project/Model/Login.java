@@ -1,15 +1,17 @@
 package com.example.Bench.Management.Project.Model;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
-@NoArgsConstructor
+@Data
 @AllArgsConstructor
-
+@NoArgsConstructor
 public class Login {
+
     @Id
     @SequenceGenerator(
             name = "login_seq",
@@ -21,7 +23,6 @@ public class Login {
             generator = "login_seq"
     )
     private long id;
-    private String emailId;
+    private String email;
     private long role;
-
 }

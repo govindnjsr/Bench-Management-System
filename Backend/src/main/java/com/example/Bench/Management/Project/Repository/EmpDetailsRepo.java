@@ -18,4 +18,7 @@ public interface EmpDetailsRepo extends JpaRepository<EmpDetails,Long> {
 
     @Query(value = "select count(*) from bench.emp_details",nativeQuery = true)
     public long getAllEmployees();
+
+
+
 }
