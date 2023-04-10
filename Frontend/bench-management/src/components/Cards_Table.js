@@ -13,21 +13,7 @@ export default function Cards_Table() {
         <SideBar />
         </div>
         <div className='right-dashboard'>
-                <div className='profileBar' >
-                  <p classname='nav-heading'>Bench Management</p>
-                  <div class="dropdown">
-
-                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                          Profile Name
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-dark">
-                          <li><a class="dropdown-item active" href="#">Action</a></li>
-                          <li><a class="dropdown-item" href="#">Another action</a></li>
-                          <li><a class="dropdown-item" href="#">Something else here</a></li>
-                          <li><a class="dropdown-item" href="#">Separated link</a></li>
-                        </ul>
-                      </div> 
-                </div>
+                
                                                             {/* <div style={{ height: "90vh", borderRight: "3px inset lightgrey", margin:'0px', padding:'0px', opacity:'0.25' }}></div> */}
                 <div className='cards-table'>
                   
