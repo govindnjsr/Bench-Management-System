@@ -32,4 +32,20 @@ public class EController {
     public List<EmpDetails>getData(){
         return empDetailsService.getData();
     }
+
+    //get count of  all active employees
+    @GetMapping("activeemployee")
+    public long getActiveEmployees(){
+        return empDetailsService.getActiveEmployees();
+    }
+    //get count of all inactive employees
+    @GetMapping("inactiveemployee")
+    public long getInactiveEmployees(){
+        return empDetailsService.getInactiveEmployees();
+    }
+    //get count of all employees
+    @GetMapping("allemployee")
+    public long getAllEmployees(){
+        return empDetailsService.getAllEmployees();
+    }
 }

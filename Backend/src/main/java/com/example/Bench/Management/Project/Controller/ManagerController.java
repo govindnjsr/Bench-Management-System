@@ -15,10 +15,7 @@ import java.util.List;
 public class ManagerController {
     @Autowired
     private ManagerService managerService;
-//    public ManagerController(ManagerService managerService){
-//        super();
-//        this.managerService=managerService;
-//    }
+
     @PostMapping("/save")
     public  ResponseEntity<ManagerDetails>save(@RequestBody ManagerDetails managerDetails){
         return new ResponseEntity<ManagerDetails>(managerService.save(managerDetails),HttpStatus.CREATED);
@@ -46,5 +43,11 @@ public class ManagerController {
             @PathVariable Long locationId
     ){
         return managerService.assignLocationToManager(managerId,locationId);
+    }
+
+    @DeleteMapping("delete/{managerId}/locationdelete/{locationId}")
+    public ResponseEntity removeLocation(@PathVariable Long managerId,@PathVariable Long locationId){
+        managerService.deleteAssignLocation(managerId,locationId);
+        return new ResponseEntity(HttpStatus.OK);
     }
 }
