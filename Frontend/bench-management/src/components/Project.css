@@ -2,7 +2,7 @@
 /* CSS for SideBar */
 
 .left-panel {
-  background-color: rgb(8, 8, 41);
+  background-color: #0D091F;
   height: 100vh;
   overflow-y: auto;
   width: 17vw;
@@ -21,6 +21,7 @@
 
 .filterContainer{
   padding-top: 10%;
+  padding-left: 3%;
 }
 .filterByExperience{
   padding-top: 1%;
@@ -31,6 +32,17 @@
   padding-top: 0px;
   margin-bottom: 0px;
   display: block;
+}
+.form-range::-webkit-slider-thumb {
+  background: #B26700;
+}
+
+.form-range::-moz-range-thumb {
+  background: gray;
+}
+
+.form-range::-ms-thumb {
+  background: gray;
 }
 .sliderParaLeft, .sliderParaRightExpereince
 ,.sliderParaRightBench {
@@ -50,17 +62,22 @@
 .filterByBenchTime,.filterBySkills {
   margin-top: 10%;
 }
-
+.skillsLabel{
+  font-weight: 500;
+  opacity: 0.8;
+}
 
 /* CSS for Cards_Tables */
 
 .cardsTableMain {
   display: flex;
   flex-direction: row;
-  background-color: rgb(8, 8, 41);
+  background-color: #161032;
   color: white;
 }
-
+.profileBar{
+  height: 7%;
+}
 .cards-table {
   height: 100vh;
   width: 83%;
@@ -84,13 +101,17 @@
   height: 8%;
 }
 
-.table-subheading {
+.tableSubHeading {
   padding-top: 1%;
   height: 6%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 2%;
 }
+
+
+/* login page CSS */
+
 .hr-text {
   line-height: 1em;
   position: relative;
