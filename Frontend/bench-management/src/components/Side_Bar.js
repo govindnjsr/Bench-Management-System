@@ -78,6 +78,26 @@ export default function SideBar() {
                   </div>
                </div>
 
+               <div className='filterByLocation'>
+
+                  <p style={{fontSize:'18px', opacity:'0.8', fontWeight:'bold', marginBottom:'0px'}}>Location</p>
+
+                  <div className="form-check mx-4 my-4">
+                     <input className="form-check-input" type="checkbox" value="Gurugram" id="loc-1" />
+                     <label className="form-check-label skillsLabel" htmlFor="skill-1">
+                        Gurugram
+                     </label><br />
+                     <input className="form-check-input" type="checkbox" value="Banglore" id="loc-2" />
+                     <label className="form-check-label skillsLabel" htmlFor="skill-2">
+                        Banglore
+                     </label><br />
+                     <input className="form-check-input" type="checkbox" value="Hyderabad" id="loc-3" />
+                     <label className="form-check-label skillsLabel" htmlFor="skill-3">
+                        Hyderabad
+                     </label><br />
+                  </div>
+               </div>
+
             </div>
          </div>
       </>
