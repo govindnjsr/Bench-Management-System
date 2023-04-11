@@ -8,15 +8,14 @@ export default function SideBar() {
    const [experienceValue, setExperienceValue] = useState(3);
 
    return (
-      
-   <div className="window">
+      <>
        <div className='filterHeading' >
-          <h4>SORT BY FILTERS</h4>
+          <p className='pfilterHeading'>SORT BY FILTERS</p>
        </div>
        <div className="left-panel">
             <div className="filterContainer">
                <div className='filterByExperience'>
-                  <p style={{ fontSize: '18px', opacity: '0.8', fontWeight: 'bold', marginBottom: '0px' }}>EXPERIENCE <span style={{ fontSize: '12px', opacity: '0.7', marginLeft: '3%' }}>( 0 - {experienceValue} Years)</span></p>
+                  <p className='pfilter'>EXPERIENCE <span className='span-style'>( 0 - {experienceValue} Years)</span></p>
                   <label htmlFor="customRange2" className="form-label"></label>
                   <input type="range" className="form-range experienceClass" min="1" max="10" value={experienceValue} onChange={(e) => setExperienceValue(e.target.value)} id="customRange2" />
                   <p className='sliderParaLeft'>0 Years</p>
@@ -25,7 +24,7 @@ export default function SideBar() {
 
 
                <div className='filterByBenchTime'>
-                  <p style={{ fontSize: '18px', opacity: '0.8', fontWeight: 'bold', marginBottom: '0px' }}>BENCH TIME <span style={{ fontSize: '12px', opacity: '0.7', marginLeft: '3%' }}>( 0 - {benchTimeValue} Months)</span></p>
+                  <p className='pfilter'>BENCH TIME <span className='span-style'>( 0 - {benchTimeValue} Months)</span></p>
                   <label htmlFor="customRange2" className="form-label"></label>
                   <input type="range" className="form-range benchTimeSliderClass" min="1" max="12" value={benchTimeValue} onChange={(e) => setBenchTimeValue(e.target.value)} id="customRange2" />
                   <p className='sliderParaLeft'>0 Months</p>
@@ -35,7 +34,7 @@ export default function SideBar() {
 
                <div className='filterBySkills'>
 
-                  <p style={{ fontSize: '18px', opacity: '0.8', fontWeight: 'bold', marginBottom: '0px' }}>SKILLS</p>
+                  <p className='pfilter'>SKILLS</p>
 
                   <div className="form-check mx-4 my-4">
                      <input className="form-check-input" type="checkbox" value="Java" id="skill-1" />
@@ -75,7 +74,7 @@ export default function SideBar() {
 
                <div className='filterByLocation'>
 
-                  <p style={{ fontSize: '18px', opacity: '0.8', fontWeight: 'bold', marginBottom: '0px' }}>Location</p>
+                  <p className='pfilter'>Location</p>
 
                   <div className="form-check mx-4 my-4">
                      <input className="form-check-input" type="checkbox" value="Gurugram" id="loc-1" />
@@ -95,7 +94,6 @@ export default function SideBar() {
 
             </div>
          </div>
-      </div>
-      
+         </>
    )
 }

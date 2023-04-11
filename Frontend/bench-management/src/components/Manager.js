@@ -44,12 +44,11 @@ export default function Manager() {
            </div>
            <div className='actions'>
               <h5>Employees</h5>
-              <div className='buttons'>
-                 <button type="button" className="btn btn-light">Employees</button>
+             
                  <form className="d-flex" role="search">
                  <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
                  </form>
-              </div>
+      
            </div>
            <div className='number'>
                <p>showing 50 rows</p>
