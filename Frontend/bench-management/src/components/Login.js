@@ -16,7 +16,7 @@ export default function Login() {
   function handleCallbackResponse(response) {
     console.log("Encoded JWT ID token: " + response.credential);
     var userObject = jwt_decode(response.credential);
-    if (userObject.email === "bansaldhruv0809@gmail.com") { // if user is verified then render to next page
+    if (userObject.email === "bansaldhruv0809@gmail.com" || userObject.email === "meghamathur1007@gmail.com") { // if user is verified then render to next page
       authData.handleLogin();
       authData.handleUserData(userObject);
     }

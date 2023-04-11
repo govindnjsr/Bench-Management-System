@@ -9,7 +9,7 @@ export default function SideBar() {
    return (
       <>
          <div className='filterHeading' >
-            <p className='pfilter'>SORT BY FILTERS</p>
+            <p className='pfilterHeading'>SORT BY FILTERS</p>
          </div>
          <div className="left-panel">
             <div className="filterContainer">
