@@ -122,12 +122,8 @@
 
 .profile {
   background-color: #0d091f;
-<<<<<<< HEAD
-  width: 10%;
-=======
   opacity: 0.5;
   width: 28%;
->>>>>>> 3341fee2f0b5112cc87535c8237625ae2d4913da
   display: flex;
   justify-content: center;
   align-items: center;
@@ -208,83 +204,6 @@
   opacity: 0.8;
 }
 
-<<<<<<< HEAD
-/* CSS for Cards_Tables */
-
-/* .cardsTableMain {
-  display: flex;
-  flex-direction: row;
-  background-color: #160f32;
-  color: white;
-}
- */
-
-
-
-/* .right-dashboard {
-  display: flex;
-  flex-direction:column;
-} */
-
-
-/* 
-.profileBar {
-  height: 8.3%;
-  background-color: #b26700;
-  margin-right: 0%;
-  width: 584%;
-  position: fixed;
-}
-
-.nav-heading {
-  inline-size: 10%;
-  background: rgb(21, 137, 238);
-}
-
-.dropdown {
-  margin-left: 12%;
-  margin-top: 0%;
-}
-.cards-table {
-  height: 100vh;
-  width: 83%;
-  margin-left: 0%;
-  margin-top: 8%;
-  margin-right: 0%;
-  position: fixed;
-}
-
-.search {
-  color: white;
-  height: 5.7%;
-  align-items: end;
-}
-
-.cards-heading {
-  padding-top: 1%;
-}
-.table-heading {
-  background-color: rgb(210, 216, 216);
-  height: 8%;
-}
-
-.tableSubHeading {
-  padding-top: 1%;
-  height: 6%;
-  display: flex;
-  flex-direction: row;
-  gap: 2%;
-} */
-.window{
-  display:flex;
-  flex-direction: column;
-  gap:50px;
-}
-.bottom{
-  display: flex;
-  flex-direction:row;
-  gap:0.2%;
-=======
 
 /* login page CSS */
 
@@ -298,7 +217,6 @@
   text-align: center;
   height: 1.5em;
   opacity: 0.4;
->>>>>>> 3341fee2f0b5112cc87535c8237625ae2d4913da
 }
 .bottom-right{
   height:90vh;
@@ -311,14 +229,6 @@
   position: fixed;
   /* margin-left: 18.1%; */
 }
-<<<<<<< HEAD
-.row{
-  padding:1%;
-  margin-top: 2%;
-  /* margin-left: 18.1%; */
-  margin-left: 0.1%;
-  background-color: #B26700;
-=======
 
 
 
@@ -352,27 +262,18 @@
   margin-top: 3.8%;
   margin-left: 18.1%;
   background-color: #b26700;
->>>>>>> 3341fee2f0b5112cc87535c8237625ae2d4913da
   width:82.8%;
   display: flex;
   flex-direction:row;
   gap:10%;
   position:fixed;
 }
-<<<<<<< HEAD
-.actions{
-  /* margin-left: 18.1%; */
-  margin-top: 11.2%;
-  color: white;
-  background-color: #0D091F;
-=======
 
 .actions{
   margin-left: 18.1%;
   margin-top: 12.9%;
   color: white;
   background-color: #0d091f;
->>>>>>> 3341fee2f0b5112cc87535c8237625ae2d4913da
   display: flex;
   flex-direction: row;
   gap:50%;
@@ -380,30 +281,11 @@
   width:82.8%;
   position: fixed;
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> 3341fee2f0b5112cc87535c8237625ae2d4913da
 .buttons{
 display: flex;
 flex-direction: row;
   gap:5%;
 }
-<<<<<<< HEAD
-.number{
-  /* margin-left: 18.1%; */
-  background-color: #B26700;
-  width:82.8%;
-  position: fixed;
-  margin-top: 16.2%;
-}
-.table-format{
-  height: 50vh;
-  width:81.2vw;
-  /* margin-left: 48.1%; */
-  margin-top: 24.5%;
-  overflow-y: scroll;
-=======
 
 .number{
   margin-left: 18.1%;
@@ -420,5 +302,4 @@ flex-direction: row;
   width:219%;
   overflow-y: scroll;
 
->>>>>>> 3341fee2f0b5112cc87535c8237625ae2d4913da
 }
