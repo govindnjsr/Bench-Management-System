@@ -1,0 +1,343 @@
+/* login page CSS */
+
+.loginContainer {
+  background-image: url(Images/loginBackgroundImage.jpg);
+  height: 100vh;
+  width: 100vw;
+  background-size: cover;
+}
+
+.loginPageContent {
+  color: white;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.welcomeHeading {
+  padding-top: 12%;
+  padding-bottom: 0px;
+  opacity: 0.7;
+}
+
+.projectHeading {
+  padding-bottom: 5%;
+}
+
+.hr-text {
+  line-height: 1em;
+  position: relative;
+  outline: 0;
+  border: 0;
+  color: black;
+  text-align: center;
+  height: 1.5em;
+  opacity: 0.4;
+  font-size: medium;
+  font-weight: bold;
+}
+
+.hr-text::before {
+  content: "";
+  /* // use the linear-gradient for the fading effect
+    // use a solid background color for a solid bar */
+  background: linear-gradient(to right, transparent, white, transparent);
+  position: absolute;
+  left: 0;
+  top: 40%;
+  width: 100%;
+  height: 3px;
+}
+
+.hr-text::after {
+  content: attr(data-content);
+  position: relative;
+  display: inline-block;
+  padding: 0 0.5em;
+  line-height: 1.5em;
+  /* // this is really the only tricky part, you need to specify the background color of the container element... */
+  color: black;
+  background-color: #fcfcfa;
+}
+
+#loginButton {
+  padding-top: 3%;
+  margin: auto;
+}
+
+/* CSS for SideBar */
+
+.filterHeading {
+  padding-top: 6%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 18vw;
+  margin-left: 0%;
+  color: white;
+  background-color: #489fb5;
+  height: 4vh;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.filterContainer {
+  padding-left: 5%;
+}
+
+.left-panel {
+  padding-top: 1%;
+  position: fixed;
+  background-color: #ffecd1;
+  height: 87.5vh;
+  overflow: auto;
+  width: 18vw;
+  margin-left: 0%;
+  color: black;
+}
+
+.pfilter {
+  font-size: 14px;
+  font-weight: bold;
+  opacity: 0.8;
+  margin-bottom: 0%;
+}
+
+.span-style {
+  font-size: 12px;
+  opacity: 0.7;
+  margin-left: 3%;
+}
+
+.form-check-label {
+  font-size: 13px;
+}
+
+.form-range {
+  width: 85%;
+  padding-left: 10%;
+  padding-top: 0px;
+  margin-bottom: 0px;
+  display: block;
+}
+
+.form-range::-webkit-slider-thumb {
+  background: #489fb5;
+}
+
+.form-range::-moz-range-thumb {
+  background: #489fb5;
+}
+
+.form-range::-ms-thumb {
+  background: #489fb5;
+}
+
+.sliderParaLeft,
+.sliderParaRightExpereince,
+.sliderParaRightBench {
+  margin: 0%;
+  padding: 0px 10%;
+  font-size: 12px;
+  font-weight: 500;
+  opacity: 0.5;
+  display: inline;
+}
+
+.sliderParaRightExpereince {
+  padding-left: 18%;
+}
+
+.sliderParaRightBench {
+  padding-left: 14%;
+}
+
+.filterByBenchTime,
+.filterBySkills {
+  margin-top: 10%;
+}
+
+.skillsLabel {
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+
+/* CSS for NAVBAR */
+
+.NavbarComponent {
+  display: flex;
+  flex-direction: row;
+  margin: 0px;
+  padding: 0px;
+  height: 8%;
+  width: 100%;
+  background-color: #16697a;
+  color: white;
+  position: fixed;
+}
+
+.logoContainer {
+  height: 10%;
+  object-fit: contain;
+  width: 18%;
+  padding-top: 0%;
+  padding-bottom: 1%;
+  padding-left: 1%;
+  position: fixed;
+}
+
+.logoImageClass {
+  height: 100%;
+  width: 85%;
+  object-fit: contain;
+}
+
+.NavbarHeading {
+  margin-left: 40%;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+}
+
+.profile {
+  background-color: #16697a;
+  opacity: 0.5;
+  width: 28%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 80%;
+  padding-top: 10px;
+  position: fixed;
+}
+
+.profileUserName {
+  margin-left: 10%;
+}
+
+.dropdown-menu {
+  margin: 0px;
+  padding: 0px;
+  min-width: 6vw !important;
+  max-height: 6vh !important;
+}
+
+.userIcon {
+  margin-right: 6%;
+}
+
+/* .NavbarDropDownMenu {} */
+
+
+/* CSS for REndering_Admin */
+
+.window {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.bottom {
+  display: flex;
+  flex-direction: row;
+  gap: 0.2%;
+}
+
+.bottom-right {
+  height: 90vh;
+}
+
+.statistics {
+  background-color: #489fb5;
+  height: 4%;
+  width: 1320%;
+  color: white;
+  position: fixed;
+  padding-left: 2%;
+  font-size: 14px;
+  font-weight: bold;
+  /* margin-left: 18.1%; */
+}
+
+.row {
+  padding: 1%;
+  margin-top: 2%;
+  /* margin-left: 18.1%; */
+  margin-left: 0.1%;
+  background-color: #ffecd1;
+  width: 82.8%;
+  display: flex;
+  flex-direction: row;
+  gap: 10%;
+  position: fixed;
+
+}
+
+.card-title {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.card-text {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.employees {
+  font-size: 14px;
+  font-weight: bold;
+  padding-left: 2%;
+  padding-top: 0.5%;
+}
+
+.btn {
+  font-size: 10px;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.actions {
+  /* margin-left: 18.1%; */
+  height: 8%;
+  margin-top: 11.2%;
+  color: white;
+  background-color: #489fb5;
+  display: flex;
+  flex-direction: row;
+  gap: 50%;
+  padding: 0.5%;
+  width: 82.8%;
+  position: fixed;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 5%;
+  padding-bottom: 1%;
+}
+
+.number {
+  /* margin-left: 18.1%; */
+  background-color: #d8e2dc;
+  width: 82.8%;
+  position: fixed;
+  margin-top: 15.2%;
+  padding-left: 2%;
+  padding-top: 0%;
+  height: 4vh;
+}
+
+.table-format {
+  height: 55vh;
+  width: 81.5vw;
+  /* margin-left: 48.1%; */
+  margin-top: 21.5%;
+  overflow-y: scroll;
+  background-color: #ffecd1;
+
+}
