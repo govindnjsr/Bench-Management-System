@@ -1,31 +1,46 @@
 /* CSS for SideBar */
 
+.filterHeading{
+  position: fixed;
+  color: #fcfcfa;
+
+}
 .left-panel {
+  position: fixed;
   background-color: #0d091f;
-  height: 84.5vh;
+  height: 92.5vh;
   overflow: auto;
   width: 18vw;
   margin-left: 0%;
   color: white;
 }
+.filterContainer{
+  margin-top: 22%;
+}
+
+
+/* CSS for NAVBAR */
 
 .NavbarComponent {
   display: flex;
   flex-direction: row;
   margin: 0px;
   padding: 0px;
-  height: 10%;
+  height: 8%;
   width: 100%;
   background-color: #0d091f;
   color: white;
+  position: fixed;
 }
 
 .logoContainer {
   height: 10%;
   object-fit: contain;
   width: 18%;
-  padding-top: 1%;
+  padding-top: 0%;
+  padding-bottom: 1%;
   padding-left: 1%;
+  position: fixed;
 }
 .logoImageClass {
   height: 100%;
@@ -33,20 +48,24 @@
   object-fit: contain;
 }
 .NavbarHeading {
-  margin-left: 28%;
+  margin-left: 40%;
+  margin-top: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: fixed;
 }
 
 .profile {
   background-color: #0d091f;
   opacity: 0.5;
-  width: 10%;
+  width: 28%;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-left: 28%;
+  margin-left: 80%;
+  padding-top: 10px;
+  position: fixed;
 }
 .profileUserName {
   margin-left: 10%;
@@ -107,66 +126,6 @@
   opacity: 0.8;
 }
 
-/* CSS for Cards_Tables */
-
-.cardsTableMain {
-  display: flex;
-  flex-direction: row;
-  background-color: #160f32;
-  color: white;
-}
-
-.right-dashboard {
-  /* display: flex;
-  flex-direction:column; */
-}
-.profileBar {
-  height: 8.3%;
-  background-color: #b26700;
-  margin-right: 0%;
-  width: 584%;
-  position: fixed;
-}
-
-.nav-heading {
-  inline-size: 10%;
-  background: rgb(21, 137, 238);
-}
-
-.dropdown {
-  margin-left: 12%;
-  margin-top: 0%;
-}
-.cards-table {
-  height: 100vh;
-  width: 83%;
-  margin-left: 0%;
-  margin-top: 8%;
-  margin-right: 0%;
-  position: fixed;
-}
-
-.search {
-  color: white;
-  height: 5.7%;
-  align-items: end;
-}
-
-.cards-heading {
-  padding-top: 1%;
-}
-.table-heading {
-  background-color: rgb(210, 216, 216);
-  height: 8%;
-}
-
-.tableSubHeading {
-  padding-top: 1%;
-  height: 6%;
-  display: flex;
-  flex-direction: row;
-  gap: 2%;
-}
 
 /* login page CSS */
 
@@ -201,4 +160,79 @@
   /* // this is really the only tricky part, you need to specify the background color of the container element... */
   color: black;
   background-color: #fcfcfa;
+}
+
+
+
+
+/* CSS for REndering_Admin */
+
+.window{
+  display:flex;
+  flex-direction: column;
+  gap:50px;
+}
+
+.bottom{
+  display: flex;
+  flex-direction:row;
+  gap:0.2%;
+}
+
+
+.statistics{
+  background-color:#b26700;
+  height: 7.7%;
+  width: 1320%;
+  color: white;
+  position: fixed;
+  margin-left: 18.1%;
+}
+
+.row{
+  padding:1%;
+  margin-top: 3.8%;
+  margin-left: 18.1%;
+  background-color: #b26700;
+  width:82.8%;
+  display: flex;
+  flex-direction:row;
+  gap:10%;
+  position:fixed;
+}
+
+.actions{
+  margin-left: 18.1%;
+  margin-top: 12.9%;
+  color: white;
+  background-color: #0d091f;
+  display: flex;
+  flex-direction: row;
+  gap:50%;
+  padding: 1%;
+  width:82.8%;
+  position: fixed;
+}
+
+.buttons{
+display: flex;
+flex-direction: row;
+  gap:5%;
+}
+
+.number{
+  margin-left: 18.1%;
+  background-color: #b26700;
+  width:82.8%;
+  position: fixed;
+  margin-top: 17.9%;
+}
+
+
+.table-format{
+  margin-left: 48.1%;
+  margin-top: 57%;
+  width:219%;
+  overflow-y: scroll;
+
 }

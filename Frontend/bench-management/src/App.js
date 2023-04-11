@@ -1,15 +1,17 @@
 //import logo from './logo.svg';
 import './App.css';
-import Cards_Table from './components/Cards_Table';
 import Login from './components/Login';
 import Navbar from './components/Navbar';
+import Manager from './components/Manager';
+import Rendering from './components/Rendering_Admin';
 
 function App() {
   return (
     <div className="App">
-    <Navbar/>
+    {/* <Navbar/> */}
       {/* <Login/> */}
-      {/* <Cards_Table/> */}
+      {/* <Rendering/> */}
+      <Manager/>
     </div>
   );
 }
