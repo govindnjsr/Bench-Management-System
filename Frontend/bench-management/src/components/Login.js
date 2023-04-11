@@ -1,33 +1,30 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import './Project.css';
 import { useEffect } from 'react';
 import logoImage from './Images/accoliteLogo.png';
 import jwt_decode from "jwt-decode";
+import AuthContext from './AuthContext';
 import ManagerDashboard from './ManagerDashboard';
 import AdminDashboard from './AdminDashboard';
-import AuthContext from './AuthContext';
 export default function Login() {
   const authData = useContext(AuthContext);
-  const [displayError, setDisplayError] = useState(false);
+  // const [displayError, setDisplayError] = useState(false);
   const manager = 1;
-  const admin = 2;
-
+  const admin = 2; // eslint-disable-line 
   const role = 2;
+
   function handleCallbackResponse(response) {
-    //console.log("Encoded JWT ID token: " + response.credential);
+    console.log("Encoded JWT ID token: " + response.credential);
     var userObject = jwt_decode(response.credential);
-    // console.log(userObject);
-    // setUser(userObject);
     if (userObject.email === "bansaldhruv0809@gmail.com") { // if user is verified then render to next page
-      //document.getElementById("googleLoginButton").hidden = true;
       authData.handleLogin();
       authData.handleUserData(userObject);
     }
     else {
-      alert("Invalid User");
+      alert("Access Denied");
     }
   }
-  
+
   useEffect(() => {
     const google = window.google;
     google.accounts.id.initialize({ // eslint-disable-line 
@@ -43,29 +40,27 @@ export default function Login() {
 
   return (
     authData.login === false ?
-    (
-    <>
-    
-      <div className='loginContainer'>
-        <div>
-          <img className='logoContainer' src={logoImage} alt="accoliteLogo" />
-        </div>
-        <div className='loginPageContent'>
-          <h5 className='welcomeHeading'>Welcome Back To</h5>
-          <h1 className='projectHeading'>Bench Management</h1>
-          <b>
-            <hr className="hr-text" data-content="One Tap Below to Sign-in" />
-          </b>
-          <div id='loginButton'></div>
-        </div>
-      </div>
+      (
+        <>
 
+          <div className='loginContainer'>
+            <div>
+              <img className='logoContainer' src={logoImage} alt="accoliteLogo" />
+            </div>
+            <div className='loginPageContent'>
+              <h5 className='welcomeHeading'>Welcome Back To</h5>
+              <h1 className='projectHeading'>Bench Management</h1>
+              <b>
+                <hr className="hr-text" data-content="One Tap Below to Sign-in" />
+              </b>
+              <div id='loginButton'></div>
+            </div>
+          </div>
 
-
-    </>)
-    : (
-      (role === manager) ? <ManagerDashboard/>
-      : <AdminDashboard/>
-    )
+        </>)
+      : (
+        (role === manager) ? <ManagerDashboard />
+          : <AdminDashboard />
+      )
   )
 }

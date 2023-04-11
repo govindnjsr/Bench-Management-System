@@ -1,19 +1,128 @@
-import React, { useCallback, useContext } from 'react'
-import NavBar from './Navbar'
-import SideBar from './Side_Bar'
-import Cards_Table from './Cards_Table'
-import AuthContext from './AuthContext'
-import Login from './Login'
+import React from 'react'
+import Navbar from './Navbar';
+import SideBar from './SideBar';
 
 export default function ManagerDashboard() {
-    const authData = useContext(AuthContext);
-  return ((
-    authData.login ?
-    <div>
-      {/* <NavBar/> */}
-    <Cards_Table/>
+  return (
+    <div className="window">
+      <div className='top'>
+        <Navbar />
+      </div>
+      <div className='bottom'>
+        <div className='bottom-left'>
+          <SideBar />
+        </div>
+        <div className='bottom-right'>
+          <div className='statistics'>
+            <h5><b>Statistics</b></h5>
+          </div>
+          <div className="row">
+            <div className="col-sm-3 mx-3">
+              <div className="card">
+                <div className="card-body">
+                  <h5 className="card-title">Total Employees</h5>
+                  <p className="card-text">12345</p>
+                </div>
+              </div>
+            </div>
+            <div className="col-sm-3">
+              <div className="card">
+                <div className="card-body">
+                  <h5 className="card-title">Active Employees</h5>
+                  <p className="card-text">12345</p>
+                </div>
+              </div>
+            </div>
+            <div className="col-sm-3">
+              <div className="card">
+                <div className="card-body">
+                  <h5 className="card-title">Benched Employees</h5>
+                  <p className="card-text">12345</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className='actions'>
+            <h5>Employees</h5>
+
+            <form className="d-flex" role="search">
+              <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+            </form>
+
+          </div>
+          <div className='number'>
+            <p>showing 50 rows</p>
+          </div>
+
+          <div className='table-format'>
+            <table className="table table-dark table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">Emp_Id</th>
+                  <th scope="col">Emp_Name</th>
+                  <th scope="col">Location</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>Dhruv Bansal</td>
+                  <td>Gurugram</td>
+                  <td>Active</td>
+                  <td>View/Update</td>
+                </tr>
+                <tr>
+                  <th scope="row">2</th>
+                  <td>Megha Mathur</td>
+                  <td>Gurugram</td>
+                  <td>Active</td>
+                  <td>View/Update</td>
+                </tr>
+                <tr>
+                  <th scope="row">3</th>
+                  <td>Shambhavi Vats</td>
+                  <td>Gurugram</td>
+                  <td>Active</td>
+                  <td>View/Update</td>
+                </tr>
+                <tr>
+                  <th scope="row">5</th>
+                  <td>Gobind</td>
+                  <td>Gurugram</td>
+                  <td>Active</td>
+                  <td>View/Update</td>
+                </tr>
+                <tr>
+                  <th scope="row">6</th>
+                  <td>Dhruv Bansal</td>
+                  <td>Gurugram</td>
+                  <td>Active</td>
+                  <td>View/Update</td>
+                </tr>
+                <tr>
+                  <th scope="row">7</th>
+                  <td>Megha Mathur</td>
+                  <td>Gurugram</td>
+                  <td>Active</td>
+                  <td>View/Update</td>
+                </tr>
+                <tr>
+                  <th scope="row">8</th>
+                  <td>Shambhavi Vats</td>
+                  <td>Gurugram</td>
+                  <td>Active</td>
+                  <td>View/Update</td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+
+
+        </div>
+      </div>
     </div>
-    : <Login/>
-  )
   )
 }

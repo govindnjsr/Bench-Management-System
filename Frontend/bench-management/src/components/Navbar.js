@@ -1,6 +1,5 @@
 import React, { useContext } from 'react'
 import logoImage from './Images/accoliteLogo.png'
-import SideBar from './Side_Bar'
 import Dropdown from 'react-bootstrap/Dropdown';
 import AuthContext from './AuthContext';
 export default function NavBar() {
@@ -37,11 +36,13 @@ export default function NavBar() {
                             </Dropdown.Menu>
                         </Dropdown>
                     </div>
-
+                    {/* <i className="fa-solid fa-user"></i>
+                    <div className='NavbarDropDown'>
+                        <span className='profileUserName'>username</span>
+                    </div> */}
                 </div>
 
             </div>
-            {/* <SideBar /> */}
         </>
     )
 }
