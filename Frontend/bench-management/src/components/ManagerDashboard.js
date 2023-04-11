@@ -55,7 +55,7 @@ export default function ManagerDashboard() {
           </div>
 
           <div className='table-format'>
-            <table className="table table-dark table-striped">
+            <table className="table table table-striped">
               <thead>
                 <tr>
                   <th scope="col">Emp_Id</th>

@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import './Project.css';
 import { useEffect } from 'react';
+import axios from 'axios';
 import logoImage from './Images/accoliteLogo.png';
 import jwt_decode from "jwt-decode";
 import AuthContext from './AuthContext';
@@ -11,7 +12,7 @@ export default function Login() {
   // const [displayError, setDisplayError] = useState(false);
   const manager = 1;
   const admin = 2; // eslint-disable-line 
-  const role = 2;
+  const role = 1;
 
   function handleCallbackResponse(response) {
     console.log("Encoded JWT ID token: " + response.credential);
@@ -24,7 +25,11 @@ export default function Login() {
       alert("Access Denied");
     }
   }
-
+  useEffect(() => {
+    axios.get("http://localhost:2538/api/login/get").then((response) => {
+      console.log(response);
+    })
+  }, [])
   useEffect(() => {
     const google = window.google;
     google.accounts.id.initialize({ // eslint-disable-line 
