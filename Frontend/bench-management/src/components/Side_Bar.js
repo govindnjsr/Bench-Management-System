@@ -8,14 +8,12 @@ export default function SideBar() {
    const [experienceValue, setExperienceValue] = useState(3);
 
    return (
-      <>
-
-         <div className='filterHeading'>
-            <hr style={{ color: 'grey', borderWidth: '2px', marginTop: '0px', marginBottom: '0px' }} />
-            <p style={{ fontSize: '14px', opacity: '0.6', fontWeight: 'bolder', marginTop: '10%' }}>SORT BY FILTERS</p>
-         </div>
-         <div className="left-panel">
-
+      
+   <div className="window">
+       <div className='filterHeading' >
+          <h4>SORT BY FILTERS</h4>
+       </div>
+       <div className="left-panel">
             <div className="filterContainer">
                <div className='filterByExperience'>
                   <p style={{ fontSize: '18px', opacity: '0.8', fontWeight: 'bold', marginBottom: '0px' }}>EXPERIENCE <span style={{ fontSize: '12px', opacity: '0.7', marginLeft: '3%' }}>( 0 - {experienceValue} Years)</span></p>
@@ -97,6 +95,7 @@ export default function SideBar() {
 
             </div>
          </div>
-      </>
+      </div>
+      
    )
 }
