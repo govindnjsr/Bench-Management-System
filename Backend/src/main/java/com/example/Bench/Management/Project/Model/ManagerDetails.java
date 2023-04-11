@@ -44,6 +44,7 @@ public class ManagerDetails {
                     )
             }
     )
+
     private List<Location>assignedLocation=new ArrayList<>();
 
 }

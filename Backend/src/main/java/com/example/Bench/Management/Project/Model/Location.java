@@ -29,8 +29,6 @@ public class Location {
             referencedColumnName = "id"
     )
     private List<EmpDetails> EmployeeDetails;
-
-
     @ManyToMany(mappedBy = "assignedLocation", fetch = FetchType.LAZY,
          cascade = {
             CascadeType.PERSIST,

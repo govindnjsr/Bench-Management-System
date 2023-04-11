@@ -60,6 +60,29 @@ public class ManagerServiceImp implements ManagerService {
         locationSet.add(location);
         managerDetails.setAssignedLocation(locationSet);
           return managerRepo.save(managerDetails);
+    }
+
+    //delete the assign location to the manager
+    @Override
+    public void deleteAssignLocation(Long managerId, long locationId) {
+
+        ManagerDetails managerDetails=managerRepo.findById(managerId).get();
+        List<Location>assignLocation=null;
+        assignLocation=managerDetails.getAssignedLocation();
+        int indexToBeDeleted=-1;
+        for(int i=0;i<assignLocation.size();i++){
+            Location location=assignLocation.get(i);
+            if(location.getId()==locationId){
+                indexToBeDeleted=i;
+                break;
+            }
+        }
+        if(indexToBeDeleted!=-1) {
+            assignLocation.remove(indexToBeDeleted);
+            managerRepo.save(managerDetails);
+        }
 
     }
+
+
 }

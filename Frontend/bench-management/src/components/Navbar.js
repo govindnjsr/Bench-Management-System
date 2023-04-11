@@ -41,7 +41,7 @@ export default function NavBar() {
                 </div>
 
             </div>
-            <SideBar />
+            {/* <SideBar /> */}
         </>
     )
 }

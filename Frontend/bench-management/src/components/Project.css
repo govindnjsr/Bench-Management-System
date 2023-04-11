@@ -64,32 +64,47 @@
 
 /* CSS for SideBar */
 
+.filterHeading{
+  position: fixed;
+  color: #fcfcfa;
+
+}
 .left-panel {
+  position: fixed;
   background-color: #0d091f;
-  height: 84.5vh;
+  height: 92.5vh;
   overflow: auto;
   width: 18vw;
   margin-left: 0%;
   color: white;
 }
+.filterContainer{
+  margin-top: 22%;
+}
+
+
+/* CSS for NAVBAR */
 
 .NavbarComponent {
   display: flex;
   flex-direction: row;
   margin: 0px;
   padding: 0px;
-  height: 10%;
+  height: 8%;
   width: 100%;
   background-color: #0d091f;
   color: white;
+  position: fixed;
 }
 
 .logoContainer {
   height: 10%;
   object-fit: contain;
   width: 18%;
-  padding-top: 1%;
+  padding-top: 0%;
+  padding-bottom: 1%;
   padding-left: 1%;
+  position: fixed;
 }
 .logoImageClass {
   height: 100%;
@@ -97,19 +112,28 @@
   object-fit: contain;
 }
 .NavbarHeading {
-  margin-left: 28%;
+  margin-left: 40%;
+  margin-top: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: fixed;
 }
 
 .profile {
   background-color: #0d091f;
+<<<<<<< HEAD
   width: 10%;
+=======
+  opacity: 0.5;
+  width: 28%;
+>>>>>>> 3341fee2f0b5112cc87535c8237625ae2d4913da
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-left: 28%;
+  margin-left: 80%;
+  padding-top: 10px;
+  position: fixed;
 }
 .profileUserName {
   margin-left: 10%;
@@ -184,6 +208,7 @@
   opacity: 0.8;
 }
 
+<<<<<<< HEAD
 /* CSS for Cards_Tables */
 
 /* .cardsTableMain {
@@ -259,6 +284,21 @@
   display: flex;
   flex-direction:row;
   gap:0.2%;
+=======
+
+/* login page CSS */
+
+.hr-text {
+  line-height: 1em;
+  position: relative;
+  outline: 0;
+  border: 0;
+  color: black;
+
+  text-align: center;
+  height: 1.5em;
+  opacity: 0.4;
+>>>>>>> 3341fee2f0b5112cc87535c8237625ae2d4913da
 }
 .bottom-right{
   height:90vh;
@@ -271,23 +311,68 @@
   position: fixed;
   /* margin-left: 18.1%; */
 }
+<<<<<<< HEAD
 .row{
   padding:1%;
   margin-top: 2%;
   /* margin-left: 18.1%; */
   margin-left: 0.1%;
   background-color: #B26700;
+=======
+
+
+
+
+/* CSS for REndering_Admin */
+
+.window{
+  display:flex;
+  flex-direction: column;
+  gap:50px;
+}
+
+.bottom{
+  display: flex;
+  flex-direction:row;
+  gap:0.2%;
+}
+
+
+.statistics{
+  background-color:#b26700;
+  height: 7.7%;
+  width: 1320%;
+  color: white;
+  position: fixed;
+  margin-left: 18.1%;
+}
+
+.row{
+  padding:1%;
+  margin-top: 3.8%;
+  margin-left: 18.1%;
+  background-color: #b26700;
+>>>>>>> 3341fee2f0b5112cc87535c8237625ae2d4913da
   width:82.8%;
   display: flex;
   flex-direction:row;
   gap:10%;
   position:fixed;
 }
+<<<<<<< HEAD
 .actions{
   /* margin-left: 18.1%; */
   margin-top: 11.2%;
   color: white;
   background-color: #0D091F;
+=======
+
+.actions{
+  margin-left: 18.1%;
+  margin-top: 12.9%;
+  color: white;
+  background-color: #0d091f;
+>>>>>>> 3341fee2f0b5112cc87535c8237625ae2d4913da
   display: flex;
   flex-direction: row;
   gap:50%;
@@ -295,11 +380,16 @@
   width:82.8%;
   position: fixed;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3341fee2f0b5112cc87535c8237625ae2d4913da
 .buttons{
 display: flex;
 flex-direction: row;
   gap:5%;
 }
+<<<<<<< HEAD
 .number{
   /* margin-left: 18.1%; */
   background-color: #B26700;
@@ -313,4 +403,22 @@ flex-direction: row;
   /* margin-left: 48.1%; */
   margin-top: 24.5%;
   overflow-y: scroll;
+=======
+
+.number{
+  margin-left: 18.1%;
+  background-color: #b26700;
+  width:82.8%;
+  position: fixed;
+  margin-top: 17.9%;
+}
+
+
+.table-format{
+  margin-left: 48.1%;
+  margin-top: 57%;
+  width:219%;
+  overflow-y: scroll;
+
+>>>>>>> 3341fee2f0b5112cc87535c8237625ae2d4913da
 }

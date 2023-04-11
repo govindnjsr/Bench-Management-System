@@ -9,5 +9,4 @@ import java.util.List;
 @Repository
 public interface ManagerRepo extends JpaRepository<ManagerDetails,Long> {
 
-//    List<ManagerDetails> findAllById(Long id);
 }

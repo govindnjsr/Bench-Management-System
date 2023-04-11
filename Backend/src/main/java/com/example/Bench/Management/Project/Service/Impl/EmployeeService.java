@@ -26,4 +26,19 @@ public class EmployeeService implements EmpDetailsService {
     public List<EmpDetails> getData() {
         return empDetailsRepo.findAll();
     }
+
+    @Override
+    public long getActiveEmployees() {
+        return empDetailsRepo.getAllActiveEmployees();
+    }
+
+    @Override
+    public long getInactiveEmployees() {
+        return empDetailsRepo.getAllInActiveEmployees();
+    }
+
+    @Override
+    public long getAllEmployees() {
+        return empDetailsRepo.getAllEmployees();
+    }
 }
