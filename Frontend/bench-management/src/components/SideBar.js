@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import './Project.css'
-import logoImage from './Images/accoliteLogo.png';
 
 export default function SideBar() {
 
@@ -9,10 +8,10 @@ export default function SideBar() {
 
    return (
       <>
-       <div className='filterHeading' >
-          <p className='pfilterHeading'>SORT BY FILTERS</p>
-       </div>
-       <div className="left-panel">
+         <div className='filterHeading' >
+            <p className='pfilter'>SORT BY FILTERS</p>
+         </div>
+         <div className="left-panel">
             <div className="filterContainer">
                <div className='filterByExperience'>
                   <p className='pfilter'>EXPERIENCE <span className='span-style'>( 0 - {experienceValue} Years)</span></p>
@@ -94,6 +93,6 @@ export default function SideBar() {
 
             </div>
          </div>
-         </>
+      </>
    )
 }
