@@ -25,19 +25,12 @@ function App() {
 
 
   return (
-    <>
-
-      <div className="App">
-        <AuthState>
-          <RouterProvider router={router} />
-        </AuthState>
-        {/* <NavBar/> */}
-        {/* <BasicExample/> */}
-        {/* <Login /> */}
-        {/* <Cards_Table/> */}
-      </div>
-
-    </>
+    <div className="App">
+    {/* <Navbar/> */}
+      {/* <Login/> */}
+      <Rendering/>
+      {/* <Manager/> */}
+    </div>
   );
 }
 

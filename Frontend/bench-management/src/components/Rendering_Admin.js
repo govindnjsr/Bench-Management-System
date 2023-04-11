@@ -17,7 +17,7 @@ export default function Rendering() {
             </div>
             <div className='bottom-right'>
               <div className='statistics'>
-                <h5><b>Statistics</b></h5>
+                <p>STATISTICS</p>
               </div>
               <div className="row">
                   <div className="col-sm-3 mx-3">
@@ -46,10 +46,10 @@ export default function Rendering() {
                   </div>
                 </div>
                 <div className='actions'>
-                   <h5>Employees</h5>
+                   <p className='employees'>EMPLOYEES</p>
                    <div className='buttons'>
-                      <button type="button" className="btn btn-light">Manager</button>
-                      <button type="button" className="btn btn-light">Employees</button>
+                      <button type="button" className="btn btn-light"> View Manager</button>
+                      <button type="button" className="btn btn-light">Employees +</button>
                       <form className="d-flex" role="search">
                       <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
                       </form>
@@ -58,9 +58,9 @@ export default function Rendering() {
                 <div className='number'>
                     <p>showing 50 rows</p>
                 </div>
-               
+                    <div className='table'>
                       <div className='table-format'>
-                        <table className="table table-dark table-striped">
+                        <table className="table table table-striped">
                           <thead>
                             <tr>
                               <th scope="col">Emp_Id</th>
@@ -120,11 +120,60 @@ export default function Rendering() {
                               <td>Active</td>
                               <td>View/Update</td>
                             </tr>
+                            <tr>
+                              <th scope="row">9</th>
+                              <td>Megha Mathur</td>
+                              <td>Gurugram</td>
+                              <td>Active</td>
+                              <td>View/Update</td>
+                            </tr>
+                            <tr>
+                              <th scope="row">10</th>
+                              <td>Megha Mathur</td>
+                              <td>Gurugram</td>
+                              <td>Active</td>
+                              <td>View/Update</td>
+                            </tr>
+                            <tr>
+                              <th scope="row">11</th>
+                              <td>Megha Mathur</td>
+                              <td>Gurugram</td>
+                              <td>Active</td>
+                              <td>View/Update</td>
+                            </tr>
+                            <tr>
+                              <th scope="row">12</th>
+                              <td>Megha Mathur</td>
+                              <td>Gurugram</td>
+                              <td>Active</td>
+                              <td>View/Update</td>
+                            </tr>
+                            <tr>
+                              <th scope="row">13</th>
+                              <td>Megha Mathur</td>
+                              <td>Gurugram</td>
+                              <td>Active</td>
+                              <td>View/Update</td>
+                            </tr>
+                            <tr>
+                              <th scope="row">14</th>
+                              <td>Megha Mathur</td>
+                              <td>Gurugram</td>
+                              <td>Active</td>
+                              <td>View/Update</td>
+                            </tr>
+                            <tr>
+                              <th scope="row">15</th>
+                              <td>Megha Mathur</td>
+                              <td>Gurugram</td>
+                              <td>Active</td>
+                              <td>View/Update</td>
+                            </tr>
             
                           </tbody>
                         </table>
                      </div>
-          
+                     </div>
                 
             </div>
         </div>
