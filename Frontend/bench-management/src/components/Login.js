@@ -27,6 +27,7 @@ export default function Login() {
       alert("Invalid User");
     }
   }
+  
   useEffect(() => {
     const google = window.google;
     google.accounts.id.initialize({ // eslint-disable-line 
