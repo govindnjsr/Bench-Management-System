@@ -4,6 +4,7 @@ import Login from './components/Login';
 import Navbar from './components/Navbar';
 import Manager from './components/Manager';
 import Rendering from './components/Rendering_Admin';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
