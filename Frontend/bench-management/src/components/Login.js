@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import './Project.css';
 import { useEffect } from 'react';
 import axios from 'axios';
@@ -12,17 +12,25 @@ export default function Login() {
   // const [displayError, setDisplayError] = useState(false);
   const manager = 1;
   const admin = 2; // eslint-disable-line 
-  const role = 1;
-
+  const [role, setRole] = useState(0);
+  const [currentPage, setCurrentPage] = useState(true)
+  const [data, setdata] = useState([{
+    role : 1,
+    email : "bansaldhruv0809@gmail.com"
+  }])
   function handleCallbackResponse(response) {
     console.log("Encoded JWT ID token: " + response.credential);
     var userObject = jwt_decode(response.credential);
-    if (userObject.email === "bansaldhruv0809@gmail.com" || userObject.email === "meghamathur1007@gmail.com") { // if user is verified then render to next page
+     { // if user is verified then render to next page
+      console.log(data);
+      data.forEach((item) => {
+        if(item.email === userObject.email){
+          setRole(item.role);
+          setCurrentPage(false);
+        }
+      })
       authData.handleLogin();
       authData.handleUserData(userObject);
-    }
-    else {
-      alert("Access Denied");
     }
   }
   useEffect(() => {
@@ -44,7 +52,7 @@ export default function Login() {
   }, []);
 
   return (
-    authData.login === false ?
+    currentPage === true ?
       (
         <>
 
