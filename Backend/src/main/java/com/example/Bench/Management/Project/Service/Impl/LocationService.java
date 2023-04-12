@@ -1,5 +1,6 @@
 package com.example.Bench.Management.Project.Service.Impl;
 
+import com.example.Bench.Management.Project.Model.EmpDetails;
 import com.example.Bench.Management.Project.Model.Location;
 import com.example.Bench.Management.Project.Repository.LocationRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +37,15 @@ public class LocationService implements com.example.Bench.Management.Project.Ser
     @Override
     public void deleteLocation(Long id) {
          locationRepo.deleteById(id);
+    }
+
+    @Override
+    public void addEmployeeToLocation(Long locationid,EmpDetails empDetails) {
+        Location location=locationRepo.findById(locationid).get();
+        List<EmpDetails>assignedEmployee=null;
+        assignedEmployee=location.getEmployeeDetails();
+        assignedEmployee.add(empDetails);
+        location.setEmployeeDetails(assignedEmployee);
+        locationRepo.save(location);
     }
 }

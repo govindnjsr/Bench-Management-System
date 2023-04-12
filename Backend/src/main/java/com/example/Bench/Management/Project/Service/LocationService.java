@@ -1,5 +1,6 @@
 package com.example.Bench.Management.Project.Service;
 
+import com.example.Bench.Management.Project.Model.EmpDetails;
 import com.example.Bench.Management.Project.Model.Location;
 import org.springframework.stereotype.Service;
 
@@ -12,4 +13,7 @@ public interface LocationService {
 
     public List<Location>getLocationDetails(Long id);
     public void deleteLocation(Long id);
+
+    //adding employes to a particular location
+    public void addEmployeeToLocation(Long locationid,EmpDetails empDetails);
 }

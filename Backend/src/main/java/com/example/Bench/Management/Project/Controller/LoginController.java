@@ -15,11 +15,11 @@ import java.util.List;
 public class LoginController {
     @Autowired
     private LoginService loginService;
-    @PostMapping
+    @PostMapping("/save")
     public ResponseEntity<Login>save(@RequestBody  Login login){
         return new ResponseEntity<Login>(loginService.save(login), HttpStatus.CREATED);
     }
-    @GetMapping
+    @GetMapping("/get")
     public List<Login>getData(){
         return loginService.getData();
     }

@@ -37,18 +37,29 @@ public class ManagerServiceImp implements ManagerService {
     }
 
     @Override
-    public List<ManagerDetails> getManagerDetails(Long managerId) {
-        if(null!=managerId){
-            return managerRepo.findAllById(Collections.singleton(managerId));
-        }
-        else{
-            return managerRepo.findAll();
-        }
+    public ManagerDetails getManagerDetails(Long managerId) {
+       ManagerDetails managerDetails=null;
+       if(managerId!=null){
+           managerDetails=managerRepo.findById(managerId).get();
+       }
+       return managerDetails;
     }
 
     @Override
-    public void deleteManager(long id) {
-          managerRepo.deleteById((id));
+    public String deleteManager(Long managerId) {
+        ManagerDetails manager=null;
+        if(managerId!=null){
+            manager=managerRepo.findById(managerId).get();
+            if(manager.getMActive()==true){
+                manager.setMActive(false);
+            }
+            else
+                manager.setMActive(true);
+
+            managerRepo.save(manager);
+        }
+        return "Deleted";
+
     }
 
     @Override
