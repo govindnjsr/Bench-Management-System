@@ -13,10 +13,14 @@ function AddEmployee() {
     return (
       <>
         
-        <Button variant="light" onClick={handleShow}>
+        {/* <Button className='action-btn' variant="light" size="lg" onClick={handleShow}>
           ADD EMPLOYEE
-        </Button>
+        </Button> */}
+          <button className='button2' onClick={handleShow}>
+            <i class="fa-solid fa-user-plus"></i> &nbsp; EMPLOYEE 
+         </button>
   
+
         <Modal
           show={show}
           onHide={handleClose}
@@ -29,10 +33,6 @@ function AddEmployee() {
           <Modal.Body>
           <Form id='add'>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                    <Form.Label>ID</Form.Label>
-                    <Form.Control type="number" placeholder="Enter ID" required/>
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                     <Form.Label>Name</Form.Label>
                     <Form.Control type="text" placeholder="Enter Name" required/>
                 </Form.Group>
@@ -42,7 +42,7 @@ function AddEmployee() {
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                     <Form.Label>Phone Number</Form.Label>
-                    <Form.Control type="number" placeholder="name@example.com" required/>
+                    <Form.Control type="number" placeholder="93190684368" required/>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                     <Form.Label>Work Experience</Form.Label>
@@ -142,12 +142,8 @@ function AddEmployee() {
                 </Form>
           </Modal.Body>
           <Modal.Footer>
-            {/* <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button> */}
-            <button onClick={handleClose}>Close</button>
-            <button form="add">Add</button>
-            {/* <Button variant="primary">ADD</Button> */}
+            <button className='button3' onClick={handleClose}>Close</button> &nbsp; 
+            <button className='button3' form="add">Add</button>
           </Modal.Footer>
         </Modal>
       </>

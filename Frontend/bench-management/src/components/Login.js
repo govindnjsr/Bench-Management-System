@@ -11,7 +11,7 @@ export default function Login() {
   // const [displayError, setDisplayError] = useState(false);
   const manager = 1;
   const admin = 2; // eslint-disable-line 
-  const role = 2;
+  const role = 1;
 
   function handleCallbackResponse(response) {
     console.log("Encoded JWT ID token: " + response.credential);
@@ -26,6 +26,7 @@ export default function Login() {
   }
 
   useEffect(() => {
+    /* global google */
     const google = window.google;
     google.accounts.id.initialize({ // eslint-disable-line 
       client_id: "305985372566-gu0rl4u8sm3ceu06m92tc52t0v8um5ne.apps.googleusercontent.com",
