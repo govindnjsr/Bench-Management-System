@@ -10,9 +10,9 @@ public interface ManagerService {
     //get all data of employee
     public List<ManagerDetails>getData();
    //get manager details with id
-    public  List<ManagerDetails>getManagerDetails(Long managerId);
+    public  ManagerDetails getManagerDetails(Long managerId);
     //delete manager with id ...
-    public void deleteManager(long id);
+    public String deleteManager(Long managerId);
     //assign manager to particuler location
     ManagerDetails assignLocationToManager(Long managerId, Long locationId);
     //delete the location Access from a manager

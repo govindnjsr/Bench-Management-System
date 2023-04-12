@@ -30,6 +30,7 @@ public class ManagerDetails {
     )
     private long id;
     private String mName;
+    private Boolean mActive;
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
     @JoinTable(

@@ -20,20 +20,23 @@ public class ManagerController {
     public  ResponseEntity<ManagerDetails>save(@RequestBody ManagerDetails managerDetails){
         return new ResponseEntity<ManagerDetails>(managerService.save(managerDetails),HttpStatus.CREATED);
     }
-    @GetMapping()
-    public List<ManagerDetails>getData(){
+//    @GetMapping()
+//    public List<ManagerDetails>getData(){
+//        return managerService.getData();
+//    }
+
+    @GetMapping("/get")
+    public List<ManagerDetails>getAllManagers(){
         return managerService.getData();
     }
-
-    @GetMapping(value = {"/getManagers","/{managerId}"})
-     public List<ManagerDetails>getManager(@PathVariable(required = false)Long managerId){
+    @GetMapping("/get/{managerId}")
+     public ManagerDetails getManager(@PathVariable(required = false)Long managerId){
         return managerService.getManagerDetails(managerId);
     }
 
-    @DeleteMapping("delete/{managerId}")
-    public ResponseEntity removeManager(@PathVariable Long managerId){
-        managerService.deleteManager(managerId);
-        return new ResponseEntity(HttpStatus.OK);
+    @PutMapping("delete/{managerId}")
+    public String removeManager(@PathVariable Long managerId){
+       return managerService.deleteManager(managerId);
     }
 
     //assign location to manager

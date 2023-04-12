@@ -8,15 +8,15 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface EmpDetailsRepo extends JpaRepository<EmpDetails,Long> {
 
-    @Query(value = "select count(*) from bench.emp_details where bench_status=true "
+    @Query(value = "select count(*) from bench.emp_details where bench_status=false "
            ,nativeQuery = true)
     public long getAllActiveEmployees();
 
-    @Query(value = "select count(*) from bench.emp_details where bench_status=false "
+    @Query(value = "select count(*) from bench.emp_details where bench_status=true "
             ,nativeQuery = true)
     public long getAllInActiveEmployees();
 
-    @Query(value = "select count(*) from bench.emp_details",nativeQuery = true)
+    @Query(value = "select count(*) from bench.emp_details where active=true",nativeQuery = true)
     public long getAllEmployees();
 
 

@@ -6,6 +6,7 @@ import com.example.Bench.Management.Project.Service.EmpDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -41,4 +42,27 @@ public class EmployeeService implements EmpDetailsService {
     public long getAllEmployees() {
         return empDetailsRepo.getAllEmployees();
     }
+
+    @Override
+    public String updateCompanyStatus(Long employeeId) {
+        EmpDetails empDetails=empDetailsRepo.findById(employeeId).get();
+        if(empDetails.getActive()==true){
+            empDetails.setActive(false);
+        }
+        else
+            empDetails.setActive(true);
+      empDetailsRepo.save(empDetails);
+        return "Update";
+    }
+
+    @Override
+    public EmpDetails getEmployeeById(Long employeeId) {
+        EmpDetails empDetails=null;
+        if(employeeId!=null) {
+           empDetails = empDetailsRepo.findById(employeeId).get();
+            return empDetails;
+        }
+        else return empDetails;
+    }
+
 }

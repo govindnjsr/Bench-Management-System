@@ -1,5 +1,6 @@
 package com.example.Bench.Management.Project.Model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -33,6 +34,8 @@ public class EmpDetails {
     private Date billableDate;
     private Boolean benchStatus;
     private String skills;
+    private Boolean active;
+    private String empLocation;
 
     @OneToMany(
             cascade = CascadeType.ALL
