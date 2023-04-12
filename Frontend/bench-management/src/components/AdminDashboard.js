@@ -1,13 +1,45 @@
-import React from 'react'
+import React, { useState,useEffect } from 'react'
 import './Project.css';
 import Navbar from './Navbar';
 import SideBar from './SideBar';
 import AddEmployee from './AddEmployee';
 import ViewManager from './ViewManager';
+import axios from 'axios';
+import { Button } from 'bootstrap';
+
+
+export default function AdminDashboard(prop) {
 
 
 
-export default function AdminDashboard() {
+  const[allEmployees,setAllEmployee]=useState()
+  const[activeEmp,setActiveEmp]=useState()
+  const[benchedEmp,setBenchedEmp]=useState()
+  const[empdetails,setEmpDetails]=useState()
+
+
+  const fetchApi=async ()=>{
+    try{
+      // http://192.168.1.64:2538/api/employees
+       const allEmp=await axios.get('http://localhost:2538/api/empdetails/get/allemployee');
+       setAllEmployee(allEmp.data);
+       const allActiveEmp=await axios.get('http://localhost:2538/api/empdetails/get/activeemployee');
+       setActiveEmp(allActiveEmp.data);
+       const allBenchedEmp=await axios.get('http://localhost:2538/api/empdetails/get/benchedemployee');
+       setBenchedEmp(allBenchedEmp.data);
+       const employeeDetails=await axios.get('http://localhost:2538/api/empdetails/get');
+       setEmpDetails(employeeDetails.data);
+    //    setData(res.data);
+    }
+    catch{
+       console.log()
+    }
+  }
+  useEffect(()=>{
+    fetchApi()
+  },[])
+
+  console.log(empdetails)
   return (
     <div className="window">
       <div className='top'>
@@ -26,7 +58,7 @@ export default function AdminDashboard() {
               <div className="card">
                 <div className="card-body">
                   <h5 className="card-title">Total Employees</h5>
-                  <p className="card-text">12345</p>
+                  <p className="card-text">{allEmployees}</p>
                 </div>
               </div>
             </div>
@@ -34,7 +66,7 @@ export default function AdminDashboard() {
               <div className="card">
                 <div className="card-body">
                   <h5 className="card-title">Active Employees</h5>
-                  <p className="card-text">12345</p>
+                  <p className="card-text">{activeEmp}</p>
                 </div>
               </div>
             </div>
@@ -42,7 +74,7 @@ export default function AdminDashboard() {
               <div className="card">
                 <div className="card-body">
                   <h5 className="card-title">Benched Employees</h5>
-                  <p className="card-text">12345</p>
+                  <p className="card-text">{benchedEmp}</p>
                 </div>
               </div>
             </div>
@@ -70,109 +102,25 @@ export default function AdminDashboard() {
                     <th scope="col">Emp_Id</th>
                     <th scope="col">Emp_Name</th>
                     <th scope="col">Location</th>
-                    <th scope="col">Status</th>
+                    <th scope="col">BStatus</th>
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
                 <tbody>
+                {empdetails &&
+                  empdetails.map((emp)=>(
                   <tr>
-                    <th scope="row">1</th>
-                    <td>Dhruv Bansal</td>
-                    <td>Gurugram</td>
-                    <td>Active</td>
-                    <td>View/Update</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Megha Mathur</td>
-                    <td>Gurugram</td>
-                    <td>Active</td>
-                    <td>View/Update</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>Shambhavi Vats</td>
-                    <td>Gurugram</td>
-                    <td>Active</td>
-                    <td>View/Update</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">5</th>
-                    <td>Gobind</td>
-                    <td>Gurugram</td>
-                    <td>Active</td>
-                    <td>View/Update</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">6</th>
-                    <td>Dhruv Bansal</td>
-                    <td>Gurugram</td>
-                    <td>Active</td>
-                    <td>View/Update</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">7</th>
-                    <td>Megha Mathur</td>
-                    <td>Gurugram</td>
-                    <td>Active</td>
-                    <td>View/Update</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">8</th>
-                    <td>Shambhavi Vats</td>
-                    <td>Gurugram</td>
-                    <td>Active</td>
-                    <td>View/Update</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">9</th>
-                    <td>Megha Mathur</td>
-                    <td>Gurugram</td>
-                    <td>Active</td>
-                    <td>View/Update</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">10</th>
-                    <td>Megha Mathur</td>
-                    <td>Gurugram</td>
-                    <td>Active</td>
-                    <td>View/Update</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">11</th>
-                    <td>Megha Mathur</td>
-                    <td>Gurugram</td>
-                    <td>Active</td>
-                    <td>View/Update</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">12</th>
-                    <td>Megha Mathur</td>
-                    <td>Gurugram</td>
-                    <td>Active</td>
-                    <td>View/Update</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">13</th>
-                    <td>Megha Mathur</td>
-                    <td>Gurugram</td>
-                    <td>Active</td>
-                    <td>View/Update</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">14</th>
-                    <td>Megha Mathur</td>
-                    <td>Gurugram</td>
-                    <td>Active</td>
-                    <td>View/Update</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">15</th>
-                    <td>Megha Mathur</td>
-                    <td>Gurugram</td>
-                    <td>Active</td>
-                    <td>View/Update</td>
-                  </tr>
+                      <td>{emp.id}</td>
+                      <td>{emp.name}</td>
+                      <td>{emp.empLocation}</td>
+                      <td>{emp.benchStatus==true?"Active":"Inactive"}</td>
+                      <td>
+                        <button>View</button>
+                      </td>
+                 </tr>
+        ))
+                 }
+                  
 
                 </tbody>
               </table>
