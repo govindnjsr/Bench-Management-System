@@ -4,6 +4,8 @@ import Navbar from './Navbar';
 import SideBar from './SideBar';
 import AddEmployee from './AddEmployee';
 import ViewManager from './ViewManager';
+import search from './Images/search.png';
+import UpdateEmployee from './UpdateEmployee';
 
 
 
@@ -26,7 +28,8 @@ export default function AdminDashboard() {
               <div className="card">
                 <div className="card-body">
                   <h5 className="card-title">Total Employees</h5>
-                  <p className="card-text">12345</p>
+                  <p className="card-text">12345</p> 
+                  <button className='button4'>View</button>
                 </div>
               </div>
             </div>
@@ -35,6 +38,7 @@ export default function AdminDashboard() {
                 <div className="card-body">
                   <h5 className="card-title">Active Employees</h5>
                   <p className="card-text">12345</p>
+                  <button className='button4'>View</button>
                 </div>
               </div>
             </div>
@@ -43,6 +47,7 @@ export default function AdminDashboard() {
                 <div className="card-body">
                   <h5 className="card-title">Benched Employees</h5>
                   <p className="card-text">12345</p>
+                  <button className='button4'>View</button>
                 </div>
               </div>
             </div>
@@ -50,22 +55,21 @@ export default function AdminDashboard() {
           <div className='actions'>
             <p className='employees'>EMPLOYEES</p>
             <div className='buttons'>
-              {/* <button type="button" className="btn btn-light"> View Manager</button> */}
-              {/* <button type="button" className="btn btn-light">Employees +</button> */}
               <ViewManager/>
               <AddEmployee/>
               <form className="d-flex" role="search">
-                <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                <input className="search-box1" type="search" placeholder="Search " aria-label="Search" />
+                 <img className="search" src={search} alt="search-img"/>
               </form>
             </div>
           </div>
           <div className='number'>
-            <p>showing 50 rows</p>
+            <p>50 rows returned</p>
           </div>
           <div className='table'>
             <div className='table-format'>
               <table className="table table table-striped">
-                <thead>
+                <thead className='thread1'>
                   <tr>
                     <th scope="col">Emp_Id</th>
                     <th scope="col">Emp_Name</th>
@@ -74,104 +78,104 @@ export default function AdminDashboard() {
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody className='thread1'>
                   <tr>
                     <th scope="row">1</th>
                     <td>Dhruv Bansal</td>
                     <td>Gurugram</td>
                     <td>Active</td>
-                    <td>View/Update</td>
+                    <td><UpdateEmployee/></td>
                   </tr>
                   <tr>
                     <th scope="row">2</th>
                     <td>Megha Mathur</td>
                     <td>Gurugram</td>
                     <td>Active</td>
-                    <td>View/Update</td>
+                    <td><UpdateEmployee/></td>
                   </tr>
                   <tr>
                     <th scope="row">3</th>
                     <td>Shambhavi Vats</td>
                     <td>Gurugram</td>
                     <td>Active</td>
-                    <td>View/Update</td>
+                    <td><UpdateEmployee/></td>
                   </tr>
                   <tr>
                     <th scope="row">5</th>
                     <td>Gobind</td>
                     <td>Gurugram</td>
                     <td>Active</td>
-                    <td>View/Update</td>
+                    <td><UpdateEmployee/></td>
                   </tr>
                   <tr>
                     <th scope="row">6</th>
                     <td>Dhruv Bansal</td>
                     <td>Gurugram</td>
                     <td>Active</td>
-                    <td>View/Update</td>
+                    <td><UpdateEmployee/></td>
                   </tr>
                   <tr>
                     <th scope="row">7</th>
                     <td>Megha Mathur</td>
                     <td>Gurugram</td>
                     <td>Active</td>
-                    <td>View/Update</td>
+                    <td><UpdateEmployee/></td>
                   </tr>
                   <tr>
                     <th scope="row">8</th>
                     <td>Shambhavi Vats</td>
                     <td>Gurugram</td>
                     <td>Active</td>
-                    <td>View/Update</td>
+                    <td><UpdateEmployee/></td>
                   </tr>
                   <tr>
                     <th scope="row">9</th>
                     <td>Megha Mathur</td>
                     <td>Gurugram</td>
                     <td>Active</td>
-                    <td>View/Update</td>
+                    <td><UpdateEmployee/></td>
                   </tr>
                   <tr>
                     <th scope="row">10</th>
                     <td>Megha Mathur</td>
                     <td>Gurugram</td>
                     <td>Active</td>
-                    <td>View/Update</td>
+                    <td><UpdateEmployee/></td>
                   </tr>
                   <tr>
                     <th scope="row">11</th>
                     <td>Megha Mathur</td>
                     <td>Gurugram</td>
                     <td>Active</td>
-                    <td>View/Update</td>
+                    <td><UpdateEmployee/></td>
                   </tr>
                   <tr>
                     <th scope="row">12</th>
                     <td>Megha Mathur</td>
                     <td>Gurugram</td>
                     <td>Active</td>
-                    <td>View/Update</td>
+                    <td><UpdateEmployee/></td>
                   </tr>
                   <tr>
                     <th scope="row">13</th>
                     <td>Megha Mathur</td>
                     <td>Gurugram</td>
                     <td>Active</td>
-                    <td>View/Update</td>
+                    <td><UpdateEmployee/></td>
                   </tr>
                   <tr>
                     <th scope="row">14</th>
                     <td>Megha Mathur</td>
                     <td>Gurugram</td>
                     <td>Active</td>
-                    <td>View/Update</td>
+                    <td><UpdateEmployee/></td>
                   </tr>
                   <tr>
                     <th scope="row">15</th>
                     <td>Megha Mathur</td>
                     <td>Gurugram</td>
                     <td>Active</td>
-                    <td>View/Update</td>
+                    <td><UpdateEmployee/></td>
                   </tr>
 
                 </tbody>
@@ -182,9 +186,6 @@ export default function AdminDashboard() {
         </div>
       </div>
     </div>
-
-
-
   )
 }
 
