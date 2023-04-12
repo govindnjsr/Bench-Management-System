@@ -57,10 +57,14 @@ console.log(empdetails)
     return (
       <>
         
-        <Button variant="light" onClick={handleShow}>
+        {/* <Button className='action-btn' variant="light" size="lg" onClick={handleShow}>
           ADD EMPLOYEE
-        </Button>
+        </Button> */}
+          <button className='button2' onClick={handleShow}>
+            <i class="fa-solid fa-user-plus"></i> &nbsp; EMPLOYEE 
+         </button>
   
+
         <Modal
           show={show}
           onHide={handleClose}
@@ -97,7 +101,7 @@ console.log(empdetails)
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                     <Form.Label>Phone Number</Form.Label>
-                    <Form.Control name="phoneNo" onChange={handleChangeValue.bind(this)} type="number" placeholder="name@example.com" />
+                    <Form.Control name="phoneNo" onChange={handleChangeValue.bind(this)} type="number" placeholder="type phone number" />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                     <Form.Label>Work Experience</Form.Label>
@@ -200,8 +204,8 @@ console.log(empdetails)
             {/* <Button variant="secondary" onClick={handleClose}>
               Close
             </Button> */}
-            <button onClick={handleClose}>Close</button>
-            <button form="add" onClick={saveData}>Add</button>
+            <button className='button3' onClick={handleClose}>Close</button> &nbsp; 
+            <button className='button3' form="add" onClick={saveData}>Add</button>
             {/* <Button variant="primary">ADD</Button> */}
           </Modal.Footer>
         </Modal>

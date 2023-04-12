@@ -3,25 +3,22 @@ import AuthContext from './AuthContext'
 import { useState } from 'react';
 export default function AuthState(props) {
 
-    const [login, setlogin] = useState(false);
-    const [user, setUser] = useState() // eslint-disable-line
+    const [isAuthentication, setAuthentication] = useState(false);
+    const[currentRole,setCurrentRole]=useState(0)
+    const[googleData,setGoogleData]=useState({})
     function handleLogin() {
-        if(login === true) {
-            setUser(false)
+        if(isAuthentication === true) {
+            setAuthentication(false)
             console.log("logged out successfully")
         }
         else {
-            setlogin(true)  
+            setAuthentication(true)  
             console.log("logged in Successfully")
         }
     }
-    console.log("logged in : " + login)
-    function handleUserData(userData) {
-        setUser(userData)
-    }
-    console.log("userData:" + JSON.stringify(user));
+    
   return (
-    <AuthContext.Provider value={{login, user, handleLogin, handleUserData}}>
+    <AuthContext.Provider value={{googleData,isAuthentication, currentRole,setGoogleData,handleLogin,setAuthentication,setCurrentRole}}>
         {props.children}
     </AuthContext.Provider>
   )

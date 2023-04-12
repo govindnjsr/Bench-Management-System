@@ -74,9 +74,9 @@ function ViewManager() {
     console.log(addlocation)
     return (
       <>
-        <Button variant="light" onClick={handleShow}>
-          VIEW MANAGER
-        </Button>
+        <button className='button2' onClick={handleShow}>
+        <i class="fa-solid fa-user"></i> &nbsp; MANAGERS 
+        </button>
   
         <Modal
           show={show}
@@ -88,7 +88,7 @@ function ViewManager() {
             <Modal.Title>Managers</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-          <Form>
+          <Form id='view'>
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                     <Form.Label>Manager Id</Form.Label>
                     <Form.Control name="managerId" onChange={handleAddLocation.bind(this)} placeholder="Enter manager Id" />
@@ -162,8 +162,8 @@ function ViewManager() {
     </Table>
           </Modal.Body>
           <Modal.Footer>
-            <button onClick={handleClose}>Close</button>
-            {/* <button>Understood</button> */}
+            <button className='button3' onClick={handleClose}>Close</button> 
+            {/* <button className='button3' form="view">Apply</button> */}
           </Modal.Footer>
         </Modal>
       </>

@@ -6,9 +6,11 @@ import AddEmployee from './AddEmployee';
 import ViewManager from './ViewManager';
 import axios from 'axios';
 import { Button } from 'bootstrap';
-
+import search from './Images/search.png';
+import UpdateEmployee from './UpdateEmployee';
 
 export default function AdminDashboard(prop) {
+
 
 
 
@@ -59,6 +61,7 @@ export default function AdminDashboard(prop) {
                 <div className="card-body">
                   <h5 className="card-title">Total Employees</h5>
                   <p className="card-text">{allEmployees}</p>
+                  <button className='button4'>View</button>
                 </div>
               </div>
             </div>
@@ -67,6 +70,7 @@ export default function AdminDashboard(prop) {
                 <div className="card-body">
                   <h5 className="card-title">Active Employees</h5>
                   <p className="card-text">{activeEmp}</p>
+                   <button className='button4'>View</button>
                 </div>
               </div>
             </div>
@@ -75,6 +79,7 @@ export default function AdminDashboard(prop) {
                 <div className="card-body">
                   <h5 className="card-title">Benched Employees</h5>
                   <p className="card-text">{benchedEmp}</p>
+                  <button className='button4'>View</button>
                 </div>
               </div>
             </div>
@@ -82,22 +87,21 @@ export default function AdminDashboard(prop) {
           <div className='actions'>
             <p className='employees'>EMPLOYEES</p>
             <div className='buttons'>
-              {/* <button type="button" className="btn btn-light"> View Manager</button> */}
-              {/* <button type="button" className="btn btn-light">Employees +</button> */}
               <ViewManager/>
               <AddEmployee/>
               <form className="d-flex" role="search">
-                <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                <input className="search-box1" type="search" placeholder="Search " aria-label="Search" />
+                 <img className="search" src={search} alt="search-img"/>
               </form>
             </div>
           </div>
           <div className='number'>
-            <p>showing 50 rows</p>
+            <p>50 rows returned</p>
           </div>
           <div className='table'>
             <div className='table-format'>
               <table className="table table table-striped">
-                <thead>
+                <thead className='thread1'>
                   <tr>
                     <th scope="col">Emp_Id</th>
                     <th scope="col">Emp_Name</th>
@@ -106,17 +110,15 @@ export default function AdminDashboard(prop) {
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody className='thread1'>
                 {empdetails &&
                   empdetails.map((emp)=>(
                   <tr>
-                      <td>{emp.id}</td>
+                      <th scope="row">{emp.id}</th>
                       <td>{emp.name}</td>
                       <td>{emp.empLocation}</td>
                       <td>{emp.benchStatus==true?"Active":"Inactive"}</td>
-                      <td>
-                        <button>View</button>
-                      </td>
+                      <td><UpdateEmployee/></td>
                  </tr>
         ))
                  }
@@ -130,9 +132,6 @@ export default function AdminDashboard(prop) {
         </div>
       </div>
     </div>
-
-
-
   )
 }
 
