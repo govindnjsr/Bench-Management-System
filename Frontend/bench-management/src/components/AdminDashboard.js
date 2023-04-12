@@ -2,6 +2,10 @@ import React from 'react'
 import './Project.css';
 import Navbar from './Navbar';
 import SideBar from './SideBar';
+import AddEmployee from './AddEmployee';
+import ViewManager from './ViewManager';
+
+
 
 export default function AdminDashboard() {
   return (
@@ -46,8 +50,10 @@ export default function AdminDashboard() {
           <div className='actions'>
             <p className='employees'>EMPLOYEES</p>
             <div className='buttons'>
-              <button type="button" className="btn btn-light"> View Manager</button>
-              <button type="button" className="btn btn-light">Employees +</button>
+              {/* <button type="button" className="btn btn-light"> View Manager</button> */}
+              {/* <button type="button" className="btn btn-light">Employees +</button> */}
+              <ViewManager/>
+              <AddEmployee/>
               <form className="d-flex" role="search">
                 <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
               </form>
