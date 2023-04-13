@@ -7,38 +7,41 @@ import jwt_decode from "jwt-decode";
 import AuthContext from './AuthContext';
 import ManagerDashboard from './ManagerDashboard';
 import AdminDashboard from './AdminDashboard';
+import axios from 'axios';
 export default function Login() {
   const authData = useContext(AuthContext);
-  // const [displayError, setDisplayError] = useState(false);
-  const manager = 1;
-  const admin = 2; // eslint-disable-line 
-  const [role, setRole] = useState(0);
-  const [currentPage, setCurrentPage] = useState(true)
-  const [data, setdata] = useState([{
-    role : 1,
-    email : "bansaldhruv0809@gmail.com"
-  }])
+  const [loginApiData,setLoginApiData]=useState();
+
   function handleCallbackResponse(response) {
     console.log("Encoded JWT ID token: " + response.credential);
     var userObject = jwt_decode(response.credential);
-     { // if user is verified then render to next page
-      console.log(data);
-      data.forEach((item) => {
-        if(item.email === userObject.email){
-          setRole(item.role);
-          setCurrentPage(false);
-        }
-      })
-      authData.handleLogin();
-      authData.handleUserData(userObject);
+    authData.setGoogleData(userObject);       
+  }
+
+   console.log("google "+ JSON.stringify(authData.googleData))
+    {loginApiData && loginApiData.forEach(element => {
+            if(authData.googleData && element.email==authData.googleData.email){
+              authData.handleLogin();
+              authData.setCurrentRole(element.role);
+              setLoginApiData(false);
+            }
+        });
+    }
+  
+  //calling api
+  const fetchApi=async ()=>{
+    try{
+       const loginData=await axios.get('http://localhost:2538/api/login/get')
+       setLoginApiData(loginData.data);  
+    }
+    catch{
+       console.log()
     }
   }
+  //useEFFECT
+
   useEffect(() => {
-    axios.get("http://localhost:2538/api/login/get").then((response) => {
-      console.log(response);
-    })
-  }, [])
-  useEffect(() => {
+    /* global google */
     const google = window.google;
     google.accounts.id.initialize({ // eslint-disable-line 
       client_id: "305985372566-gu0rl4u8sm3ceu06m92tc52t0v8um5ne.apps.googleusercontent.com",
@@ -49,10 +52,12 @@ export default function Login() {
       document.getElementById("loginButton"),
       { theme: "outline", size: "large", shape: "pill", width: "400", height: "300" }
     );
+    fetchApi();   
   }, []);
-
+   
+  console.log(loginApiData)
   return (
-    currentPage === true ?
+    authData.isAuthentication === false ?
       (
         <>
 
@@ -66,13 +71,13 @@ export default function Login() {
               <b>
                 <hr className="hr-text" data-content="One Tap Below to Sign-in" />
               </b>
-              <div id='loginButton'></div>
+              <div id='loginButton' ></div>
             </div>
           </div>
 
         </>)
       : (
-        (role === manager) ? <ManagerDashboard />
+        (authData.currentRole === 1) ? <ManagerDashboard />
           : <AdminDashboard />
       )
   )
