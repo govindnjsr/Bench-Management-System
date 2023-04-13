@@ -1,10 +1,74 @@
-import React from 'react'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
 import Navbar from './Navbar';
 import SideBar from './SideBar';
 import search from './Images/search.png'
 import UpdateEmployee from './UpdateEmployee';
+import AuthContext from './AuthContext';
+import axios from 'axios';
 
 export default function ManagerDashboard() {
+
+  // const authData = useContext(AuthContext)
+  const [managerData, setManagerData] = useState({}); // for assigned locations of that manager
+  const [allEmpDetails, setAllEmpDetails] = useState();
+  const [filteredEmpData, setFilteredEmpData] = useState([]);
+  const [countAllEmployees, setCountAllEmployees] = useState(0);
+  const [countActiveEmp, setCountActiveEmp] = useState(0);
+  const [countBenchedEmp, setCountBenchedEmp] = useState(0);
+  const fetchManagerTable = async () => {
+    try{
+      const Data = await axios.get(`http://localhost:2538/api/manager/get/1`); // ${authData.managerId} instead of 1
+      setManagerData(Data.data)
+    }
+    catch{
+      console.log()
+    }
+  }
+
+  const fetchAllEmp = async () => {
+    try{
+      const Data = await axios.get('http://localhost:2538/api/empdetails/get');
+      setAllEmpDetails(Data.data);
+    }
+    catch{
+      console.log("error fetching employee details")
+    }
+  }
+
+// console.log(managerData)
+console.log(allEmpDetails)
+console.log(filteredEmpData)
+  useEffect(() => {
+    fetchManagerTable();
+    fetchAllEmp();
+  }, [])
+
+  //for fetching assigned location when the manager data is updated
+
+  useEffect(() => {
+    managerData.assignedLocation && managerData.assignedLocation.forEach(element => {
+      const locationName = element.locName;
+      var check = true;
+      allEmpDetails && allEmpDetails.forEach(emp => {
+        if(emp.empLocation && emp.empLocation == locationName) {
+          console.log(emp);
+          if(check){
+            setFilteredEmpData([emp]);
+            check = false;
+          }
+          else setFilteredEmpData(filteredEmpData => [...filteredEmpData, emp]);
+          if(emp.benchStatus && emp.benchStatus === false){
+            setCountActiveEmp(countActiveEmp => countActiveEmp + 1);
+          }
+          else setCountBenchedEmp(countBenchedEmp => countBenchedEmp + 1);
+        }
+      })
+      
+    });
+    setCountAllEmployees(countAllEmployees => filteredEmpData.length);
+  },[managerData, allEmpDetails])
+
+
   return (
     <div className="window">
       <div className='top'>
@@ -23,7 +87,7 @@ export default function ManagerDashboard() {
               <div className="card">
                 <div className="card-body">
                   <h5 className="card-title">Total Employees</h5>
-                  <p className="card-text">12345</p>
+                  <p className="card-text">{countAllEmployees}</p>
                 </div>
               </div>
             </div>
@@ -31,7 +95,7 @@ export default function ManagerDashboard() {
               <div className="card">
                 <div className="card-body">
                   <h5 className="card-title">Active Employees</h5>
-                  <p className="card-text">12345</p>
+                  <p className="card-text">{countActiveEmp}</p>
                 </div>
               </div>
             </div>
@@ -39,7 +103,7 @@ export default function ManagerDashboard() {
               <div className="card">
                 <div className="card-body">
                   <h5 className="card-title">Benched Employees</h5>
-                  <p className="card-text">12345</p>
+                  <p className="card-text">{countBenchedEmp}</p>
                 </div>
               </div>
             </div>
@@ -67,105 +131,17 @@ export default function ManagerDashboard() {
                   </tr>
                 </thead>
                 <tbody className='thread1'>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Dhruv Bansal</td>
-                    <td>Gurugram</td>
-                    <td>Active</td>
-                    <td><UpdateEmployee /></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Megha Mathur</td>
-                    <td>Gurugram</td>
-                    <td>Active</td>
-                    <td><UpdateEmployee /></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>Shambhavi Vats</td>
-                    <td>Gurugram</td>
-                    <td>Active</td>
-                    <td><UpdateEmployee /></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">5</th>
-                    <td>Gobind</td>
-                    <td>Gurugram</td>
-                    <td>Active</td>
-                    <td><UpdateEmployee /></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">6</th>
-                    <td>Dhruv Bansal</td>
-                    <td>Gurugram</td>
-                    <td>Active</td>
-                    <td><UpdateEmployee /></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">7</th>
-                    <td>Megha Mathur</td>
-                    <td>Gurugram</td>
-                    <td>Active</td>
-                    <td><UpdateEmployee /></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">8</th>
-                    <td>Shambhavi Vats</td>
-                    <td>Gurugram</td>
-                    <td>Active</td>
-                    <td><UpdateEmployee /></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">9</th>
-                    <td>Megha Mathur</td>
-                    <td>Gurugram</td>
-                    <td>Active</td>
-                    <td><UpdateEmployee /></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">10</th>
-                    <td>Megha Mathur</td>
-                    <td>Gurugram</td>
-                    <td>Active</td>
-                    <td><UpdateEmployee /></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">11</th>
-                    <td>Megha Mathur</td>
-                    <td>Gurugram</td>
-                    <td>Active</td>
-                    <td><UpdateEmployee /></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">12</th>
-                    <td>Megha Mathur</td>
-                    <td>Gurugram</td>
-                    <td>Active</td>
-                    <td><UpdateEmployee /></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">13</th>
-                    <td>Megha Mathur</td>
-                    <td>Gurugram</td>
-                    <td>Active</td>
-                    <td><UpdateEmployee /></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">14</th>
-                    <td>Megha Mathur</td>
-                    <td>Gurugram</td>
-                    <td>Active</td>
-                    <td><UpdateEmployee /></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">15</th>
-                    <td>Megha Mathur</td>
-                    <td>Gurugram</td>
-                    <td>Active</td>
-                    <td><UpdateEmployee /></td>
-                  </tr>
-
+                  {filteredEmpData &&
+                    filteredEmpData.map((key) => (
+                      <tr>
+                        <th scope='row'>{key.id}</th>
+                        <td>{key.name}</td>
+                        <td>{key.empLocation}</td>
+                        <td>{key.benchStatus === true ? "Active" : "Inactive"}</td>
+                        <td><UpdateEmployee /></td>
+                      </tr>
+                    ))
+                  }
                 </tbody>
               </table>
 
