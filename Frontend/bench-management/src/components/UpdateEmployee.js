@@ -14,9 +14,9 @@ function UpdateEmployee() {
        View / Update
       </Button> */}
       <button className='button5' onClick={handleShow}>
-          View/ Update
+        View/ Update
       </button>
-  
+
 
       <Modal
         show={show}

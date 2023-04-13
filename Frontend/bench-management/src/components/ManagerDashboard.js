@@ -51,128 +51,128 @@ export default function ManagerDashboard() {
             <p className='employees'>EMPLOYEES</p>
             <form className="d-flex" role="search">
               <input className="search-box2" type="search" placeholder="Search" aria-label="Search" />
-              <img className="search" src={search} alt="search-img"/>
+              <img className="search" src={search} alt="search-img" />
             </form>
           </div>
           <div className='number'>
             <p> 50 rows returned</p>
           </div>
           <div className='table'>
-          <div className='table-format'>
-            <table className="table table table-striped">
-              <thead className='thread1'>
-                <tr>
-                  <th scope="col">Emp_Id</th>
-                  <th scope="col">Emp_Name</th>
-                  <th scope="col">Location</th>
-                  <th scope="col">Status</th>
-                  <th scope="col">Action</th>
-                </tr>
-              </thead>
-              <tbody className='thread1'>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Dhruv Bansal</td>
-                  <td>Gurugram</td>
-                  <td>Active</td>
-                  <td><UpdateEmployee/></td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Megha Mathur</td>
-                  <td>Gurugram</td>
-                  <td>Active</td>
-                  <td><UpdateEmployee/></td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Shambhavi Vats</td>
-                  <td>Gurugram</td>
-                  <td>Active</td>
-                  <td><UpdateEmployee/></td>
-                </tr>
-                <tr>
-                  <th scope="row">5</th>
-                  <td>Gobind</td>
-                  <td>Gurugram</td>
-                  <td>Active</td>
-                  <td><UpdateEmployee/></td>
-                </tr>
-                <tr>
-                  <th scope="row">6</th>
-                  <td>Dhruv Bansal</td>
-                  <td>Gurugram</td>
-                  <td>Active</td>
-                  <td><UpdateEmployee/></td>
-                </tr>
-                <tr>
-                  <th scope="row">7</th>
-                  <td>Megha Mathur</td>
-                  <td>Gurugram</td>
-                  <td>Active</td>
-                  <td><UpdateEmployee/></td>
-                </tr>
-                <tr>
-                  <th scope="row">8</th>
-                  <td>Shambhavi Vats</td>
-                  <td>Gurugram</td>
-                  <td>Active</td>
-                  <td><UpdateEmployee/></td>
-                </tr>
-                <tr>
+            <div className='table-format'>
+              <table className="table table table-striped">
+                <thead className='thread1'>
+                  <tr>
+                    <th scope="col">Emp_Id</th>
+                    <th scope="col">Emp_Name</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody className='thread1'>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Dhruv Bansal</td>
+                    <td>Gurugram</td>
+                    <td>Active</td>
+                    <td><UpdateEmployee /></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>Megha Mathur</td>
+                    <td>Gurugram</td>
+                    <td>Active</td>
+                    <td><UpdateEmployee /></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td>Shambhavi Vats</td>
+                    <td>Gurugram</td>
+                    <td>Active</td>
+                    <td><UpdateEmployee /></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">5</th>
+                    <td>Gobind</td>
+                    <td>Gurugram</td>
+                    <td>Active</td>
+                    <td><UpdateEmployee /></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">6</th>
+                    <td>Dhruv Bansal</td>
+                    <td>Gurugram</td>
+                    <td>Active</td>
+                    <td><UpdateEmployee /></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">7</th>
+                    <td>Megha Mathur</td>
+                    <td>Gurugram</td>
+                    <td>Active</td>
+                    <td><UpdateEmployee /></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">8</th>
+                    <td>Shambhavi Vats</td>
+                    <td>Gurugram</td>
+                    <td>Active</td>
+                    <td><UpdateEmployee /></td>
+                  </tr>
+                  <tr>
                     <th scope="row">9</th>
                     <td>Megha Mathur</td>
                     <td>Gurugram</td>
                     <td>Active</td>
-                    <td><UpdateEmployee/></td>
+                    <td><UpdateEmployee /></td>
                   </tr>
                   <tr>
                     <th scope="row">10</th>
                     <td>Megha Mathur</td>
                     <td>Gurugram</td>
                     <td>Active</td>
-                    <td><UpdateEmployee/></td>
+                    <td><UpdateEmployee /></td>
                   </tr>
                   <tr>
                     <th scope="row">11</th>
                     <td>Megha Mathur</td>
                     <td>Gurugram</td>
                     <td>Active</td>
-                    <td><UpdateEmployee/></td>
+                    <td><UpdateEmployee /></td>
                   </tr>
                   <tr>
                     <th scope="row">12</th>
                     <td>Megha Mathur</td>
                     <td>Gurugram</td>
                     <td>Active</td>
-                    <td><UpdateEmployee/></td>
+                    <td><UpdateEmployee /></td>
                   </tr>
                   <tr>
                     <th scope="row">13</th>
                     <td>Megha Mathur</td>
                     <td>Gurugram</td>
                     <td>Active</td>
-                    <td><UpdateEmployee/></td>
+                    <td><UpdateEmployee /></td>
                   </tr>
                   <tr>
                     <th scope="row">14</th>
                     <td>Megha Mathur</td>
                     <td>Gurugram</td>
                     <td>Active</td>
-                    <td><UpdateEmployee/></td>
+                    <td><UpdateEmployee /></td>
                   </tr>
                   <tr>
                     <th scope="row">15</th>
                     <td>Megha Mathur</td>
                     <td>Gurugram</td>
                     <td>Active</td>
-                    <td><UpdateEmployee/></td>
+                    <td><UpdateEmployee /></td>
                   </tr>
 
-              </tbody>
-            </table>
+                </tbody>
+              </table>
 
-          </div>
+            </div>
           </div>
         </div>
       </div>
