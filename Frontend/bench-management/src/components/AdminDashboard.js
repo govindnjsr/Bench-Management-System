@@ -52,12 +52,11 @@ export default function AdminDashboard(prop) {
             <p>STATISTICS</p>
           </div>
           <div className="row">
-            <div className="col-sm-3 mx-3">
+            <div className="col-sm-3 ">
               <div className="card">
                 <div className="card-body">
                   <h5 className="card-title">Total Employees</h5>
                   <p className="card-text">{allEmployees}</p>
-                  <button className='button4'>View</button>
                 </div>
               </div>
             </div>
@@ -66,7 +65,6 @@ export default function AdminDashboard(prop) {
                 <div className="card-body">
                   <h5 className="card-title">Active Employees</h5>
                   <p className="card-text">{activeEmp}</p>
-                  <button className='button4'>View</button>
                 </div>
               </div>
             </div>
@@ -75,7 +73,6 @@ export default function AdminDashboard(prop) {
                 <div className="card-body">
                   <h5 className="card-title">Benched Employees</h5>
                   <p className="card-text">{benchedEmp}</p>
-                  <button className='button4'>View</button>
                 </div>
               </div>
             </div>

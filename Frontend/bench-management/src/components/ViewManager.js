@@ -70,56 +70,58 @@ function ViewManager() {
 
 
 
-  console.log(managerDetails)
-  console.log(addlocation)
-  return (
-    <>
-      <button className='button2' onClick={handleShow}>
-        <i class="fa-solid fa-user"></i> &nbsp; MANAGERS
-      </button>
-
-      <Modal
-        show={show}
-        onHide={handleClose}
-        backdrop="static"
-        keyboard={false}
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>Managers</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
+    console.log(managerDetails) 
+    console.log(addlocation)
+    return (
+      <>
+        <button className='button2' onClick={handleShow}>
+        <i class="fa-solid fa-user"></i> &nbsp; MANAGERS 
+        </button>
+  
+        <Modal
+          show={show}
+          onHide={handleClose}
+          backdrop="static"
+          keyboard={false}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Manager's Location Access</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
           <Form id='view'>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Manager Id</Form.Label>
-              <Form.Control name="managerId" onChange={handleAddLocation.bind(this)} placeholder="Enter manager Id" />
-            </Form.Group>
-            <Form.Group>
-
-              <Form.Label>Select Location</Form.Label>
-              <Form.Select aria-label="Default select example" name="locationId" onChange={handleAddLocation.bind(this)} >
-                <option>Select from below</option>
-                <option value={1} >Gurugram</option>
-                <option value={2} >Bangalore</option>
-                <option value={3} >Hyderabad</option>
-              </Form.Select>
-            </Form.Group>
-            <Button onClick={postLocationToManager}>Add Location</Button>
-            <Button onClick={deleteLocationToManager}>Delete Location</Button>
+          <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                    <Form.Label>Manager Id</Form.Label>
+                    <Form.Control name="managerId" onChange={handleAddLocation.bind(this)} placeholder="Enter manager Id" />
+                </Form.Group>
+          <Form.Group>
+                   
+                    <Form.Label>Select Location</Form.Label>
+                    <Form.Select aria-label="Default select example" name="locationId" onChange={handleAddLocation.bind(this)} >                        
+                        <option>Select from below</option>
+                        <option value={1} >Gurugram</option>
+                        <option value={2} >Bangalore</option>
+                        <option value={3} >Hyderabad</option>
+                    </Form.Select>
+                </Form.Group>
+                <div className='btn-mngr'>
+                <Button className='button6' onClick={postLocationToManager}>Add Location</Button>
+                <Button className='button6' onClick={deleteLocationToManager}>Delete Location</Button>
+                </div>
           </Form>
           <Table striped bordered hover>
-            <thead>
-              <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Locations</th>
-              </tr>
-            </thead>
-            <tbody>
-              {managerDetails && managerDetails.map((user, index) => (
-                <tr>
-                  <td>{user.id}</td>
-                  <td>{user.mname}</td>
-                  <td>
+      <thead className='thread2'>
+        <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Locations</th>
+        </tr>
+      </thead>
+      <tbody>
+        {managerDetails && managerDetails.map((user,index)=>(
+            <tr>
+            <td>{user.id}</td>
+            <td>{user.mname}</td>
+            <td>
 
                     {user.assignedLocation && user.assignedLocation.map((loc, index) => (
                       <p>{loc.locName}</p>
