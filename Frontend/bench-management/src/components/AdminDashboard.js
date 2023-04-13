@@ -1,45 +1,41 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import './Project.css';
 import Navbar from './Navbar';
 import SideBar from './SideBar';
 import AddEmployee from './AddEmployee';
 import ViewManager from './ViewManager';
 import axios from 'axios';
-import { Button } from 'bootstrap';
 import search from './Images/search.png';
 import UpdateEmployee from './UpdateEmployee';
 
 export default function AdminDashboard(prop) {
+  
+  const [allEmployees, setAllEmployee] = useState()
+  const [activeEmp, setActiveEmp] = useState()
+  const [benchedEmp, setBenchedEmp] = useState()
+  const [empdetails, setEmpDetails] = useState()
 
 
-
-
-  const[allEmployees,setAllEmployee]=useState()
-  const[activeEmp,setActiveEmp]=useState()
-  const[benchedEmp,setBenchedEmp]=useState()
-  const[empdetails,setEmpDetails]=useState()
-
-
-  const fetchApi=async ()=>{
-    try{
+  const fetchApi = async () => {
+    try {
       // http://192.168.1.64:2538/api/employees
-       const allEmp=await axios.get('http://localhost:2538/api/empdetails/get/allemployee');
-       setAllEmployee(allEmp.data);
-       const allActiveEmp=await axios.get('http://localhost:2538/api/empdetails/get/activeemployee');
-       setActiveEmp(allActiveEmp.data);
-       const allBenchedEmp=await axios.get('http://localhost:2538/api/empdetails/get/benchedemployee');
-       setBenchedEmp(allBenchedEmp.data);
-       const employeeDetails=await axios.get('http://localhost:2538/api/empdetails/get');
-       setEmpDetails(employeeDetails.data);
-    //    setData(res.data);
+      const allEmp = await axios.get('http://localhost:2538/api/empdetails/get/allemployee');
+      setAllEmployee(allEmp.data);
+      const allActiveEmp = await axios.get('http://localhost:2538/api/empdetails/get/activeemployee');
+      setActiveEmp(allActiveEmp.data);
+      const allBenchedEmp = await axios.get('http://localhost:2538/api/empdetails/get/benchedemployee');
+      setBenchedEmp(allBenchedEmp.data);
+      const employeeDetails = await axios.get('http://localhost:2538/api/empdetails/get');
+      setEmpDetails(employeeDetails.data);
+      //    setData(res.data);
     }
-    catch{
-       console.log()
+    catch {
+      console.log()
     }
   }
-  useEffect(()=>{
+  useEffect(() => {
     fetchApi()
-  },[])
+  }, [])
 
   console.log(empdetails)
   return (
@@ -84,11 +80,11 @@ export default function AdminDashboard(prop) {
           <div className='actions'>
             <p className='employees'>EMPLOYEES</p>
             <div className='buttons'>
-              <ViewManager/>
-              <AddEmployee/>
+              <ViewManager />
+              <AddEmployee />
               <form className="d-flex" role="search">
                 <input className="search-box1" type="search" placeholder="Search " aria-label="Search" />
-                 <img className="search" src={search} alt="search-img"/>
+                <img className="search" src={search} alt="search-img" />
               </form>
             </div>
           </div>
@@ -108,18 +104,18 @@ export default function AdminDashboard(prop) {
                   </tr>
                 </thead>
                 <tbody className='thread1'>
-                {empdetails &&
-                  empdetails.map((emp)=>(
-                  <tr>
-                      <th scope="row">{emp.id}</th>
-                      <td>{emp.name}</td>
-                      <td>{emp.empLocation}</td>
-                      <td>{emp.benchStatus==true?"Active":"Inactive"}</td>
-                      <td><UpdateEmployee/></td>
-                 </tr>
-        ))
-                 }
-                  
+                  {empdetails &&
+                    empdetails.map((emp) => (
+                      <tr>
+                        <th scope="row">{emp.id}</th>
+                        <td>{emp.name}</td>
+                        <td>{emp.empLocation}</td>
+                        <td>{emp.benchStatus == true ? "Active" : "Inactive"}</td>
+                        <td><UpdateEmployee /></td>
+                      </tr>
+                    ))
+                  }
+
 
                 </tbody>
               </table>

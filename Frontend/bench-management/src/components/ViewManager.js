@@ -6,69 +6,69 @@ import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 
 function ViewManager() {
-    const [show, setShow] = useState(false);
-    const[managerDetails,setManagerDetails]=useState();
-    const[postResponse,setPostResponse]=useState();
-    const[deleteResponse,setDeleteResponse]=useState();
-    const[addlocation,setAddLocation]=useState({
-      managerId:null,
-      locationId:null
-    });
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-    
-    const handleAddLocation=(e)=>{
-      
-      setAddLocation({ ...addlocation, [e.target.name]: e.target.value });
-    }
-    
-    const postLocationToManager=async()=>{
-      try{
-        await axios.put(`http://localhost:2538/api/manager/${addlocation.managerId}/location/${addlocation.locationId}`).
-        then((response) => {
+  const [show, setShow] = useState(false);
+  const [managerDetails, setManagerDetails] = useState();
+  const [postResponse, setPostResponse] = useState();
+  const [deleteResponse, setDeleteResponse] = useState();
+  const [addlocation, setAddLocation] = useState({
+    managerId: null,
+    locationId: null
+  });
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const handleAddLocation = (e) => {
+
+    setAddLocation({ ...addlocation, [e.target.name]: e.target.value });
+  }
+
+  const postLocationToManager = async () => {
+    try {
+      await axios.put(`http://localhost:2538/api/manager/${addlocation.managerId}/location/${addlocation.locationId}`)
+        .then((response) => {
           console.log("response " + response);
           setPostResponse(response);
           setAddLocation({
-            managerId:null,
-      locationId:null
+            managerId: null,
+            locationId: null
           })
         });
-               
-     }
-     catch{
-        console.log()
-     }
 
     }
+    catch {
+      console.log()
+    }
 
-    const deleteLocationToManager=async()=>{
-      try{
-        await axios.delete(`http://localhost:2538/api/manager/delete/${addlocation.managerId}/locationdelete/${addlocation.locationId}`).
-        then((response) => {
+  }
+
+  const deleteLocationToManager = async () => {
+    try {
+      await axios.delete(`http://localhost:2538/api/manager/delete/${addlocation.managerId}/locationdelete/${addlocation.locationId}`)
+        .then((response) => {
           console.log("response " + response);
           setDeleteResponse(response);
-        });               
-     }
-     catch{
-        console.log()
-     }
+        });
     }
+    catch {
+      console.log()
+    }
+  }
 
-    const fetchManagerData=async ()=>{
-      try{
-         const managerApiDetails=await axios.get('http://localhost:2538/api/manager/get');
-         setManagerDetails(managerApiDetails.data);
-                
-      }
-      catch{
-         console.log()
-      }
+  const fetchManagerData = async () => {
+    try {
+      const managerApiDetails = await axios.get('http://localhost:2538/api/manager/get');
+      setManagerDetails(managerApiDetails.data);
+
     }
-    useEffect(()=>{
-      fetchManagerData();
-    },[postResponse,deleteResponse])
-   
-     
+    catch {
+      console.log()
+    }
+  }
+  useEffect(() => {
+    fetchManagerData();
+  }, [postResponse, deleteResponse])
+
+
 
     console.log(managerDetails) 
     console.log(addlocation)
@@ -123,10 +123,10 @@ function ViewManager() {
             <td>{user.mname}</td>
             <td>
 
-              {user.assignedLocation && user.assignedLocation.map((loc,index)=>(
-                 <p>{loc.locName}</p>
-              ))
-              }
+                    {user.assignedLocation && user.assignedLocation.map((loc, index) => (
+                      <p>{loc.locName}</p>
+                    ))
+                    }
                     {/* <Form>
                 {['checkbox'].map((type) => (
                     <div key={`inline-${type}`} className="mb-3">
@@ -155,21 +155,21 @@ function ViewManager() {
                     </div>
                 ))}
                 </Form> */}
-          </td>
-          </tr>
-        ))
-}          
-       
-      </tbody>
-    </Table>
-          </Modal.Body>
-          <Modal.Footer>
-            <button className='button3' onClick={handleClose}>Close</button> 
-            {/* <button className='button3' form="view">Apply</button> */}
-          </Modal.Footer>
-        </Modal>
-      </>
-    );
-  }
+                  </td>
+                </tr>
+              ))
+              }
 
-  export default ViewManager;
+            </tbody>
+          </Table>
+        </Modal.Body>
+        <Modal.Footer>
+          <button className='button3' onClick={handleClose}>Close</button>
+          {/* <button className='button3' form="view">Apply</button> */}
+        </Modal.Footer>
+      </Modal>
+    </>
+  );
+}
+
+export default ViewManager;

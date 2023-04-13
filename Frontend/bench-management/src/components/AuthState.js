@@ -4,22 +4,23 @@ import { useState } from 'react';
 export default function AuthState(props) {
 
     const [isAuthentication, setAuthentication] = useState(false);
-    const[currentRole,setCurrentRole]=useState(0)
-    const[googleData,setGoogleData]=useState({})
+    const [currentRole, setCurrentRole] = useState(0)
+    const [googleData, setGoogleData] = useState({})
+    const [loopEntry, setLoopEntry] = useState(false);
     function handleLogin() {
-        if(isAuthentication === true) {
-            setAuthentication(false)
-            console.log("logged out successfully")
-        }
-        else {
-            setAuthentication(true)  
-            console.log("logged in Successfully")
-        }
+        setAuthentication(true)
+        console.log("logged in Successfully")
+
     }
-    
-  return (
-    <AuthContext.Provider value={{googleData,isAuthentication, currentRole,setGoogleData,handleLogin,setAuthentication,setCurrentRole}}>
-        {props.children}
-    </AuthContext.Provider>
-  )
+    function handleLogout() {
+        setAuthentication(false)
+        setCurrentRole(0)
+        setLoopEntry(false)
+        console.log("logged out successfully")
+    }
+    return (
+        <AuthContext.Provider value={{ googleData, isAuthentication, currentRole, setGoogleData, handleLogin, setAuthentication, setCurrentRole, handleLogout, loopEntry,setLoopEntry }}>
+            {props.children}
+        </AuthContext.Provider>
+    )
 }

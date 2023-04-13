@@ -5,11 +5,11 @@ export default function SideBar() {
 
    const [benchTimeValue, setBenchTimeValue] = useState(3);
    const [experienceValue, setExperienceValue] = useState(3);
-   const[filters,setFilters]=useState({
-      exp:0,
-      benchTime:0,
-      locationId:0,
-    })
+   const [filters, setFilters] = useState({
+      exp: 0,
+      benchTime: 0,
+      locationId: 0,
+   })
 
    return (
       <>

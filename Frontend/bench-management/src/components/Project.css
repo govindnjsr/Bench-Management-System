@@ -82,7 +82,7 @@
   font-weight: bold;
 }
 
-.pfilterHeading{
+.pfilterHeading {
   padding-bottom: 2%;
 }
 
@@ -95,7 +95,7 @@
   position: fixed;
   background-color: #ffecd1;
   height: 87.5vh;
-  overflow-y:scroll;
+  overflow-y: scroll;
   width: 18vw;
   margin-left: 0%;
   color: black;
@@ -180,6 +180,7 @@
   background-color: #16697a;
   color: white;
   position: fixed;
+  z-index: 10;
 }
 
 .logoContainer {
@@ -211,33 +212,34 @@
 
 .profile {
   background-color: #16697a;
-  opacity: 0.5;
-  width: 28%;
+  opacity: 0.9;
+  width: 9%;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-left: 80%;
-  padding-top: 10px;
-  position: fixed;
+  margin-left: 89%;
 }
-
-.profileUserName {
-  margin-left: 10%;
+.googleImage{
+  height: 22%;
+  width: 22%;
+  border-radius: 100%;
+  padding: 0px;
+  margin: 0px;
+  margin-right: 5%;
 }
-
 .dropdown-menu {
   margin: 0px;
   padding: 0px;
   min-width: 6vw !important;
   max-height: 6vh !important;
 }
-
 .userIcon {
   margin-right: 6%;
 }
 
-/* .NavbarDropDownMenu {} */
+.NavbarDropDownMenu{
 
+}
 
 /* CSS for REndering_Admin */
 
@@ -299,17 +301,17 @@
   text-align: center;
 }
 
-.button4{
+.button4 {
   height: 5vh;
   width:9vw;
   background-color: #489fb5;
   border: none;
   color: rgb(24, 23, 23);
-  padding: 6px 15px 15px 15px ;
+  padding: 6px 15px 15px 15px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size:12px;
+  font-size: 12px;
   font-weight: 500;
   margin: 0px 0px 0px 45px;
   cursor: pointer;
@@ -358,24 +360,25 @@ margin-right: 0px;
 border: none;
 
 }
-.search-box2{
-  margin-top:0.5% ;
+
+.search-box2 {
+  margin-top: 0.5%;
   height: 5vh;
-  width:12vw;
-  border-top-left-radius:  12px;
+  width: 12vw;
+  border-top-left-radius: 12px;
   border-bottom-left-radius: 12px;
   margin-right: 0px;
   margin-left: 300px;
   border: none;
-  }
+}
 
-.search{
+.search {
   margin-top: 0.5%;
-  height:5vh;
-  border-top-right-radius:  12px;
+  height: 5vh;
+  border-top-right-radius: 12px;
   border-bottom-right-radius: 12px;
   padding-left: 4px;
-  padding-right:4px ;
+  padding-right: 4px;
   padding-top: 4px;
   padding-bottom: 4px;
   /* margin-top: 2%; */
@@ -404,17 +407,17 @@ border: none;
   background-color: #ffecd1;
 }
 
-.button5{
+.button5 {
   height: 5vh;
-  width:9vw;
+  width: 9vw;
   background-color: #489fb5;
   border: none;
   color: rgb(24, 23, 23);
-  padding: 6px 15px 15px 15px ;
+  padding: 6px 15px 15px 15px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size:12px;
+  font-size: 12px;
   font-weight: 500;
   margin: 2px 0px;
   cursor: pointer;
@@ -424,26 +427,43 @@ border: none;
 
 /* CSS FOR MODAL */
 
-.button2{
+.button2 {
   height: 5vh;
-  width:12vw;
+  width: 12vw;
   background-color: white;
   border: none;
   color: rgb(24, 23, 23);
-  padding: 6px 15px 15px 15px ;
+  padding: 6px 15px 15px 15px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size:12px;
+  font-size: 12px;
   font-weight: 500;
   margin: 2px 0px;
   cursor: pointer;
   border-radius: 12px;
 }
 
-.button3{
+.button3 {
   height: 5vh;
-  width:8vw;
+  width: 8vw;
+  background-color: #489fb5;
+  border: none;
+  color: rgb(24, 23, 23);
+  padding: 8px 15px 15px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 500;
+  margin: 3px 3px;
+  cursor: pointer;
+  border-radius: 12px;
+}
+
+.button6{
+  height: 5vh;
+  width:10vw;
   background-color:#489fb5;
   border: none;
   color: rgb(24, 23, 23);
@@ -453,7 +473,7 @@ border: none;
   display: inline-block;
   font-size:12px;
   font-weight: 500;
-  margin: 3px 3px;
+  margin: 3px 3px 3px 3px;
   cursor: pointer;
   border-radius: 12px;
 }
@@ -481,12 +501,18 @@ border: none;
   margin-bottom: 4%;
 }
 
-.thread2{
- text-align: center;
+.btn-mngr{
+  margin-top: 4%;
+  margin-left: 21%;
+  margin-bottom: 4%;
 }
 
-.thread1{
-text-align:center;
+.thread2 {
+  text-align: center;
+}
+
+.thread1 {
+  text-align: center;
 }
 
 /* CSS FOR VIEW EMPLOYEE */
