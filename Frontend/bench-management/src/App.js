@@ -5,6 +5,7 @@ import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } 
 import AuthState from './components/AuthState';
 import AdminDashboard from './components/AdminDashboard';
 import ManagerDashboard from './components/ManagerDashboard';
+import ViewEmployee from './components/ViewEmployee';
 
 function App() {
   const router = createBrowserRouter(

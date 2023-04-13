@@ -85,7 +85,7 @@ function ViewManager() {
           keyboard={false}
         >
           <Modal.Header closeButton>
-            <Modal.Title>Managers</Modal.Title>
+            <Modal.Title>Manager's Location Access</Modal.Title>
           </Modal.Header>
           <Modal.Body>
           <Form id='view'>
@@ -103,11 +103,13 @@ function ViewManager() {
                         <option value={3} >Hyderabad</option>
                     </Form.Select>
                 </Form.Group>
-                <Button onClick={postLocationToManager}>Add Location</Button>
-                <Button onClick={deleteLocationToManager}>Delete Location</Button>
+                <div className='btn-mngr'>
+                <Button className='button6' onClick={postLocationToManager}>Add Location</Button>
+                <Button className='button6' onClick={deleteLocationToManager}>Delete Location</Button>
+                </div>
           </Form>
           <Table striped bordered hover>
-      <thead>
+      <thead className='thread2'>
         <tr>
           <th>Id</th>
           <th>Name</th>
