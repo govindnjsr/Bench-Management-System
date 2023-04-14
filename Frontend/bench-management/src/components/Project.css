@@ -102,6 +102,7 @@
 }
 
 .pfilter {
+  color: rgb(36, 34, 34);
   font-size: 14px;
   font-weight: bold;
   opacity: 0.8;
@@ -237,11 +238,8 @@
   margin-right: 6%;
 }
 
-.NavbarDropDownMenu{
 
-}
-
-/* CSS for REndering_Admin */
+/* CSS for Rendering_Admin */
 
 .window {
   display: flex;
@@ -269,13 +267,11 @@
   padding-top: 0.1%;
   font-size: 14px;
   font-weight: bold;
-  /* margin-left: 18.1%; */
 }
 
 .row {
   padding: 1%;
   margin-top: 2.1%;
-  /* margin-left: 18.1%; */
   margin-left: 0.1%;
   background-color: #ffecd1;
   width: 82.8%;
@@ -285,17 +281,19 @@
   position: fixed;
 
 }
-
-
-
+.card{
+  background-color:#d8e2dc;
+}
 
 .card-title {
+  color: rgb(67, 64, 64);
   font-size: 14px;
   font-weight: bold;
   text-align: center;
 }
 
 .card-text {
+  color: rgb(67, 64, 64);
   font-size: 14px;
   font-weight: bold;
   text-align: center;
@@ -405,6 +403,9 @@ border: none;
   margin-top: 20.2%;
   overflow-y: auto;
   background-color: #ffecd1;
+}
+th{
+  color: rgb(67, 64, 64);
 }
 
 .button5 {
@@ -521,50 +522,49 @@ border: none;
  
   display: flex;
   flex-direction: column;
-  gap:0.5%;
-  
-}
-
-.profile-view{
-  margin-top: 4%;
-  background-color:#ffecd1;
 }
 
 .profile-photo{
   align-items: center;
   height: 25vh;
   width: 25vh;
-  margin: 1% 6% 1% 44.5%;
+  margin: 1% 6% 1% 44%;
 }
 
-.profile-name{
-  text-align: center;
-  margin-bottom: 1%;
+.shadow1{
+  margin: 5% 4.5% 0% 4.5%;
+  background-color:#ffecd1;
 }
 
-.personal{
-  margin-top: 0.5%;
-  background-color: #ffecd1;
+.shadow2{
+  margin: 0% 4.5% 0% 4.5%;
+  background-color:#ffecd1;
 }
+
 .profile-headings{
   padding-left: 1%;
   margin-top: 0.5%;
-  margin-bottom: 0px;
+  margin-bottom: 3%;
   background-color: #489fb5;
   text-align:left;
   font-size: larger;
   font-weight:500;
   color: white;
 }
-.personal-table{
-  background-color: #16697a;
-  padding: 2%;
-  margin: 1% 15% 1% 30%;
-  color: white;
+
+.details{
+  display: flex;
+  flex-direction: row;
+  gap:25%;
 }
 
+.labels{
+  color:rgb(170, 169, 169);
+  margin-bottom: 0px;
+  
+}
 
-.work{
-  background-color:#ffecd1;
-  margin-top: 0.5%;
+.content{
+  color: rgb(67, 66, 66);
+  margin-top: 0px;
 }

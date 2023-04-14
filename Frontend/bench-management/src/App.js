@@ -10,7 +10,7 @@ import ViewEmployee from './components/ViewEmployee';
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path='/' element={<Login />}>
+      <Route path='/' element={<Login/>}>
         <Route path='admin' element={<AdminDashboard />} />
         <Route path='manager' element={<ManagerDashboard />} />
       </Route>
