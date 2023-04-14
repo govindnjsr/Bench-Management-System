@@ -1,15 +1,16 @@
 import React from 'react'
 import NavBar from './Navbar'
-import image from './Images/photo.avif';
+import profileImageEmployee from './Images/photo.avif';
 
 export default function ViewEmployee() {
+
   return (
     <div >
              <div className='profile-window'>
-                <div>
-                    <NavBar/>
-                </div>
 
+                <div>
+                    <NavBar />
+                </div>
                 <div className='shadow1 p-3 mb-5'>
                 <h6 className='profile-heading'>PROFILE</h6>
                     <hr></hr>

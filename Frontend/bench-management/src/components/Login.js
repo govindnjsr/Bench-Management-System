@@ -11,7 +11,7 @@ export default function Login() {
   const authData = useContext(AuthContext);
   const manager = 2;
   const [loginApiData, setLoginApiData] = useState();
-  
+
   function handleCallbackResponse(response) {
     //console.log("Encoded JWT ID token: " + response.credential);
     var userObject = jwt_decode(response.credential);
@@ -22,20 +22,22 @@ export default function Login() {
 
   useEffect(() => {
     loginApiData && loginApiData.forEach(element => {
-      if(!authData.loopEntry) authData.setLoopEntry(true);
+      if (!authData.loopEntry) authData.setLoopEntry(true);
       if (authData.googleData && element.email == authData.googleData.email) {
         authData.handleLogin();
         authData.setCurrentRole(element.role);
-        // setLoginApiData(false);
+        if(element.role === manager) {
+          authData.setManagerId(element.id);
+        }
       }
     });
   }, [authData.googleData])
   {
-  if(authData.loopEntry && authData.currentRole === 0){ 
-    alert("Sorry you are not authorized to access!!");
-    authData.setLoopEntry(false); 
+    if (authData.loopEntry && authData.currentRole === 0) {
+      alert("Sorry you are not authorized to access!!");
+      authData.setLoopEntry(false);
+    }
   }
-}
   //calling api
   const fetchApi = async () => {
     try {

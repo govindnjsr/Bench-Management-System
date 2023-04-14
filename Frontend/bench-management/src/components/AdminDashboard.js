@@ -8,11 +8,11 @@ import axios from 'axios';
 import search from './Images/search.png';
 import UpdateEmployee from './UpdateEmployee';
 
-export default function AdminDashboard(prop) {
-  
-  const [allEmployees, setAllEmployee] = useState()
-  const [activeEmp, setActiveEmp] = useState()
-  const [benchedEmp, setBenchedEmp] = useState()
+export default function AdminDashboard() {
+
+  const [countAllEmployees, setCountAllEmployees] = useState()
+  const [countActiveEmp, setCountActiveEmp] = useState()
+  const [countBenchedEmp, setCountBenchedEmp] = useState()
   const [empdetails, setEmpDetails] = useState()
 
 
@@ -20,11 +20,11 @@ export default function AdminDashboard(prop) {
     try {
       // http://192.168.1.64:2538/api/employees
       const allEmp = await axios.get('http://localhost:2538/api/empdetails/get/allemployee');
-      setAllEmployee(allEmp.data);
+      setCountAllEmployees(allEmp.data);
       const allActiveEmp = await axios.get('http://localhost:2538/api/empdetails/get/activeemployee');
-      setActiveEmp(allActiveEmp.data);
+      setCountActiveEmp(allActiveEmp.data);
       const allBenchedEmp = await axios.get('http://localhost:2538/api/empdetails/get/benchedemployee');
-      setBenchedEmp(allBenchedEmp.data);
+      setCountBenchedEmp(allBenchedEmp.data);
       const employeeDetails = await axios.get('http://localhost:2538/api/empdetails/get');
       setEmpDetails(employeeDetails.data);
       //    setData(res.data);
@@ -56,7 +56,7 @@ export default function AdminDashboard(prop) {
               <div className="card">
                 <div className="card-body">
                   <h5 className="card-title">Total Employees</h5>
-                  <p className="card-text">{allEmployees}</p>
+                  <p className="card-text">{countAllEmployees}</p>
                 </div>
               </div>
             </div>
@@ -64,7 +64,7 @@ export default function AdminDashboard(prop) {
               <div className="card">
                 <div className="card-body">
                   <h5 className="card-title">Active Employees</h5>
-                  <p className="card-text">{activeEmp}</p>
+                  <p className="card-text">{countActiveEmp}</p>
                 </div>
               </div>
             </div>
@@ -72,7 +72,7 @@ export default function AdminDashboard(prop) {
               <div className="card">
                 <div className="card-body">
                   <h5 className="card-title">Benched Employees</h5>
-                  <p className="card-text">{benchedEmp}</p>
+                  <p className="card-text">{countBenchedEmp}</p>
                 </div>
               </div>
             </div>
@@ -115,8 +115,6 @@ export default function AdminDashboard(prop) {
                       </tr>
                     ))
                   }
-
-
                 </tbody>
               </table>
             </div>
