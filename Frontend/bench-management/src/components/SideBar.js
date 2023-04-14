@@ -103,11 +103,11 @@ export default function SideBar() {
                      <div className="form-check mx-4 my-4">
                         <input className="form-check-input" type="checkbox" value="active" id="status-1" />
                         <label className="form-check-label skillsLabel" htmlFor="status-1">
-                           Active
+                           Not on bench
                         </label><br />
                         <input className="form-check-input" type="checkbox" value="benched" id="status-2" />
                         <label className="form-check-label skillsLabel" htmlFor="status-2">
-                           Benched
+                           On benched
                         </label><br />
                      </div>
                 </div>
