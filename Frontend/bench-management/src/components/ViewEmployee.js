@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import NavBar from './Navbar'
-import image from './Images/photo.avif';
+import profileImageEmployee from './Images/photo.avif';
+import AuthContext from './AuthContext';
 
 export default function ViewEmployee() {
-
+const authData = useContext(AuthContext);
+const empId = authData.viewEmployeeId;
   return (
     <div >
              <div className='profile-window'>
@@ -19,7 +21,7 @@ export default function ViewEmployee() {
                     </div>
                
                     <hr></hr>
-                    <img className='profile-photo' src={image} alt='profile photo'/>
+                    <img className='profile-photo' src={profileImageEmployee} alt='profileImageEmployee'/>
                     <div className='content'><center>Megha Mathur</center></div>
                     <div className='content'><center>ID : 1234</center></div>
                 </div>

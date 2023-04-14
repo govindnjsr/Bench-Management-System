@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback, useContext } from 'react'
 import './Project.css';
 import Navbar from './Navbar';
 import SideBar from './SideBar';
@@ -7,16 +7,22 @@ import ViewManager from './ViewManager';
 import axios from 'axios';
 import search from './Images/search.png';
 import UpdateEmployee from './UpdateEmployee';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import AuthContext from './AuthContext';
 
 export default function AdminDashboard() {
-
+  const authData = useContext(AuthContext);
+  const navigate = useNavigate();
+  const handleViewEmployee = (id) => {
+    navigate("/viewEmployee");
+  }
   const [countAllEmployees, setCountAllEmployees] = useState()
   const [countActiveEmp, setCountActiveEmp] = useState()
   const [countBenchedEmp, setCountBenchedEmp] = useState()
   const [empdetails, setEmpDetails] = useState()
 
-
+  
+  
   const fetchApi = async () => {
     try {
       // http://192.168.1.64:2538/api/employees
@@ -29,6 +35,7 @@ export default function AdminDashboard() {
       const employeeDetails = await axios.get('http://localhost:2538/api/empdetails/get');
       setEmpDetails(employeeDetails.data);
       //    setData(res.data);
+
     }
     catch {
       console.log()
@@ -90,7 +97,7 @@ export default function AdminDashboard() {
             </div>
           </div>
           <div className='number'>
-            <p>50 rows returned</p>
+            <p>{empdetails?.length} rows returned</p>
           </div>
           <div className='table'>
             <div className='table-format'>
@@ -107,13 +114,15 @@ export default function AdminDashboard() {
                 <tbody className='thread1'>
                   {empdetails &&
                     empdetails.map((emp) => (
+
                       <tr>
-                        <Link to='/viewEmployee'>
-                        <th scope="row">{emp.id}</th></Link>
+                        
+                        <th scope="row" onClick={() => {handleViewEmployee(emp.id); authData.handleEmpId(emp.id); }}>{emp.id}</th>
+
                         <td>{emp.name}</td>
                         <td>{emp.empLocation}</td>
                         <td>{emp.benchStatus == true ? "Active" : "Inactive"}</td>
-                        <td><UpdateEmployee /></td>
+                        <td><UpdateEmployee/></td>
                       </tr>
                       
                     ))

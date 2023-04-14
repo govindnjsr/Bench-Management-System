@@ -16,4 +16,6 @@ public interface LocationService {
 
     //adding employes to a particular location
     public void addEmployeeToLocation(Long locationid,EmpDetails empDetails);
+
+    long getIdByLocation(String locName);
 }

@@ -8,6 +8,9 @@ function AddEmployee() {
     const [post, setPost] = useState()
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const [postLocation, setPostLocation] = useState();
+    const [locationId, setLocationId] = useState();
+    const [locName, setLocName] = useState();
     const [empdetails, setEmpDetails] = useState({
         "name": "",
         "address": "",
@@ -19,8 +22,13 @@ function AddEmployee() {
         "skills": null,
         "active": null,
         "empLocation": null,
-
     });
+
+    // const [locationDetails, setLocationDetails] = useState({
+    //     "id" : 0,
+    //     "locName" : null,
+    //     "employeeDetails" : []
+    // });
 
     const saveDataAtBackend = async () => {
         try {
@@ -33,6 +41,22 @@ function AddEmployee() {
         catch {
             console.log()
         }
+        // setLocationDetails({
+        //     "id" : locationId,
+        //     "locName" : locName,
+        //     "employeeDetails" : empdetails
+        // })
+
+        // try{
+        //     console.log(locationId);
+        //     await axios.post(`http://localhost:2538/api/location/addemployee/${locationId}`, empdetails)
+        //         .then((response) => {
+        //             setPostLocation(response.data);
+        //         });
+        // }
+        // catch {
+        //     console.log()
+        // }
     }
     //   useEffect(()=>{
     //     fetchApi()
@@ -43,15 +67,31 @@ function AddEmployee() {
     const handleChangeValue = (e) => {
 
         setEmpDetails({ ...empdetails, [e.target.name]: e.target.value });
-
+        // console.log(e.target.value)
     };
+    const getLocationId = async (e) => {
+        try{
+            setLocName(e.target.value);
+            const locationId = await axios.get(`http://localhost:2538/api/location/getId/${e.target.value}`);
+            setLocationId(locationId.data);
+        }
+        catch{
+            console.log();
+        }
+    }
+    const handleLocationValue = (e) => {
+        setEmpDetails({ ...empdetails, [e.target.name]: e.target.value });
+        getLocationId(e);
+    }
     //    const handleChange = (event) => {
     //         setBenchStatus({benchStatus: event.target.value});
     //         }
     //         const handleCompanyActive= (event) => {
     //             setCompanyStatus({companystatus: event.target.value});
     //         }
-    console.log("post " + post)
+    console.log(locationId);
+    console.log("post " + post);
+    console.log("postLocationId" + postLocation);
     console.log(empdetails)
     return (
         <>
@@ -81,7 +121,7 @@ function AddEmployee() {
                 </Form.Group> */}
                         <Form.Group>
                             <Form.Label>Location</Form.Label>
-                            <Form.Select aria-label="Default select example" name="empLocation" onChange={handleChangeValue.bind(this)}>
+                            <Form.Select aria-label="Default select example" name="empLocation" onChange={handleLocationValue.bind(this)}>
 
                                 <option>Select from below</option>
                                 <option value="Gurugram" >Gurugram</option>
