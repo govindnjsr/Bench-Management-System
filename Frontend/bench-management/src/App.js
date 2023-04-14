@@ -9,6 +9,7 @@ import AuthState from './components/AuthState';
 import ViewEmployee from './components/ViewEmployee';
 import { useContext } from 'react';
 import AuthContext from './components/AuthContext';
+import AdminDashboard from './components/AdminDashboard';
 
 function App() {
 
@@ -16,7 +17,7 @@ function App() {
   
   const router = createBrowserRouter([
     {
-      path: "/", element: <Login />,
+      path: "/", element: <AdminDashboard />,
     },
     { path: "/viewEmployee", element: <ViewEmployee /> }
   ]);

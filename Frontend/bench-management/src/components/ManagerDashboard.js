@@ -7,7 +7,7 @@ import AuthContext from './AuthContext';
 import axios from 'axios';
 
 export default function ManagerDashboard() {
-
+  
   const authData = useContext(AuthContext)
   const [managerData, setManagerData] = useState({}); // for assigned locations of that manager
   const [allEmpDetails, setAllEmpDetails] = useState();

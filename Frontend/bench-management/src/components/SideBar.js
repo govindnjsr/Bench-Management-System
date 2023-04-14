@@ -16,10 +16,33 @@ export default function SideBar() {
       const {value,checked}=e.target;
       let temp1=true,temp2=false;
       if(checked)  
-      {authData.setAppliedFilters({ ...authData.appliedFilters, [e.target.name]: temp1});
+      {
+         authData.setAppliedFilters({ ...authData.appliedFilters, [e.target.name]: temp1});
+         if(e.target.name=="gurugram" ||e.target.name=="bangalore" || e.target.name=="hyderabad" ){
+            authData.setCheckFilter({...authData.checkFilter,["location"]:temp1});
+            
+         }
+         else if(e.target.name=="active" || e.target.name=="benched")
+          {
+            authData.setCheckFilter({...authData.checkFilter,["status"]:temp1});
+          }
+         else{
+            authData.setCheckFilter({...authData.checkFilter,["skill"]:temp1});
+         }
     }
     else{
       authData.setAppliedFilters({ ...authData.appliedFilters, [e.target.name]:temp2 });
+      if(e.target.name=="gurugram" ||e.target.name=="bangalore" || e.target.name=="hyderabad" ){
+         authData.setCheckFilter({...authData.checkFilter,["location"]:temp2});
+         
+      }
+      else if(e.target.name=="active" || e.target.name=="benched")
+          {
+            authData.setCheckFilter({...authData.checkFilter,["status"]:temp2});
+          }
+      else{
+         authData.setCheckFilter({...authData.checkFilter,["skill"]:temp2});
+      }
     }
     };
     console.log("filters "+JSON.stringify(authData.appliedFilters))
@@ -113,11 +136,11 @@ export default function SideBar() {
                      <p className='pfilter'>STATUS</p>
 
                      <div className="form-check mx-4 my-4">
-                        <input className="form-check-input" type="checkbox" value="active" id="status-1" />
+                        <input className="form-check-input" type="checkbox"  name="active" value={true} onChange={handleFiltersValue.bind(this)} id="status-1" />
                         <label className="form-check-label skillsLabel" htmlFor="status-1">
                            Active
                         </label><br />
-                        <input className="form-check-input" type="checkbox" value="benched" id="status-2" />
+                        <input className="form-check-input" type="checkbox"  name="benched" value={true} onChange={handleFiltersValue.bind(this)} id="status-2" />
                         <label className="form-check-label skillsLabel" htmlFor="status-2">
                            Benched
                         </label><br />

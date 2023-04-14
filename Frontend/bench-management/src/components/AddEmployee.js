@@ -50,6 +50,7 @@ function AddEmployee() {
            const allEmp=await axios.post('http://localhost:2538/api/empdetails/save',empdetails)
            .then((response) => {
             setPost(response.data);
+            
           });
              
         }

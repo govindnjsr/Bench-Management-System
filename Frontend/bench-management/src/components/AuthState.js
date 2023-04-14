@@ -8,6 +8,11 @@ export default function AuthState(props) {
     const[currentRole,setCurrentRole]=useState(0)
     const[googleData,setGoogleData]=useState({})
     const[dtoData,setDtoData]=useState()
+    const[checkFilter,setCheckFilter]=useState({
+        "skill":false,
+        "location":false,
+        "status":false
+    })
     const[appliedFilters,setAppliedFilters]=useState({
         "experience":false,
         "benchtime":false,
@@ -21,8 +26,11 @@ export default function AuthState(props) {
         "springboot":false,
         "gurugram":false,
         "bangalore":false,
-        "hyderabad":false
+        "hyderabad":false,
+        "active":false,
+        "benched":false
     })
+
     const [managerId, setManagerId] = useState(-1);
     const [loopEntry, setLoopEntry] = useState(false);
     const [viewEmployeeId, setViewEmployeeId] = useState(0);
@@ -40,7 +48,7 @@ export default function AuthState(props) {
         console.log("logged out successfully")
     }
     return (
-        <AuthContext.Provider value={{appliedFilters,dtoData, googleData, setAppliedFilters,setDtoData,isAuthentication, currentRole,
+        <AuthContext.Provider value={{checkFilter,setCheckFilter,appliedFilters,dtoData, googleData, setAppliedFilters,setDtoData,isAuthentication, currentRole,
          setGoogleData, handleLogin, setAuthentication,
           setCurrentRole, handleLogout, loopEntry,setLoopEntry, managerId, setManagerId
           ,handleEmpId, viewEmployeeId }}>
