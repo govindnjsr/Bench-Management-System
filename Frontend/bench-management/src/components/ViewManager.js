@@ -6,26 +6,26 @@ import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 
 function ViewManager() {
-    const [show, setShow] = useState(false);
-    const[managerDetails,setManagerDetails]=useState();
-    const[postResponse,setPostResponse]=useState();
-    const[deleteResponse,setDeleteResponse]=useState();
-    const[addlocation,setAddLocation]=useState({
-      managerId:null,
-      locationId:null
-    });
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-    
-    const handleAddLocation=(e)=>{
-      
-      setAddLocation({ ...addlocation, [e.target.name]: e.target.value });
-    }
-    
-    const postLocationToManager=async()=>{
-      try{
-        await axios.put(`http://localhost:2538/api/manager/${addlocation.managerId}/location/${addlocation.locationId}`).
-        then((response) => {
+  const [show, setShow] = useState(false);
+  const [managerDetails, setManagerDetails] = useState();
+  const [postResponse, setPostResponse] = useState();
+  const [deleteResponse, setDeleteResponse] = useState();
+  const [addlocation, setAddLocation] = useState({
+    managerId: null,
+    locationId: null
+  });
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const handleAddLocation = (e) => {
+
+    setAddLocation({ ...addlocation, [e.target.name]: e.target.value });
+  }
+
+  const postLocationToManager = async () => {
+    try {
+      await axios.put(`http://localhost:2538/api/manager/${addlocation.managerId}/location/${addlocation.locationId}`)
+        .then((response) => {
           console.log("response " + response);
           setPostResponse(response);
           setAddLocation({
@@ -33,42 +33,42 @@ function ViewManager() {
             locationId:null
           })
         });
-               
-     }
-     catch{
-        console.log()
-     }
 
     }
+    catch {
+      console.log()
+    }
 
-    const deleteLocationToManager=async()=>{
-      try{
-        await axios.delete(`http://localhost:2538/api/manager/delete/${addlocation.managerId}/locationdelete/${addlocation.locationId}`).
-        then((response) => {
+  }
+
+  const deleteLocationToManager = async () => {
+    try {
+      await axios.delete(`http://localhost:2538/api/manager/delete/${addlocation.managerId}/locationdelete/${addlocation.locationId}`)
+        .then((response) => {
           console.log("response " + response);
           setDeleteResponse(response);
-        });               
-     }
-     catch{
-        console.log()
-     }
+        });
     }
+    catch {
+      console.log()
+    }
+  }
 
-    const fetchManagerData=async ()=>{
-      try{
-         const managerApiDetails=await axios.get('http://localhost:2538/api/manager/get');
-         setManagerDetails(managerApiDetails.data);
-                
-      }
-      catch{
-         console.log()
-      }
+  const fetchManagerData = async () => {
+    try {
+      const managerApiDetails = await axios.get('http://localhost:2538/api/manager/get');
+      setManagerDetails(managerApiDetails.data);
+
     }
-    useEffect(()=>{
-      fetchManagerData();
-    },[postResponse,deleteResponse])
-   
-     
+    catch {
+      console.log()
+    }
+  }
+  useEffect(() => {
+    fetchManagerData();
+  }, [postResponse, deleteResponse])
+
+
 
     console.log(managerDetails) 
     console.log(addlocation)
@@ -85,7 +85,7 @@ function ViewManager() {
           keyboard={false}
         >
           <Modal.Header closeButton>
-            <Modal.Title>Managers</Modal.Title>
+            <Modal.Title>Manager's Location Access</Modal.Title>
           </Modal.Header>
           <Modal.Body>
           <Form id='view'>
@@ -103,11 +103,13 @@ function ViewManager() {
                         <option value={3} >Hyderabad</option>
                     </Form.Select>
                 </Form.Group>
-                <Button onClick={postLocationToManager}>Add Location</Button>
-                <Button onClick={deleteLocationToManager}>Delete Location</Button>
+                <div className='btn-mngr'>
+                <button className='button6' onClick={postLocationToManager}>Add Location</button>
+                <button className='button6' onClick={deleteLocationToManager}>Delete Location</button>
+                </div>
           </Form>
           <Table striped bordered hover>
-      <thead>
+      <thead className='thread2'>
         <tr>
           <th>Id</th>
           <th>Name</th>
@@ -121,53 +123,24 @@ function ViewManager() {
             <td>{user.mname}</td>
             <td>
 
-              {user.assignedLocation && user.assignedLocation.map((loc,index)=>(
-                 <p>{loc.locName}</p>
+                    {user.assignedLocation && user.assignedLocation.map((loc, index) => (
+                      <p>{loc.locName}</p>
+                    ))
+                    }
+                  </td>
+                </tr>
               ))
               }
-                    {/* <Form>
-                {['checkbox'].map((type) => (
-                    <div key={`inline-${type}`} className="mb-3">
-                    <Form.Check
-                        inline
-                        label="Gurugram"
-                        name="group1"
-                        type={type}
-                        id={`inline-${type}-1`}
-                        checked={true}
-                        
-                    />
-                    <Form.Check
-                        inline
-                        label="Banglore"
-                        name="group1"
-                        type={type}
-                        id={`inline-${type}-2`}
-                    />
-                    <Form.Check
-                        inline
-                        label="Hyderabad"
-                        type={type}
-                        id={`inline-${type}-3`}
-                    />
-                    </div>
-                ))}
-                </Form> */}
-          </td>
-          </tr>
-        ))
-}          
-       
-      </tbody>
-    </Table>
-          </Modal.Body>
-          <Modal.Footer>
-            <button className='button3' onClick={handleClose}>Close</button> 
-            {/* <button className='button3' form="view">Apply</button> */}
-          </Modal.Footer>
-        </Modal>
-      </>
-    );
-  }
 
-  export default ViewManager;
+            </tbody>
+          </Table>
+        </Modal.Body>
+        <Modal.Footer>
+          <button className='button3' onClick={handleClose}>Close</button>
+        </Modal.Footer>
+      </Modal>
+    </>
+  );
+}
+
+export default ViewManager;

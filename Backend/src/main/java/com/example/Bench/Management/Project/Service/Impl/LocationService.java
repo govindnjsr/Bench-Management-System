@@ -48,4 +48,8 @@ public class LocationService implements com.example.Bench.Management.Project.Ser
         location.setEmployeeDetails(assignedEmployee);
         locationRepo.save(location);
     }
+    @Override
+    public long getIdByLocation(String locName) {
+        return locationRepo.getId(locName);
+    }
 }

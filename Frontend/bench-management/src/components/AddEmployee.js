@@ -6,17 +6,20 @@ import Form from 'react-bootstrap/Form'
 import axios from 'axios';
 function AddEmployee() {
     const [show, setShow] = useState(false);
-   const[post,setPost]=useState()
+    const [post, setPost] = useState()
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const[dtoData,setDtoData]=useState()
 
-    const[empdetails,setEmpDetails]=useState({ 
+    const [postLocation, setPostLocation] = useState();
+    const [locationId, setLocationId] = useState();
+    const [locName, setLocName] = useState();
+    const [empdetails, setEmpDetails] = useState({
         "name": "",
         "address": "",
         "phoneNo": null,
         "workExp": 0,
-        "benchDate": null, 
+        "benchDate": null,
         "billableDate": null,
         "benchStatus": null,   
         "active": null,  
@@ -50,8 +53,8 @@ function AddEmployee() {
           });
              
         }
-        catch{
-           console.log()
+        catch {
+            console.log()
         }
       }
    
@@ -75,6 +78,21 @@ function AddEmployee() {
 
 
 // console.log(empdetails)
+// ------------------------------------------------------------------------------------------------/
+// const getLocationId = async (e) => {
+//     try{
+//         setLocName(e.target.value);
+//         const locationId = await axios.get(`http://localhost:2538/api/location/getId/${e.target.value}`);
+//         setLocationId(locationId.data);
+//     }
+//     catch{
+//         console.log();
+//     }
+// }
+// const handleLocationValue = (e) => {
+//     setEmpDetails({ ...empdetails, [e.target.name]: e.target.value });
+//     getLocationId(e);
+// }
 // console.log(skills)
 // console.log("printinggg" + JSON.stringify(responseSkill))
 // console.log("post "+post)
@@ -235,6 +253,6 @@ function AddEmployee() {
         </Modal>
       </>
     );
-  }
+}
 
-  export default AddEmployee;
+export default AddEmployee;

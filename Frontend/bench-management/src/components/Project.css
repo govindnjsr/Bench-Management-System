@@ -82,7 +82,7 @@
   font-weight: bold;
 }
 
-.pfilterHeading{
+.pfilterHeading {
   padding-bottom: 2%;
 }
 
@@ -93,15 +93,42 @@
 .left-panel {
   padding-top: 1%;
   position: fixed;
-  background-color: #ffecd1;
+  background-color:#ffecd1;
   height: 87.5vh;
-  overflow-y:scroll;
+  overflow-y: scroll;
   width: 18vw;
   margin-left: 0%;
   color: black;
 }
 
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  
+  background:#489fb5;  
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #d8e2dc;
+}
+
+
+
+
 .pfilter {
+  color: rgb(36, 34, 34);
   font-size: 14px;
   font-weight: bold;
   opacity: 0.8;
@@ -180,6 +207,7 @@
   background-color: #16697a;
   color: white;
   position: fixed;
+  z-index: 10;
 }
 
 .logoContainer {
@@ -211,35 +239,33 @@
 
 .profile {
   background-color: #16697a;
-  opacity: 0.5;
-  width: 28%;
+  opacity: 0.9;
+  width: 9%;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-left: 80%;
-  padding-top: 10px;
-  position: fixed;
+  margin-left: 89%;
 }
-
-.profileUserName {
-  margin-left: 10%;
+.googleImage{
+  height: 22%;
+  width: 22%;
+  border-radius: 100%;
+  padding: 0px;
+  margin: 0px;
+  margin-right: 5%;
 }
-
 .dropdown-menu {
   margin: 0px;
   padding: 0px;
   min-width: 6vw !important;
   max-height: 6vh !important;
 }
-
 .userIcon {
   margin-right: 6%;
 }
 
-/* .NavbarDropDownMenu {} */
 
-
-/* CSS for REndering_Admin */
+/* CSS for Rendering_Admin */
 
 .window {
   display: flex;
@@ -267,50 +293,53 @@
   padding-top: 0.1%;
   font-size: 14px;
   font-weight: bold;
-  /* margin-left: 18.1%; */
 }
 
 .row {
   padding: 1%;
   margin-top: 2.1%;
-  /* margin-left: 18.1%; */
   margin-left: 0.1%;
   background-color: #ffecd1;
   width: 82.8%;
   display: flex;
   flex-direction: row;
-  gap: 10%;
+  gap: 11.6%;
   position: fixed;
 
 }
-
-
+.card{
+  background-color:#d8e2dc;
+  border: none;
+  box-shadow: 3px 3px 3px #022028;
+}
 
 .card-title {
+  color: rgb(67, 64, 64);
   font-size: 14px;
   font-weight: bold;
   text-align: center;
 }
 
 .card-text {
+  color: rgb(67, 64, 64);
   font-size: 14px;
   font-weight: bold;
   text-align: center;
 }
 
-.button4{
+.button4 {
   height: 5vh;
-  width:15.8vw;
+  width:9vw;
   background-color: #489fb5;
   border: none;
   color: rgb(24, 23, 23);
-  padding: 6px 15px 15px 15px ;
+  padding: 6px 15px 15px 15px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size:12px;
+  font-size: 12px;
   font-weight: 500;
-  margin: 2px 0px;
+  margin: 0px 0px 0px 45px;
   cursor: pointer;
   border-radius: 12px;
 }
@@ -330,7 +359,7 @@
 
 .actions {
   height: 8%;
-  margin-top: 14.4%;
+  margin-top: 10.4%;
   color: white;
   background-color: #489fb5;
   display: flex;
@@ -355,28 +384,29 @@ border-top-left-radius:  12px;
 border-bottom-left-radius: 12px;
 margin-right: 0px;
 border: none;
+
 }
-.search-box2{
-  margin-top:0.5% ;
+
+.search-box2 {
+  margin-top: 0.5%;
   height: 5vh;
-  width:12vw;
-  border-top-left-radius:  12px;
+  width: 12vw;
+  border-top-left-radius: 12px;
   border-bottom-left-radius: 12px;
   margin-right: 0px;
   margin-left: 300px;
   border: none;
-  }
+}
 
-.search{
+.search {
   margin-top: 0.5%;
-  height:5vh;
-  border-top-right-radius:  12px;
+  height: 5vh;
+  border-top-right-radius: 12px;
   border-bottom-right-radius: 12px;
   padding-left: 4px;
-  padding-right:4px ;
+  padding-right: 4px;
   padding-top: 4px;
   padding-bottom: 4px;
-  /* margin-top: 2%; */
   background-color: #fff;
   align-items: center;
 }
@@ -387,7 +417,7 @@ border: none;
   background-color: #d8e2dc;
   width: 82.8%;
   position: fixed;
-  margin-top: 18.4%;
+  margin-top: 14.4%;
   padding-left: 2%;
   padding-top: 0.2%;
   height: 4vh;
@@ -395,73 +425,175 @@ border: none;
 }
 
 .table-format {
-  height: 49vh;
-  width: 81.5vw;
-  /* margin-left: 48.1%; */
-  margin-top: 24.8%;
-  overflow-y: scroll;
+  height: 56.7vh;
+  width: 81.7vw;
+  margin-top: 20.2%;
+  overflow-y: auto;
   background-color: #ffecd1;
 }
+th{
+  color: rgb(67, 64, 64);
+}
 
-.button5{
+.button5 {
   height: 5vh;
-  width:9vw;
+  width: 6vw;
   background-color: #489fb5;
   border: none;
-  color: rgb(24, 23, 23);
-  padding: 6px 15px 15px 15px ;
+  color:white;
+  padding: 6px 15px 15px 15px;
   text-align: center;
-  text-decoration: none;
   display: inline-block;
-  font-size:12px;
+  font-size: 12px;
   font-weight: 500;
   margin: 2px 0px;
   cursor: pointer;
   border-radius: 12px;
+  opacity: 8;
+}
+.button5:hover{
+  color: white;
+  opacity: 0.8;
 }
 
 
 /* CSS FOR MODAL */
 
-.button2{
+.button2 {
   height: 5vh;
-  width:12vw;
+  width: 12vw;
   background-color: white;
   border: none;
   color: rgb(24, 23, 23);
-  padding: 6px 15px 15px 15px ;
+  padding: 6px 15px 15px 15px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size:12px;
+  font-size: 12px;
   font-weight: 500;
   margin: 2px 0px;
   cursor: pointer;
   border-radius: 12px;
 }
 
-.button3{
+.button2:hover{
+  opacity: 0.8;
+}
+
+.button3 {
   height: 5vh;
-  width:8vw;
+  width: 8vw;
+  background-color: #489fb5;
+  border: none;
+  color: white;
+  padding: 8px 15px 15px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 500;
+  margin: 3px 3px;
+  cursor: pointer;
+  border-radius: 12px;
+}
+.button3:hover{
+  opacity: 0.8;
+}
+
+.button6{
+  height: 5vh;
+  width:10vw;
   background-color:#489fb5;
   border: none;
-  color: rgb(24, 23, 23);
+  color: white;
   padding: 8px 15px 15px 15px ;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size:12px;
   font-weight: 500;
-  margin: 3px 3px;
+  margin: 3px 3px 3px 3px;
   cursor: pointer;
   border-radius: 12px;
 }
-
-.thread2{
- text-align: center;
+.button6:hover{
+  opacity: 0.8;
 }
 
-.thread1{
-text-align:center;
+
+.btn-mngr{
+  margin-top: 4%;
+  margin-left: 21%;
+  margin-bottom: 4%;
 }
+
+.thread2 {
+  text-align: center;
+}
+
+.thread1 {
+  text-align: center;
+}
+
+/* CSS FOR VIEW EMPLOYEE */
+
+.profile-window{
+ 
+  display: flex;
+  flex-direction: column;
+}
+
+.for-back{
+  display: flex;
+  flex-direction: row;
+  gap:85%
+}
+
+.profile-photo{
+  align-items: center;
+  height: 25vh;
+  width: 25vh;
+  margin: 1% 6% 1% 44%;
+}
+
+.shadow1{
+  margin: 5% 4.5% 0% 4.5%;
+  background-color:#ffecd1;
+  box-shadow: 10px 10px 10px rgb(125, 125, 125);
+}
+
+.shadow2{
+  margin: 0% 4.5% 0% 4.5%;
+  background-color:#ffecd1;
+  box-shadow: 10px 10px 10px rgb(125, 125, 125);
+}
+
+.profile-headings{
+  padding-left: 1%;
+  margin-top: 0.5%;
+  margin-bottom: 3%;
+  background-color: #489fb5;
+  text-align:left;
+  font-size: larger;
+  font-weight:500;
+  color: white;
+}
+
+.details{
+  display: flex;
+  flex-direction: row;
+  gap:25%;
+}
+
+.labels{
+  color:rgb(170, 169, 169);
+  margin-bottom: 0px;
+  
+}
+
+.content{
+  color: rgb(67, 66, 66);
+  margin-top: 0px;
+}
+
 
