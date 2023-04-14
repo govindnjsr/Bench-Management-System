@@ -15,7 +15,7 @@ export default function AdminDashboard(prop) {
   const[activeEmp,setActiveEmp]=useState()
   const[benchedEmp,setBenchedEmp]=useState()
   const[empdetails,setEmpDetails]=useState()
- const[filterApllied,setFilterApplied]=useState(false)
+//  const[Keys,setKeys]=useState()
 
   const fetchApi=async ()=>{
     try{
@@ -41,59 +41,54 @@ export default function AdminDashboard(prop) {
     fetchApi()
   },[authData.appliedFilters])
 
-//   {
-//     "employeeId": 6,
-//     "employeeName": "govindaahavespringboot",
-//     "experience": 1,
-//     "java": false,
-//     "python": false,
-//     "react": false,
-//     "angular": false,
-//     "html": false,
-//     "css": false,
-//     "javascript": false,
-//     "springboot": true,
-//     "location": 1,
-//     "benchStatus": false
-// }
-// "gurugram":false,
-//         "bangalore":false,
-//         "hyderabad":false
-  const doCheck=(emp)=>{
-    console.log(typeof(authData.appliedFilters.java))
-    console.log(typeof(emp.java))
-    let Ok=true;   
-     
-    let Keys = Object.keys(authData.appliedFilters);
-    Keys.forEach(element => {
-      if(element!=="gurugram" && element!=="bangalore" && element!=="hyderabad")
-      {if(authData.appliedFilters[element]==true && authData.appliedFilters[element]!=emp[element])
-        {Ok=false;
-          setFilterApplied(true);
-        }
-      }
+  const doCheckSkills=(emp)=>{
+    let Keys=Object.keys(authData.appliedFilters);
+    let ok=false;
+    console.log("Docheck  "+" "+emp.location)
+     Keys.forEach(element => {
+       {
+          if(authData.appliedFilters[element]==true && emp[element]==true)
+           ok=true;       
+       }
 
     });
+       return ok;
 
-    if(Ok){
-      console.log("im ander")
-      console.log("checkkkkkkk 1 "+authData.appliedFilters["gurugram"]);
-      console.log("emp "+JSON.stringify(emp))
-      console.log("emp location "+typeof(emp["location"]))
-      console.log("filter loc "+typeof(authData.appliedFilters["gurugram"]))
-      console.log(typeof(1))
-      if(authData.appliedFilters["gurugram"]==true && emp["location"]===1 ||
-      authData.appliedFilters["bangalore"]==true && emp["location"]===2 ||
-      authData.appliedFilters["hyderabad"]==true && emp["location"]===3 
-         ){
-          setFilterApplied(true);
-         }
-         else
-         Ok=false;
-    }
-    console.log("checkkkkkkk 2 "+authData.appliedFilters["gurugram"]+" "+emp["location"]);
-    return Ok;
+  }
+
+  const doCheckLocations=(emp)=>{
+    let Keys=Object.keys(authData.appliedFilters);
+    let ok=false;
+     Keys.forEach(element => {
+      if(element==="gurugram" && authData.appliedFilters[element]===true && emp.location===1 ){
+      
+        ok=true;
+    }else 
+     if(element==="bangalore" && authData.appliedFilters[element]===true && emp.location===2){
+      
+         ok=true;
+     } else
+     if(element==="hyderabad" && authData.appliedFilters[element]===true && emp.location===3){
     
+       ok=true;
+     }
+
+    });
+   
+       return ok;
+  }
+
+  const checkFilter=(emp)=>{
+    let Keys=Object.keys(authData.appliedFilters);
+    let ok=true;
+    Keys.forEach(filterKey => {
+      if(authData.appliedFilters[filterKey]===true && emp[filterKey]!=true ){
+      
+        ok=false;
+    }
+
+    });
+    return ok;
 
   }
   // console.log(empdetails)
@@ -170,25 +165,17 @@ export default function AdminDashboard(prop) {
                 <tbody className='thread1'>
                 {authData.dtoData &&
                   authData.dtoData.map((emp)=>(
-                 doCheck(emp)===true && filterApllied? 
-                  ( 
-                  <tr>
+                    checkFilter(emp)==true?
+                  (<tr>
                       <th scope="row">{emp.employeeId}</th>
                       <td>{emp.employeeName}</td>
                       <td>{emp.location==1?"Gurugram":emp.location==2?"Bangalore":emp.location==3?"Hyderabad":"none"}</td>
                       <td>{emp.benchStatus==0?"NotBenched":"Benched"}</td>
                       <td><UpdateEmployee/></td> 
                  </tr>):
-                 (
-                  <tr>
-                  <th scope="row">{emp.employeeId}</th>
-                  <td>{emp.employeeName}</td>
-                  <td>{emp.location==1?"Gurugram":emp.location==2?"Bangalore":emp.location==3?"Hyderabad":"none"}</td>
-                  <td>{emp.benchStatus==0?"NotBenched":"Benched"}</td>
-                  <td><UpdateEmployee/></td> 
-                  </tr>
-                 )
-        ))
+                 (<tr>DUmmy</tr>)          
+                  ))
+        
                  }
                   
 

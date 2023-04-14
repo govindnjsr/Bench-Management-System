@@ -30,7 +30,7 @@ function ViewManager() {
           setPostResponse(response);
           setAddLocation({
             managerId:null,
-      locationId:null
+            locationId:null
           })
         });
                
