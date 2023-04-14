@@ -13,8 +13,13 @@ const empId = authData.viewEmployeeId;
                 <div>
                     <NavBar />
                 </div>
+                
                 <div className='shadow1 p-3 mb-5'>
-                <h6 className='profile-heading'>PROFILE</h6>
+                    <div className='for-back'>
+                        <h6 className='profile-heading'>PROFILE</h6>
+                        <button className='button3'><i class="fa-sharp fa-solid fa-arrow-left"></i> &nbsp;BACK</button>
+                    </div>
+               
                     <hr></hr>
                     <img className='profile-photo' src={profileImageEmployee} alt='profileImageEmployee'/>
                     <div className='content'><center>Megha Mathur</center></div>
@@ -72,18 +77,12 @@ const empId = authData.viewEmployeeId;
                         <div className='details1'>
                             <p className='labels'>Client Name</p>
                             <p className='content'>Amazon</p>
-                            <p className='labels'>Client Name</p>
-                            <p className='content'>Flipkart</p>
                         </div>
                         <div className='details1'>
                             <p className='labels'>Interview Date</p>
                             <p className='content'>22/07/2005</p>
-                            <p className='labels'>Interview Date</p>
-                            <p className='content'>11/03/2000</p>
                         </div>
                         <div className='details1'>
-                            <p className='labels'>Result</p>
-                            <p className='content'>Not Clear</p>
                             <p className='labels'>Result</p>
                             <p className='content'>Not Clear</p>
                         </div>
