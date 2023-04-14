@@ -104,8 +104,8 @@ function ViewManager() {
                     </Form.Select>
                 </Form.Group>
                 <div className='btn-mngr'>
-                <Button className='button6' onClick={postLocationToManager}>Add Location</Button>
-                <Button className='button6' onClick={deleteLocationToManager}>Delete Location</Button>
+                <button className='button6' onClick={postLocationToManager}>Add Location</button>
+                <button className='button6' onClick={deleteLocationToManager}>Delete Location</button>
                 </div>
           </Form>
           <Table striped bordered hover>
@@ -127,34 +127,6 @@ function ViewManager() {
                       <p>{loc.locName}</p>
                     ))
                     }
-                    {/* <Form>
-                {['checkbox'].map((type) => (
-                    <div key={`inline-${type}`} className="mb-3">
-                    <Form.Check
-                        inline
-                        label="Gurugram"
-                        name="group1"
-                        type={type}
-                        id={`inline-${type}-1`}
-                        checked={true}
-                        
-                    />
-                    <Form.Check
-                        inline
-                        label="Banglore"
-                        name="group1"
-                        type={type}
-                        id={`inline-${type}-2`}
-                    />
-                    <Form.Check
-                        inline
-                        label="Hyderabad"
-                        type={type}
-                        id={`inline-${type}-3`}
-                    />
-                    </div>
-                ))}
-                </Form> */}
                   </td>
                 </tr>
               ))
@@ -165,7 +137,6 @@ function ViewManager() {
         </Modal.Body>
         <Modal.Footer>
           <button className='button3' onClick={handleClose}>Close</button>
-          {/* <button className='button3' form="view">Apply</button> */}
         </Modal.Footer>
       </Modal>
     </>

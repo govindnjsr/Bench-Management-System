@@ -93,13 +93,39 @@
 .left-panel {
   padding-top: 1%;
   position: fixed;
-  background-color: #ffecd1;
+  background-color:#ffecd1;
   height: 87.5vh;
   overflow-y: scroll;
   width: 18vw;
   margin-left: 0%;
   color: black;
 }
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  
+  background:#489fb5;  
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #d8e2dc;
+}
+
+
+
 
 .pfilter {
   color: rgb(36, 34, 34);
@@ -283,6 +309,8 @@
 }
 .card{
   background-color:#d8e2dc;
+  border: none;
+  box-shadow: 3px 3px 3px #022028;
 }
 
 .card-title {
@@ -379,7 +407,6 @@ border: none;
   padding-right: 4px;
   padding-top: 4px;
   padding-bottom: 4px;
-  /* margin-top: 2%; */
   background-color: #fff;
   align-items: center;
 }
@@ -410,19 +437,23 @@ th{
 
 .button5 {
   height: 5vh;
-  width: 9vw;
+  width: 6vw;
   background-color: #489fb5;
   border: none;
-  color: rgb(24, 23, 23);
+  color:white;
   padding: 6px 15px 15px 15px;
   text-align: center;
-  text-decoration: none;
   display: inline-block;
   font-size: 12px;
   font-weight: 500;
   margin: 2px 0px;
   cursor: pointer;
   border-radius: 12px;
+  opacity: 8;
+}
+.button5:hover{
+  color: white;
+  opacity: 0.8;
 }
 
 
@@ -445,12 +476,16 @@ th{
   border-radius: 12px;
 }
 
+.button2:hover{
+  opacity: 0.8;
+}
+
 .button3 {
   height: 5vh;
   width: 8vw;
   background-color: #489fb5;
   border: none;
-  color: rgb(24, 23, 23);
+  color: white;
   padding: 8px 15px 15px 15px;
   text-align: center;
   text-decoration: none;
@@ -461,13 +496,16 @@ th{
   cursor: pointer;
   border-radius: 12px;
 }
+.button3:hover{
+  opacity: 0.8;
+}
 
 .button6{
   height: 5vh;
   width:10vw;
   background-color:#489fb5;
   border: none;
-  color: rgb(24, 23, 23);
+  color: white;
   padding: 8px 15px 15px 15px ;
   text-align: center;
   text-decoration: none;
@@ -478,29 +516,10 @@ th{
   cursor: pointer;
   border-radius: 12px;
 }
-
-.button6{
-  height: 5vh;
-  width:10vw;
-  background-color:#489fb5;
-  border: none;
-  color: rgb(24, 23, 23);
-  padding: 8px 15px 15px 15px ;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size:12px;
-  font-weight: 500;
-  margin: 3px 3px 3px 3px;
-  cursor: pointer;
-  border-radius: 12px;
+.button6:hover{
+  opacity: 0.8;
 }
 
-.btn-mngr{
-  margin-top: 4%;
-  margin-left: 21%;
-  margin-bottom: 4%;
-}
 
 .btn-mngr{
   margin-top: 4%;
@@ -524,6 +543,12 @@ th{
   flex-direction: column;
 }
 
+.for-back{
+  display: flex;
+  flex-direction: row;
+  gap:85%
+}
+
 .profile-photo{
   align-items: center;
   height: 25vh;
@@ -534,11 +559,13 @@ th{
 .shadow1{
   margin: 5% 4.5% 0% 4.5%;
   background-color:#ffecd1;
+  box-shadow: 10px 10px 10px rgb(125, 125, 125);
 }
 
 .shadow2{
   margin: 0% 4.5% 0% 4.5%;
   background-color:#ffecd1;
+  box-shadow: 10px 10px 10px rgb(125, 125, 125);
 }
 
 .profile-headings{
@@ -568,3 +595,5 @@ th{
   color: rgb(67, 66, 66);
   margin-top: 0px;
 }
+
+

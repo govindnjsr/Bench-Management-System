@@ -30,10 +30,6 @@ function UpdateEmployee() {
                 </Modal.Header>
                 <Modal.Body>
                     <Form id='add'>
-                        {/* <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                    <Form.Label>ID</Form.Label>
-                    <Form.Control type="number" placeholder="Enter ID" required/>
-                </Form.Group> */}
                         <Form.Group>
                             <Form.Label>Location</Form.Label>
                             <Form.Select aria-label="Default select example" name="empLocation">
