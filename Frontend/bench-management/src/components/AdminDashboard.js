@@ -7,6 +7,7 @@ import ViewManager from './ViewManager';
 import axios from 'axios';
 import search from './Images/search.png';
 import UpdateEmployee from './UpdateEmployee';
+import { Link } from 'react-router-dom';
 
 export default function AdminDashboard() {
 
@@ -107,12 +108,14 @@ export default function AdminDashboard() {
                   {empdetails &&
                     empdetails.map((emp) => (
                       <tr>
-                        <th scope="row">{emp.id}</th>
+                        <Link to='/viewEmployee'>
+                        <th scope="row">{emp.id}</th></Link>
                         <td>{emp.name}</td>
                         <td>{emp.empLocation}</td>
                         <td>{emp.benchStatus == true ? "Active" : "Inactive"}</td>
                         <td><UpdateEmployee /></td>
                       </tr>
+                      
                     ))
                   }
                 </tbody>

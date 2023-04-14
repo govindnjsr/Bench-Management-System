@@ -111,7 +111,7 @@ console.log(filteredEmpData)
           <div className='actions'>
             <p className='employees'>EMPLOYEES</p>
             <form className="d-flex" role="search">
-              <input className="search-box2" type="search" placeholder="Search" aria-label="Search" />
+              <input className="search-box2" type="search" placeholder="Search by name" aria-label="Search" />
               <img className="search" src={search} alt="search-img" />
             </form>
           </div>
