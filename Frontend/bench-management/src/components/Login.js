@@ -41,13 +41,14 @@ export default function Login() {
 
   useEffect(() => {
     /* global google */
+     /* global accounts */
     const google = window.google;
-    google.accounts.id.initialize({ // eslint-disable-line 
+    google?.accounts.id.initialize({ // eslint-disable-line 
       client_id: "305985372566-gu0rl4u8sm3ceu06m92tc52t0v8um5ne.apps.googleusercontent.com",
       callback: handleCallbackResponse
     });
 
-    google.accounts.id.renderButton( // eslint-disable-line
+    google?.accounts.id.renderButton( // eslint-disable-line
       document.getElementById("loginButton"),
       { theme: "outline", size: "large", shape: "pill", width: "400", height: "300" }
     );
@@ -56,7 +57,7 @@ export default function Login() {
    
   console.log(loginApiData)
   return (
-    authData.isAuthentication === false ?
+    !authData.isAuthentication === false ?
       (
         <>
 
@@ -76,7 +77,7 @@ export default function Login() {
 
         </>)
       : (
-        (authData.currentRole === 1) ? <ManagerDashboard />
+        (authData.currentRole === 2) ? <ManagerDashboard />
           : <AdminDashboard />
       )
   )

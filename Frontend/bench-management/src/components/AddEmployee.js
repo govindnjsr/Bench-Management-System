@@ -1,5 +1,5 @@
 // import React from 'react'
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form'
@@ -9,6 +9,8 @@ function AddEmployee() {
    const[post,setPost]=useState()
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const[dtoData,setDtoData]=useState()
+
     const[empdetails,setEmpDetails]=useState({ 
         "name": "",
         "address": "",
@@ -16,15 +18,32 @@ function AddEmployee() {
         "workExp": 0,
         "benchDate": null, 
         "billableDate": null,
-        "benchStatus": null, 
-        "skills": null,  
+        "benchStatus": null,   
         "active": null,  
         "empLocation": null, 
+        
        
     });
-
+    const[skills,setSkills]=useState(
+        {
+            
+                "java": false,
+                "python": false,
+                "react": false,
+                "angular": false,
+                "html": false,
+                "css": false,
+                "javascript": false,
+                "springboot": false
+            
+        }
+    )
+   const[print,setPrint]=useState({})
+   const[responseSkill,setResponseSkill]=useState()
     const saveDataAtBackend=async ()=>{
         try{
+          empdetails.skill=skills;
+           setEmpDetails({...empdetails});
            const allEmp=await axios.post('http://localhost:2538/api/empdetails/save',empdetails)
            .then((response) => {
             setPost(response.data);
@@ -35,36 +54,37 @@ function AddEmployee() {
            console.log()
         }
       }
-    //   useEffect(()=>{
-    //     fetchApi()
-    //   },[])
-    const saveData=()=>{
-        saveDataAtBackend();
+   
+    const saveData=()=>{       
+         saveDataAtBackend();
     }
-    const handleChangeValue = (e) => {
-       
+    const handleChangeValue = (e) => {       
         setEmpDetails({ ...empdetails, [e.target.name]: e.target.value });
-
       };
-//    const handleChange = (event) => {
-//         setBenchStatus({benchStatus: event.target.value});
-//         }
-//         const handleCompanyActive= (event) => {
-//             setCompanyStatus({companystatus: event.target.value});
-//         }
-    console.log("post "+post)
-console.log(empdetails)
+    const handleSkillValue=(e)=>{
+       const {value,checked}=e.target;
+       let True=true,False=false;
+       if(checked)
+       {setSkills({...skills,[e.target.name]:True});
+       }
+       else{
+        setSkills({...skills,[e.target.name]:False});
+       }
+         
+    }
+
+
+// console.log(empdetails)
+// console.log(skills)
+// console.log("printinggg" + JSON.stringify(responseSkill))
+// console.log("post "+post)
+// console.log("Dto "+JSON.stringify(dtoData))
     return (
       <>
         
-        {/* <Button className='action-btn' variant="light" size="lg" onClick={handleShow}>
-          ADD EMPLOYEE
-        </Button> */}
           <button className='button2' onClick={handleShow}>
             <i class="fa-solid fa-user-plus"></i> &nbsp; EMPLOYEE 
          </button>
-  
-
         <Modal
           show={show}
           onHide={handleClose}
@@ -76,18 +96,13 @@ console.log(empdetails)
           </Modal.Header>
           <Modal.Body>
           <Form id='add'>
-                {/* <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                    <Form.Label>ID</Form.Label>
-                    <Form.Control type="number" placeholder="Enter ID" required/>
-                </Form.Group> */}
                <Form.Group>
                     <Form.Label>Location</Form.Label>
-                    <Form.Select aria-label="Default select example" name="empLocation" onChange={handleChangeValue.bind(this)}>
-                        
+                    <Form.Select aria-label="Default select example" name="empLocation" onChange={handleChangeValue.bind(this)}>                        
                         <option>Select from below</option>
-                        <option value="Gurugram" >Gurugram</option>
-                        <option value="Bangalore">Bangalore</option>
-                        <option value="Hyderabad">Hyderabad</option>
+                        <option value={1} >Gurugram</option>
+                        <option value={2}>Bangalore</option>
+                        <option value={3}>Hyderabad</option>
                     </Form.Select>
                 </Form.Group><br/>
 
@@ -127,61 +142,70 @@ console.log(empdetails)
                 <Form.Group>
                     <Form.Label>Skills</Form.Label>
                     {['checkbox'].map((type) => (
-                        <div key={`inline-${type}`} className="mb-3">
+                        <div key={`inline-${type}`} className="mb-3" onChange={handleSkillValue.bind(this)}>
                         <Form.Check
                             inline
                             label="Java"
-                            name="group1"
+                            name="java"
                             type={type}
+                            value={"1"}
                             id={`inline-${type}-1`}
+                            
                         />
                         <Form.Check
                             inline
-                            label="Python"
-                            name="group1"
+                            label="python"
+                            name="python"
                             type={type}
+                            value={"1"}
                             id={`inline-${type}-2`}
                         />
                          <Form.Check
                             inline
                             label="React"
-                            name="group1"
+                            name="react"
                             type={type}
+                            value={"1"}
                             id={`inline-${type}-3`}
                         />
                          <Form.Check
                             inline
                             label="Angular"
-                            name="group1"
+                            name="angular"
                             type={type}
+                            value={"1"}
                             id={`inline-${type}-4`}
                         />
                          <Form.Check
                             inline
                             label="HTML"
-                            name="group1"
+                            name="html"
                             type={type}
+                            value={"1"}
                             id={`inline-${type}-5`}
                         />
                          <Form.Check
                             inline
                             label="CSS"
-                            name="group1"
+                            name="css"
                             type={type}
+                            value={"1"}
                             id={`inline-${type}-6`}
                         />
                          <Form.Check
                             inline
                             label="JavaScript"
-                            name="group1"
+                            name="javascript"
                             type={type}
+                            value={"1"}
                             id={`inline-${type}-7`}
                         />
                          <Form.Check
                             inline
                             label="SpringBoot"
-                            name="group1"
+                            name="springboot"
                             type={type}
+                            value={"1"}
                             id={`inline-${type}-8`}
                         />
                         </div>
@@ -205,7 +229,7 @@ console.log(empdetails)
               Close
             </Button> */}
             <button className='button3' onClick={handleClose}>Close</button> &nbsp; 
-            <button className='button3' form="add" onClick={saveData}>Add</button>
+            <button className='button3'  onClick={saveData}>Add</button>
             {/* <Button variant="primary">ADD</Button> */}
           </Modal.Footer>
         </Modal>

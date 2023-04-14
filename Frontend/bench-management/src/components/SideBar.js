@@ -1,16 +1,28 @@
-import React, { useState } from 'react'
+import React, { useState ,useContext } from 'react'
 import './Project.css'
-
+import AuthContext from './AuthContext';
 export default function SideBar() {
-
+   const authData = useContext(AuthContext);
+   // const [appliedFilters,setAppliedFilters]=authData;
    const [benchTimeValue, setBenchTimeValue] = useState(3);
    const [experienceValue, setExperienceValue] = useState(3);
-   const[filters,setFilters]=useState({
-      exp:0,
-      benchTime:0,
-      locationId:0,
-    })
+   // const[filters,setFilters]=useState({
+   //    exp:0,
+   //    benchTime:0,
+   //    locationId:0,
+   //  })
 
+    const handleFiltersValue = (e) => {     
+      const {value,checked}=e.target;
+      let temp1=true,temp2=false;
+      if(checked)  
+      {authData.setAppliedFilters({ ...authData.appliedFilters, [e.target.name]: temp1});
+    }
+    else{
+      authData.setAppliedFilters({ ...authData.appliedFilters, [e.target.name]:temp2 });
+    }
+    };
+    console.log("filters "+JSON.stringify(authData.appliedFilters))
    return (
       <>
          <div className='filterHeading' >
@@ -21,7 +33,7 @@ export default function SideBar() {
                <div className='filterByExperience'>
                   <p className='pfilter'>EXPERIENCE <span className='span-style'>( 0 - {experienceValue} Years)</span></p>
                   <label htmlFor="customRange2" className="form-label"></label>
-                  <input type="range" className="form-range experienceClass" min="1" max="10" value={experienceValue} onChange={(e) => setExperienceValue(e.target.value)} id="customRange2" />
+                  <input type="range" className="form-range experienceClass" min="1" max="10" value={experienceValue} onChange={(e) => handleFiltersValue(e.target.value).bind(this)} id="customRange2" />
                   <p className='sliderParaLeft'>0 Years</p>
                   <span className='sliderParaRightExpereince'>10 Years</span>
                </div>
@@ -40,36 +52,36 @@ export default function SideBar() {
 
                   <p className='pfilter'>SKILLS</p>
 
-                  <div className="form-check mx-4 my-4">
-                     <input className="form-check-input" type="checkbox" value="Java" id="skill-1" />
+                  <div className="form-check mx-4 my-4" >
+                     <input className="form-check-input" type="checkbox" name="java" value={"1"} onChange={handleFiltersValue.bind(this)} id="skill-1" />
                      <label className="form-check-label skillsLabel" htmlFor="skill-1">
                         Java
                      </label><br />
-                     <input className="form-check-input" type="checkbox" value="Python" id="skill-2" />
+                     <input className="form-check-input" type="checkbox"  name="python" value={"1"} onChange={handleFiltersValue.bind(this)} id="skill-2" />
                      <label className="form-check-label skillsLabel" htmlFor="skill-2">
                         Python
                      </label><br />
-                     <input className="form-check-input" type="checkbox" value="React" id="skill-3" />
+                     <input className="form-check-input" type="checkbox"  name="react" value={"1"} onChange={handleFiltersValue.bind(this)}id="skill-3" />
                      <label className="form-check-label skillsLabel" htmlFor="skill-3">
                         React
                      </label><br />
-                     <input className="form-check-input" type="checkbox" value="Angular" id="skill-4" />
+                     <input className="form-check-input" type="checkbox"  name="angular" value={"1"} onChange={handleFiltersValue.bind(this)} id="skill-4" />
                      <label className="form-check-label skillsLabel" htmlFor="skill-4">
                         Angular
                      </label><br />
-                     <input className="form-check-input" type="checkbox" value="HTML" id="skill-5" />
+                     <input className="form-check-input" type="checkbox" name="html" value={"1"} onChange={handleFiltersValue.bind(this)} id="skill-5" />
                      <label className="form-check-label skillsLabel" htmlFor="skill-5">
                         HTML
                      </label><br />
-                     <input className="form-check-input" type="checkbox" value="CSS" id="skill-6" />
+                     <input className="form-check-input" type="checkbox"  name="css" value={"1"} onChange={handleFiltersValue.bind(this)} id="skill-6" />
                      <label className="form-check-label skillsLabel" htmlFor="skill-6">
                         CSS
                      </label><br />
-                     <input className="form-check-input" type="checkbox" value="JavaScript" id="skill-7" />
+                     <input className="form-check-input" type="checkbox"  name="javascript" value={"1"} onChange={handleFiltersValue.bind(this)} id="skill-7" />
                      <label className="form-check-label skillsLabel" htmlFor="skill-7">
                         JavaScript
                      </label><br />
-                     <input className="form-check-input" type="checkbox" value="SpringBoot" id="skill-8" />
+                     <input className="form-check-input" type="checkbox"  name="springboot" value={"1"} onChange={handleFiltersValue.bind(this)} id="skill-8" />
                      <label className="form-check-label skillsLabel" htmlFor="skill-8">
                         SpringBoot
                      </label><br />
@@ -81,15 +93,15 @@ export default function SideBar() {
                   <p className='pfilter'>Location</p>
 
                   <div className="form-check mx-4 my-4">
-                     <input className="form-check-input" type="checkbox" value="Gurugram" id="loc-1" />
+                     <input className="form-check-input" type="checkbox" name="gurugram" value={true} onChange={handleFiltersValue.bind(this)} id="loc-1" />
                      <label className="form-check-label skillsLabel" htmlFor="skill-1">
                         Gurugram
                      </label><br />
-                     <input className="form-check-input" type="checkbox" value="Banglore" id="loc-2" />
+                     <input className="form-check-input" type="checkbox"  name="bangalore" value={true} onChange={handleFiltersValue.bind(this)} id="loc-2" />
                      <label className="form-check-label skillsLabel" htmlFor="skill-2">
                         Banglore
                      </label><br />
-                     <input className="form-check-input" type="checkbox" value="Hyderabad" id="loc-3" />
+                     <input className="form-check-input" type="checkbox"  name="hyderabad" value={true} onChange={handleFiltersValue.bind(this)} id="loc-3" />
                      <label className="form-check-label skillsLabel" htmlFor="skill-3">
                         Hyderabad
                      </label><br />
