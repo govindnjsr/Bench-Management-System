@@ -3,27 +3,47 @@ import NavBar from "./Navbar";
 import profileImageEmployee from "./Images/photo.avif";
 import AuthContext from "./AuthContext";
 import { useNavigate } from "react-router-dom";
+import { forIn } from "lodash";
 import axios from "axios";
 import Login from "./Login";
 export default function ViewEmployee() {
+  const _ = require('lodash');
   const authData = useContext(AuthContext);
   const empId = authData.viewEmployeeId;
-  const [empDetail, setEmpDetail] = useState();
+  const [empDetail, setEmpDetail] = useState({});
   const navigate = useNavigate();
+  const [empSkills, setEmpSkills] = useState();
+  const [empSkillsValue, setEmpSkillsValue] = useState();
   function handleBackButton() {
     navigate('/');
   }
-
-  useEffect(() => {
+  console.log(empId);
+  console.log(empDetail);
+  const getEmpData = async () => {
     try {
-      const empDetail = axios.get(`http://localhost:2538/api/empdetails/get/${empId}`)
+      const emp = await axios.get(`http://localhost:2538/api/empdetails/get/${empId}`)
         .then((response) => {
           setEmpDetail(response.data);
-        })
+        });
     }
-    catch { }
+    catch {
+      console.log();
+    }
+  }
+
+  useEffect(() => {
+    getEmpData();
   }, [])
 
+  useEffect(() => {
+    // setEmpSkills(Object.entries(empDetail.skill));
+    // setEmpSkillsValue(Object.values(empDetail.skill));
+    _.forIn(empDetail.skill && empDetail.skill, function (value, skills) {
+      console.log(skills);
+    })
+  }, [empDetail])
+
+  console.log(empSkills);
   return (
     authData.isAuthentication ?
       <div >
@@ -41,8 +61,8 @@ export default function ViewEmployee() {
 
             <hr></hr>
             <img className='profile-photo' src={profileImageEmployee} alt='profileImageEmployee' />
-            <div className='content'><center>Megha Mathur</center></div>
-            <div className='content'><center>ID : 1234</center></div>
+            <div className='content'><center>{empDetail.name}</center></div>
+            <div className='content'><center>ID : {empId}</center></div>
           </div>
 
           <div className="shadow2 p-3 mb-5">
@@ -72,31 +92,33 @@ export default function ViewEmployee() {
                 <p className="labels">Work Experience</p>
                 <p className="content">{empDetail.workExp} Years</p>
                 <p className="labels">Location</p>
-                <p className="content">{empDetail.empLocation}</p>
+                <p className="content">{empDetail.empLocation === 1 ? "Gurugram" :
+                  empDetail.empLocation === 2 ? "Banglore" : "Hyderabad"}</p>
               </div>
               <div className="details1">
                 <p className="labels">Last Billable Date</p>
                 <p className="content">{empDetail.billableDate}</p>
                 <p className="labels">Bench Status</p>
-                <p className="content">{empDetail.benchStatus == false ? "Not on Bench" : "On Bench"}</p>
+                <p className="content">{empDetail.benchStatus === true ? "On Bench" : "Not on Bench"}</p>
               </div>
               <div className="details1">
-              <p className='labels'>Bench Start Date</p>
-              <p className='content'>23/8/2020</p>
+                <p className='labels'>Bench Start Date</p>
+                <p className='content'>{empDetail.benchDate}</p>
                 <p className="labels">Skills</p>
                 <p className="content">
-                  {
-                    Object.entries(empDetail.skills).map(([skill, value]) => {
-                      if (empDetail.skills[skill] === true) <span>{skill} </span>
-                    })
-                  }
+                  {/* {
+                    Object.keys(empDetail.skill) &&
+                    Object.keys(empDetail.skill).map((skills) =>(
+                      <span>{skills}</span>
+                    ))
+                  } */}
                 </p>
               </div>
             </div>
           </div>
 
           <div className="shadow2 p-3 mb-5">
-          <h6 className='profile-heading'>LAST CLIENT INTERVIEW</h6>
+            <h6 className='profile-heading'>LAST CLIENT INTERVIEW</h6>
             <hr></hr>
             <div className='details-interview'>
               <div className="details1">
@@ -115,7 +137,6 @@ export default function ViewEmployee() {
           </div>
         </div>
       </div>
-
       :
       <Login />
   )
