@@ -29,16 +29,19 @@ const empId = authData.viewEmployeeId;
                 <div className="shadow2 p-3 mb-5">
                     <h6 className='profile-heading'>PERSONAL INFORMATION</h6>
                     <hr></hr>
-                    <div className='details'>
+                    <div className='details-personal'>
                         <div className='details1'>
                             <p className='labels'>Name</p>
                             <p className='content'>Megha Mathur</p>
+                            <p className='labels'>Email ID</p>
+                            <p className='content'>megha.mathur@accolitedigital.com</p>
                         </div>
                         <div className='details1'>
                             <p className='labels'>Contact Number</p>
                             <p className='content'>9319018917</p>
                         </div>
                         <div className='details1'>
+                            
                             <p className='labels'>Address</p>
                             <p className='content'>A-1/9 Xenia Hub, Sector 55, Gurugram</p>
                         </div>
@@ -48,7 +51,7 @@ const empId = authData.viewEmployeeId;
                 <div className="shadow2 p-3 mb-5">
                     <h6 className='profile-heading'>WORK INFORMATION</h6>
                     <hr></hr>
-                    <div className='details'>
+                    <div className='details-work'>
                         <div className='details1'>
                             <p className='labels'>Work Experience</p>
                             <p className='content'>2 Years</p>
@@ -59,21 +62,21 @@ const empId = authData.viewEmployeeId;
                             <p className='labels'>Last Billable Date</p>
                             <p className='content'>10/07/2020</p>
                             <p className='labels'>Bench Status</p>
-                            <p className='content'>Not Benched</p>
+                            <p className='content'>Not On Benched</p>
                         </div>
                         <div className='details1'>
-                            <p className='labels'>Active</p>
-                            <p className='content'>Active</p>
-                            <p className='labels'>Slills</p>
+                            <p className='labels'>Bench Start Date</p>
+                            <p className='content'>23/8/2020</p>
+                            <p className='labels'>Skills</p>
                             <p className='content'>HTML, CSS, REACT</p>
                         </div>
                     </div> 
                 </div>
 
                 <div className="shadow2 p-3 mb-5">
-                    <h6 className='profile-heading'>CLIENT INTERVIEWS</h6>
+                    <h6 className='profile-heading'>LAST CLIENT INTERVIEW</h6>
                     <hr></hr>
-                    <div className='details'>
+                    <div className='details-interview'>
                         <div className='details1'>
                             <p className='labels'>Client Name</p>
                             <p className='content'>Amazon</p>
@@ -84,7 +87,7 @@ const empId = authData.viewEmployeeId;
                         </div>
                         <div className='details1'>
                             <p className='labels'>Result</p>
-                            <p className='content'>Not Clear</p>
+                            <p className='content'>Accepted/Rejected</p>
                         </div>
                     </div> 
                 </div>

@@ -5,6 +5,7 @@ import search from './Images/search.png'
 import UpdateEmployee from './UpdateEmployee';
 import AuthContext from './AuthContext';
 import axios from 'axios';
+import AddEmployee from './AddEmployee';
 
 export default function ManagerDashboard() {
   
@@ -86,23 +87,7 @@ console.log(filteredEmpData)
             <div className="col-sm-3">
               <div className="card">
                 <div className="card-body">
-                  <h5 className="card-title">Total Employees</h5>
-                  <p className="card-text">{countAllEmployees}</p>
-                </div>
-              </div>
-            </div>
-            <div className="col-sm-3">
-              <div className="card">
-                <div className="card-body">
-                  <h5 className="card-title">Active Employees</h5>
-                  <p className="card-text">{countActiveEmp}</p>
-                </div>
-              </div>
-            </div>
-            <div className="col-sm-3">
-              <div className="card">
-                <div className="card-body">
-                  <h5 className="card-title">Benched Employees</h5>
+                  <h5 className="card-title">Employees On Bench</h5>
                   <p className="card-text">{countBenchedEmp}</p>
                 </div>
               </div>
@@ -110,10 +95,13 @@ console.log(filteredEmpData)
           </div>
           <div className='actions'>
             <p className='employees'>EMPLOYEES</p>
-            <form className="d-flex" role="search">
-              <input className="search-box2" type="search" placeholder="Search by name" aria-label="Search" />
-              <img className="search" src={search} alt="search-img" />
-            </form>
+            <div className='buttons-manager-dashboard'>
+              <AddEmployee />
+              <form className="d-flex" role="search">
+                <input className="search-box1" type="search" placeholder=" search by name " aria-label="Search" />
+                <img className="search" src={search} alt="search-img" />
+              </form>
+            </div>
           </div>
           <div className='number'>
             <p> 50 rows returned</p>
