@@ -364,7 +364,7 @@
   background-color: #489fb5;
   display: flex;
   flex-direction: row;
-  gap: 40.5%;
+  gap: 37.5%;
   padding: 0.5%;
   width: 82.8%;
   position: fixed;
@@ -375,6 +375,14 @@
   flex-direction: row;
   gap: 4%;
   padding-bottom: 1%;
+}
+
+.buttons-manager-dashboard{
+  display: flex;
+  flex-direction: row;
+  gap: 4%;
+  padding-bottom: 1%;
+  margin-left: 17%;
 }
 .search-box1{
 margin-top:0.5% ;
@@ -431,8 +439,19 @@ border: none;
   overflow-y: auto;
   background-color: #ffecd1;
 }
-th{
+.pointer-to-profile:hover{
   color: rgb(67, 64, 64);
+  cursor:pointer;
+  transition:ease-in-out 0.01s;
+
+}
+
+.nopointer-to-profile{
+  cursor:context-menu;
+}
+
+th{
+  cursor: pointer;
 }
 
 .button5 {
@@ -461,7 +480,7 @@ th{
 
 .button2 {
   height: 5vh;
-  width: 12vw;
+  width: 14vw;
   background-color: white;
   border: none;
   color: rgb(24, 23, 23);
@@ -506,11 +525,11 @@ th{
   background-color:#489fb5;
   border: none;
   color: white;
-  padding: 8px 15px 15px 15px ;
+  padding: 6px 15px 15px 15px ;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size:12px;
+  font-size:13px;
   font-weight: 500;
   margin: 3px 3px 3px 3px;
   cursor: pointer;
@@ -579,10 +598,20 @@ th{
   color: white;
 }
 
-.details{
+.details-personal{
   display: flex;
   flex-direction: row;
-  gap:25%;
+  gap:20%;
+}
+.details-work{
+  display: flex;
+  flex-direction: row;
+  gap:26%;
+}
+.details-interview{
+  display: flex;
+  flex-direction: row;
+  gap:29%;
 }
 
 .labels{

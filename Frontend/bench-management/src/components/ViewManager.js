@@ -75,7 +75,7 @@ function ViewManager() {
     return (
       <>
         <button className='button2' onClick={handleShow}>
-        <i class="fa-solid fa-user"></i> &nbsp; MANAGERS 
+        <i class="fa-solid fa-user"></i> &nbsp; BENCH MANAGERS 
         </button>
   
         <Modal
@@ -85,13 +85,13 @@ function ViewManager() {
           keyboard={false}
         >
           <Modal.Header closeButton>
-            <Modal.Title>Manager's Location Access</Modal.Title>
+            <Modal.Title>Bench Manager Location Access</Modal.Title>
           </Modal.Header>
           <Modal.Body>
           <Form id='view'>
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                    <Form.Label>Manager Id</Form.Label>
-                    <Form.Control name="managerId" onChange={handleAddLocation.bind(this)} placeholder="Enter manager Id" />
+                    <Form.Label>Manager Name</Form.Label>
+                    <Form.Control name="managerId" onChange={handleAddLocation.bind(this)} placeholder="Enter manager name" />
                 </Form.Group>
           <Form.Group>
                    
@@ -104,14 +104,14 @@ function ViewManager() {
                     </Form.Select>
                 </Form.Group>
                 <div className='btn-mngr'>
-                <button className='button6' onClick={postLocationToManager}>Add Location</button>
-                <button className='button6' onClick={deleteLocationToManager}>Delete Location</button>
+                <button className='button6' onClick={postLocationToManager}>Grant Access</button>
+                <button className='button6' onClick={deleteLocationToManager}>Revoke Access</button>
                 </div>
           </Form>
           <Table striped bordered hover>
       <thead className='thread2'>
         <tr>
-          <th>Id</th>
+          <th>#</th>
           <th>Name</th>
           <th>Locations</th>
         </tr>

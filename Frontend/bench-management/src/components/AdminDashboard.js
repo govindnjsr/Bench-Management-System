@@ -146,26 +146,10 @@ export default function AdminDashboard() {
             <p>STATISTICS</p>
           </div>
           <div className="row">
-            <div className="col-sm-3 ">
-              <div className="card">
-                <div className="card-body">
-                  <h5 className="card-title">Total Employees</h5>
-                  <p className="card-text">{countAllEmployees}</p>
-                </div>
-              </div>
-            </div>
             <div className="col-sm-3">
               <div className="card">
                 <div className="card-body">
-                  <h5 className="card-title">Active Employees</h5>
-                  <p className="card-text">{countActiveEmp}</p>
-                </div>
-              </div>
-            </div>
-            <div className="col-sm-3">
-              <div className="card">
-                <div className="card-body">
-                  <h5 className="card-title">Benched Employees</h5>
+                  <h5 className="card-title">Employees On Bench</h5>
                   <p className="card-text">{countBenchedEmp}</p>
                 </div>
               </div>
@@ -177,7 +161,7 @@ export default function AdminDashboard() {
               <ViewManager />
               <AddEmployee />
               <form className="d-flex" role="search">
-                <input className="search-box1" type="search" placeholder="Search " aria-label="Search" />
+                <input className="search-box1" type="search" placeholder=" search by name " aria-label="Search" />
                 <img className="search" src={search} alt="search-img" />
               </form>
             </div>
@@ -189,12 +173,12 @@ export default function AdminDashboard() {
             <div className='table-format'>
               <table className="table table table-striped">
                 <thead className='thread1'>
-                  <tr>
-                    <th scope="col">Emp_Id</th>
-                    <th scope="col">Emp_Name</th>
-                    <th scope="col">Location</th>
-                    <th scope="col">BStatus</th>
-                    <th scope="col">Action</th>
+                  <tr >
+                    <th className='pointer-to-profile' title="Click on ID to view profile" scope="col">Id</th>
+                    <th className='nopointer-to-profile' scope="col">Name</th>
+                    <th className='mopointer-to-profile' scope="col">Location</th>
+                    <th className='nopointer-to-profile' scope="col">Bench_Status</th>
+                    <th className='nopointer-to-profile' scope="col">Action</th>
                   </tr>
                 </thead>
                 <tbody className='thread1'>

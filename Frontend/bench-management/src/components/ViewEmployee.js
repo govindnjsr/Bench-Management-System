@@ -48,7 +48,7 @@ export default function ViewEmployee() {
           <div className="shadow2 p-3 mb-5">
             <h6 className="profile-heading">PERSONAL INFORMATION</h6>
             <hr></hr>
-            <div className="details">
+            <div className='details-personal'>
               <div className="details1">
                 <p className="labels">Name</p>
                 <p className="content">{empDetail.name}</p>
@@ -67,7 +67,7 @@ export default function ViewEmployee() {
           <div className="shadow2 p-3 mb-5">
             <h6 className="profile-heading">WORK INFORMATION</h6>
             <hr></hr>
-            <div className="details">
+            <div className='details-work'>
               <div className="details1">
                 <p className="labels">Work Experience</p>
                 <p className="content">{empDetail.workExp} Years</p>
@@ -81,8 +81,8 @@ export default function ViewEmployee() {
                 <p className="content">{empDetail.benchStatus == false ? "Not on Bench" : "On Bench"}</p>
               </div>
               <div className="details1">
-                <p className="labels">Active</p>
-                <p className="content">{empDetail.active ? "Yes" : "No"}</p>
+              <p className='labels'>Bench Start Date</p>
+              <p className='content'>23/8/2020</p>
                 <p className="labels">Skills</p>
                 <p className="content">
                   {
@@ -96,9 +96,9 @@ export default function ViewEmployee() {
           </div>
 
           <div className="shadow2 p-3 mb-5">
-            <h6 className="profile-heading">CLIENT INTERVIEWS</h6>
+          <h6 className='profile-heading'>LAST CLIENT INTERVIEW</h6>
             <hr></hr>
-            <div className="details">
+            <div className='details-interview'>
               <div className="details1">
                 <p className="labels">Client Name</p>
                 <p className="content">Amazon</p>
@@ -109,7 +109,7 @@ export default function ViewEmployee() {
               </div>
               <div className="details1">
                 <p className="labels">Result</p>
-                <p className="content">Not Clear</p>
+                <p className='content'>Accepted/Rejected</p>
               </div>
             </div>
           </div>
