@@ -1,4 +1,4 @@
-import React, { useState ,useContext,useEffect } from 'react'
+import React, { useState ,useContext } from 'react'
 import './Project.css'
 import AuthContext from './AuthContext';
 export default function SideBar() {
@@ -15,50 +15,38 @@ export default function SideBar() {
     function handleFiltersValue(e) { 
       if(e && e.value) { 
       const {value,checked}=e.target;
-      let True=true,False=false;
+      let temp1=true,temp2=false;
       if(checked)  
       {
-         authData.setAppliedFilters({ ...authData.appliedFilters, [e.target.name]: True});
-         authData.setCheckFilter({...authData.checkFilter,["byDefault"]:False});
+         authData.setAppliedFilters({ ...authData.appliedFilters, [e.target.name]: temp1});
          if(e.target.name=="gurugram" ||e.target.name=="bangalore" || e.target.name=="hyderabad" ){
-           
-            authData.setCheckFilter({...authData.checkFilter,["location"]:authData.checkFilter["location"]+1});
+            authData.setCheckFilter({...authData.checkFilter,["location"]:temp1});
             
          }
          else if(e.target.name=="active" || e.target.name=="benched")
           {
-          
-            authData.setCheckFilter({...authData.checkFilter,["status"]:authData.checkFilter["status"]+1});
+            authData.setCheckFilter({...authData.checkFilter,["status"]:temp1});
           }
          else{
-           
-            authData.setCheckFilter({...authData.checkFilter,["skill"]:authData.checkFilter["skill"]+1});
+            authData.setCheckFilter({...authData.checkFilter,["skill"]:temp1});
          }
     }
     else{
-      authData.setAppliedFilters({ ...authData.appliedFilters, [e.target.name]:False });
-      if(authData.checkFilter["location"]==false && authData.checkFilter["status"]==false &&
-      authData.checkFilter["skill"]==false)
-         {
-            authData.setCheckFilter({...authData.checkFilter,["byDefault"]:True});
-         }
-     else if(e.target.name=="gurugram" ||e.target.name=="bangalore" || e.target.name=="hyderabad" ){
-          authData.setCheckFilter({...authData.checkFilter,["location"]:authData.checkFilter["location"]-1});
+      authData.setAppliedFilters({ ...authData.appliedFilters, [e.target.name]:temp2 });
+      if(e.target.name=="gurugram" ||e.target.name=="bangalore" || e.target.name=="hyderabad" ){
+         authData.setCheckFilter({...authData.checkFilter,["location"]:temp2});
          
       }
       else if(e.target.name=="active" || e.target.name=="benched")
           {
-        
-            authData.setCheckFilter({...authData.checkFilter,["status"]:authData.checkFilter["status"]-1});
+            authData.setCheckFilter({...authData.checkFilter,["status"]:temp2});
           }
       else{
-        
-         authData.setCheckFilter({...authData.checkFilter,["skill"]:authData.checkFilter["skill"]-1});
+         authData.setCheckFilter({...authData.checkFilter,["skill"]:temp2});
       }
     }
     };
-   
-  
+    console.log("filters "+JSON.stringify(authData.appliedFilters))
    return (
       <>
          <div className='filterHeading' >
