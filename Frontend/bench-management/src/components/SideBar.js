@@ -6,23 +6,41 @@ export default function SideBar() {
    // const [appliedFilters,setAppliedFilters]=authData;
    const [benchTimeValue, setBenchTimeValue] = useState(3);
    const [experienceValue, setExperienceValue] = useState(3);
-   // const[filters,setFilters]=useState({
-   //    exp:0,
-   //    benchTime:0,
-   //    locationId:0,
-   //  })
 
     const handleFiltersValue = (e) => {     
       const {value,checked}=e.target;
-      let temp1=true,temp2=false;
+      let True=true,False=false;
       if(checked)  
-      {authData.setAppliedFilters({ ...authData.appliedFilters, [e.target.name]: temp1});
+      {
+         authData.setAppliedFilters({ ...authData.appliedFilters, [e.target.name]: True});
+
+         if(e.target.name=="gurugram" ||e.target.name=="bangalore" || e.target.name=="hyderabad" ){
+            authData.setCheckFilter({...authData.checkFilter,["location"]:authData.checkFilter["location"]+1});
+
+         }
+         else if(e.target.name=="active" || e.target.name=="benched")
+          {
+            authData.setCheckFilter({...authData.checkFilter,["status"]:authData.checkFilter["status"]+1});
+          }
+         else{
+            authData.setCheckFilter({...authData.checkFilter,["skill"]:authData.checkFilter["skill"]+1});
+         }
     }
     else{
-      authData.setAppliedFilters({ ...authData.appliedFilters, [e.target.name]:temp2 });
+      authData.setAppliedFilters({ ...authData.appliedFilters, [e.target.name]:False });
+      if(e.target.name=="gurugram" ||e.target.name=="bangalore" || e.target.name=="hyderabad" ){
+         authData.setCheckFilter({...authData.checkFilter,["location"]:authData.checkFilter["location"]-1});
+         
+      }
+      else if(e.target.name=="active" || e.target.name=="benched")
+          {
+            authData.setCheckFilter({...authData.checkFilter,["status"]:authData.checkFilter["status"]-1});
+          }
+      else{
+         authData.setCheckFilter({...authData.checkFilter,["skill"]:authData.checkFilter["skill"]-1});
+      }
     }
     };
-    console.log("filters "+JSON.stringify(authData.appliedFilters))
    return (
       <>
          <div className='filterHeading' >
@@ -113,13 +131,13 @@ export default function SideBar() {
                      <p className='pfilter'>STATUS</p>
 
                      <div className="form-check mx-4 my-4">
-                        <input className="form-check-input" type="checkbox" value="active" id="status-1" />
+                        <input className="form-check-input" type="checkbox"  name="active" value={true} onChange={handleFiltersValue.bind(this)} id="status-1" />
                         <label className="form-check-label skillsLabel" htmlFor="status-1">
-                           Active
+                           Not on bench
                         </label><br />
-                        <input className="form-check-input" type="checkbox" value="benched" id="status-2" />
+                        <input className="form-check-input" type="checkbox"  name="benched" value={true} onChange={handleFiltersValue.bind(this)} id="status-2" />
                         <label className="form-check-label skillsLabel" htmlFor="status-2">
-                           Benched
+                           On benched
                         </label><br />
                      </div>
                 </div>
