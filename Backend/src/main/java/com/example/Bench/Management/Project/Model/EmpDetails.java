@@ -1,18 +1,19 @@
 package com.example.Bench.Management.Project.Model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import java.util.Date;
+
+import java.sql.Date;
 import java.util.List;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 public class EmpDetails {
 
     @Id
@@ -29,13 +30,14 @@ public class EmpDetails {
     private String name;
     private String address;
     private long phoneNo;
-    private String workExp;
-    private Date benchDate;
-    private Date billableDate;
-    private Boolean benchStatus;
-    private String skills;
-    private Boolean active;
-    private String empLocation;
+    private long workExp;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private String benchDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private String billableDate;
+    private boolean benchStatus;
+    private boolean active;
+    private long empLocation;
 
     @OneToMany(
             cascade = CascadeType.ALL
@@ -46,5 +48,15 @@ public class EmpDetails {
     )
     private List<IntDetails> InterviewDetails;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="skills_id",referencedColumnName = "id")
+    private Skill skill;
 
+    public boolean getActive() {
+        return active;
+    }
+
+    public boolean getBenchStatus() {
+        return benchStatus;
+    }
 }
