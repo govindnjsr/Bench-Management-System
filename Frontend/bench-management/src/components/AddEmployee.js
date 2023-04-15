@@ -61,6 +61,7 @@ function AddEmployee() {
    
     const saveData=()=>{       
          saveDataAtBackend();
+         handleClose();
     }
     const handleChangeValue = (e) => {       
         setEmpDetails({ ...empdetails, [e.target.name]: e.target.value });
@@ -133,12 +134,12 @@ function AddEmployee() {
                     <Form.Select aria-label="Default select example" name="benchStatus" onChange={handleChangeValue.bind(this)}>
                         
                         <option>Select from below</option>
-                        <option value={false} >Active</option>
-                        <option value={true} >Benched</option>
+                        <option value={false} >Not on Bench</option>
+                        <option value={true} >On Bench</option>
                     </Form.Select>
                 </Form.Group><br/>
                 <Form.Group>
-                    <Form.Label>Skills</Form.Label>
+                    <Form.Label>Primary Skills</Form.Label>
                     {['checkbox'].map((type) => (
                         <div key={`inline-${type}`} className="mb-3" onChange={handleSkillValue.bind(this)}>
                         <Form.Check
@@ -227,7 +228,7 @@ function AddEmployee() {
               Close
             </Button> */}
             <button className='button3' onClick={handleClose}>Close</button> &nbsp; 
-            <button className='button3'  onClick={saveData}>Add</button>
+            <button className='button3' type='button' onClick={saveData}>Add</button>
             {/* <Button variant="primary">ADD</Button> */}
           </Modal.Footer>
         </Modal>

@@ -32,6 +32,7 @@ function ViewManager() {
             managerId:null,
             locationId:null
           })
+          handleClose();
         });
 
     }
@@ -47,6 +48,7 @@ function ViewManager() {
         .then((response) => {
           console.log("response " + response);
           setDeleteResponse(response);
+          handleClose();
         });
     }
     catch {
@@ -105,7 +107,7 @@ function ViewManager() {
                 </Form.Group>
                 <div className='btn-mngr'>
                 <button className='button6' type='button' onClick={postLocationToManager}>Grant Access</button>
-                <button className='button6' type='button'  onClick={deleteLocationToManager}>Revoke Access</button>
+                <button className='button6' type='button' onClick={deleteLocationToManager}>Revoke Access</button>
                 </div>
           </Form>
           <Table striped bordered hover>
