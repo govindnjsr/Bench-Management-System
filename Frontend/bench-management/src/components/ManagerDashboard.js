@@ -15,15 +15,125 @@ export default function ManagerDashboard() {
   const [countAllEmployees, setCountAllEmployees] = useState(0);
   const [countActiveEmp, setCountActiveEmp] = useState(0);
   const [countBenchedEmp, setCountBenchedEmp] = useState(0);
+  const [currentLocationAcess,setCurrentLocationAcess]=useState();
   const fetchManagerTable = async () => {
     try{
       const Data = await axios.get(`http://localhost:2538/api/manager/get/1`); // ${authData.managerId} instead of 1
-      setManagerData(Data.data)
+     
+      const allEmp=await axios.get('http://localhost:2538/api/manager/get/1')
+           .then((response) => {
+            setManagerData(response.data)
+            
+            
+          });
     }
     catch{
       console.log()
     }
   }
+  //-------SetLocationAcess----------------//
+
+ console.log("manager data "+JSON.stringify(managerData.assignedLocation))
+
+   {
+    managerData.assignedLocation && managerData.assignedLocation.map((data)=>{
+      console.log("data "+JSON.stringify(data.id))
+      
+    })
+   }
+
+  // ------------------------------------------
+  // -------------Filtering Section---------------------------
+  const allowData=(emp)=>{
+    let Keys=Object.keys(authData.appliedFilters);
+    let ok=true,okSkill=true,okLocation=false;
+    let selectDataKey=Object.keys(authData.checkFilter);
+    //iterate over the filter section
+
+    //By default 
+    if(!authData.checkFilter["skill"] && !authData.checkFilter["location"] && !authData.checkFilter["status"])
+       return true;
+    //for skills
+   
+        if(authData.checkFilter["skill"]){
+          //iterate over the filters..
+          Keys.forEach(filterKey => {
+            if(filterKey!="gurugram" && filterKey!="hyderabad" && filterKey!="bangalore" &&
+               filterKey!="active" && filterKey!="benched")
+             {
+              
+              if(authData.appliedFilters[filterKey]===true && emp[filterKey]!=true )            
+                 okSkill=false;
+          }      
+          });
+        }
+   
+    //for location
+    
+      if(authData.checkFilter["location"]){
+        //iterate over the filters..
+        Keys.forEach(filterKey => {
+            if(authData.locationAcess["gurugram"] && filterKey==="gurugram" && authData.appliedFilters[filterKey] && (emp.location==1) )            
+               {
+             
+                okLocation=true;
+               }
+            
+           if(authData.locationAcess["bangalore"] && filterKey==="bangalore" && authData.appliedFilters[filterKey]===true && (emp.location==2) )            
+              {  
+              
+                okLocation=true;
+              }
+           if( authData.locationAcess["hyderabad"] && filterKey==="hyderabad" && authData.appliedFilters[filterKey]===true && (emp.location==3) )            
+           {
+          
+           okLocation=true;
+           }
+              
+        });
+      }
+     let okStatus=false;
+      //for Active status
+      if(authData.checkFilter["status"]){
+     
+      Keys.forEach(filterKey => {
+        if(filterKey==="active" && authData.appliedFilters[filterKey]===true && (emp.benchStatus==false) )            
+           {
+          
+            okStatus=true;
+           }
+        
+       if(filterKey==="benched" && authData.appliedFilters[filterKey]===true && (emp.benchStatus==true) )            
+          {  
+           
+           okStatus=true;
+          }
+          
+    });
+ }
+      
+    if(authData.checkFilter["skill"] && authData.checkFilter["location"] && authData.checkFilter["status"])
+     {return okSkill && okLocation && okStatus;}
+    else if(authData.checkFilter["skill"] && authData.checkFilter["location"])
+     {return okSkill && okLocation;}
+     else if(authData.checkFilter["skill"] && authData.checkFilter["status"])
+      {return okSkill && okStatus;}
+     else if(authData.checkFilter["location"]  && authData.checkFilter["status"])
+       {return okLocation && okStatus;}
+    else if(authData.checkFilter["location"])
+    {return okLocation;}
+    else if(authData.checkFilter["skill"] )
+    {return okSkill;}
+    else return okStatus;
+    
+
+  }
+
+
+
+
+  // ------------------------------------------------
+
 
   const fetchAllEmp = async () => {
     try{

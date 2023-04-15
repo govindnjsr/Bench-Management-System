@@ -112,9 +112,8 @@ export default function AdminDashboard() {
           }
           
     });
-
-      }
-     
+ }
+      
     if(authData.checkFilter["skill"] && authData.checkFilter["location"] && authData.checkFilter["status"])
      {return okSkill && okLocation && okStatus;}
     else if(authData.checkFilter["skill"] && authData.checkFilter["location"])

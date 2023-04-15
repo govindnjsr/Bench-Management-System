@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-@CrossOrigin(origins = "http://localhost:3000")
+
 @RestController
 @RequestMapping("/api/location")
 public class LocationController {
@@ -37,10 +37,6 @@ public class LocationController {
     public String addEmployeeToALocation(@PathVariable Long locationId, @RequestBody EmpDetails empDetails){
         locationService.addEmployeeToLocation(locationId,empDetails);
         return "Added";
-    }
-    @GetMapping("/getId/{locName}")
-    public long getIdByLocation(@PathVariable String locName){
-        return locationService.getIdByLocation(locName);
     }
 
 }

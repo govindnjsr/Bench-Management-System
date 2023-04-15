@@ -13,6 +13,12 @@ export default function AuthState(props) {
         "location":0,
         "status":0
     })
+    const[locationAcess,setLocationAccess]=useState({
+        "gurugram":true,
+        "hyderabad":true,
+        "bangalore":true
+        
+    })
     const[appliedFilters,setAppliedFilters]=useState({
         "experience":false,
         "benchtime":false,
@@ -48,7 +54,7 @@ export default function AuthState(props) {
         console.log("logged out successfully")
     }
     return (
-        <AuthContext.Provider value={{checkFilter,setCheckFilter,appliedFilters,dtoData, googleData, setAppliedFilters,setDtoData,isAuthentication, currentRole,
+        <AuthContext.Provider value={{locationAcess,setLocationAccess,checkFilter,setCheckFilter,appliedFilters,dtoData, googleData, setAppliedFilters,setDtoData,isAuthentication, currentRole,
          setGoogleData, handleLogin, setAuthentication,
           setCurrentRole, handleLogout, loopEntry,setLoopEntry, managerId, setManagerId
           ,handleEmpId, viewEmployeeId }}>

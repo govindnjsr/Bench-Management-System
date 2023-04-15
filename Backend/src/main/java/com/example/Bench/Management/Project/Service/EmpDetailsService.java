@@ -1,5 +1,6 @@
 package com.example.Bench.Management.Project.Service;
 
+import com.example.Bench.Management.Project.Model.Dto;
 import com.example.Bench.Management.Project.Model.EmpDetails;
 import com.example.Bench.Management.Project.Model.ManagerDetails;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -23,4 +24,6 @@ public interface EmpDetailsService {
 
      //get Employee BY id
      public EmpDetails getEmployeeById(Long employeeId);
+
+     public List<Dto>getAllDto();
 }
