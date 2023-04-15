@@ -6,46 +6,41 @@ export default function SideBar() {
    // const [appliedFilters,setAppliedFilters]=authData;
    const [benchTimeValue, setBenchTimeValue] = useState(3);
    const [experienceValue, setExperienceValue] = useState(3);
-   // const[filters,setFilters]=useState({
-   //    exp:0,
-   //    benchTime:0,
-   //    locationId:0,
-   //  })
 
     const handleFiltersValue = (e) => {     
       const {value,checked}=e.target;
-      let temp1=true,temp2=false;
+      let True=true,False=false;
       if(checked)  
       {
-         authData.setAppliedFilters({ ...authData.appliedFilters, [e.target.name]: temp1});
+         authData.setAppliedFilters({ ...authData.appliedFilters, [e.target.name]: True});
+
          if(e.target.name=="gurugram" ||e.target.name=="bangalore" || e.target.name=="hyderabad" ){
-            authData.setCheckFilter({...authData.checkFilter,["location"]:temp1});
-            
+            authData.setCheckFilter({...authData.checkFilter,["location"]:authData.checkFilter["location"]+1});
+
          }
          else if(e.target.name=="active" || e.target.name=="benched")
           {
-            authData.setCheckFilter({...authData.checkFilter,["status"]:temp1});
+            authData.setCheckFilter({...authData.checkFilter,["status"]:authData.checkFilter["status"]+1});
           }
          else{
-            authData.setCheckFilter({...authData.checkFilter,["skill"]:temp1});
+            authData.setCheckFilter({...authData.checkFilter,["skill"]:authData.checkFilter["skill"]+1});
          }
     }
     else{
-      authData.setAppliedFilters({ ...authData.appliedFilters, [e.target.name]:temp2 });
+      authData.setAppliedFilters({ ...authData.appliedFilters, [e.target.name]:False });
       if(e.target.name=="gurugram" ||e.target.name=="bangalore" || e.target.name=="hyderabad" ){
-         authData.setCheckFilter({...authData.checkFilter,["location"]:temp2});
+         authData.setCheckFilter({...authData.checkFilter,["location"]:authData.checkFilter["location"]-1});
          
       }
       else if(e.target.name=="active" || e.target.name=="benched")
           {
-            authData.setCheckFilter({...authData.checkFilter,["status"]:temp2});
+            authData.setCheckFilter({...authData.checkFilter,["status"]:authData.checkFilter["status"]-1});
           }
       else{
-         authData.setCheckFilter({...authData.checkFilter,["skill"]:temp2});
+         authData.setCheckFilter({...authData.checkFilter,["skill"]:authData.checkFilter["skill"]-1});
       }
     }
     };
-    console.log("filters "+JSON.stringify(authData.appliedFilters))
    return (
       <>
          <div className='filterHeading' >
@@ -151,4 +146,4 @@ export default function SideBar() {
          </div>
       </>
    )
-}}
+}

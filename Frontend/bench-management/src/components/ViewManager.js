@@ -70,8 +70,8 @@ function ViewManager() {
 
 
 
-    console.log(managerDetails) 
-    console.log(addlocation)
+    // console.log(managerDetails) 
+    // console.log(addlocation)
     return (
       <>
         <button className='button2' onClick={handleShow}>
