@@ -6,47 +6,41 @@ export default function SideBar() {
    // const [appliedFilters,setAppliedFilters]=authData;
    const [benchTimeValue, setBenchTimeValue] = useState(3);
    const [experienceValue, setExperienceValue] = useState(3);
-   // const[filters,setFilters]=useState({
-   //    exp:0,
-   //    benchTime:0,
-   //    locationId:0,
-   //  })
 
-    function handleFiltersValue(e) { 
-      if(e && e.value) { 
+    const handleFiltersValue = (e) => {     
       const {value,checked}=e.target;
-      let temp1=true,temp2=false;
+      let True=true,False=false;
       if(checked)  
       {
-         authData.setAppliedFilters({ ...authData.appliedFilters, [e.target.name]: temp1});
+         authData.setAppliedFilters({ ...authData.appliedFilters, [e.target.name]: True});
+
          if(e.target.name=="gurugram" ||e.target.name=="bangalore" || e.target.name=="hyderabad" ){
-            authData.setCheckFilter({...authData.checkFilter,["location"]:temp1});
-            
+            authData.setCheckFilter({...authData.checkFilter,["location"]:authData.checkFilter["location"]+1});
+
          }
          else if(e.target.name=="active" || e.target.name=="benched")
           {
-            authData.setCheckFilter({...authData.checkFilter,["status"]:temp1});
+            authData.setCheckFilter({...authData.checkFilter,["status"]:authData.checkFilter["status"]+1});
           }
          else{
-            authData.setCheckFilter({...authData.checkFilter,["skill"]:temp1});
+            authData.setCheckFilter({...authData.checkFilter,["skill"]:authData.checkFilter["skill"]+1});
          }
     }
     else{
-      authData.setAppliedFilters({ ...authData.appliedFilters, [e.target.name]:temp2 });
+      authData.setAppliedFilters({ ...authData.appliedFilters, [e.target.name]:False });
       if(e.target.name=="gurugram" ||e.target.name=="bangalore" || e.target.name=="hyderabad" ){
-         authData.setCheckFilter({...authData.checkFilter,["location"]:temp2});
+         authData.setCheckFilter({...authData.checkFilter,["location"]:authData.checkFilter["location"]-1});
          
       }
       else if(e.target.name=="active" || e.target.name=="benched")
           {
-            authData.setCheckFilter({...authData.checkFilter,["status"]:temp2});
+            authData.setCheckFilter({...authData.checkFilter,["status"]:authData.checkFilter["status"]-1});
           }
       else{
-         authData.setCheckFilter({...authData.checkFilter,["skill"]:temp2});
+         authData.setCheckFilter({...authData.checkFilter,["skill"]:authData.checkFilter["skill"]-1});
       }
     }
-    }};
-    console.log("filters "+JSON.stringify(authData.appliedFilters))
+    };
    return (
       <>
          <div className='filterHeading' >
@@ -57,7 +51,7 @@ export default function SideBar() {
                <div className='filterByExperience'>
                   <p className='pfilter'>EXPERIENCE <span className='span-style'>( 0 - {experienceValue} Years)</span></p>
                   <label htmlFor="customRange2" className="form-label"></label>
-                  <input type="range" className="form-range experienceClass" min="1" max="10" value={experienceValue} onChange={(e) => {this.handleFiltersValue(e)}} id="customRange2" />
+                  <input type="range" className="form-range experienceClass" min="1" max="10" value={experienceValue} onChange={(e) => handleFiltersValue(e.target.value).bind(this)} id="customRange2" />
                   <p className='sliderParaLeft'>0 Years</p>
                   <span className='sliderParaRightExpereince'>10 Years</span>
                </div>

@@ -7,7 +7,7 @@ import ViewManager from './ViewManager';
 import axios from 'axios';
 import search from './Images/search.png';
 import UpdateEmployee from './UpdateEmployee';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import AuthContext from './AuthContext';
 
 export default function AdminDashboard() {
@@ -51,6 +51,10 @@ export default function AdminDashboard() {
     let ok=true,okSkill=true,okLocation=false;
     let selectDataKey=Object.keys(authData.checkFilter);
     //iterate over the filter section
+
+    //By default 
+    if(!authData.checkFilter["skill"] && !authData.checkFilter["location"] && !authData.checkFilter["status"])
+       return true;
     //for skills
    
         if(authData.checkFilter["skill"]){
@@ -71,9 +75,6 @@ export default function AdminDashboard() {
       if(authData.checkFilter["location"]){
         //iterate over the filters..
         Keys.forEach(filterKey => {
-
-  
-            console.log(filterKey+" "+emp.location+" "+authData.appliedFilters[filterKey])
             if(filterKey==="gurugram" && authData.appliedFilters[filterKey]===true && (emp.location==1) )            
                {
              
@@ -130,6 +131,7 @@ export default function AdminDashboard() {
     
 
   }
+  console.log("Render..  "+JSON.stringify(authData.checkFilter))
   return (
     <div className="window">
       <div className='top'>
