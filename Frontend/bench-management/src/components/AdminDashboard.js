@@ -7,7 +7,7 @@ import ViewManager from './ViewManager';
 import axios from 'axios';
 import search from './Images/search.png';
 import UpdateEmployee from './UpdateEmployee';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import AuthContext from './AuthContext';
 
 export default function AdminDashboard() {

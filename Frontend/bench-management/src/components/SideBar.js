@@ -12,7 +12,8 @@ export default function SideBar() {
    //    locationId:0,
    //  })
 
-    const handleFiltersValue = (e) => {     
+    function handleFiltersValue(e) { 
+      if(e && e.value) { 
       const {value,checked}=e.target;
       let True=true,False=false;
       if(checked)  
@@ -68,7 +69,7 @@ export default function SideBar() {
                <div className='filterByExperience'>
                   <p className='pfilter'>EXPERIENCE <span className='span-style'>( 0 - {experienceValue} Years)</span></p>
                   <label htmlFor="customRange2" className="form-label"></label>
-                  <input type="range" className="form-range experienceClass" min="1" max="10" value={experienceValue} onChange={(e) => handleFiltersValue(e.target.value).bind(this)} id="customRange2" />
+                  <input type="range" className="form-range experienceClass" min="1" max="10" value={experienceValue} onChange={(e) => {this.handleFiltersValue(e)}} id="customRange2" />
                   <p className='sliderParaLeft'>0 Years</p>
                   <span className='sliderParaRightExpereince'>10 Years</span>
                </div>
@@ -163,4 +164,4 @@ export default function SideBar() {
          </div>
       </>
    )
-}
+}}
