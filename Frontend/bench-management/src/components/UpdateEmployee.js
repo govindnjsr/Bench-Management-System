@@ -51,18 +51,18 @@ function UpdateEmployee() {
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label>Phone Number</Form.Label>
-                            <Form.Control name="phoneNo" type="number" placeholder="type phone number" />
+                            <Form.Control name="phoneNo" type="number" placeholder="Enter phone number" />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label>Work Experience</Form.Label>
                             <Form.Control name="workExp" type="number" placeholder="Enter work experience in years" />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                            <Form.Label>Bench Date</Form.Label>
+                            <Form.Label>Bench Start Date</Form.Label>
                             <Form.Control name="benchDate" type="date" placeholder="Enter bench date" />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                            <Form.Label>Billable Date</Form.Label>
+                            <Form.Label>Last Billable Date</Form.Label>
                             <Form.Control name="billableDate" type="date" placeholder="Enter last billable date" />
                         </Form.Group>
                         <Form.Group>
@@ -70,8 +70,8 @@ function UpdateEmployee() {
                             <Form.Select aria-label="Default select example" name="benchStatus" >
 
                                 <option>Select from below</option>
-                                <option value={false} >Active</option>
-                                <option value={true} >Benched</option>
+                                <option value={false} >Not On Bench</option>
+                                <option value={true} >On Bench</option>
                             </Form.Select>
                         </Form.Group><br />
                         <Form.Group>
