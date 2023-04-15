@@ -2,10 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import NavBar from "./Navbar";
 import profileImageEmployee from "./Images/photo.avif";
 import AuthContext from "./AuthContext";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Login from "./Login";
-
 export default function ViewEmployee() {
   const authData = useContext(AuthContext);
   const empId = authData.viewEmployeeId;
@@ -94,9 +93,9 @@ export default function ViewEmployee() {
               <p className="content">{empDetail.active ? "Yes" : "No"}</p>
               <p className="labels">Skills</p>
               <p className="content">
-                {
-                    _forIn(empDetail.skills, (value, skill) => {
-                        if(value === true) {skill}
+                { 
+                    Object.entries(empDetail.skills).map(([skill, value]) => {
+                        if(empDetail.skills[skill] === true) <span>{skill} </span>
                     })
                 }
                 </p>
