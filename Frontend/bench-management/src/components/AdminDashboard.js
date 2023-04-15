@@ -13,7 +13,7 @@ import AuthContext from './AuthContext';
 export default function AdminDashboard() {
   const authData = useContext(AuthContext);
   const navigate = useNavigate();
-  const handleViewEmployee = (id) => {
+  const handleViewEmployee = () => {
     navigate("/viewEmployee");
   }
   const [countAllEmployees, setCountAllEmployees] = useState()
@@ -185,10 +185,10 @@ export default function AdminDashboard() {
                   authData.dtoData.map((emp)=>(
                     allowData(emp)==true?
                   (<tr>
-                      <th scope="row" onClick={() => {handleViewEmployee(emp.employeeId); authData.handleEmpId(emp.employeeId); }} >{emp.employeeId}</th>
+                      <th scope="row" onClick={() => {handleViewEmployee(); authData.handleEmpId(emp.employeeId); }} >{emp.employeeId}</th>
                       <td>{emp.employeeName}</td>
                       <td>{emp.location==1?"Gurugram":emp.location==2?"Bangalore":emp.location==3?"Hyderabad":"none"}</td>
-                      <td>{emp.benchStatus==0?"NotBenched":"Benched"}</td>
+                      <td>{emp.benchStatus==0?"Not On Bench":"On Bench"}</td>
                       <td><UpdateEmployee/></td> 
                  </tr>):
                  (<tr></tr>)
