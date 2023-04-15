@@ -9,9 +9,10 @@ export default function AuthState(props) {
     const[googleData,setGoogleData]=useState({})
     const[dtoData,setDtoData]=useState()
     const[checkFilter,setCheckFilter]=useState({
-        "skill":false,
-        "location":false,
-        "status":false
+        "skill":0,
+        "location":0,
+        "status":0,
+        "byDefault":true
     })
     const[appliedFilters,setAppliedFilters]=useState({
         "experience":false,

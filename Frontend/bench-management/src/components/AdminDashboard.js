@@ -43,8 +43,8 @@ export default function AdminDashboard() {
     }
   }
   useEffect(() => {
-    fetchApi()
-  },[authData.appliedFilters,authData.dtoDetails])
+    fetchApi();
+  },[authData.checkFilter])
 
   const allowData=(emp)=>{
     let Keys=Object.keys(authData.appliedFilters);
@@ -73,7 +73,7 @@ export default function AdminDashboard() {
         Keys.forEach(filterKey => {
 
   
-            console.log(filterKey+" "+emp.location+" "+authData.appliedFilters[filterKey])
+            
             if(filterKey==="gurugram" && authData.appliedFilters[filterKey]===true && (emp.location==1) )            
                {
              
@@ -130,6 +130,8 @@ export default function AdminDashboard() {
     
 
   }
+
+  console.log("REnder... "+JSON.stringify(authData.checkFilter))
   return (
     <div className="window">
       <div className='top'>
@@ -206,7 +208,9 @@ export default function AdminDashboard() {
                       <td>{emp.benchStatus==0?"NotBenched":"Benched"}</td>
                       <td><UpdateEmployee/></td> 
                  </tr>):
-                 (<tr></tr>)
+                 (<tr>
+                  
+                 </tr>)
                          
                   ))
         
