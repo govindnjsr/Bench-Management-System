@@ -28,7 +28,7 @@ export default function ManagerDashboard() {
     try{
     //  / const Data = await axios.get(`http://localhost:2538/api/manager/get/1`); // ${authData.managerId} instead of 1
      
-      const allEmp=await axios.get(`http://localhost:2538/api/manager/get/${authData.managerId}`)
+      const allEmp=await axios.get(`http://localhost:2538/api/manager/get/${authData.managerId+1}`)
            .then((response) => {
             setManagerData(response.data)  ;                  
           });
@@ -131,17 +131,17 @@ export default function ManagerDashboard() {
       if(authData.checkFilter["status"]){
      
       Keys.forEach(filterKey => {
-        if(filterKey==="active" && authData.appliedFilters[filterKey]===true && (emp.benchStatus==false) )            
-           {
-          
+        if(allowLocation(emp))
+        {if(filterKey==="active" && authData.appliedFilters[filterKey]===true && (emp.benchStatus==false) )            
+           {          
             okStatus=true;
            }
         
        if(filterKey==="benched" && authData.appliedFilters[filterKey]===true && (emp.benchStatus==true) )            
-          {  
-           
+          {           
            okStatus=true;
           }
+        }
           
     });
  }

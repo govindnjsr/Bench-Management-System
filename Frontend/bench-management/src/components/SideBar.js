@@ -4,8 +4,9 @@ import AuthContext from './AuthContext';
 export default function SideBar() {
    const authData = useContext(AuthContext);
    // const [appliedFilters,setAppliedFilters]=authData;
+  
    const [benchTimeValue, setBenchTimeValue] = useState(3);
-   const [experienceValue, setExperienceValue] = useState(3);
+    const [experienceValue, setExperienceValue] = useState(3);
 
     const handleFiltersValue = (e) => {     
       const {value,checked}=e.target;
@@ -51,7 +52,7 @@ export default function SideBar() {
                <div className='filterByExperience'>
                   <p className='pfilter'>EXPERIENCE <span className='span-style'>( 0 - {experienceValue} Years)</span></p>
                   <label htmlFor="customRange2" className="form-label"></label>
-                  <input type="range" className="form-range experienceClass" min="1" max="10" value={experienceValue} onChange={(e) => handleFiltersValue(e.target.value).bind(this)} id="customRange2" />
+                  <input type="range" className="form-range experienceClass" min="1" max="10" value={experienceValue}  id="customRange2" />
                   <p className='sliderParaLeft'>0 Years</p>
                   <span className='sliderParaRightExpereince'>10 Years</span>
                </div>
@@ -60,7 +61,7 @@ export default function SideBar() {
                <div className='filterByBenchTime'>
                   <p className='pfilter'>BENCH TIME <span className='span-style'>( 0 - {benchTimeValue} Months)</span></p>
                   <label htmlFor="customRange2" className="form-label"></label>
-                  <input type="range" className="form-range benchTimeSliderClass" min="1" max="12" value={benchTimeValue} onChange={(e) => setBenchTimeValue(e.target.value)} id="customRange2" />
+                  <input type="range" className="form-range benchTimeSliderClass" min="1" max="12"   id="customRange2" />
                   <p className='sliderParaLeft'>0 Months</p>
                   <span className='sliderParaRightBench'>12 Months</span>
                </div>

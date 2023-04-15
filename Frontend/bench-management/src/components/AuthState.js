@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 export default function AuthState(props) {
 
+    
     const [isAuthentication, setAuthentication] = useState(false);
     const[currentRole,setCurrentRole]=useState(0)
     const[googleData,setGoogleData]=useState({})
