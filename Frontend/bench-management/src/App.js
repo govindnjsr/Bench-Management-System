@@ -10,6 +10,7 @@ import ViewEmployee from './components/ViewEmployee';
 import { useContext } from 'react';
 import AuthContext from './components/AuthContext';
 import AdminDashboard from './components/AdminDashboard';
+import ManagerDashboard from './components/ManagerDashboard';
 
 function App() {
 
