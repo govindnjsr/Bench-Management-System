@@ -1,14 +1,25 @@
-import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import Login from "./components/Login";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import AuthState from "./components/AuthState";
-import ViewEmployee from "./components/ViewEmployee";
+import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Login from './components/Login';
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from 'react-router-dom';
+import AuthState from './components/AuthState';
+import ViewEmployee from './components/ViewEmployee';
+import { useContext } from 'react';
+import AuthContext from './components/AuthContext';
+import AdminDashboard from './components/AdminDashboard';
 
 function App() {
+
+  const authData = useContext(AuthContext);
+  
   const router = createBrowserRouter([
-    { path: "/", element: <Login /> },
-    { path: "/viewEmployee", element: <ViewEmployee /> },
+    {
+      path: "/", element: <AdminDashboard />,
+    },
+    { path: "/viewEmployee", element: <ViewEmployee /> }
   ]);
 
   return (

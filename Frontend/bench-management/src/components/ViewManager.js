@@ -104,8 +104,8 @@ function ViewManager() {
                     </Form.Select>
                 </Form.Group>
                 <div className='btn-mngr'>
-                <button className='button6' type="button" onClick={postLocationToManager}>Add Location</button>
-                <button className='button6' type="button" onClick={deleteLocationToManager}>Delete Location</button>
+                <button className='button6' onClick={postLocationToManager}>Add Location</button>
+                <button className='button6' onClick={deleteLocationToManager}>Delete Location</button>
                 </div>
           </Form>
           <Table striped bordered hover>
@@ -117,13 +117,13 @@ function ViewManager() {
         </tr>
       </thead>
       <tbody>
-        {managerDetails && managerDetails.map((user)=>(
+        {managerDetails && managerDetails.map((user,index)=>(
             <tr>
             <td>{user.id}</td>
             <td>{user.mname}</td>
             <td>
 
-                    {user.assignedLocation && user.assignedLocation.map((loc) => (
+                    {user.assignedLocation && user.assignedLocation.map((loc, index) => (
                       <p>{loc.locName}</p>
                     ))
                     }
