@@ -5,8 +5,32 @@ import { useNavigate } from 'react-router-dom';
 export default function AuthState(props) {
 
     const [isAuthentication, setAuthentication] = useState(false);
-    const [currentRole, setCurrentRole] = useState(0)
-    const [googleData, setGoogleData] = useState({})
+    const[currentRole,setCurrentRole]=useState(0)
+    const[googleData,setGoogleData]=useState({})
+    const[dtoData,setDtoData]=useState()
+    const[checkFilter,setCheckFilter]=useState({
+        "skill":0,
+        "location":0,
+        "status":0
+    })
+    const[appliedFilters,setAppliedFilters]=useState({
+        "experience":false,
+        "benchtime":false,
+        "java":false,
+        "python":false,
+        "react":false,
+        "angular":false,
+        "html":false,
+        "css":false,
+        "javascript":false,
+        "springboot":false,
+        "gurugram":false,
+        "bangalore":false,
+        "hyderabad":false,
+        "active":false,
+        "benched":false
+    })
+
     const [managerId, setManagerId] = useState(-1);
     const [loopEntry, setLoopEntry] = useState(false);
     const [viewEmployeeId, setViewEmployeeId] = useState(0);
@@ -24,7 +48,7 @@ export default function AuthState(props) {
         console.log("logged out successfully")
     }
     return (
-        <AuthContext.Provider value={{ googleData, isAuthentication, currentRole,
+        <AuthContext.Provider value={{checkFilter,setCheckFilter,appliedFilters,dtoData, googleData, setAppliedFilters,setDtoData,isAuthentication, currentRole,
          setGoogleData, handleLogin, setAuthentication,
           setCurrentRole, handleLogout, loopEntry,setLoopEntry, managerId, setManagerId
           ,handleEmpId, viewEmployeeId }}>

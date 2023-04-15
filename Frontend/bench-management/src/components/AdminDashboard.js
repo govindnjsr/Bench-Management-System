@@ -25,7 +25,6 @@ export default function AdminDashboard() {
   
   const fetchApi = async () => {
     try {
-      // http://192.168.1.64:2538/api/employees
       const allEmp = await axios.get('http://localhost:2538/api/empdetails/get/allemployee');
       setCountAllEmployees(allEmp.data);
       const allActiveEmp = await axios.get('http://localhost:2538/api/empdetails/get/activeemployee');
@@ -34,7 +33,9 @@ export default function AdminDashboard() {
       setCountBenchedEmp(allBenchedEmp.data);
       const employeeDetails = await axios.get('http://localhost:2538/api/empdetails/get');
       setEmpDetails(employeeDetails.data);
-      //    setData(res.data);
+     
+      const dtoDetails = await axios.get('http://localhost:2538/api/dto/get');
+      authData.setDtoData(dtoDetails.data);
 
     }
     catch {
@@ -43,9 +44,94 @@ export default function AdminDashboard() {
   }
   useEffect(() => {
     fetchApi()
-  }, [])
+  },[authData.appliedFilters,authData.dtoDetails])
 
-  console.log(empdetails)
+  const allowData=(emp)=>{
+    let Keys=Object.keys(authData.appliedFilters);
+    let ok=true,okSkill=true,okLocation=false;
+    let selectDataKey=Object.keys(authData.checkFilter);
+    //iterate over the filter section
+
+    //By default 
+    if(!authData.checkFilter["skill"] && !authData.checkFilter["location"] && !authData.checkFilter["status"])
+       return true;
+    //for skills
+   
+        if(authData.checkFilter["skill"]){
+          //iterate over the filters..
+          Keys.forEach(filterKey => {
+            if(filterKey!="gurugram" && filterKey!="hyderabad" && filterKey!="bangalore" &&
+               filterKey!="active" && filterKey!="benched")
+             {
+              
+              if(authData.appliedFilters[filterKey]===true && emp[filterKey]!=true )            
+                 okSkill=false;
+          }      
+          });
+        }
+   
+    //for location
+    
+      if(authData.checkFilter["location"]){
+        //iterate over the filters..
+        Keys.forEach(filterKey => {
+            if(filterKey==="gurugram" && authData.appliedFilters[filterKey]===true && (emp.location==1) )            
+               {
+             
+                okLocation=true;
+               }
+            
+           if(filterKey==="bangalore" && authData.appliedFilters[filterKey]===true && (emp.location==2) )            
+              {  
+              
+                okLocation=true;
+              }
+           if( filterKey==="hyderabad" && authData.appliedFilters[filterKey]===true && (emp.location==3) )            
+           {
+          
+           okLocation=true;
+           }
+              
+        });
+      }
+     let okStatus=false;
+      //for Active status
+      if(authData.checkFilter["status"]){
+     
+      Keys.forEach(filterKey => {
+        if(filterKey==="active" && authData.appliedFilters[filterKey]===true && (emp.benchStatus==false) )            
+           {
+          
+            okStatus=true;
+           }
+        
+       if(filterKey==="benched" && authData.appliedFilters[filterKey]===true && (emp.benchStatus==true) )            
+          {  
+           
+           okStatus=true;
+          }
+          
+    });
+
+      }
+     
+    if(authData.checkFilter["skill"] && authData.checkFilter["location"] && authData.checkFilter["status"])
+     {return okSkill && okLocation && okStatus;}
+    else if(authData.checkFilter["skill"] && authData.checkFilter["location"])
+     {return okSkill && okLocation;}
+     else if(authData.checkFilter["skill"] && authData.checkFilter["status"])
+      {return okSkill && okStatus;}
+     else if(authData.checkFilter["location"]  && authData.checkFilter["status"])
+       {return okLocation && okStatus;}
+    else if(authData.checkFilter["location"])
+    {return okLocation;}
+    else if(authData.checkFilter["skill"] )
+    {return okSkill;}
+    else return okStatus;
+    
+
+  }
+  console.log("Render..  "+JSON.stringify(authData.checkFilter))
   return (
     <div className="window">
       <div className='top'>
@@ -96,22 +182,22 @@ export default function AdminDashboard() {
                   </tr>
                 </thead>
                 <tbody className='thread1'>
-                  {empdetails &&
-                    empdetails.map((emp) => (
-
-                      <tr>
-                        
-                        <th scope="row" onClick={() => {handleViewEmployee(emp.id); authData.handleEmpId(emp.id); }}>{emp.id}</th>
-
-                        <td>{emp.name}</td>
-                        <td>{emp.empLocation}</td>
-                        <td>{emp.benchStatus == true ? "Active" : "Inactive"}</td>
-                        <td><UpdateEmployee/></td>
-                      </tr>
-                      
-                    ))
-                  }
-                </tbody>
+                {authData.dtoData &&
+                  authData.dtoData.map((emp)=>(
+                    allowData(emp)==true?
+                  (<tr>
+                      <th scope="row" onClick={() => {handleViewEmployee(emp.employeeId); authData.handleEmpId(emp.employeeId); }} >{emp.employeeId}</th>
+                      <td>{emp.employeeName}</td>
+                      <td>{emp.location==1?"Gurugram":emp.location==2?"Bangalore":emp.location==3?"Hyderabad":"none"}</td>
+                      <td>{emp.benchStatus==0?"NotBenched":"Benched"}</td>
+                      <td><UpdateEmployee/></td> 
+                 </tr>):
+                 (<tr></tr>)
+                         
+                  ))
+        
+                 }
+              </tbody>
               </table>
             </div>
           </div>

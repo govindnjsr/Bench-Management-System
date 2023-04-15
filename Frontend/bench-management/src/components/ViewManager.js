@@ -29,8 +29,8 @@ function ViewManager() {
           console.log("response " + response);
           setPostResponse(response);
           setAddLocation({
-            managerId: null,
-            locationId: null
+            managerId:null,
+            locationId:null
           })
         });
 
@@ -70,8 +70,8 @@ function ViewManager() {
 
 
 
-    console.log(managerDetails) 
-    console.log(addlocation)
+    // console.log(managerDetails) 
+    // console.log(addlocation)
     return (
       <>
         <button className='button2' onClick={handleShow}>

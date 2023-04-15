@@ -9,13 +9,15 @@ import ManagerDashboard from './ManagerDashboard';
 import AdminDashboard from './AdminDashboard';
 export default function Login() {
   const authData = useContext(AuthContext);
-  const manager = 2;
+  const manager = 1;
   const [loginApiData, setLoginApiData] = useState();
 
   function handleCallbackResponse(response) {
     //console.log("Encoded JWT ID token: " + response.credential);
+
     var userObject = jwt_decode(response.credential);
     authData.setGoogleData(userObject);
+
   }
 
   console.log("google " + JSON.stringify(authData.googleData))
@@ -52,6 +54,7 @@ export default function Login() {
 
   useEffect(() => {
     /* global google */
+     /* global accounts */
     const google = window.google;
     google?.accounts.id.initialize({ // eslint-disable-line 
       client_id: "305985372566-gu0rl4u8sm3ceu06m92tc52t0v8um5ne.apps.googleusercontent.com",
@@ -70,7 +73,6 @@ export default function Login() {
     authData.isAuthentication === false ?
       (
         <>
-
           <div className='loginContainer'>
             <div>
               <img className='logoContainer' src={logoImage} alt="accoliteLogo" />
