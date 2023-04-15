@@ -104,8 +104,8 @@ function ViewManager() {
                     </Form.Select>
                 </Form.Group>
                 <div className='btn-mngr'>
-                <button className='button6' onClick={postLocationToManager}>Grant Access</button>
-                <button className='button6' onClick={deleteLocationToManager}>Revoke Access</button>
+                <button className='button6' type='button' onClick={postLocationToManager}>Grant Access</button>
+                <button className='button6' type='button'  onClick={deleteLocationToManager}>Revoke Access</button>
                 </div>
           </Form>
           <Table striped bordered hover>

@@ -77,27 +77,6 @@ function AddEmployee() {
          
     }
 
-
-// console.log(empdetails)
-// ------------------------------------------------------------------------------------------------/
-// const getLocationId = async (e) => {
-//     try{
-//         setLocName(e.target.value);
-//         const locationId = await axios.get(`http://localhost:2538/api/location/getId/${e.target.value}`);
-//         setLocationId(locationId.data);
-//     }
-//     catch{
-//         console.log();
-//     }
-// }
-// const handleLocationValue = (e) => {
-//     setEmpDetails({ ...empdetails, [e.target.name]: e.target.value });
-//     getLocationId(e);
-// }
-// console.log(skills)
-// console.log("printinggg" + JSON.stringify(responseSkill))
-// console.log("post "+post)
-// console.log("Dto "+JSON.stringify(dtoData))
     return (
       <>
         
