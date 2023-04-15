@@ -5,7 +5,6 @@ import search from './Images/search.png'
 import UpdateEmployee from './UpdateEmployee';
 import AuthContext from './AuthContext';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
 export default function ManagerDashboard() {
   
@@ -16,15 +15,9 @@ export default function ManagerDashboard() {
   const [countAllEmployees, setCountAllEmployees] = useState(0);
   const [countActiveEmp, setCountActiveEmp] = useState(0);
   const [countBenchedEmp, setCountBenchedEmp] = useState(0);
-
-  const navigate = useNavigate();
-  const handleViewEmployee = (id) => {
-    navigate("/viewEmployee");
-  }
-
   const fetchManagerTable = async () => {
     try{
-      const Data = await axios.get(`http://localhost:2538/api/manager/get/${authData.managerId}`); // ${authData.managerId} instead of 1
+      const Data = await axios.get(`http://localhost:2538/api/manager/get/1`); // ${authData.managerId} instead of 1
       setManagerData(Data.data)
     }
     catch{
@@ -141,7 +134,7 @@ console.log(filteredEmpData)
                   {filteredEmpData &&
                     filteredEmpData.map((key) => (
                       <tr>
-                        <th scope='row' onClick={() => {handleViewEmployee(key.id); authData.handleEmpId(key.id); }} >{key.id}</th>
+                        <th scope='row'>{key.id}</th>
                         <td>{key.name}</td>
                         <td>{key.empLocation}</td>
                         <td>{key.benchStatus === true ? "Active" : "Inactive"}</td>
