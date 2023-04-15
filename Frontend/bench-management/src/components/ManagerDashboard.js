@@ -18,9 +18,8 @@ export default function ManagerDashboard() {
   const [countActiveEmp, setCountActiveEmp] = useState(0);
   const [countBenchedEmp, setCountBenchedEmp] = useState(0);
   const [currentLocationAcess,setCurrentLocationAcess]=useState();
-  const[assignedLocation,setAssignedLocation]=useState({
-   
-  })
+  const[assignedLocation,setAssignedLocation]=useState({})
+  const[empOnBench,setEmpOnBench]=useState()
   const navigate = useNavigate();
   const handleViewEmployee = (id) => {
     navigate("/viewEmployee");
@@ -35,6 +34,10 @@ export default function ManagerDashboard() {
           });
           const dtoDetails = await axios.get('http://localhost:2538/api/dto/get');
       authData.setDtoData(dtoDetails.data);
+
+      const allBenchedEmp = await axios.get('http://localhost:2538/api/empdetails/get/benchedemployee');
+      setEmpOnBench(allBenchedEmp.data);
+
     }
     catch{
       console.log()
@@ -59,21 +62,29 @@ export default function ManagerDashboard() {
         
   })
  
-  console.log("asslocation  "+JSON.stringify(assignedLocation))
-
   }
  
   // -------------Filtering Section---------------------------
+  const allowLocation=(emp)=>{
+    
+    if(emp.location==1 && assignedLocation["gurugram"])return true;
+    if(emp.location==2 && assignedLocation["bangalore"])return true;
+    if(emp.location==3 && assignedLocation["hyderabad"])return true;
+    
+  }
   const allowData=(emp)=>{
   
+    //By default 
+    if(!authData.checkFilter["skill"] && !authData.checkFilter["location"] && !authData.checkFilter["status"])
+      {
+        return allowLocation(emp);
+      }
     let Keys=Object.keys(authData.appliedFilters);
     let ok=true,okSkill=true,okLocation=false;
     let selectDataKey=Object.keys(authData.checkFilter);
     //iterate over the filter section
 
-    //By default 
-    if(!authData.checkFilter["skill"] && !authData.checkFilter["location"] && !authData.checkFilter["status"])
-       return true;
+    
     //for skills
    
         if(authData.checkFilter["skill"]){
@@ -83,7 +94,9 @@ export default function ManagerDashboard() {
                filterKey!="active" && filterKey!="benched")
              {
               
-              if(authData.appliedFilters[filterKey]===true && emp[filterKey]!=true )            
+              if(authData.appliedFilters[filterKey]===true && emp[filterKey]!=true)            
+                 okSkill=false;
+              if(!allowLocation(emp))
                  okSkill=false;
           }      
           });
@@ -152,6 +165,7 @@ export default function ManagerDashboard() {
 
   console.log(authData.dtoData)
   console.log("manager id "+authData.managerId)
+  console.log("asslocation  "+JSON.stringify(assignedLocation))
   return (
     <div className="window">
       <div className='top'>
@@ -170,7 +184,7 @@ export default function ManagerDashboard() {
               <div className="card">
                 <div className="card-body">
                   <h5 className="card-title">Employees On Bench</h5>
-                  <p className="card-text">{countBenchedEmp}</p>
+                  <p className="card-text">{empOnBench}</p>
                 </div>
               </div>
             </div>
@@ -208,7 +222,7 @@ export default function ManagerDashboard() {
                       <th scope="row" onClick={() => {handleViewEmployee(emp.employeeId); authData.handleEmpId(emp.employeeId); }} >{emp.employeeId}</th>
                       <td>{emp.employeeName}</td>
                       <td>{emp.location==1?"Gurugram":emp.location==2?"Bangalore":emp.location==3?"Hyderabad":"none"}</td>
-                      <td>{emp.benchStatus==0?"NotBenched":"Benched"}</td>
+                      <td>{emp.benchStatus==0?"Not on Bench":"On Bench"}</td>
                       <td><UpdateEmployee/></td> 
                  </tr>)
                  :
