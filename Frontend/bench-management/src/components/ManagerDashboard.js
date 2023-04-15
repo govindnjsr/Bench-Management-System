@@ -5,6 +5,7 @@ import search from './Images/search.png'
 import UpdateEmployee from './UpdateEmployee';
 import AuthContext from './AuthContext';
 import axios from 'axios';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 
 export default function ManagerDashboard() {
   
@@ -16,35 +17,54 @@ export default function ManagerDashboard() {
   const [countActiveEmp, setCountActiveEmp] = useState(0);
   const [countBenchedEmp, setCountBenchedEmp] = useState(0);
   const [currentLocationAcess,setCurrentLocationAcess]=useState();
+  const[assignedLocation,setAssignedLocation]=useState({
+   
+  })
+  const navigate = useNavigate();
+  const handleViewEmployee = (id) => {
+    navigate("/viewEmployee");
+  }
   const fetchManagerTable = async () => {
     try{
-      const Data = await axios.get(`http://localhost:2538/api/manager/get/1`); // ${authData.managerId} instead of 1
+    //  / const Data = await axios.get(`http://localhost:2538/api/manager/get/1`); // ${authData.managerId} instead of 1
      
-      const allEmp=await axios.get('http://localhost:2538/api/manager/get/1')
+      const allEmp=await axios.get(`http://localhost:2538/api/manager/get/${authData.managerId}`)
            .then((response) => {
-            setManagerData(response.data)
-            
-            
+            setManagerData(response.data)  ;                  
           });
+          const dtoDetails = await axios.get('http://localhost:2538/api/dto/get');
+      authData.setDtoData(dtoDetails.data);
     }
     catch{
       console.log()
     }
   }
-  //-------SetLocationAcess----------------//
 
- console.log("manager data "+JSON.stringify(managerData.assignedLocation))
+  useEffect(()=>{
+    fetchManagerTable();
+     
+  },[])
+  useEffect(()=>{
+    setLocations();
+     
+  },[managerData])
+ 
+  const setLocations=()=>{
+      managerData.assignedLocation && managerData.assignedLocation.map((key)=>{
+      console.log("id "+key.id+" "+key.locName); 
+      if(key.id==1) assignedLocation.gurugram=true;
+      else if(key.id==2) assignedLocation.bangalore=true;
+      else if(key.id==3) assignedLocation.hyderabad=true;
+        
+  })
+ 
+  console.log("asslocation  "+JSON.stringify(assignedLocation))
 
-   {
-    managerData.assignedLocation && managerData.assignedLocation.map((data)=>{
-      console.log("data "+JSON.stringify(data.id))
-      
-    })
-   }
-
-  // ------------------------------------------
+  }
+ 
   // -------------Filtering Section---------------------------
   const allowData=(emp)=>{
+  
     let Keys=Object.keys(authData.appliedFilters);
     let ok=true,okSkill=true,okLocation=false;
     let selectDataKey=Object.keys(authData.checkFilter);
@@ -73,18 +93,18 @@ export default function ManagerDashboard() {
       if(authData.checkFilter["location"]){
         //iterate over the filters..
         Keys.forEach(filterKey => {
-            if(authData.locationAcess["gurugram"] && filterKey==="gurugram" && authData.appliedFilters[filterKey] && (emp.location==1) )            
+            if(assignedLocation["gurugram"] && filterKey==="gurugram" && authData.appliedFilters[filterKey] && (emp.location==1) )            
                {
              
                 okLocation=true;
                }
             
-           if(authData.locationAcess["bangalore"] && filterKey==="bangalore" && authData.appliedFilters[filterKey]===true && (emp.location==2) )            
+           if(assignedLocation["bangalore"] && filterKey==="bangalore" && authData.appliedFilters[filterKey]===true && (emp.location==2) )            
               {  
               
                 okLocation=true;
               }
-           if( authData.locationAcess["hyderabad"] && filterKey==="hyderabad" && authData.appliedFilters[filterKey]===true && (emp.location==3) )            
+           if( assignedLocation["hyderabad"] && filterKey==="hyderabad" && authData.appliedFilters[filterKey]===true && (emp.location==3) )            
            {
           
            okLocation=true;
@@ -129,56 +149,8 @@ export default function ManagerDashboard() {
 
   }
 
-
-
-
-  // ------------------------------------------------
-
-
-  const fetchAllEmp = async () => {
-    try{
-      const Data = await axios.get('http://localhost:2538/api/empdetails/get');
-      setAllEmpDetails(Data.data);
-    }
-    catch{
-      console.log("error fetching employee details")
-    }
-  }
-
-// console.log(managerData)
-console.log(allEmpDetails)
-console.log(filteredEmpData)
-  useEffect(() => {
-    fetchManagerTable();
-    fetchAllEmp();
-  }, [])
-
-  //for fetching assigned location when the manager data is updated
-
-  useEffect(() => {
-    managerData.assignedLocation && managerData.assignedLocation.forEach(element => {
-      const locationName = element.locName;
-      var check = true;
-      allEmpDetails && allEmpDetails.forEach(emp => {
-        if(emp.empLocation && emp.empLocation == locationName) {
-          console.log(emp);
-          if(check){
-            setFilteredEmpData([emp]);
-            check = false;
-          }
-          else setFilteredEmpData(filteredEmpData => [...filteredEmpData, emp]);
-          if(emp.benchStatus && emp.benchStatus === false){
-            setCountActiveEmp(countActiveEmp => countActiveEmp + 1);
-          }
-          else setCountBenchedEmp(countBenchedEmp => countBenchedEmp + 1);
-        }
-      })
-      
-    });
-    setCountAllEmployees(countAllEmployees => filteredEmpData.length);
-  },[managerData, allEmpDetails])
-
-
+  console.log(authData.dtoData)
+  console.log("manager id "+authData.managerId)
   return (
     <div className="window">
       <div className='top'>
@@ -241,17 +213,22 @@ console.log(filteredEmpData)
                   </tr>
                 </thead>
                 <tbody className='thread1'>
-                  {filteredEmpData &&
-                    filteredEmpData.map((key) => (
-                      <tr>
-                        <th scope='row'>{key.id}</th>
-                        <td>{key.name}</td>
-                        <td>{key.empLocation}</td>
-                        <td>{key.benchStatus === true ? "Active" : "Inactive"}</td>
-                        <td><UpdateEmployee /></td>
-                      </tr>
-                    ))
-                  }
+                {authData.dtoData &&
+                  authData.dtoData.map((emp)=>(
+                    allowData(emp)==true?
+                  (<tr>
+                      <th scope="row" onClick={() => {handleViewEmployee(emp.employeeId); authData.handleEmpId(emp.employeeId); }} >{emp.employeeId}</th>
+                      <td>{emp.employeeName}</td>
+                      <td>{emp.location==1?"Gurugram":emp.location==2?"Bangalore":emp.location==3?"Hyderabad":"none"}</td>
+                      <td>{emp.benchStatus==0?"NotBenched":"Benched"}</td>
+                      <td><UpdateEmployee/></td> 
+                 </tr>)
+                 :
+                 (<tr></tr>)
+                         
+                  ))
+        
+                 }
                 </tbody>
               </table>
 
