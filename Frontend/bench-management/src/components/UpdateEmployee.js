@@ -165,8 +165,8 @@ function UpdateEmployee() {
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <button className='button3' onClick={handleClose}>Close</button> &nbsp;
-                    <button className='button3' form="add">Update</button>
+                    <button className='button3' type='button' onClick={handleClose}>Close</button> &nbsp;
+                    <button className='button3' type='button' form="add">Update</button>
                 </Modal.Footer>
             </Modal>
         </>
