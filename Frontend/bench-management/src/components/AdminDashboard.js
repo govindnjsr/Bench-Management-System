@@ -44,7 +44,7 @@ export default function AdminDashboard() {
   }
   useEffect(() => {
     fetchApi();
-  }, [authData.appliedFilters, authData.dtoDetails])
+  }, [authData.appliedFilters, authData.dtoDetails, authData.post])
 
 
 
