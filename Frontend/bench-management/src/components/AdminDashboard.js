@@ -200,7 +200,7 @@ export default function AdminDashboard() {
                           <td>{emp.employeeName}</td>
                           <td>{emp.location == 1 ? "Gurugram" : emp.location == 2 ? "Bangalore" : emp.location == 3 ? "Hyderabad" : "none"}</td>
                           <td>{emp.benchStatus == 0 ? "Not On Bench" : "On Bench"}</td>
-                          <td><UpdateEmployee /></td>
+                          <td><UpdateEmployee id = {emp.employeeId}/></td>
                         </tr>) :
                         (<tr></tr>)
 
