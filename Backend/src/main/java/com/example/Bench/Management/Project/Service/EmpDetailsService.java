@@ -26,4 +26,6 @@ public interface EmpDetailsService {
      public EmpDetails getEmployeeById(Long employeeId);
 
      public List<Dto>getAllDto();
+
+      public String updateEmployeeById(Long employeeId, EmpDetails empDetails);
 }

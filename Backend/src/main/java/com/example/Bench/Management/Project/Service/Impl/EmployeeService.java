@@ -120,5 +120,22 @@ public class EmployeeService implements EmpDetailsService {
         return dto;
     }
 
+    @Override
+    public String updateEmployeeById(Long employeeId, EmpDetails empDetails) {
+        EmpDetails empDetails1=empDetailsRepo.findById(employeeId).get();
+        empDetails1.setName(empDetails.getName());
+        empDetails1.setAddress(empDetails.getAddress());
+        empDetails1.setPhoneNo(empDetails.getPhoneNo());
+        empDetails1.setWorkExp(empDetails.getWorkExp());
+        empDetails1.setBenchDate(empDetails.getBenchDate());
+        empDetails1.setBillableDate(empDetails.getBillableDate());
+        empDetails1.setBenchStatus(empDetails.getBenchStatus());
+        empDetails1.setSkill(empDetails.getSkill());
+        empDetails1.setInterviewDetails(empDetails.getInterviewDetails());
+        empDetails1.setEmpLocation(empDetails.getEmpLocation());
+        empDetails1.setActive(empDetails.getActive());
+        empDetailsRepo.save(empDetails1);
+        return "updated";
+    }
 
 }
