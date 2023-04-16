@@ -61,4 +61,9 @@ public class EController {
     public EmpDetails getEmployeeById(@PathVariable Long employeeId){
         return empDetailsService.getEmployeeById(employeeId);
     }
+
+    @PutMapping("/update/{employeeId}")
+    public String updateEmployeeById(@PathVariable Long employeeId, @RequestBody EmpDetails empDetails){
+        return empDetailsService.updateEmployeeById(employeeId,empDetails);
+    }
 }

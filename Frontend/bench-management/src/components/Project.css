@@ -194,7 +194,26 @@
   opacity: 0.8;
 }
 
-
+.button6 {
+  height: 5vh;
+  width:9vw;
+  background-color: #489fb5;
+  border: none;
+  color:white;
+  padding: 6px 15px 15px 15px;
+  margin: 10px 0px 40px 45px;
+  text-align: center;
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 12px;
+  opacity: 8;
+}
+.button6:hover{
+  color: white;
+  opacity: 0.8;
+}
 /* CSS for NAVBAR */
 
 .NavbarComponent {
@@ -334,16 +353,19 @@
   border: none;
   color: rgb(24, 23, 23);
   padding: 6px 15px 15px 15px;
+  margin: 0px 0px 0px 45px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 12px;
   font-weight: 500;
-  margin: 0px 0px 0px 45px;
   cursor: pointer;
   border-radius: 12px;
 }
-
+.button4:hover{
+  color: white;
+  opacity: 0.8;
+}
 .employees {
   font-size: 14px;
   font-weight: bold;
@@ -439,6 +461,13 @@ border: none;
   overflow-y: auto;
   background-color: #ffecd1;
 }
+
+.tableHeader{
+  position: sticky;
+  top: 0px;
+  background-color: #ffecd1;
+}
+
 .pointer-to-profile:hover{
   color: rgb(67, 64, 64);
   cursor:pointer;
@@ -519,23 +548,24 @@ th{
   opacity: 0.8;
 }
 
-.button6{
+.button5 {
   height: 5vh;
-  width:10vw;
-  background-color:#489fb5;
+  width: 6vw;
+  background-color: #489fb5;
   border: none;
-  color: white;
-  padding: 6px 15px 15px 15px ;
+  color:white;
+  padding: 6px 15px 15px 15px;
   text-align: center;
-  text-decoration: none;
   display: inline-block;
-  font-size:13px;
+  font-size: 12px;
   font-weight: 500;
-  margin: 3px 3px 3px 3px;
+  margin: 2px 0px;
   cursor: pointer;
   border-radius: 12px;
+  opacity: 8;
 }
-.button6:hover{
+.button5:hover{
+  color: white;
   opacity: 0.8;
 }
 
@@ -553,7 +583,6 @@ th{
 .thread1 {
   text-align: center;
 }
-
 /* CSS FOR VIEW EMPLOYEE */
 
 .profile-window{

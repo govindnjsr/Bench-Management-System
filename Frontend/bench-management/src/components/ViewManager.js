@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Table from 'react-bootstrap/Table';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
+import AuthContext from './AuthContext';
 
 function ViewManager() {
+  const authData = useContext(AuthContext);
   const [show, setShow] = useState(false);
   const [managerDetails, setManagerDetails] = useState();
   const [postResponse, setPostResponse] = useState();

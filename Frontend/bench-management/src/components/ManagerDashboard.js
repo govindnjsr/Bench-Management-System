@@ -175,7 +175,7 @@ export default function ManagerDashboard() {
             <div className='table-format'>
               <table className="table table table-striped">
                 <thead className='thread1'>
-                  <tr>
+                  <tr className='tableHeader'>
                     <th scope="col">Emp_Id</th>
                     <th scope="col">Emp_Name</th>
                     <th scope="col">Location</th>

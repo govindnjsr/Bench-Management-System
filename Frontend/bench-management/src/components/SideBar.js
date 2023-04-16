@@ -1,13 +1,16 @@
-import React, { useState ,useContext } from 'react'
+import React, { useState ,useContext, useEffect } from 'react'
 import './Project.css'
 import AuthContext from './AuthContext';
 export default function SideBar() {
    const authData = useContext(AuthContext);
-   // const [appliedFilters,setAppliedFilters]=authData;
-  
-   const [benchTimeValue, setBenchTimeValue] = useState(3);
-    const [experienceValue, setExperienceValue] = useState(3);
 
+
+   //  useEffect(() => {
+   //    filterDataByBenchTime();
+   //  }, [authData.benchTimeValue])
+   const handleApplyFilter = () => {
+      
+   }
     const handleFiltersValue = (e) => {     
       const {value,checked}=e.target;
       let True=true,False=false;
@@ -50,18 +53,18 @@ export default function SideBar() {
          <div className="left-panel">
             <div className="filterContainer">
                <div className='filterByExperience'>
-                  <p className='pfilter'>EXPERIENCE <span className='span-style'>( 0 - {experienceValue} Years)</span></p>
+                  <p className='pfilter'>EXPERIENCE <span className='span-style'>( 0 - {authData.experienceValue} Years)</span></p>
                   <label htmlFor="customRange2" className="form-label"></label>
-                  <input type="range" className="form-range experienceClass" min="1" max="10" value={experienceValue}  id="customRange2" />
+                  <input type="range" className="form-range experienceClass" min="1" max="10" defaultValue='3' onChange={(e) => {authData.setExperienceValue(e.target.value)}} id="customRange2" />
                   <p className='sliderParaLeft'>0 Years</p>
                   <span className='sliderParaRightExpereince'>10 Years</span>
                </div>
 
 
                <div className='filterByBenchTime'>
-                  <p className='pfilter'>BENCH TIME <span className='span-style'>( 0 - {benchTimeValue} Months)</span></p>
+                  <p className='pfilter'>BENCH TIME <span className='span-style'>( 0 - {authData.benchTimeValue} Months)</span></p>
                   <label htmlFor="customRange2" className="form-label"></label>
-                  <input type="range" className="form-range benchTimeSliderClass" min="1" max="12"   id="customRange2" />
+                  <input type="range" className="form-range benchTimeSliderClass" min="1" max="12" defaultValue='3' onChange={(e) => {authData.setBenchTimeValue(e.target.value)}} id="customRange2" />
                   <p className='sliderParaLeft'>0 Months</p>
                   <span className='sliderParaRightBench'>12 Months</span>
                </div>
@@ -134,15 +137,18 @@ export default function SideBar() {
                      <div className="form-check mx-4 my-4">
                         <input className="form-check-input" type="checkbox"  name="active" value={true} onChange={handleFiltersValue.bind(this)} id="status-1" />
                         <label className="form-check-label skillsLabel" htmlFor="status-1">
-                           Not on bench
+                           Not on Bench
                         </label><br />
                         <input className="form-check-input" type="checkbox"  name="benched" value={true} onChange={handleFiltersValue.bind(this)} id="status-2" />
                         <label className="form-check-label skillsLabel" htmlFor="status-2">
-                           On benched
+                           On Bench
                         </label><br />
                      </div>
                 </div>
 
+               {/* <div className='applyFilterButton'>
+                  <button className='button6' type='button' onClick={handleApplyFilter}> Apply Filters </button>
+               </div> */}
             </div>
          </div>
       </>
