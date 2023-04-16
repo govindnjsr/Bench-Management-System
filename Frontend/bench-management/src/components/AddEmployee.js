@@ -61,6 +61,7 @@ function AddEmployee() {
    
     const saveData=()=>{       
          saveDataAtBackend();
+         handleClose();
     }
     const handleChangeValue = (e) => {       
         setEmpDetails({ ...empdetails, [e.target.name]: e.target.value });
@@ -77,27 +78,6 @@ function AddEmployee() {
          
     }
 
-
-// console.log(empdetails)
-// ------------------------------------------------------------------------------------------------/
-// const getLocationId = async (e) => {
-//     try{
-//         setLocName(e.target.value);
-//         const locationId = await axios.get(`http://localhost:2538/api/location/getId/${e.target.value}`);
-//         setLocationId(locationId.data);
-//     }
-//     catch{
-//         console.log();
-//     }
-// }
-// const handleLocationValue = (e) => {
-//     setEmpDetails({ ...empdetails, [e.target.name]: e.target.value });
-//     getLocationId(e);
-// }
-// console.log(skills)
-// console.log("printinggg" + JSON.stringify(responseSkill))
-// console.log("post "+post)
-// console.log("Dto "+JSON.stringify(dtoData))
     return (
       <>
         
@@ -142,11 +122,11 @@ function AddEmployee() {
                     <Form.Control name="workExp" onChange={handleChangeValue.bind(this)}  type="number" placeholder="Enter work experience in years" />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                    <Form.Label>Bench Date</Form.Label>
+                    <Form.Label>Bench Start Date</Form.Label>
                     <Form.Control name="benchDate" onChange={handleChangeValue.bind(this)} type="date" placeholder="Enter bench date" />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                    <Form.Label>Billable Date</Form.Label>
+                    <Form.Label>Expected Billable Date</Form.Label>
                     <Form.Control name="billableDate" onChange={handleChangeValue.bind(this)} type="date" placeholder="Enter last billable date" />
                 </Form.Group>
                 <Form.Group>
@@ -154,12 +134,12 @@ function AddEmployee() {
                     <Form.Select aria-label="Default select example" name="benchStatus" onChange={handleChangeValue.bind(this)}>
                         
                         <option>Select from below</option>
-                        <option value={false} >Active</option>
-                        <option value={true} >Benched</option>
+                        <option value={false} >Not on Bench</option>
+                        <option value={true} >On Bench</option>
                     </Form.Select>
                 </Form.Group><br/>
                 <Form.Group>
-                    <Form.Label>Skills</Form.Label>
+                    <Form.Label>Primary Skills</Form.Label>
                     {['checkbox'].map((type) => (
                         <div key={`inline-${type}`} className="mb-3" onChange={handleSkillValue.bind(this)}>
                         <Form.Check
@@ -248,7 +228,7 @@ function AddEmployee() {
               Close
             </Button> */}
             <button className='button3' onClick={handleClose}>Close</button> &nbsp; 
-            <button className='button3'  onClick={saveData}>Add</button>
+            <button className='button3' type='button' onClick={saveData}>Add</button>
             {/* <Button variant="primary">ADD</Button> */}
           </Modal.Footer>
         </Modal>

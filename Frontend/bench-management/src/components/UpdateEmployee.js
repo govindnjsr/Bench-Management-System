@@ -62,7 +62,7 @@ function UpdateEmployee() {
                             <Form.Control name="benchDate" type="date" placeholder="Enter bench date" />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                            <Form.Label>Last Billable Date</Form.Label>
+                            <Form.Label>Expected Billable Date</Form.Label>
                             <Form.Control name="billableDate" type="date" placeholder="Enter last billable date" />
                         </Form.Group>
                         <Form.Group>
@@ -165,8 +165,8 @@ function UpdateEmployee() {
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <button className='button3' onClick={handleClose}>Close</button> &nbsp;
-                    <button className='button3' form="add">Update</button>
+                    <button className='button3' type='button' onClick={handleClose}>Close</button> &nbsp;
+                    <button className='button3' type='button' form="add" onClick={handleClose}>Update</button>
                 </Modal.Footer>
             </Modal>
         </>

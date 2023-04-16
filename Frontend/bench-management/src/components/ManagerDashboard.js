@@ -5,6 +5,7 @@ import search from './Images/search.png'
 import UpdateEmployee from './UpdateEmployee';
 import AuthContext from './AuthContext';
 import axios from 'axios';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import AddEmployee from './AddEmployee';
 
 export default function ManagerDashboard() {
@@ -16,60 +17,155 @@ export default function ManagerDashboard() {
   const [countAllEmployees, setCountAllEmployees] = useState(0);
   const [countActiveEmp, setCountActiveEmp] = useState(0);
   const [countBenchedEmp, setCountBenchedEmp] = useState(0);
+  const [currentLocationAcess,setCurrentLocationAcess]=useState();
+  const[assignedLocation,setAssignedLocation]=useState({})
+  const[empOnBench,setEmpOnBench]=useState()
+  const navigate = useNavigate();
+  const handleViewEmployee = (id) => {
+    navigate("/viewEmployee");
+  }
   const fetchManagerTable = async () => {
     try{
-      const Data = await axios.get(`http://localhost:2538/api/manager/get/1`); // ${authData.managerId} instead of 1
-      setManagerData(Data.data)
+    //  / const Data = await axios.get(`http://localhost:2538/api/manager/get/1`); // ${authData.managerId} instead of 1
+     
+      const allEmp=await axios.get(`http://localhost:2538/api/manager/get/${authData.managerId+1}`)
+           .then((response) => {
+            setManagerData(response.data)  ;                  
+          });
+          const dtoDetails = await axios.get('http://localhost:2538/api/dto/get');
+      authData.setDtoData(dtoDetails.data);
+
+      const allBenchedEmp = await axios.get('http://localhost:2538/api/empdetails/get/benchedemployee');
+      setEmpOnBench(allBenchedEmp.data);
+
     }
     catch{
       console.log()
     }
   }
 
-  const fetchAllEmp = async () => {
-    try{
-      const Data = await axios.get('http://localhost:2538/api/empdetails/get');
-      setAllEmpDetails(Data.data);
-    }
-    catch{
-      console.log("error fetching employee details")
-    }
+  useEffect(()=>{
+    fetchManagerTable();
+     
+  },[])
+  useEffect(()=>{
+    setLocations();
+     
+  },[managerData])
+ 
+  const setLocations=()=>{
+      managerData.assignedLocation && managerData.assignedLocation.map((key)=>{
+      console.log("id "+key.id+" "+key.locName); 
+      if(key.id==1) assignedLocation.gurugram=true;
+      else if(key.id==2) assignedLocation.bangalore=true;
+      else if(key.id==3) assignedLocation.hyderabad=true;
+        
+  })
+ 
+  }
+ 
+  // -------------Filtering Section---------------------------
+  const allowLocation=(emp)=>{
+    
+    if(emp.location==1 && assignedLocation["gurugram"])return true;
+    if(emp.location==2 && assignedLocation["bangalore"])return true;
+    if(emp.location==3 && assignedLocation["hyderabad"])return true;
+    
+  }
+  const allowData=(emp)=>{
+  
+    //By default 
+    if(!authData.checkFilter["skill"] && !authData.checkFilter["location"] && !authData.checkFilter["status"])
+      {
+        return allowLocation(emp);
+      }
+    let Keys=Object.keys(authData.appliedFilters);
+    let ok=true,okSkill=true,okLocation=false;
+    let selectDataKey=Object.keys(authData.checkFilter);
+    //iterate over the filter section
+
+    
+    //for skills
+   
+        if(authData.checkFilter["skill"]){
+          //iterate over the filters..
+          Keys.forEach(filterKey => {
+            if(filterKey!="gurugram" && filterKey!="hyderabad" && filterKey!="bangalore" &&
+               filterKey!="active" && filterKey!="benched")
+             {
+              
+              if(authData.appliedFilters[filterKey]===true && emp[filterKey]!=true)            
+                 okSkill=false;
+              if(!allowLocation(emp))
+                 okSkill=false;
+          }      
+          });
+        }
+   
+    //for location
+    
+      if(authData.checkFilter["location"]){
+        //iterate over the filters..
+        Keys.forEach(filterKey => {
+            if(assignedLocation["gurugram"] && filterKey==="gurugram" && authData.appliedFilters[filterKey] && (emp.location==1) )            
+               {
+             
+                okLocation=true;
+               }
+            
+           if(assignedLocation["bangalore"] && filterKey==="bangalore" && authData.appliedFilters[filterKey]===true && (emp.location==2) )            
+              {  
+              
+                okLocation=true;
+              }
+           if( assignedLocation["hyderabad"] && filterKey==="hyderabad" && authData.appliedFilters[filterKey]===true && (emp.location==3) )            
+           {
+          
+           okLocation=true;
+           }
+              
+        });
+      }
+     let okStatus=false;
+      //for Active status
+      if(authData.checkFilter["status"]){
+     
+      Keys.forEach(filterKey => {
+        if(allowLocation(emp))
+        {if(filterKey==="active" && authData.appliedFilters[filterKey]===true && (emp.benchStatus==false) )            
+           {          
+            okStatus=true;
+           }
+        
+       if(filterKey==="benched" && authData.appliedFilters[filterKey]===true && (emp.benchStatus==true) )            
+          {           
+           okStatus=true;
+          }
+        }
+          
+    });
+ }
+      
+    if(authData.checkFilter["skill"] && authData.checkFilter["location"] && authData.checkFilter["status"])
+     {return okSkill && okLocation && okStatus;}
+    else if(authData.checkFilter["skill"] && authData.checkFilter["location"])
+     {return okSkill && okLocation;}
+     else if(authData.checkFilter["skill"] && authData.checkFilter["status"])
+      {return okSkill && okStatus;}
+     else if(authData.checkFilter["location"]  && authData.checkFilter["status"])
+       {return okLocation && okStatus;}
+    else if(authData.checkFilter["location"])
+    {return okLocation;}
+    else if(authData.checkFilter["skill"] )
+    {return okSkill;}
+    else return okStatus;
+    
+
   }
 
-// console.log(managerData)
-console.log(allEmpDetails)
-console.log(filteredEmpData)
-  useEffect(() => {
-    fetchManagerTable();
-    fetchAllEmp();
-  }, [])
-
-  //for fetching assigned location when the manager data is updated
-
-  useEffect(() => {
-    managerData.assignedLocation && managerData.assignedLocation.forEach(element => {
-      const locationName = element.locName;
-      var check = true;
-      allEmpDetails && allEmpDetails.forEach(emp => {
-        if(emp.empLocation && emp.empLocation == locationName) {
-          console.log(emp);
-          if(check){
-            setFilteredEmpData([emp]);
-            check = false;
-          }
-          else setFilteredEmpData(filteredEmpData => [...filteredEmpData, emp]);
-          if(emp.benchStatus && emp.benchStatus === false){
-            setCountActiveEmp(countActiveEmp => countActiveEmp + 1);
-          }
-          else setCountBenchedEmp(countBenchedEmp => countBenchedEmp + 1);
-        }
-      })
-      
-    });
-    setCountAllEmployees(countAllEmployees => filteredEmpData.length);
-  },[managerData, allEmpDetails])
-
-
+  console.log(authData.dtoData)
+  console.log("manager id "+authData.managerId)
+  console.log("asslocation  "+JSON.stringify(assignedLocation))
   return (
     <div className="window">
       <div className='top'>
@@ -88,7 +184,7 @@ console.log(filteredEmpData)
               <div className="card">
                 <div className="card-body">
                   <h5 className="card-title">Employees On Bench</h5>
-                  <p className="card-text">{countBenchedEmp}</p>
+                  <p className="card-text">{empOnBench}</p>
                 </div>
               </div>
             </div>
@@ -110,7 +206,7 @@ console.log(filteredEmpData)
             <div className='table-format'>
               <table className="table table table-striped">
                 <thead className='thread1'>
-                  <tr>
+                  <tr className='tableHeader'>
                     <th scope="col">Emp_Id</th>
                     <th scope="col">Emp_Name</th>
                     <th scope="col">Location</th>
@@ -119,17 +215,22 @@ console.log(filteredEmpData)
                   </tr>
                 </thead>
                 <tbody className='thread1'>
-                  {filteredEmpData &&
-                    filteredEmpData.map((key) => (
-                      <tr>
-                        <th scope='row'>{key.id}</th>
-                        <td>{key.name}</td>
-                        <td>{key.empLocation}</td>
-                        <td>{key.benchStatus === true ? "Active" : "Inactive"}</td>
-                        <td><UpdateEmployee /></td>
-                      </tr>
-                    ))
-                  }
+                {authData.dtoData &&
+                  authData.dtoData.map((emp)=>(
+                    allowData(emp)==true?
+                  (<tr>
+                      <th scope="row" onClick={() => {handleViewEmployee(emp.employeeId); authData.handleEmpId(emp.employeeId); }} >{emp.employeeId}</th>
+                      <td>{emp.employeeName}</td>
+                      <td>{emp.location==1?"Gurugram":emp.location==2?"Bangalore":emp.location==3?"Hyderabad":"none"}</td>
+                      <td>{emp.benchStatus==0?"Not on Bench":"On Bench"}</td>
+                      <td><UpdateEmployee/></td> 
+                 </tr>)
+                 :
+                 (<tr></tr>)
+                         
+                  ))
+        
+                 }
                 </tbody>
               </table>
 

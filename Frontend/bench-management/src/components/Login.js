@@ -20,7 +20,7 @@ export default function Login() {
 
   }
 
-  console.log("google " + JSON.stringify(authData.googleData))
+  // console.log("google " + JSON.stringify(authData.googleData))
 
   useEffect(() => {
     loginApiData && loginApiData.forEach(element => {
@@ -29,7 +29,8 @@ export default function Login() {
         authData.handleLogin();
         authData.setCurrentRole(element.role);
         if(element.role === manager) {
-          authData.setManagerId(element.id);
+          authData.setManagerId(element.empId);
+
         }
       }
     });
@@ -45,6 +46,7 @@ export default function Login() {
     try {
       const loginData = await axios.get('http://localhost:2538/api/login/get')
       setLoginApiData(loginData.data);
+      // authData.setLoginDetails(loginData.data);
     }
     catch {
       console.log()
@@ -54,7 +56,6 @@ export default function Login() {
 
   useEffect(() => {
     /* global google */
-     /* global accounts */
     const google = window.google;
     google?.accounts.id.initialize({ // eslint-disable-line 
       client_id: "305985372566-gu0rl4u8sm3ceu06m92tc52t0v8um5ne.apps.googleusercontent.com",
@@ -68,7 +69,7 @@ export default function Login() {
     fetchApi();
   }, [authData.handleLogout]);
 
-  console.log(loginApiData)
+  // console.log(loginApiData)
   return (
     authData.isAuthentication === false ?
       (
@@ -89,7 +90,10 @@ export default function Login() {
 
         </>)
       : (
-        (authData.currentRole === manager) ? <ManagerDashboard />
+        (authData.currentRole === manager) ? 
+          (
+            <ManagerDashboard />
+          )
           : <AdminDashboard />
       )
   )

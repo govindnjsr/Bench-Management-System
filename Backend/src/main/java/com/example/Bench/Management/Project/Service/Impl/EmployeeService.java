@@ -1,13 +1,24 @@
 package com.example.Bench.Management.Project.Service.Impl;
 
+import com.example.Bench.Management.Project.Model.Dto;
 import com.example.Bench.Management.Project.Model.EmpDetails;
+import com.example.Bench.Management.Project.Model.Location;
+import com.example.Bench.Management.Project.Model.Skill;
 import com.example.Bench.Management.Project.Repository.EmpDetailsRepo;
 import com.example.Bench.Management.Project.Service.EmpDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class EmployeeService implements EmpDetailsService {
@@ -64,5 +75,50 @@ public class EmployeeService implements EmpDetailsService {
         }
         else return empDetails;
     }
+
+
+    @Override
+    public List<Dto> getAllDto() {
+
+        return empDetailsRepo.findAll()
+                .stream()
+                .map(this::convertEntityToDto)
+                .collect(Collectors.toList());
+    }
+
+    private Dto convertEntityToDto(EmpDetails empDetails){
+        Dto dto=new Dto();
+        dto.setEmployeeId(empDetails.getId());
+        dto.setEmployeeName(empDetails.getName());
+        dto.setExperience(empDetails.getWorkExp());
+        dto.setJava(empDetails.getSkill().getJava());
+        dto.setPython(empDetails.getSkill().getPython());
+        dto.setReact(empDetails.getSkill().getReact());
+        dto.setAngular(empDetails.getSkill().getAngular());
+        dto.setHtml(empDetails.getSkill().getHtml());
+        dto.setCss(empDetails.getSkill().getCss());
+        dto.setJavascript(empDetails.getSkill().getJavascript());
+        dto.setSpringboot(empDetails.getSkill().getSpringboot());
+        dto.setLocation(empDetails.getEmpLocation());
+        dto.setBenchStatus(empDetails.getBenchStatus());
+
+        String benchDate=empDetails.getBenchDate();
+        String billableDate=empDetails.getBillableDate();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    try{
+        Date d1 = sdf.parse(benchDate);
+        String currentDate = DateTimeFormatter.ofPattern("yyyy-MM-dd").format(LocalDateTime.now());
+        Date d2 = sdf.parse(currentDate);
+        long difference = d2.getTime() - d1.getTime();
+        difference = (difference / (1000 * 60 * 60 * 24))/30;
+
+        if(difference >= 0 )
+        dto.setBenchPeriod(difference);
+        else dto.setBenchPeriod(0);
+    }
+    catch (ParseException e) {}
+        return dto;
+    }
+
 
 }
