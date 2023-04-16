@@ -122,11 +122,11 @@ function AddEmployee() {
                     <Form.Control name="workExp" onChange={handleChangeValue.bind(this)}  type="number" placeholder="Enter work experience in years" />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                    <Form.Label>Bench Date</Form.Label>
+                    <Form.Label>Bench Start Date</Form.Label>
                     <Form.Control name="benchDate" onChange={handleChangeValue.bind(this)} type="date" placeholder="Enter bench date" />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                    <Form.Label>Billable Date</Form.Label>
+                    <Form.Label>Expected Billable Date</Form.Label>
                     <Form.Control name="billableDate" onChange={handleChangeValue.bind(this)} type="date" placeholder="Enter last billable date" />
                 </Form.Group>
                 <Form.Group>

@@ -26,5 +26,6 @@ public class Dto {
     private boolean springboot;
     private long location;
     private boolean benchStatus;
+    private long benchPeriod;
 
 }
