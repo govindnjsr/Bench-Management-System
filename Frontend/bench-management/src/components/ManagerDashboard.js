@@ -65,12 +65,10 @@ export default function ManagerDashboard() {
   }
  
   // -------------Filtering Section---------------------------
-  const allowLocation=(emp)=>{
-    
+  const allowLocation=(emp)=>{    
     if(emp.location==1 && assignedLocation["gurugram"])return true;
     if(emp.location==2 && assignedLocation["bangalore"])return true;
-    if(emp.location==3 && assignedLocation["hyderabad"])return true;
-    
+    if(emp.location==3 && assignedLocation["hyderabad"])return true;    
   }
   const allowData=(emp)=>{
   
@@ -81,12 +79,8 @@ export default function ManagerDashboard() {
       }
     let Keys=Object.keys(authData.appliedFilters);
     let ok=true,okSkill=true,okLocation=false;
-    let selectDataKey=Object.keys(authData.checkFilter);
-    //iterate over the filter section
-
-    
-    //for skills
-   
+    let selectDataKey=Object.keys(authData.checkFilter);    
+    //for skills   
         if(authData.checkFilter["skill"]){
           //iterate over the filters..
           Keys.forEach(filterKey => {
@@ -100,72 +94,47 @@ export default function ManagerDashboard() {
                  okSkill=false;
           }      
           });
-        }
-   
-    //for location
-    
+        }   
+    //for location    
       if(authData.checkFilter["location"]){
         //iterate over the filters..
         Keys.forEach(filterKey => {
-            if(assignedLocation["gurugram"] && filterKey==="gurugram" && authData.appliedFilters[filterKey] && (emp.location==1) )            
-               {
-             
+            if((assignedLocation["gurugram"] && filterKey==="gurugram" && authData.appliedFilters[filterKey] && (emp.location==1)) ||
+            (assignedLocation["bangalore"] && filterKey==="bangalore" && authData.appliedFilters[filterKey]===true && (emp.location==2) )||
+            ( assignedLocation["hyderabad"] && filterKey==="hyderabad" && authData.appliedFilters[filterKey]===true && (emp.location==3) ))            
+               {             
                 okLocation=true;
                }
-            
-           if(assignedLocation["bangalore"] && filterKey==="bangalore" && authData.appliedFilters[filterKey]===true && (emp.location==2) )            
-              {  
-              
-                okLocation=true;
-              }
-           if( assignedLocation["hyderabad"] && filterKey==="hyderabad" && authData.appliedFilters[filterKey]===true && (emp.location==3) )            
-           {
-          
-           okLocation=true;
-           }
-              
         });
       }
      let okStatus=false;
       //for Active status
-      if(authData.checkFilter["status"]){
-     
+      if(authData.checkFilter["status"]){     
       Keys.forEach(filterKey => {
         if(allowLocation(emp))
-        {if(filterKey==="active" && authData.appliedFilters[filterKey]===true && (emp.benchStatus==false) )            
+        {if( (filterKey==="active" && authData.appliedFilters[filterKey]===true && (emp.benchStatus==false) ) ||
+        (filterKey==="benched" && authData.appliedFilters[filterKey]===true && (emp.benchStatus==true) )  )         
            {          
             okStatus=true;
            }
-        
-       if(filterKey==="benched" && authData.appliedFilters[filterKey]===true && (emp.benchStatus==true) )            
-          {           
-           okStatus=true;
-          }
-        }
-          
+        }          
     });
  }
       
-    if(authData.checkFilter["skill"] && authData.checkFilter["location"] && authData.checkFilter["status"])
+     if(authData.checkFilter["skill"] && authData.checkFilter["location"] && authData.checkFilter["status"])
      {return okSkill && okLocation && okStatus;}
-    else if(authData.checkFilter["skill"] && authData.checkFilter["location"])
+     else if(authData.checkFilter["skill"] && authData.checkFilter["location"])
      {return okSkill && okLocation;}
      else if(authData.checkFilter["skill"] && authData.checkFilter["status"])
-      {return okSkill && okStatus;}
+     {return okSkill && okStatus;}
      else if(authData.checkFilter["location"]  && authData.checkFilter["status"])
-       {return okLocation && okStatus;}
-    else if(authData.checkFilter["location"])
-    {return okLocation;}
-    else if(authData.checkFilter["skill"] )
-    {return okSkill;}
-    else return okStatus;
-    
-
-  }
-
-  console.log(authData.dtoData)
-  console.log("manager id "+authData.managerId)
-  console.log("asslocation  "+JSON.stringify(assignedLocation))
+     {return okLocation && okStatus;}
+     else if(authData.checkFilter["location"])
+     {return okLocation;}
+     else if(authData.checkFilter["skill"] )
+     {return okSkill;}
+     else return okStatus;
+ }
   return (
     <div className="window">
       <div className='top'>
