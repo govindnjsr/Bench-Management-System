@@ -44,7 +44,7 @@ export default function AdminDashboard() {
   }
   useEffect(() => {
     fetchApi();
-  }, [authData.appliedFilters, authData.dtoDetails, authData.benchTimeValue])
+  }, [authData.appliedFilters, authData.dtoDetails])
 
 
 
@@ -53,7 +53,7 @@ export default function AdminDashboard() {
     let ok = true, okSkill = true, okLocation = false;
     let selectDataKey = Object.keys(authData.checkFilter);
     //iterate over the filter section
-
+   
     //By default 
     if (!authData.checkFilter["skill"] && !authData.checkFilter["location"] && !authData.checkFilter["status"])
       return true;
@@ -136,8 +136,8 @@ export default function AdminDashboard() {
 
   }
   console.log("Render..  " + JSON.stringify(authData.checkFilter) + " " + authData.experienceValue)
-  console.log("dtoo " + JSON.stringify(authData.dtoData))
-
+  // console.log("dtoo " + JSON.stringify(authData.dtoData))
+ 
   // const data = authData.dtoData?.filter(emp => allowData(emp == true))
   // setFilterDataOfDto(data);
   // console.log("filter data : " + filterDataOfDto);
