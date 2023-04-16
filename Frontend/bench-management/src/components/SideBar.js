@@ -137,18 +137,18 @@ export default function SideBar() {
                      <div className="form-check mx-4 my-4">
                         <input className="form-check-input" type="checkbox"  name="active" value={true} onChange={handleFiltersValue.bind(this)} id="status-1" />
                         <label className="form-check-label skillsLabel" htmlFor="status-1">
-                           Not on bench
+                           Not on Bench
                         </label><br />
                         <input className="form-check-input" type="checkbox"  name="benched" value={true} onChange={handleFiltersValue.bind(this)} id="status-2" />
                         <label className="form-check-label skillsLabel" htmlFor="status-2">
-                           On benched
+                           On Bench
                         </label><br />
                      </div>
                 </div>
 
-               <div className='applyFilterButton'>
+               {/* <div className='applyFilterButton'>
                   <button className='button6' type='button' onClick={handleApplyFilter}> Apply Filters </button>
-               </div>
+               </div> */}
             </div>
          </div>
       </>

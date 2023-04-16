@@ -110,7 +110,7 @@ public class EmployeeService implements EmpDetailsService {
         String currentDate = DateTimeFormatter.ofPattern("yyyy-MM-dd").format(LocalDateTime.now());
         Date d2 = sdf.parse(currentDate);
         long difference = d2.getTime() - d1.getTime();
-        difference = (difference / (1000 * 60 * 60 * 24))/30;
+        difference = (difference / (1000 * 60 * 60 * 24));
 
         if(difference >= 0 )
         dto.setBenchPeriod(difference);

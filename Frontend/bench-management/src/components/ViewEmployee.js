@@ -10,6 +10,7 @@ export default function ViewEmployee() {
   const authData = useContext(AuthContext);
   const empId = authData.viewEmployeeId;
   const [empDetail, setEmpDetail] = useState({});
+  const [benchPeriodEmp, setBenchPeriodEmp] = useState(0);
   const navigate = useNavigate();
 
   function handleBackButton() {
@@ -23,6 +24,10 @@ export default function ViewEmployee() {
         .then((response) => {
           setEmpDetail(response.data);
         });
+
+      authData.dtoData &&  authData.dtoData.map(key => {
+        if(key.employeeId === empId) setBenchPeriodEmp(key.benchPeriod);
+      })
     }
     catch {
       console.log();
@@ -46,7 +51,7 @@ export default function ViewEmployee() {
           <div className='shadow1 p-3 mb-5'>
             <div className='for-back'>
               <h6 className='profile-heading'>PROFILE</h6>
-              <button className='button3' onClick={handleBackButton}><i class="fa-sharp fa-solid fa-arrow-left"></i> &nbsp;BACK</button>
+              <button className='button3' onClick={handleBackButton} style={{position : 'fixed', right: '7%'}}><i class="fa-sharp fa-solid fa-arrow-left"></i> &nbsp;BACK</button>
             </div>
 
             <hr></hr>
@@ -89,7 +94,7 @@ export default function ViewEmployee() {
                 <p className="labels">Expected Billable Date</p>
                 <p className="content">{empDetail.billableDate}</p>
                 <p className="labels">Bench Status</p>
-                <p className="content">{empDetail.benchStatus === true ? "On Bench" : "Not on Bench"}</p>
+                <p className="content">{empDetail.benchStatus === true ? `On Bench (${benchPeriodEmp} Days)` : "Not on Bench"}</p>
               </div>
               <div className="details1">
                 <p className='labels'>Bench Start Date</p>

@@ -11,6 +11,7 @@ export default function AuthState(props) {
     const[dtoData,setDtoData]=useState()
     const [benchTimeValue, setBenchTimeValue] = useState(12);
     const [experienceValue, setExperienceValue] = useState(10);
+    const [show, setShow] = useState(false);
     const[checkFilter,setCheckFilter]=useState({
         "skill":0,
         "location":0,
@@ -39,7 +40,10 @@ export default function AuthState(props) {
         "active":false,
         "benched":false
     })
-
+    const handleClose = () => {
+        setShow(false);
+    }
+    const handleShow = () => setShow(true);
     const [managerId, setManagerId] = useState(-1);
     const [loopEntry, setLoopEntry] = useState(false);
     const [viewEmployeeId, setViewEmployeeId] = useState(0);
@@ -60,7 +64,8 @@ export default function AuthState(props) {
         <AuthContext.Provider value={{locationAcess,setLocationAccess,checkFilter,setCheckFilter,appliedFilters,dtoData, googleData, setAppliedFilters,setDtoData,isAuthentication, currentRole,
          setGoogleData, handleLogin, setAuthentication,
           setCurrentRole, handleLogout, loopEntry,setLoopEntry, managerId, setManagerId
-          ,handleEmpId, viewEmployeeId, benchTimeValue, setBenchTimeValue, experienceValue, setExperienceValue }}>
+          ,handleEmpId, viewEmployeeId, benchTimeValue, setBenchTimeValue,
+           experienceValue, setExperienceValue, handleClose, setShow, show, handleShow }}>
             {props.children}
         </AuthContext.Provider>
     )

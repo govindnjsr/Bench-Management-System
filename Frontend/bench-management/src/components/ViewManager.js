@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Table from 'react-bootstrap/Table';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
+import AuthContext from './AuthContext';
 
 function ViewManager() {
-  const [show, setShow] = useState(false);
+  const authData = useContext(AuthContext);
+  // const [show, setShow] = useState(false);
   const [managerDetails, setManagerDetails] = useState();
   const [postResponse, setPostResponse] = useState();
   const [deleteResponse, setDeleteResponse] = useState();
@@ -14,8 +16,8 @@ function ViewManager() {
     managerId: null,
     locationId: null
   });
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  // const handleClose = () => setShow(false);
+  // const handleShow = () => setShow(true);
 
   const handleAddLocation = (e) => {
 
@@ -32,7 +34,7 @@ function ViewManager() {
             managerId:null,
             locationId:null
           })
-          handleClose();
+          authData.handleClose();
         });
 
     }
@@ -48,7 +50,7 @@ function ViewManager() {
         .then((response) => {
           console.log("response " + response);
           setDeleteResponse(response);
-          handleClose();
+          authData.handleClose();
         });
     }
     catch {
@@ -76,13 +78,13 @@ function ViewManager() {
     // console.log(addlocation)
     return (
       <>
-        <button className='button2' onClick={handleShow}>
+        <button className='button2' onClick={authData.handleShow}>
         <i class="fa-solid fa-user"></i> &nbsp; BENCH MANAGERS 
         </button>
   
         <Modal
-          show={show}
-          onHide={handleClose}
+          show={authData.show}
+          onHide={authData.handleClose}
           backdrop="static"
           keyboard={false}
         >
@@ -138,7 +140,7 @@ function ViewManager() {
           </Table>
         </Modal.Body>
         <Modal.Footer>
-          <button className='button3' onClick={handleClose}>Close</button>
+          <button className='button3' onClick={authData.handleClose}>Close</button>
         </Modal.Footer>
       </Modal>
     </>
