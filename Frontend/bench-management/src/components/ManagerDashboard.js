@@ -12,12 +12,7 @@ export default function ManagerDashboard() {
   
   const authData = useContext(AuthContext)
   const [managerData, setManagerData] = useState({}); // for assigned locations of that manager
-  const [allEmpDetails, setAllEmpDetails] = useState();
-  const [filteredEmpData, setFilteredEmpData] = useState([]);
-  const [countAllEmployees, setCountAllEmployees] = useState(0);
-  const [countActiveEmp, setCountActiveEmp] = useState(0);
-  const [countBenchedEmp, setCountBenchedEmp] = useState(0);
-  const [currentLocationAcess,setCurrentLocationAcess]=useState();
+ 
   const[assignedLocation,setAssignedLocation]=useState({})
   const[empOnBench,setEmpOnBench]=useState()
   const navigate = useNavigate();
