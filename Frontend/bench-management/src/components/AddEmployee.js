@@ -1,19 +1,16 @@
 // import React from 'react'
-import React, { useState,useEffect } from 'react';
+import React, { useState,useEffect, useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form'
 import axios from 'axios';
+import AuthContext from './AuthContext';
 function AddEmployee() {
-    const [show, setShow] = useState(false);
+    const authData = useContext(AuthContext);
     const [post, setPost] = useState()
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    // const handleClose = () => setShow(false);
+    // const handleShow = () => setShow(true);
     const[dtoData,setDtoData]=useState()
-
-    const [postLocation, setPostLocation] = useState();
-    const [locationId, setLocationId] = useState();
-    const [locName, setLocName] = useState();
     const [empdetails, setEmpDetails] = useState({
         "name": "",
         "address": "",
@@ -41,8 +38,6 @@ function AddEmployee() {
             
         }
     )
-   const[print,setPrint]=useState({})
-   const[responseSkill,setResponseSkill]=useState()
     const saveDataAtBackend=async ()=>{
         try{
           empdetails.skill=skills;
@@ -61,7 +56,7 @@ function AddEmployee() {
    
     const saveData=()=>{       
          saveDataAtBackend();
-         handleClose();
+         authData.handleClose();
     }
     const handleChangeValue = (e) => {       
         setEmpDetails({ ...empdetails, [e.target.name]: e.target.value });
@@ -81,12 +76,12 @@ function AddEmployee() {
     return (
       <>
         
-          <button className='button2' onClick={handleShow}>
+          <button className='button2' onClick={authData.handleShow}>
             <i class="fa-solid fa-user-plus"></i> &nbsp; EMPLOYEE 
          </button>
         <Modal
-          show={show}
-          onHide={handleClose}
+          show={authData.show}
+          onHide={authData.handleClose}
           backdrop="static"
           keyboard={false}
         >
@@ -227,7 +222,7 @@ function AddEmployee() {
             {/* <Button variant="secondary" onClick={handleClose}>
               Close
             </Button> */}
-            <button className='button3' onClick={handleClose}>Close</button> &nbsp; 
+            <button className='button3' onClick={authData.handleClose}>Close</button> &nbsp; 
             <button className='button3' type='button' onClick={saveData}>Add</button>
             {/* <Button variant="primary">ADD</Button> */}
           </Modal.Footer>
