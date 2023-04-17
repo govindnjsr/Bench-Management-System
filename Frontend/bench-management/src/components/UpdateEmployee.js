@@ -1,9 +1,8 @@
-import React, { useState,useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form'
 import axios from 'axios';
 import AuthContext from './AuthContext';
-import { json } from 'react-router-dom';
 
 function UpdateEmployee(props) {
 
@@ -11,109 +10,106 @@ function UpdateEmployee(props) {
     const [show, setShow] = useState(false);
     const [fetchedEmpDetail, setFetchEmpDetail] = useState(
         {
-    }
+        }
     );
 
-    const[currentSkills,setCurrentSkill]=useState(
-        { 
+    const [currentSkills, setCurrentSkill] = useState(
+        {
             "java": false,
-        "python": false,
-        "react": false,
-        "angular": false,
-        "html": false,
-        "css": false,
-        "javascript": false,
-        "springboot": false
-    }
+            "python": false,
+            "react": false,
+            "angular": false,
+            "html": false,
+            "css": false,
+            "javascript": false,
+            "springboot": false
+        }
     )
-    const [newSkills,setNewSkills]=useState()
-   
+    const [newSkills, setNewSkills] = useState()
+
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-   
-    const [intDetails,setintDetails]=useState({
+
+    const [intDetails, setintDetails] = useState({
         "result": "",
         "client": "",
         "date": ""
     })
-    
-    const showDetail = async (id) =>
-    {
+
+    const showDetail = async (id) => {
         const fetchedData = await axios.get(`http://localhost:2538/api/empdetails/get/${id}`);
         setFetchEmpDetail(fetchedData.data);
         setCurrentSkill(fetchedData.data.skill);
         //deep copy
         setNewSkills(JSON.parse(JSON.stringify(fetchedData.data.skill)));
     }
-    const handleChangeValue = (e) => {       
+    const handleChangeValue = (e) => {
         setFetchEmpDetail({ ...fetchedEmpDetail, [e.target.name]: e.target.value });
-      };
+    };
 
-    const handleChangeValueInterview = (e)=>{
-        setintDetails({...intDetails,[e.target.name]:e.target.value});
+    const handleChangeValueInterview = (e) => {
+        setintDetails({ ...intDetails, [e.target.name]: e.target.value });
     }
 
-      const handleSkillValue=(e)=>{
-        const {value,checked}=e.target;
-        let True=true,False=false;
-        if(currentSkills[e.target.name])
-        {
+    const handleSkillValue = (e) => {
+        const { value, checked } = e.target;
+        let True = true, False = false;
+        if (currentSkills[e.target.name]) {
             // setCurrentSkill({...currentSkills,[e.target.name]:True});
-            e.target.checked=true;
+            e.target.checked = true;
 
         }
         else {
-            if(checked)
-            {setNewSkills({...newSkills,[e.target.name]:True});
+            if (checked) {
+                setNewSkills({ ...newSkills, [e.target.name]: True });
             }
-            else
-            {setNewSkills({...newSkills,[e.target.name]:False});
+            else {
+                setNewSkills({ ...newSkills, [e.target.name]: False });
+            }
         }
+
+    }
+    const checkCheck = (value) => {
+        if (value) {
+            return "checked";
         }
-        
-     }
-     const checkCheck=(value)=>{      
-        if(value)
-        {
-           return "checked";
-        }
-     }
-     
-     const saveDataAtBackend=async ()=>{
-        try{
-            fetchedEmpDetail.skill=newSkills;
+    }
+
+    const saveDataAtBackend = async () => {
+        try {
+            fetchedEmpDetail.skill = newSkills;
             // fetchedEmpDetail.interviewDetails.push(intDetails);
-            const {skill,interviewDetails:indetails}=fetchedEmpDetail;
+            const { skill, interviewDetails: indetails } = fetchedEmpDetail;
             indetails.push(intDetails);
-            fetchedEmpDetail.interviewDetails=indetails;
-           console.log("new POST DATA "+JSON.stringify(fetchedEmpDetail));
-        //    console.log("ID"+empDetail.id);
-           const allEmp=await axios.put(`http://localhost:2538/api/empdetails/update/${fetchedEmpDetail.id}`,fetchedEmpDetail);
-        //    console.log("Result"+allEmp);
-        //    authData.setPost({});
-          }
+            fetchedEmpDetail.interviewDetails = indetails;
+            console.log("new POST DATA " + JSON.stringify(fetchedEmpDetail));
+            //    console.log("ID"+empDetail.id);
+            const allEmp = await axios.put(`http://localhost:2538/api/empdetails/update/${fetchedEmpDetail.id}`, fetchedEmpDetail);
+            //    console.log("Result"+allEmp);
+            //    authData.setPost({});
+        }
         catch {
             console.log()
         }
-      }
+    }
 
-     const saveData=()=>{       
+    const saveData = () => {
         saveDataAtBackend();
         // handleClose();
-   }
+    }
 
-   
-   console.log("cur emp "+JSON.stringify(fetchedEmpDetail))
-   console.log("int details"+JSON.stringify(intDetails))
-   
-//    console.log("aaaaaaaaaaa "+JSON.stringify(skill)+" -> "+interviewDetails)
+
+    console.log("cur emp " + JSON.stringify(fetchedEmpDetail))
+    console.log("int details" + JSON.stringify(intDetails))
+
+    //    console.log("aaaaaaaaaaa "+JSON.stringify(skill)+" -> "+interviewDetails)
     return (
         <>
 
             {/* <Button variant="primary" onClick={handleShow}>
        View / Update
       </Button> */}
-            <button className='button5' onClick={() => { handleShow(); showDetail(props.id);}}>
+            <button className='button5' onClick={() => { handleShow(); showDetail(props.id); }}>
                 Update
             </button>
 
@@ -134,27 +130,27 @@ function UpdateEmployee(props) {
                             <Form.Select aria-label="Default select example" name="empLocation" onChange={handleChangeValue.bind(this)}>
 
                                 <option>Select from below</option>
-                                <option value={1} selected={fetchedEmpDetail.empLocation==1} >Gurugram</option>
-                                <option value={2} selected={fetchedEmpDetail.empLocation==2} >Bangalore</option>
-                                <option value={3} selected={fetchedEmpDetail.empLocation==3} >Hyderabad</option>
+                                <option value={1} selected={fetchedEmpDetail.empLocation == 1} >Gurugram</option>
+                                <option value={2} selected={fetchedEmpDetail.empLocation == 2} >Bangalore</option>
+                                <option value={3} selected={fetchedEmpDetail.empLocation == 3} >Hyderabad</option>
                             </Form.Select>
                         </Form.Group><br />
 
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label>Name</Form.Label>
-                            <Form.Control type="text" placeholder="Enter Name" name="name" defaultValue={fetchedEmpDetail.name} onChange={handleChangeValue.bind(this)}/>
+                            <Form.Control type="text" placeholder="Enter Name" name="name" defaultValue={fetchedEmpDetail.name} onChange={handleChangeValue.bind(this)} />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label>Address</Form.Label>
-                            <Form.Control name="address" type="text" placeholder="Enter Address"defaultValue={fetchedEmpDetail.address} onChange={handleChangeValue.bind(this)} />
+                            <Form.Control name="address" type="text" placeholder="Enter Address" defaultValue={fetchedEmpDetail.address} onChange={handleChangeValue.bind(this)} />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label>Phone Number</Form.Label>
-                            <Form.Control name="phoneNo" type="number" placeholder="Enter phone number" defaultValue={fetchedEmpDetail.phoneNo} onChange={handleChangeValue.bind(this)}/>
+                            <Form.Control name="phoneNo" type="number" placeholder="Enter phone number" defaultValue={fetchedEmpDetail.phoneNo} onChange={handleChangeValue.bind(this)} />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label>Work Experience</Form.Label>
-                            <Form.Control name="workExp" type="number" placeholder="Enter work experience in years" defaultValue={fetchedEmpDetail.workExp} onChange={handleChangeValue.bind(this)}/>
+                            <Form.Control name="workExp" type="number" placeholder="Enter work experience in years" defaultValue={fetchedEmpDetail.workExp} onChange={handleChangeValue.bind(this)} />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label>Bench Start Date</Form.Label>
@@ -162,15 +158,15 @@ function UpdateEmployee(props) {
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label>Last Billable Date</Form.Label>
-                            <Form.Control name="billableDate" type="date" placeholder="Enter last billable date" defaultValue={fetchedEmpDetail.billableDate} onChange={handleChangeValue.bind(this)}/>
+                            <Form.Control name="billableDate" type="date" placeholder="Enter last billable date" defaultValue={fetchedEmpDetail.billableDate} onChange={handleChangeValue.bind(this)} />
                         </Form.Group>
                         <Form.Group>
                             <Form.Label>Bench Status</Form.Label>
-                            <Form.Select aria-label="Default select example" name="benchStatus"onChange={handleChangeValue.bind(this)} >
+                            <Form.Select aria-label="Default select example" name="benchStatus" onChange={handleChangeValue.bind(this)} >
 
                                 <option>Select from below</option>
-                                <option value={false} selected={fetchedEmpDetail.benchStatus==false} >Not On Bench</option>
-                                <option value={true} selected={fetchedEmpDetail.benchStatus==true}  >On Bench</option>
+                                <option value={false} selected={fetchedEmpDetail.benchStatus == false} >Not On Bench</option>
+                                <option value={true} selected={fetchedEmpDetail.benchStatus == true}  >On Bench</option>
                             </Form.Select>
                         </Form.Group><br />
                         <Form.Group>
@@ -183,10 +179,10 @@ function UpdateEmployee(props) {
                                         name="java"
                                         value={true}
                                         type={type}
-                                        id={`inline-${type}-1`}                                       
-                                        defaultChecked={checkCheck(currentSkills.java)}  
-                                                                      
-                                        
+                                        id={`inline-${type}-1`}
+                                        defaultChecked={checkCheck(currentSkills.java)}
+
+
                                     />
                                     <Form.Check
                                         inline
@@ -196,7 +192,7 @@ function UpdateEmployee(props) {
                                         value={true}
                                         id={`inline-${type}-2`}
                                         defaultChecked={checkCheck(currentSkills.python)}
-                                      
+
                                     />
                                     <Form.Check
                                         inline
@@ -206,8 +202,8 @@ function UpdateEmployee(props) {
                                         value={true}
                                         id={`inline-${type}-3`}
                                         defaultChecked={checkCheck(currentSkills.react)}
-                                       
-                                        
+
+
                                     />
                                     <Form.Check
                                         inline
@@ -217,8 +213,8 @@ function UpdateEmployee(props) {
                                         value={true}
                                         id={`inline-${type}-4`}
                                         defaultChecked={checkCheck(currentSkills.angular)}
-                                        
-                                        
+
+
                                     />
                                     <Form.Check
                                         inline
@@ -228,8 +224,8 @@ function UpdateEmployee(props) {
                                         value={true}
                                         id={`inline-${type}-5`}
                                         defaultChecked={checkCheck(currentSkills.html)}
-                                        
-                                        
+
+
                                     />
                                     <Form.Check
                                         inline
@@ -238,10 +234,10 @@ function UpdateEmployee(props) {
                                         type={type}
                                         value={true}
                                         id={`inline-${type}-6`}
-            
+
                                         defaultChecked={checkCheck(currentSkills.css)}
-                                      
-                                        
+
+
                                     />
                                     <Form.Check
                                         inline
@@ -251,7 +247,7 @@ function UpdateEmployee(props) {
                                         value={true}
                                         id={`inline-${type}-7`}
                                         defaultChecked={checkCheck(currentSkills.javascript)}
-                                        
+
                                     />
                                     <Form.Check
                                         inline
@@ -261,8 +257,8 @@ function UpdateEmployee(props) {
                                         value={true}
                                         id={`inline-${type}-8`}
                                         defaultChecked={checkCheck(currentSkills.springboot)}
-                                        
-                                        
+
+
                                     />
                                 </div>
                             ))}
@@ -272,8 +268,8 @@ function UpdateEmployee(props) {
                             <Form.Select aria-label="Default select example" name="active" onChange={handleChangeValue.bind(this)}>
 
                                 <option>Select from below</option>
-                                <option value={true} selected={fetchedEmpDetail.active==true} >True</option>
-                                <option value={false}selected={fetchedEmpDetail.active==false}>False</option>
+                                <option value={true} selected={fetchedEmpDetail.active == true} >True</option>
+                                <option value={false} selected={fetchedEmpDetail.active == false}>False</option>
                             </Form.Select>
                         </Form.Group><br />
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
@@ -286,17 +282,16 @@ function UpdateEmployee(props) {
                             <Form.Select aria-label="Default select example" name="result" onChange={handleChangeValueInterview.bind(this)}>
 
                                 <option>Select from below</option>
-                                <option value={true} >Clear</option>
-                                <option value={false} >Not Clear</option>
+                                <option value={true} >Accepted</option>
+                                <option value={false} >Rejected</option>
                             </Form.Select>
                         </Form.Group>
-
 
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
                     <button className='button3' onClick={handleClose}>Close</button> &nbsp;
-                    <button className='button3' form="add" type="button" onClick={() => { saveData(); handleClose();}} >Update</button>
+                    <button className='button3' form="add" type="button" onClick={() => { saveData(); handleClose(); }} >Update</button>
                 </Modal.Footer>
             </Modal>
         </>

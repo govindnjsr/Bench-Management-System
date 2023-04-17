@@ -12,13 +12,20 @@ export default function ManagerDashboard() {
   
   const authData = useContext(AuthContext)
   const [managerData, setManagerData] = useState({}); // for assigned locations of that manager
- 
+  const [searchValue, setSearchValue] = useState("");
   const[assignedLocation,setAssignedLocation]=useState({})
   const[empOnBench,setEmpOnBench]=useState()
   const navigate = useNavigate();
   const handleViewEmployee = (id) => {
     navigate("/viewEmployee");
   }
+
+// const checkStatus = (emp) => {
+//   let okStatus = false
+//   let Keys=Object.keys(authData.appliedFilters);
+ 
+// }
+
   const fetchManagerTable = async () => {
     try{
     //  / const Data = await axios.get(`http://localhost:2538/api/manager/get/1`); // ${authData.managerId} instead of 1
@@ -27,7 +34,7 @@ export default function ManagerDashboard() {
            .then((response) => {
             setManagerData(response.data)  ;                  
           });
-          const dtoDetails = await axios.get('http://localhost:2538/api/dto/get');
+      const dtoDetails = await axios.get('http://localhost:2538/api/dto/get');
       authData.setDtoData(dtoDetails.data);
 
       const allBenchedEmp = await axios.get('http://localhost:2538/api/empdetails/get/benchedemployee');
@@ -66,7 +73,6 @@ export default function ManagerDashboard() {
     if(emp.location==3 && assignedLocation["hyderabad"])return true;    
   }
   const allowData=(emp)=>{
-  
     //By default 
     if(!authData.checkFilter["skill"] && !authData.checkFilter["location"] && !authData.checkFilter["status"])
       {
@@ -103,18 +109,21 @@ export default function ManagerDashboard() {
         });
       }
      let okStatus=false;
+     
       //for Active status
       if(authData.checkFilter["status"]){     
-      Keys.forEach(filterKey => {
-        if(allowLocation(emp))
-        {if( (filterKey==="active" && authData.appliedFilters[filterKey]===true && (emp.benchStatus==false) ) ||
-        (filterKey==="benched" && authData.appliedFilters[filterKey]===true && (emp.benchStatus==true) )  )         
-           {          
-            okStatus=true;
-           }
-        }          
-    });
- }
+        Keys.forEach(filterKey => {
+          if(allowLocation(emp))
+          {if( (filterKey==="active" && authData.appliedFilters[filterKey]===true && (emp.benchStatus==false) ) ||
+          (filterKey==="benched" && authData.appliedFilters[filterKey]===true && (emp.benchStatus==true) )  )         
+             {          
+              okStatus=true;
+             }
+          }          
+      });
+    }
+     
+  // okStatus = checkStatus(emp);
       
      if(authData.checkFilter["skill"] && authData.checkFilter["location"] && authData.checkFilter["status"])
      {return okSkill && okLocation && okStatus;}
@@ -130,6 +139,8 @@ export default function ManagerDashboard() {
      {return okSkill;}
      else return okStatus;
  }
+ console.log(authData.dtoData);
+ console.log("filter" + JSON.stringify(authData.checkFilter));
   return (
     <div className="window">
       <div className='top'>
@@ -148,7 +159,7 @@ export default function ManagerDashboard() {
               <div className="card">
                 <div className="card-body">
                   <h5 className="card-title">Employees On Bench</h5>
-                  <p className="card-text">{empOnBench}</p>
+                  <p className="card-text">{authData.dtoData && authData.dtoData.filter(key=> (allowLocation(key) == true && key.benchStatus == 1)).length}</p>
                 </div>
               </div>
             </div>
@@ -158,13 +169,15 @@ export default function ManagerDashboard() {
             <div className='buttons-manager-dashboard'>
               <AddEmployee />
               <form className="d-flex" role="search">
-                <input className="search-box1" type="search" placeholder=" search by name " aria-label="Search" />
+                <input className="search-box1" type="text" onChange={(e) => setSearchValue(e.target.value.toLowerCase())} value={searchValue} placeholder=" search by name " aria-label="Search" />
                 <img className="search" src={search} alt="search-img" />
               </form>
             </div>
           </div>
           <div className='number'>
-            <p> {authData?.dtoData?.length} rows returned</p>
+            <p> {
+                authData.dtoData && authData.dtoData.filter(key=> allowData(key) == true).length
+              } rows returned</p>
           </div>
           <div className='table'>
             <div className='table-format'>
@@ -181,7 +194,7 @@ export default function ManagerDashboard() {
                 <tbody className='thread1'>
                 {authData.dtoData &&
                   authData.dtoData.map((emp)=>(
-                    allowData(emp)==true?
+                    allowData(emp)==true && (searchValue == "" || emp.employeeName.toLowerCase().includes(searchValue)) ?
                   (<tr>
                       <th scope="row" onClick={() => {handleViewEmployee(emp.employeeId); authData.handleEmpId(emp.employeeId); }} >{emp.employeeId}</th>
                       <td>{emp.employeeName}</td>
