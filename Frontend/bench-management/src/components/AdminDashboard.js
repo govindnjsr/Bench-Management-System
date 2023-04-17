@@ -194,11 +194,11 @@ export default function AdminDashboard() {
               <table className="table">
                 <thead className='thread1'>
                   <tr className='tableHeader'>
-                    <th scope="col">Id</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Location</th>
-                    <th scope="col">Bench_Status</th>
-                    <th scope="col">Action</th>
+                    <th  scope="col">Id</th>
+                    <th className="table-align-left" scope="col">Name</th>
+                    <th className="table-align-left" scope="col">Location</th>
+                    <th className="table-align-left" scope="col">Bench_Status</th>
+                    <th className="table-align-left" scope="col">Action</th>
                   </tr>
                 </thead>
                 <tbody className='thread1'>
@@ -207,10 +207,10 @@ export default function AdminDashboard() {
                       allowData(emp) == true && (searchValue == "" || emp.employeeName.toLowerCase().includes(searchValue)) ?
                         (<tr>
                           <th className='pointer-to-profile' title="Click on ID to view profile" scope="row" onClick={() => { handleViewEmployee(); authData.handleEmpId(emp.employeeId); }} >{emp.employeeId}</th>
-                          <td>{emp.employeeName}</td>
-                          <td>{emp.location == 1 ? "Gurugram" : emp.location == 2 ? "Bangalore" : emp.location == 3 ? "Hyderabad" : "none"}</td>
-                          <td>{emp.benchStatus == 0 ? "Not On Bench" : "On Bench"}</td>
-                          <td><UpdateEmployee id = {emp.employeeId}/></td>
+                          <td className="table-align-left">{emp.employeeName}</td>
+                          <td className="table-align-left">{emp.location == 1 ? "Gurugram" : emp.location == 2 ? "Bangalore" : emp.location == 3 ? "Hyderabad" : "none"}</td>
+                          <td className="table-align-left">{emp.benchStatus == 0 ? "Not On Bench" : "On Bench"}</td>
+                          <td className="table-align-left"><UpdateEmployee id = {emp.employeeId}/></td>
                         </tr>) :
                         (<tr></tr>)
 

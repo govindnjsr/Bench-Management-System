@@ -468,6 +468,13 @@ border: none;
 
 .pointer-to-profile{
   color:#489fb5;
+  width: 15%;
+  
+}
+
+.table-align-left{
+  text-align:left;
+  padding-left: 8%;
 }
 
 .pointer-to-profile:hover{

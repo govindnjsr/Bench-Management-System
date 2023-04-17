@@ -79,8 +79,8 @@ export default function Login() {
               <img className='logoContainer' src={logoImage} alt="accoliteLogo" />
             </div>
             <div className='loginPageContent'>
-              <h5 className='welcomeHeading'>Welcome Back To</h5>
-              <h1 className='projectHeading'>Bench Management</h1>
+              <h5 className='welcomeHeading'>Welcome To</h5>
+              <h1 className='projectHeading'>Bench Management Application</h1>
               <b>
                 <hr className="hr-text" data-content="One Tap Below to Sign-in" />
               </b>
