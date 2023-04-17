@@ -1,12 +1,13 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState,useEffect, useContext } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form'
 import axios from 'axios';
+import AuthContext from './AuthContext';
 
 function UpdateEmployee(props) {
+
+    const authData = useContext(AuthContext);
     const [show, setShow] = useState(false);
-    const [record, setRecord] = useState();
-    const [put, setPut] = useState()
     const [empDetail, setEmpDetail] = useState(
         {
         "name": "",
@@ -64,9 +65,10 @@ function UpdateEmployee(props) {
         try{
            setEmpDetail({...empDetail});
            console.log("in update"+JSON.stringify(empDetail));
-           console.log("ID"+empDetail.id);
+        //    console.log("ID"+empDetail.id);
            const allEmp=await axios.put(`http://localhost:2538/api/empdetails/update/${empDetail.id}`,empDetail);
            console.log("Result"+allEmp);
+           authData.setPost({});
           }
         catch {
             console.log()

@@ -11,18 +11,9 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Login {
-
-    @Id
-    @SequenceGenerator(
-            name = "login_seq",
-            sequenceName = "login_seq",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "login_seq"
-    )
-    private long id;
+   @Id
+   private long id;
+    private long empId;
     private String email;
     private long role;
 }

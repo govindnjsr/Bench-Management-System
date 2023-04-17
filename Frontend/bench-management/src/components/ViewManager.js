@@ -16,7 +16,10 @@ function ViewManager() {
     managerId: null,
     locationId: null
   });
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false);
+    authData.setPost({});
+  }
   const handleShow = () => setShow(true);
 
   const handleAddLocation = (e) => {
@@ -34,7 +37,9 @@ function ViewManager() {
             managerId:null,
             locationId:null
           })
+          authData.setPost(response.data);
           handleClose();
+          
         });
 
     }
@@ -50,6 +55,7 @@ function ViewManager() {
         .then((response) => {
           console.log("response " + response);
           setDeleteResponse(response);
+          authData.setPost(response.data);
           handleClose();
         });
     }

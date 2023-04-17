@@ -23,7 +23,7 @@ export default function ManagerDashboard() {
     try{
     //  / const Data = await axios.get(`http://localhost:2538/api/manager/get/1`); // ${authData.managerId} instead of 1
      
-      const allEmp=await axios.get(`http://localhost:2538/api/manager/get/${authData.managerId+1}`)
+      const allEmp=await axios.get(`http://localhost:2538/api/manager/get/${authData.managerId}`)
            .then((response) => {
             setManagerData(response.data)  ;                  
           });
@@ -42,11 +42,11 @@ export default function ManagerDashboard() {
   useEffect(()=>{
     fetchManagerTable();
      
-  },[])
+  },[authData.post])
   useEffect(()=>{
     setLocations();
      
-  },[managerData])
+  },[managerData, authData.post])
  
   const setLocations=()=>{
       managerData.assignedLocation && managerData.assignedLocation.map((key)=>{
@@ -164,7 +164,7 @@ export default function ManagerDashboard() {
             </div>
           </div>
           <div className='number'>
-            <p> 50 rows returned</p>
+            <p> {authData?.dtoData?.length} rows returned</p>
           </div>
           <div className='table'>
             <div className='table-format'>
@@ -187,7 +187,7 @@ export default function ManagerDashboard() {
                       <td>{emp.employeeName}</td>
                       <td>{emp.location==1?"Gurugram":emp.location==2?"Bangalore":emp.location==3?"Hyderabad":"none"}</td>
                       <td>{emp.benchStatus==0?"Not on Bench":"On Bench"}</td>
-                      <td><UpdateEmployee/></td> 
+                      <td><UpdateEmployee id = {emp.employeeId}/></td> 
                  </tr>)
                  :
                  (<tr></tr>)

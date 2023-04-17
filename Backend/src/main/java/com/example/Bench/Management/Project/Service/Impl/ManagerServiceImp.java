@@ -8,9 +8,7 @@ import com.example.Bench.Management.Project.Service.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class ManagerServiceImp implements ManagerService {
@@ -65,12 +63,16 @@ public class ManagerServiceImp implements ManagerService {
     @Override
     public ManagerDetails assignLocationToManager(Long managerId, Long locationId) {
         List<Location> locationSet=null;
+        Set<Location>locationfilter=new HashSet<>();
         ManagerDetails managerDetails=managerRepo.findById(managerId).get();
         Location location=locationRepo.findById(locationId).get();
         locationSet=managerDetails.getAssignedLocation();
         locationSet.add(location);
+        locationfilter.addAll(locationSet);
+        locationSet=new ArrayList<>();
+        locationSet.addAll(locationfilter);
         managerDetails.setAssignedLocation(locationSet);
-          return managerRepo.save(managerDetails);
+        return managerRepo.save(managerDetails);
     }
 
     //delete the assign location to the manager

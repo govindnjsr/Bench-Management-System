@@ -11,10 +11,8 @@ import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -101,23 +99,23 @@ public class EmployeeService implements EmpDetailsService {
         dto.setSpringboot(empDetails.getSkill().getSpringboot());
         dto.setLocation(empDetails.getEmpLocation());
         dto.setBenchStatus(empDetails.getBenchStatus());
-
         String benchDate=empDetails.getBenchDate();
         String billableDate=empDetails.getBillableDate();
+        if(benchDate==null)benchDate=DateTimeFormatter.ofPattern("yyyy-MM-dd").format(LocalDateTime.now());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-    try{
-        Date d1 = sdf.parse(benchDate);
-        String currentDate = DateTimeFormatter.ofPattern("yyyy-MM-dd").format(LocalDateTime.now());
-        Date d2 = sdf.parse(currentDate);
-        long difference = d2.getTime() - d1.getTime();
-        difference = (difference / (1000 * 60 * 60 * 24));
-
-        if(difference >= 0 )
-        dto.setBenchPeriod(difference);
-        else dto.setBenchPeriod(0);
-    }
-    catch (ParseException e) {}
+        try{
+            Date d1 = sdf.parse(benchDate);
+            String currentDate = DateTimeFormatter.ofPattern("yyyy-MM-dd").format(LocalDateTime.now());
+            Date d2 = sdf.parse(currentDate);
+            long difference = d2.getTime() - d1.getTime();
+            difference = (difference / (1000 * 60 * 60 * 24));
+            if(difference >= 0 )
+                dto.setBenchPeriod(difference);
+            else dto.setBenchPeriod(0);
+        }
+        catch (ParseException e) {}
         return dto;
+
     }
 
     @Override
