@@ -168,7 +168,7 @@ export default function AdminDashboard() {
               <div className="card">
                 <div className="card-body">
                   <h5 className="card-title">Employees Not On Bench</h5>
-                  <p className="card-text">{countBenchedEmp}</p>
+                  <p className="card-text">10</p>
                 </div>
               </div>
             </div>
@@ -192,7 +192,7 @@ export default function AdminDashboard() {
               <table className="table">
                 <thead className='thread1'>
                   <tr className='tableHeader'>
-                    <th className='pointer-to-profile' title="Click on ID to view profile" scope="col">Id</th>
+                    <th scope="col">Id</th>
                     <th scope="col">Name</th>
                     <th scope="col">Location</th>
                     <th scope="col">Bench_Status</th>

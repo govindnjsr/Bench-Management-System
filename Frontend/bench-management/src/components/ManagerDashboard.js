@@ -156,7 +156,7 @@ export default function ManagerDashboard() {
               <div className="card">
                 <div className="card-body">
                   <h5 className="card-title">Employees Not On Bench</h5>
-                  <p className="card-text">{countBenchedEmp}</p>
+                  <p className="card-text">10</p>
                 </div>
               </div>
             </div>
@@ -176,13 +176,13 @@ export default function ManagerDashboard() {
           </div>
           <div className='table'>
             <div className='table-format'>
-              <table className="table table table-striped">
+              <table className="table">
                 <thead className='thread1'>
                   <tr className='tableHeader'>
-                    <th scope="col">Emp_Id</th>
-                    <th scope="col">Emp_Name</th>
+                    <th scope="col">Id</th>
+                    <th scope="col">Name</th>
                     <th scope="col">Location</th>
-                    <th scope="col">Status</th>
+                    <th scope="col">Bench-Status</th>
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
@@ -191,7 +191,7 @@ export default function ManagerDashboard() {
                   authData.dtoData.map((emp)=>(
                     allowData(emp)==true?
                   (<tr>
-                      <th scope="row" onClick={() => {handleViewEmployee(emp.employeeId); authData.handleEmpId(emp.employeeId); }} >{emp.employeeId}</th>
+                      <th className='pointer-to-profile' title="Click on ID to view profile" scope="row" onClick={() => {handleViewEmployee(emp.employeeId); authData.handleEmpId(emp.employeeId); }} >{emp.employeeId}</th>
                       <td>{emp.employeeName}</td>
                       <td>{emp.location==1?"Gurugram":emp.location==2?"Bangalore":emp.location==3?"Hyderabad":"none"}</td>
                       <td>{emp.benchStatus==0?"Not on Bench":"On Bench"}</td>
