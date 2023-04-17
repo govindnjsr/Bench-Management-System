@@ -7,10 +7,9 @@ import axios from 'axios';
 import AuthContext from './AuthContext';
 function AddEmployee() {
     const authData = useContext(AuthContext);
-    const [post, setPost] = useState()
+    
     // const handleClose = () => setShow(false);
     // const handleShow = () => setShow(true);
-    const[dtoData,setDtoData]=useState()
     const [empdetails, setEmpDetails] = useState({
         "name": "",
         "address": "",
@@ -44,7 +43,7 @@ function AddEmployee() {
            setEmpDetails({...empdetails});
            const allEmp=await axios.post('http://localhost:2538/api/empdetails/save',empdetails)
            .then((response) => {
-            setPost(response.data);
+            authData.setPost(response.data);
             
           });
              

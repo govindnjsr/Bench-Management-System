@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -26,6 +27,13 @@ public class Dto {
     private boolean springboot;
     private long location;
     private boolean benchStatus;
+    @Column(nullable = true)
     private long benchPeriod;
+
+
+
+
+
+
 
 }

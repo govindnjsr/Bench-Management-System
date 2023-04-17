@@ -12,12 +12,7 @@ export default function ManagerDashboard() {
   
   const authData = useContext(AuthContext)
   const [managerData, setManagerData] = useState({}); // for assigned locations of that manager
-  const [allEmpDetails, setAllEmpDetails] = useState();
-  const [filteredEmpData, setFilteredEmpData] = useState([]);
-  const [countAllEmployees, setCountAllEmployees] = useState(0);
-  const [countActiveEmp, setCountActiveEmp] = useState(0);
-  const [countBenchedEmp, setCountBenchedEmp] = useState(0);
-  const [currentLocationAcess,setCurrentLocationAcess]=useState();
+ 
   const[assignedLocation,setAssignedLocation]=useState({})
   const[empOnBench,setEmpOnBench]=useState()
   const navigate = useNavigate();
@@ -28,7 +23,7 @@ export default function ManagerDashboard() {
     try{
     //  / const Data = await axios.get(`http://localhost:2538/api/manager/get/1`); // ${authData.managerId} instead of 1
      
-      const allEmp=await axios.get(`http://localhost:2538/api/manager/get/${authData.managerId+1}`)
+      const allEmp=await axios.get(`http://localhost:2538/api/manager/get/${authData.managerId}`)
            .then((response) => {
             setManagerData(response.data)  ;                  
           });
@@ -47,11 +42,11 @@ export default function ManagerDashboard() {
   useEffect(()=>{
     fetchManagerTable();
      
-  },[])
+  },[authData.post])
   useEffect(()=>{
     setLocations();
      
-  },[managerData])
+  },[managerData, authData.post])
  
   const setLocations=()=>{
       managerData.assignedLocation && managerData.assignedLocation.map((key)=>{
@@ -65,12 +60,10 @@ export default function ManagerDashboard() {
   }
  
   // -------------Filtering Section---------------------------
-  const allowLocation=(emp)=>{
-    
+  const allowLocation=(emp)=>{    
     if(emp.location==1 && assignedLocation["gurugram"])return true;
     if(emp.location==2 && assignedLocation["bangalore"])return true;
-    if(emp.location==3 && assignedLocation["hyderabad"])return true;
-    
+    if(emp.location==3 && assignedLocation["hyderabad"])return true;    
   }
   const allowData=(emp)=>{
   
@@ -81,12 +74,8 @@ export default function ManagerDashboard() {
       }
     let Keys=Object.keys(authData.appliedFilters);
     let ok=true,okSkill=true,okLocation=false;
-    let selectDataKey=Object.keys(authData.checkFilter);
-    //iterate over the filter section
-
-    
-    //for skills
-   
+    let selectDataKey=Object.keys(authData.checkFilter);    
+    //for skills   
         if(authData.checkFilter["skill"]){
           //iterate over the filters..
           Keys.forEach(filterKey => {
@@ -100,72 +89,47 @@ export default function ManagerDashboard() {
                  okSkill=false;
           }      
           });
-        }
-   
-    //for location
-    
+        }   
+    //for location    
       if(authData.checkFilter["location"]){
         //iterate over the filters..
         Keys.forEach(filterKey => {
-            if(assignedLocation["gurugram"] && filterKey==="gurugram" && authData.appliedFilters[filterKey] && (emp.location==1) )            
-               {
-             
+            if((assignedLocation["gurugram"] && filterKey==="gurugram" && authData.appliedFilters[filterKey] && (emp.location==1)) ||
+            (assignedLocation["bangalore"] && filterKey==="bangalore" && authData.appliedFilters[filterKey]===true && (emp.location==2) )||
+            ( assignedLocation["hyderabad"] && filterKey==="hyderabad" && authData.appliedFilters[filterKey]===true && (emp.location==3) ))            
+               {             
                 okLocation=true;
                }
-            
-           if(assignedLocation["bangalore"] && filterKey==="bangalore" && authData.appliedFilters[filterKey]===true && (emp.location==2) )            
-              {  
-              
-                okLocation=true;
-              }
-           if( assignedLocation["hyderabad"] && filterKey==="hyderabad" && authData.appliedFilters[filterKey]===true && (emp.location==3) )            
-           {
-          
-           okLocation=true;
-           }
-              
         });
       }
      let okStatus=false;
       //for Active status
-      if(authData.checkFilter["status"]){
-     
+      if(authData.checkFilter["status"]){     
       Keys.forEach(filterKey => {
         if(allowLocation(emp))
-        {if(filterKey==="active" && authData.appliedFilters[filterKey]===true && (emp.benchStatus==false) )            
+        {if( (filterKey==="active" && authData.appliedFilters[filterKey]===true && (emp.benchStatus==false) ) ||
+        (filterKey==="benched" && authData.appliedFilters[filterKey]===true && (emp.benchStatus==true) )  )         
            {          
             okStatus=true;
            }
-        
-       if(filterKey==="benched" && authData.appliedFilters[filterKey]===true && (emp.benchStatus==true) )            
-          {           
-           okStatus=true;
-          }
-        }
-          
+        }          
     });
  }
       
-    if(authData.checkFilter["skill"] && authData.checkFilter["location"] && authData.checkFilter["status"])
+     if(authData.checkFilter["skill"] && authData.checkFilter["location"] && authData.checkFilter["status"])
      {return okSkill && okLocation && okStatus;}
-    else if(authData.checkFilter["skill"] && authData.checkFilter["location"])
+     else if(authData.checkFilter["skill"] && authData.checkFilter["location"])
      {return okSkill && okLocation;}
      else if(authData.checkFilter["skill"] && authData.checkFilter["status"])
-      {return okSkill && okStatus;}
+     {return okSkill && okStatus;}
      else if(authData.checkFilter["location"]  && authData.checkFilter["status"])
-       {return okLocation && okStatus;}
-    else if(authData.checkFilter["location"])
-    {return okLocation;}
-    else if(authData.checkFilter["skill"] )
-    {return okSkill;}
-    else return okStatus;
-    
-
-  }
-
-  console.log(authData.dtoData)
-  console.log("manager id "+authData.managerId)
-  console.log("asslocation  "+JSON.stringify(assignedLocation))
+     {return okLocation && okStatus;}
+     else if(authData.checkFilter["location"])
+     {return okLocation;}
+     else if(authData.checkFilter["skill"] )
+     {return okSkill;}
+     else return okStatus;
+ }
   return (
     <div className="window">
       <div className='top'>
@@ -200,7 +164,7 @@ export default function ManagerDashboard() {
             </div>
           </div>
           <div className='number'>
-            <p> 50 rows returned</p>
+            <p> {authData?.dtoData?.length} rows returned</p>
           </div>
           <div className='table'>
             <div className='table-format'>
@@ -223,7 +187,7 @@ export default function ManagerDashboard() {
                       <td>{emp.employeeName}</td>
                       <td>{emp.location==1?"Gurugram":emp.location==2?"Bangalore":emp.location==3?"Hyderabad":"none"}</td>
                       <td>{emp.benchStatus==0?"Not on Bench":"On Bench"}</td>
-                      <td><UpdateEmployee/></td> 
+                      <td><UpdateEmployee id = {emp.employeeId}/></td> 
                  </tr>)
                  :
                  (<tr></tr>)
