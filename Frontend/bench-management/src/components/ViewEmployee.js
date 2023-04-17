@@ -91,7 +91,7 @@ export default function ViewEmployee() {
                   empDetail.empLocation === 2 ? "Banglore" : "Hyderabad"}</p>
               </div>
               <div className="details1">
-                <p className="labels">Expected Billable Date</p>
+                <p className="labels">Last Billable Date</p>
                 <p className="content">{empDetail.billableDate}</p>
                 <p className="labels">Bench Status</p>
                 <p className="content">{empDetail.benchStatus === true ? `On Bench (${Math.round(benchPeriodEmp / 30)} Months, ${benchPeriodEmp%30} Days)` : "Not on Bench"}</p>
