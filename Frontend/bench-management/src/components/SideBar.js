@@ -53,18 +53,18 @@ export default function SideBar() {
          <div className="left-panel">
             <div className="filterContainer">
                <div className='filterByExperience'>
-                  <p className='pfilter'>EXPERIENCE <span className='span-style'>( 0 - {authData.experienceValue} Years)</span></p>
+                  <p className='pfilter'>EXPERIENCE <span className='span-style'>( Above {authData.experienceValue -1} Years)</span></p>
                   <label htmlFor="customRange2" className="form-label"></label>
-                  <input type="range" className="form-range experienceClass" min="1" max="10" defaultValue='10' onChange={(e) => {authData.setExperienceValue(e.target.value)}} id="customRange2" />
+                  <input type="range" className="form-range experienceClass" min="1" max="10" defaultValue='0' onChange={(e) => {authData.setExperienceValue(e.target.value)}} id="customRange2" />
                   <p className='sliderParaLeft'>0 Years</p>
                   <span className='sliderParaRightExpereince'>10 Years</span>
                </div>
 
 
                <div className='filterByBenchTime'>
-                  <p className='pfilter'>BENCH TIME <span className='span-style'>( 0 - {authData.benchTimeValue} Months)</span></p>
+                  <p className='pfilter'>BENCH TIME <span className='span-style'>( Above {authData.benchTimeValue -1} Months)</span></p>
                   <label htmlFor="customRange2" className="form-label"></label>
-                  <input type="range" className="form-range benchTimeSliderClass" min="1" max="12" defaultValue='12' onChange={(e) => {authData.setBenchTimeValue(e.target.value)}} id="customRange2" />
+                  <input type="range" className="form-range benchTimeSliderClass" min="1" max="12" defaultValue='0' onChange={(e) => {authData.setBenchTimeValue(e.target.value)}} id="customRange2" />
                   <p className='sliderParaLeft'>0 Months</p>
                   <span className='sliderParaRightBench'>12 Months</span>
                </div>

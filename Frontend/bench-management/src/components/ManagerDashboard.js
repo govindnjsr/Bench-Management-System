@@ -74,10 +74,19 @@ export default function ManagerDashboard() {
   }
   const allowData=(emp)=>{
     //By default 
-    if(!authData.checkFilter["skill"] && !authData.checkFilter["location"] && !authData.checkFilter["status"])
-      {
-        return allowLocation(emp);
-      }
+    if (!authData.checkFilter["skill"] && !authData.checkFilter["location"] && !authData.checkFilter["status"] && authData.experienceValue==1 && authData.benchTimeValue==1)
+    return true;
+    //for bench
+    let okBench = false;
+    if (authData.benchTimeValue <= emp.benchPeriod/30) {
+    okBench = true;
+    }
+    // return okBench;
+    //for exp
+    let okExp = false;
+    if (authData.experienceValue <= emp.experience) {
+    okExp = true;
+    }
     let Keys=Object.keys(authData.appliedFilters);
     let ok=true,okSkill=true,okLocation=false;
     let selectDataKey=Object.keys(authData.checkFilter);    
@@ -137,7 +146,11 @@ export default function ManagerDashboard() {
      {return okLocation;}
      else if(authData.checkFilter["skill"] )
      {return okSkill;}
-     else return okStatus;
+     else if(authData.experienceValue>1){
+      return okExp;
+    }
+    else if(authData.benchTimeValue>1 && okStatus)return okBench;
+    else return okStatus;
  }
  console.log(authData.dtoData);
  console.log("filter" + JSON.stringify(authData.checkFilter));

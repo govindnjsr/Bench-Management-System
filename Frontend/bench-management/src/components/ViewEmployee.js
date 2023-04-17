@@ -94,7 +94,7 @@ export default function ViewEmployee() {
                 <p className="labels">Expected Billable Date</p>
                 <p className="content">{empDetail.billableDate}</p>
                 <p className="labels">Bench Status</p>
-                <p className="content">{empDetail.benchStatus === true ? `On Bench (${benchPeriodEmp} Days)` : "Not on Bench"}</p>
+                <p className="content">{empDetail.benchStatus === true ? `On Bench (${Math.round(benchPeriodEmp / 30)} Months, ${benchPeriodEmp%30} Days)` : "Not on Bench"}</p>
               </div>
               <div className="details1">
                 <p className='labels'>Bench Start Date</p>
