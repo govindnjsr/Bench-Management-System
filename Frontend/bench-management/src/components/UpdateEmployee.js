@@ -31,7 +31,11 @@ function UpdateEmployee(props) {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
    
-    
+    const [intDetails,setintDetails]=useState({
+        "result": "",
+        "client": "",
+        "date": ""
+    })
     
     const showDetail = async (id) =>
     {
@@ -44,6 +48,10 @@ function UpdateEmployee(props) {
     const handleChangeValue = (e) => {       
         setFetchEmpDetail({ ...fetchedEmpDetail, [e.target.name]: e.target.value });
       };
+
+    const handleChangeValueInterview = (e)=>{
+        setintDetails({...intDetails,[e.target.name]:e.target.value});
+    }
 
       const handleSkillValue=(e)=>{
         const {value,checked}=e.target;
@@ -74,6 +82,10 @@ function UpdateEmployee(props) {
      const saveDataAtBackend=async ()=>{
         try{
             fetchedEmpDetail.skill=newSkills;
+            // fetchedEmpDetail.interviewDetails.push(intDetails);
+            const {skill,interviewDetails:indetails}=fetchedEmpDetail;
+            indetails.push(intDetails);
+            fetchedEmpDetail.interviewDetails=indetails;
            console.log("new POST DATA "+JSON.stringify(fetchedEmpDetail));
         //    console.log("ID"+empDetail.id);
            const allEmp=await axios.put(`http://localhost:2538/api/empdetails/update/${fetchedEmpDetail.id}`,fetchedEmpDetail);
@@ -89,9 +101,12 @@ function UpdateEmployee(props) {
         saveDataAtBackend();
         // handleClose();
    }
+
+   
    console.log("cur emp "+JSON.stringify(fetchedEmpDetail))
-   console.log("cur skills "+JSON.stringify(currentSkills))
-   console.log("new skills "+JSON.stringify(newSkills))
+   console.log("int details"+JSON.stringify(intDetails))
+   
+//    console.log("aaaaaaaaaaa "+JSON.stringify(skill)+" -> "+interviewDetails)
     return (
         <>
 
@@ -264,11 +279,11 @@ function UpdateEmployee(props) {
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label>Last Client Interview</Form.Label><br /><br />
                             <Form.Label>Client Name</Form.Label>
-                            <Form.Control name="client-name" type="text" placeholder="Enter client name" /><br />
+                            <Form.Control name="client" type="text" placeholder="Enter client name" onChange={handleChangeValueInterview.bind(this)} /><br />
                             <Form.Label>Interview Date</Form.Label>
-                            <Form.Control name="interview-date" type="date" placeholder="Enter interview date" /><br />
+                            <Form.Control name="date" type="date" placeholder="Enter interview date" onChange={handleChangeValueInterview.bind(this)} /><br />
                             <Form.Label>Interview Result</Form.Label>
-                            <Form.Select aria-label="Default select example" name="benchStatus" >
+                            <Form.Select aria-label="Default select example" name="result" onChange={handleChangeValueInterview.bind(this)}>
 
                                 <option>Select from below</option>
                                 <option value={true} >Clear</option>
