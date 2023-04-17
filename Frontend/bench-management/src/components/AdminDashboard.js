@@ -177,7 +177,7 @@ export default function AdminDashboard() {
             </div>
           </div>
           <div className='number'>
-            <p>{authData.dtoData?.length} rows returned</p>
+            <p>{authData.dtoData && authData.dtoData.filter(key=> allowData(key) == true).length} rows returned</p>
           </div>
           <div className='table'>
             <div className='table-format'>
