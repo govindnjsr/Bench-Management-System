@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -28,6 +29,7 @@ public class IntDetails {
     private long srNo;
     private String result;
     private String client;
-    private Date date;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private String date;
 
 }
