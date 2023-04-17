@@ -11,6 +11,9 @@ import { useContext } from 'react';
 import AuthContext from './components/AuthContext';
 import AdminDashboard from './components/AdminDashboard';
 import ManagerDashboard from './components/ManagerDashboard';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function App() {
 
@@ -26,6 +29,7 @@ function App() {
       <AuthState>
         <RouterProvider router={router} />
       </AuthState>
+
     </div>
   );
 }

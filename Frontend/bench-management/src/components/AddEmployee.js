@@ -109,7 +109,7 @@ function AddEmployee() {
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                     <Form.Label>Phone Number</Form.Label>
-                    <Form.Control name="phoneNo" onChange={handleChangeValue.bind(this)} type="number" placeholder="type phone number" />
+                    <Form.Control name="phoneNo" onChange={handleChangeValue.bind(this)} type="number" placeholder="Enter phone number"/>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                     <Form.Label>Work Experience</Form.Label>
@@ -120,7 +120,7 @@ function AddEmployee() {
                     <Form.Control name="benchDate" onChange={handleChangeValue.bind(this)} type="date" placeholder="Enter bench date" />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                    <Form.Label>Expected Billable Date</Form.Label>
+                    <Form.Label>Last Billable Date</Form.Label>
                     <Form.Control name="billableDate" onChange={handleChangeValue.bind(this)} type="date" placeholder="Enter last billable date" />
                 </Form.Group>
                 <Form.Group>

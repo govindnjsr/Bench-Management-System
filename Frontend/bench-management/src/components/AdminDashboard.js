@@ -166,6 +166,14 @@ export default function AdminDashboard() {
                 </div>
               </div>
             </div>
+            <div className="col-sm-3">
+              <div className="card">
+                <div className="card-body">
+                  <h5 className="card-title">Employees Not On Bench</h5>
+                  <p className="card-text">10</p>
+                </div>
+              </div>
+            </div>
           </div>
           <div className='actions'>
             <p className='employees'>EMPLOYEES</p>
@@ -183,14 +191,14 @@ export default function AdminDashboard() {
           </div>
           <div className='table'>
             <div className='table-format'>
-              <table className="table table table-striped">
+              <table className="table">
                 <thead className='thread1'>
                   <tr className='tableHeader'>
-                    <th className='pointer-to-profile' title="Click on ID to view profile" scope="col">Id</th>
-                    <th className='nopointer-to-profile' scope="col">Name</th>
-                    <th className='nopointer-to-profile' scope="col">Location</th>
-                    <th className='nopointer-to-profile' scope="col">Bench_Status</th>
-                    <th className='nopointer-to-profile' scope="col">Action</th>
+                    <th  scope="col">Id</th>
+                    <th className="table-align-left" scope="col">Name</th>
+                    <th className="table-align-left" scope="col">Location</th>
+                    <th className="table-align-left" scope="col">Bench_Status</th>
+                    <th className="table-align-left" scope="col">Action</th>
                   </tr>
                 </thead>
                 <tbody className='thread1'>
@@ -198,11 +206,11 @@ export default function AdminDashboard() {
                     authData.dtoData.map((emp) => (
                       allowData(emp) == true && (searchValue == "" || emp.employeeName.toLowerCase().includes(searchValue)) ?
                         (<tr>
-                          <th scope="row" onClick={() => { handleViewEmployee(); authData.handleEmpId(emp.employeeId); }} >{emp.employeeId}</th>
-                          <td>{emp.employeeName}</td>
-                          <td>{emp.location == 1 ? "Gurugram" : emp.location == 2 ? "Bangalore" : emp.location == 3 ? "Hyderabad" : "none"}</td>
-                          <td>{emp.benchStatus == 0 ? "Not On Bench" : "On Bench"}</td>
-                          <td><UpdateEmployee id = {emp.employeeId}/></td>
+                          <th className='pointer-to-profile' title="Click on ID to view profile" scope="row" onClick={() => { handleViewEmployee(); authData.handleEmpId(emp.employeeId); }} >{emp.employeeId}</th>
+                          <td className="table-align-left">{emp.employeeName}</td>
+                          <td className="table-align-left">{emp.location == 1 ? "Gurugram" : emp.location == 2 ? "Bangalore" : emp.location == 3 ? "Hyderabad" : "none"}</td>
+                          <td className="table-align-left">{emp.benchStatus == 0 ? "Not On Bench" : "On Bench"}</td>
+                          <td className="table-align-left"><UpdateEmployee id = {emp.employeeId}/></td>
                         </tr>) :
                         (<tr></tr>)
 
