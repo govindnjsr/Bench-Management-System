@@ -121,7 +121,7 @@ export default function SideBar() {
                      </label><br />
                      <input className="form-check-input" type="checkbox"  name="bangalore" value={true} onChange={handleFiltersValue.bind(this)} id="loc-2" />
                      <label className="form-check-label skillsLabel" htmlFor="skill-2">
-                        Banglore
+                        Bangalore
                      </label><br />
                      <input className="form-check-input" type="checkbox"  name="hyderabad" value={true} onChange={handleFiltersValue.bind(this)} id="loc-3" />
                      <label className="form-check-label skillsLabel" htmlFor="skill-3">

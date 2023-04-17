@@ -1,12 +1,13 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState,useEffect, useContext } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form'
 import axios from 'axios';
+import AuthContext from './AuthContext';
 
 function UpdateEmployee(props) {
+
+    const authData = useContext(AuthContext);
     const [show, setShow] = useState(false);
-    const [record, setRecord] = useState();
-    const [put, setPut] = useState()
     const [empDetail, setEmpDetail] = useState(
         {
         "name": "",
@@ -52,10 +53,10 @@ function UpdateEmployee(props) {
         const {value,checked}=e.target;
         let True=true,False=false;
         if(checked)
-        {setEmpDetail.skill.e({...empDetail.skill.e,[e.target.name]:True});
+        {setEmpDetail.skill({...empDetail.skill.e,[e.target.name]:True});
         }
         else{
-            setEmpDetail.skill.e({...empDetail.skill,[e.target.name]:False});
+            setEmpDetail.skill({...empDetail.skill,[e.target.name]:False});
         }
           
      }
@@ -64,9 +65,10 @@ function UpdateEmployee(props) {
         try{
            setEmpDetail({...empDetail});
            console.log("in update"+JSON.stringify(empDetail));
-           console.log("ID"+empDetail.id);
+        //    console.log("ID"+empDetail.id);
            const allEmp=await axios.put(`http://localhost:2538/api/empdetails/update/${empDetail.id}`,empDetail);
            console.log("Result"+allEmp);
+           authData.setPost({});
           }
         catch {
             console.log()
@@ -104,9 +106,9 @@ function UpdateEmployee(props) {
                             <Form.Select aria-label="Default select example" name="empLocation" onChange={handleChangeValue.bind(this)}>
 
                                 <option>Select from below</option>
-                                <option value="Gurugram" selected={empDetail.empLocation==1} >Gurugram</option>
-                                <option value="Bangalore"selected={empDetail.empLocation==2} >Bangalore</option>
-                                <option value="Hyderabad"selected={empDetail.empLocation==3} >Hyderabad</option>
+                                <option value={1} selected={empDetail.empLocation==1} >Gurugram</option>
+                                <option value={2} selected={empDetail.empLocation==2} >Bangalore</option>
+                                <option value={3} selected={empDetail.empLocation==3} >Hyderabad</option>
                             </Form.Select>
                         </Form.Group><br />
 
