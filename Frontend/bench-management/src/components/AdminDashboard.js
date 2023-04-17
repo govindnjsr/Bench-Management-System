@@ -22,6 +22,7 @@ export default function AdminDashboard() {
   const [empdetails, setEmpDetails] = useState()
   const [filterDataOfDto, setFilterDataOfDto] = useState();
   const [rowsReturned, setRowsReturned] = useState(0);
+  const [searchValue, setSearchValue] = useState("");
 
   const fetchApi = async () => {
     try {
@@ -142,6 +143,7 @@ export default function AdminDashboard() {
   // setFilterDataOfDto(data);
   // console.log("filter data : " + filterDataOfDto);
   // setRowsReturned(filterDataOfDto?.length);
+  console.log(searchValue)
   return (
     <div className="window">
       <div className='top'>
@@ -171,7 +173,7 @@ export default function AdminDashboard() {
               <ViewManager />
               <AddEmployee />
               <form className="d-flex" role="search">
-                <input className="search-box1" type="search" placeholder=" search by name " aria-label="Search" />
+                <input className="search-box1" type="text" onChange={(e) => setSearchValue(e.target.value.toLowerCase())} value={searchValue} placeholder=" search by name " aria-label="Search" />
                 <img className="search" src={search} alt="search-img" />
               </form>
             </div>
@@ -194,7 +196,7 @@ export default function AdminDashboard() {
                 <tbody className='thread1'>
                   {authData.dtoData &&
                     authData.dtoData.map((emp) => (
-                      allowData(emp) == true ?
+                      allowData(emp) == true && (searchValue == "" || emp.employeeName.toLowerCase().includes(searchValue)) ?
                         (<tr>
                           <th scope="row" onClick={() => { handleViewEmployee(); authData.handleEmpId(emp.employeeId); }} >{emp.employeeId}</th>
                           <td>{emp.employeeName}</td>
@@ -205,7 +207,7 @@ export default function AdminDashboard() {
                         (<tr></tr>)
 
                     ))
-
+                    
                   }
                 </tbody>
               </table>

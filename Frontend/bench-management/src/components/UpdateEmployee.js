@@ -29,13 +29,22 @@ function UpdateEmployee(props) {
             "css": false,
             "javascript": false,
             "springboot": false
-        }
+        },
+        "interviewDetails": [{
+            client: null,
+            date: null,
+            result: null
+        }]
     }
     );
-
+    const [empInterviewDetails, setEmpInterviewDetails] = useState({
+        client: null,
+        date: null,
+        result: null
+    });
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    console.log("Before"+JSON.stringify(empDetail));
+    // console.log("Before"+JSON.stringify(empDetail));
     
     
     const showDetail = (id) =>
@@ -49,22 +58,26 @@ function UpdateEmployee(props) {
         setEmpDetail({ ...empDetail, [e.target.name]: e.target.value });
       };
 
-      const handleSkillValue=(e)=>{
-        const {value,checked}=e.target;
-        let True=true,False=false;
+    const handleSkillValue=(e)=>{
+    const {value,checked}=e.target;
+    let True=true,False=false;
         if(checked)
-        {setEmpDetail.skill({...empDetail.skill.e,[e.target.name]:True});
+            {setEmpDetail.skill({...empDetail.skill.e,[e.target.name]:True});
         }
         else{
             setEmpDetail.skill({...empDetail.skill,[e.target.name]:False});
         }
-          
-     }
-     
+        
+    }
+    
+    const handleInterviewValue = (e) => {
+        setEmpInterviewDetails({ ...empInterviewDetails, [e.target.name] : e.target.value});
+        // {setEmpDetail?.interviewDetails({...empDetail.interviewDetails, empInterviewDetails});}
+    }
      const saveDataAtBackend=async ()=>{
         try{
            setEmpDetail({...empDetail});
-           console.log("in update"+JSON.stringify(empDetail));
+        //    console.log("in update"+JSON.stringify(empDetail));
         //    console.log("ID"+empDetail.id);
            const allEmp=await axios.put(`http://localhost:2538/api/empdetails/update/${empDetail.id}`,empDetail);
            console.log("Result"+allEmp);
@@ -74,11 +87,12 @@ function UpdateEmployee(props) {
             console.log()
         }
       }
-
+      console.log("in update"+JSON.stringify(empDetail));
      const saveData=()=>{       
         saveDataAtBackend();
         handleClose();
    }
+   console.log("interview details" +JSON.stringify(empInterviewDetails));
     return (
         <>
 
@@ -234,19 +248,18 @@ function UpdateEmployee(props) {
                         </Form.Group><br />
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label>Last Client Interview</Form.Label><br /><br />
-                            <Form.Label>Client Name</Form.Label>
-                            <Form.Control name="client-name" type="text" placeholder="Enter client name" /><br />
+                            <Form.Label >Client Name</Form.Label>
+                            <Form.Control name="client" type="text" placeholder="Enter client name" onChange={handleInterviewValue.bind(this)}/><br />
                             <Form.Label>Interview Date</Form.Label>
-                            <Form.Control name="interview-date" type="date" placeholder="Enter interview date" /><br />
+                            <Form.Control name="date" type="date" placeholder="Enter interview date" onChange={handleInterviewValue.bind(this)}/><br />
                             <Form.Label>Interview Result</Form.Label>
-                            <Form.Select aria-label="Default select example" name="benchStatus" >
+                            <Form.Select aria-label="Default select example" name="result" onChange={handleInterviewValue.bind(this)}>
 
                                 <option>Select from below</option>
-                                <option value={true} >Clear</option>
-                                <option value={false} >Not Clear</option>
+                                <option value={true} >Accepted</option>
+                                <option value={false} >Rejected</option>
                             </Form.Select>
                         </Form.Group>
-
 
                     </Form>
                 </Modal.Body>
