@@ -12,7 +12,7 @@ export default function ManagerDashboard() {
   
   const authData = useContext(AuthContext)
   const [managerData, setManagerData] = useState({}); // for assigned locations of that manager
- 
+  const [searchValue, setSearchValue] = useState("");
   const[assignedLocation,setAssignedLocation]=useState({})
   const[empOnBench,setEmpOnBench]=useState()
   const navigate = useNavigate();
@@ -169,7 +169,7 @@ export default function ManagerDashboard() {
             <div className='buttons-manager-dashboard'>
               <AddEmployee />
               <form className="d-flex" role="search">
-                <input className="search-box1" type="search" placeholder=" search by name " aria-label="Search" />
+                <input className="search-box1" type="text" onChange={(e) => setSearchValue(e.target.value.toLowerCase())} value={searchValue} placeholder=" search by name " aria-label="Search" />
                 <img className="search" src={search} alt="search-img" />
               </form>
             </div>
@@ -194,7 +194,7 @@ export default function ManagerDashboard() {
                 <tbody className='thread1'>
                 {authData.dtoData &&
                   authData.dtoData.map((emp)=>(
-                    allowData(emp)==true?
+                    allowData(emp)==true && (searchValue == "" || emp.employeeName.toLowerCase().includes(searchValue)) ?
                   (<tr>
                       <th scope="row" onClick={() => {handleViewEmployee(emp.employeeId); authData.handleEmpId(emp.employeeId); }} >{emp.employeeId}</th>
                       <td>{emp.employeeName}</td>
