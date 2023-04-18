@@ -101,6 +101,7 @@ public class EmployeeService implements EmpDetailsService {
         dto.setBenchStatus(empDetails.getBenchStatus());
         String benchDate=empDetails.getBenchDate();
         String billableDate=empDetails.getBillableDate();
+        dto.setActiveStatus(empDetails.getActive());
         if(benchDate==null)benchDate=DateTimeFormatter.ofPattern("yyyy-MM-dd").format(LocalDateTime.now());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         try{

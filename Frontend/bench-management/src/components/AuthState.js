@@ -9,10 +9,11 @@ export default function AuthState(props) {
     const[currentRole,setCurrentRole]=useState(0)
     const[googleData,setGoogleData]=useState({})
     const[dtoData,setDtoData]=useState()
-    const [benchTimeValue, setBenchTimeValue] = useState(12);
-    const [experienceValue, setExperienceValue] = useState(10);
+    const [benchTimeValue, setBenchTimeValue] = useState(0);
+    const [experienceValue, setExperienceValue] = useState(0);
     const [show, setShow] = useState(false);
     const [post, setPost] = useState()
+    const[assignedLocation,setAssignedLocation]=useState({})
     const[checkFilter,setCheckFilter]=useState({
         "skill":0,
         "location":0,
@@ -67,7 +68,8 @@ export default function AuthState(props) {
           setCurrentRole, handleLogout, loopEntry,setLoopEntry, managerId, setManagerId
           ,handleEmpId, viewEmployeeId, benchTimeValue, setBenchTimeValue,
            experienceValue, setExperienceValue, handleClose,
-            setShow, show, handleShow, post, setPost }}>
+            setShow, show, handleShow, post, setPost,
+            assignedLocation, setAssignedLocation}}>
             {props.children}
         </AuthContext.Provider>
     )

@@ -86,7 +86,7 @@ function UpdateEmployee(props) {
             //    console.log("ID"+empDetail.id);
             const allEmp = await axios.put(`http://localhost:2538/api/empdetails/update/${fetchedEmpDetail.id}`, fetchedEmpDetail);
             //    console.log("Result"+allEmp);
-            //    authData.setPost({});
+               authData.setPost({});
         }
         catch {
             console.log()
@@ -165,7 +165,7 @@ function UpdateEmployee(props) {
                             <Form.Select aria-label="Default select example" name="benchStatus" onChange={handleChangeValue.bind(this)} >
 
                                 <option>Select from below</option>
-                                <option value={false} selected={fetchedEmpDetail.benchStatus == false} >Not On Bench</option>
+                                <option value={false} selected={fetchedEmpDetail.benchStatus == false} >Remove From Bench</option>
                                 <option value={true} selected={fetchedEmpDetail.benchStatus == true}  >On Bench</option>
                             </Form.Select>
                         </Form.Group><br />

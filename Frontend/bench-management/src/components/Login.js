@@ -80,7 +80,7 @@ export default function Login() {
             </div>
             <div className='loginPageContent'>
               <h5 className='welcomeHeading'>Welcome To</h5>
-              <h1 className='projectHeading'>Bench Management Application</h1>
+              <h1 className='projectHeading'>Bench Management System</h1>
               <b>
                 <hr className="hr-text" data-content="One Tap Below to Sign-in" />
               </b>
