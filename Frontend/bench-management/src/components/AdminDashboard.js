@@ -56,24 +56,38 @@ export default function AdminDashboard() {
     //iterate over the filter section
    
     //By default 
-    if (!authData.checkFilter["skill"] && !authData.checkFilter["location"] && !authData.checkFilter["status"])
-      return true;
+    // if (!authData.checkFilter["skill"] && !authData.checkFilter["location"] && !authData.checkFilter["status"])
+    //   return true;
 
-    //for exp
-    let okExp = true;
+    
+    // let okExp = true;
 
-    if (authData.experienceValue > emp.experience) {
-      okExp = false;
-    }
+    // if (authData.experienceValue > emp.experience) {
+    //   okExp = false;
+    // }
 
-    //for bench time
-    let okBench = true;
-    if (authData.benchTimeValue > emp.benchPeriod) {
-      okBench = false;
-    }
+    // let okBench = true;
+    // if (authData.benchTimeValue > emp.benchPeriod) {
+    //   okBench = false;
+    // }
 
     // if(okExp)return true;
     //for skills
+//By default
+if(emp.activeStatus == false) return false;
+    if (!authData.checkFilter["skill"] && !authData.checkFilter["location"] && !authData.checkFilter["status"] && authData.experienceValue==1 && authData.benchTimeValue==1)
+    return true;
+    //for bench
+    let okBench = false;
+    if (authData.benchTimeValue <= emp.benchPeriod/30) {
+    okBench = true;
+    }
+    // return okBench;
+    //for exp
+    let okExp = false;
+    if (authData.experienceValue <= emp.experience) {
+    okExp = true;
+    }
 
     if (authData.checkFilter["skill"]) {
       //iterate over the filters..
@@ -132,8 +146,12 @@ export default function AdminDashboard() {
 
     else if (authData.checkFilter["location"]) { return okLocation; }
     else if (authData.checkFilter["skill"]) { return okSkill; }
+    // else return okStatus;
+    else if(authData.experienceValue>1){
+      return okExp;
+    }
+    else if(authData.benchTimeValue>1 && okStatus)return okBench;
     else return okStatus;
-
 
   }
   console.log("Render..  " + JSON.stringify(authData.checkFilter) + " " + authData.experienceValue)
@@ -169,8 +187,8 @@ export default function AdminDashboard() {
             <div className="col-sm-3">
               <div className="card">
                 <div className="card-body">
-                  <h5 className="card-title">Employees Not On Bench</h5>
-                  <p className="card-text">10</p>
+                  <h5 className="card-title">Recently removed from bench</h5>
+                  <p className="card-text">{countActiveEmp}</p>
                 </div>
               </div>
             </div>
@@ -187,7 +205,7 @@ export default function AdminDashboard() {
             </div>
           </div>
           <div className='number'>
-            <p>{authData.dtoData && authData.dtoData.filter(key=> allowData(key) == true).length} rows returned</p>
+            <p></p>
           </div>
           <div className='table'>
             <div className='table-format'>
@@ -209,7 +227,7 @@ export default function AdminDashboard() {
                           <th className='pointer-to-profile' title="Click on ID to view profile" scope="row" onClick={() => { handleViewEmployee(); authData.handleEmpId(emp.employeeId); }} >{emp.employeeId}</th>
                           <td className="table-align-left">{emp.employeeName}</td>
                           <td className="table-align-left">{emp.location == 1 ? "Gurugram" : emp.location == 2 ? "Bangalore" : emp.location == 3 ? "Hyderabad" : "none"}</td>
-                          <td className="table-align-left">{emp.benchStatus == 0 ? "Not On Bench" : "On Bench"}</td>
+                          <td className="table-align-left">{emp.benchStatus == 0 ? "Removed From Bench" : "On Bench"}</td>
                           <td className="table-align-left"><UpdateEmployee id = {emp.employeeId}/></td>
                         </tr>) :
                         (<tr></tr>)

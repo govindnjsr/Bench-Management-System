@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Navbar from './Navbar';
 import SideBar from './SideBar';
 import search from './Images/search.png'
@@ -58,9 +58,9 @@ export default function ManagerDashboard() {
   const setLocations=()=>{
       managerData.assignedLocation && managerData.assignedLocation.map((key)=>{
       console.log("id "+key.id+" "+key.locName); 
-      if(key.id==1) assignedLocation.gurugram=true;
-      else if(key.id==2) assignedLocation.bangalore=true;
-      else if(key.id==3) assignedLocation.hyderabad=true;
+      if(key.id==1) authData.assignedLocation.gurugram=true;
+      else if(key.id==2) authData.assignedLocation.bangalore=true;
+      else if(key.id==3) authData.assignedLocation.hyderabad=true;
         
   })
  
@@ -68,16 +68,26 @@ export default function ManagerDashboard() {
  
   // -------------Filtering Section---------------------------
   const allowLocation=(emp)=>{    
-    if(emp.location==1 && assignedLocation["gurugram"])return true;
-    if(emp.location==2 && assignedLocation["bangalore"])return true;
-    if(emp.location==3 && assignedLocation["hyderabad"])return true;    
+    if(emp.location==1 && authData.assignedLocation["gurugram"])return true;
+    if(emp.location==2 && authData.assignedLocation["bangalore"])return true;
+    if(emp.location==3 && authData.assignedLocation["hyderabad"])return true;    
   }
   const allowData=(emp)=>{
     //By default 
-    if(!authData.checkFilter["skill"] && !authData.checkFilter["location"] && !authData.checkFilter["status"])
-      {
-        return allowLocation(emp);
-      }
+    if(emp.activeStatus === false) return false;
+    if (!authData.checkFilter["skill"] && !authData.checkFilter["location"] && !authData.checkFilter["status"] && authData.experienceValue==1 && authData.benchTimeValue==1)
+    return true;
+    //for bench
+    let okBench = false;
+    if (authData.benchTimeValue <= emp.benchPeriod/30) {
+    okBench = true;
+    }
+    // return okBench;
+    //for exp
+    let okExp = false;
+    if (authData.experienceValue <= emp.experience) {
+    okExp = true;
+    }
     let Keys=Object.keys(authData.appliedFilters);
     let ok=true,okSkill=true,okLocation=false;
     let selectDataKey=Object.keys(authData.checkFilter);    
@@ -100,9 +110,9 @@ export default function ManagerDashboard() {
       if(authData.checkFilter["location"]){
         //iterate over the filters..
         Keys.forEach(filterKey => {
-            if((assignedLocation["gurugram"] && filterKey==="gurugram" && authData.appliedFilters[filterKey] && (emp.location==1)) ||
-            (assignedLocation["bangalore"] && filterKey==="bangalore" && authData.appliedFilters[filterKey]===true && (emp.location==2) )||
-            ( assignedLocation["hyderabad"] && filterKey==="hyderabad" && authData.appliedFilters[filterKey]===true && (emp.location==3) ))            
+            if((authData.assignedLocation["gurugram"] && filterKey==="gurugram" && authData.appliedFilters[filterKey] && (emp.location==1)) ||
+            (authData.assignedLocation["bangalore"] && filterKey==="bangalore" && authData.appliedFilters[filterKey]===true && (emp.location==2) )||
+            ( authData.assignedLocation["hyderabad"] && filterKey==="hyderabad" && authData.appliedFilters[filterKey]===true && (emp.location==3) ))            
                {             
                 okLocation=true;
                }
@@ -137,7 +147,11 @@ export default function ManagerDashboard() {
      {return okLocation;}
      else if(authData.checkFilter["skill"] )
      {return okSkill;}
-     else return okStatus;
+     else if(authData.experienceValue>1){
+      return okExp;
+    }
+    else if(authData.benchTimeValue>1 && okStatus)return okBench;
+    else return okStatus;
  }
  console.log(authData.dtoData);
  console.log("filter" + JSON.stringify(authData.checkFilter));
@@ -166,8 +180,8 @@ export default function ManagerDashboard() {
             <div className="col-sm-3">
               <div className="card">
                 <div className="card-body">
-                  <h5 className="card-title">Employees Not On Bench</h5>
-                  <p className="card-text">10</p>
+                  <h5 className="card-title">Recently removed From Bench</h5>
+                  <p className="card-text">{authData.dtoData && authData.dtoData.filter(key=> (allowLocation(key) == true && key.benchStatus == 0)).length}</p>
                 </div>
               </div>
             </div>
@@ -183,9 +197,7 @@ export default function ManagerDashboard() {
             </div>
           </div>
           <div className='number'>
-            <p> {
-                authData.dtoData && authData.dtoData.filter(key=> allowData(key) == true).length
-              } rows returned</p>
+            <p> </p>
           </div>
           <div className='table'>
             <div className='table-format'>
@@ -207,7 +219,7 @@ export default function ManagerDashboard() {
                       <th className='pointer-to-profile' title="Click on ID to view profile" scope="row" onClick={() => {handleViewEmployee(emp.employeeId); authData.handleEmpId(emp.employeeId); }} >{emp.employeeId}</th>
                       <td className="table-align-left">{emp.employeeName}</td>
                       <td className="table-align-left">{emp.location==1?"Gurugram":emp.location==2?"Bangalore":emp.location==3?"Hyderabad":"none"}</td>
-                      <td className="table-align-left">{emp.benchStatus==0?"Not on Bench":"On Bench"}</td>
+                      <td className="table-align-left">{emp.benchStatus==0?"Removed From Bench":"On Bench"}</td>
                       <td className="table-align-left"><UpdateEmployee id = {emp.employeeId}/></td> 
                  </tr>)
                  :

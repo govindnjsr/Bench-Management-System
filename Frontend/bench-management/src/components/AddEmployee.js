@@ -18,7 +18,7 @@ function AddEmployee() {
         "benchDate": null,
         "billableDate": null,
         "benchStatus": null,   
-        "active": null,  
+        "active": true,
         "empLocation": null, 
         
        
@@ -93,6 +93,15 @@ function AddEmployee() {
                     <Form.Label>Location</Form.Label>
                     <Form.Select aria-label="Default select example" name="empLocation" onChange={handleChangeValue.bind(this)}>                        
                         <option>Select from below</option>
+                        {/* {
+                            authData.assignedLocation["gurugram"] ? <option value={1} >Gurugram</option> : <option></option>
+                        }
+                        {
+                            authData.assignedLocation["bangalore"] ? <option value={2} >Bangalore</option> : <option></option>
+                        }
+                        {
+                            authData.assignedLocation["hyderabad"] ? <option value={3} >Hyderabad</option> : <option></option>
+                        } */}
                         <option value={1} >Gurugram</option>
                         <option value={2}>Bangalore</option>
                         <option value={3}>Hyderabad</option>
@@ -204,17 +213,6 @@ function AddEmployee() {
                         </div>
                     ))}
                 </Form.Group>
-                <Form.Group>
-                    <Form.Label>Active</Form.Label>
-                    <Form.Select aria-label="Default select example" name="active" onChange={handleChangeValue.bind(this)}>
-                        
-                        <option>Select from below</option>
-                        <option value={true}>True</option>
-                        <option value={false}>False</option>
-                    </Form.Select>
-                </Form.Group>
-                
-                
                 </Form>
           </Modal.Body>
           <Modal.Footer>

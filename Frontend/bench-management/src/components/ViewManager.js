@@ -100,8 +100,8 @@ function ViewManager() {
           <Modal.Body>
           <Form id='view'>
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                    <Form.Label>Manager Name</Form.Label>
-                    <Form.Control name="managerId" onChange={handleAddLocation.bind(this)} placeholder="Enter manager name" />
+                    <Form.Label>Manager Id</Form.Label>
+                    <Form.Control name="managerId" onChange={handleAddLocation.bind(this)} placeholder="Enter manager Id" />
                 </Form.Group>
           <Form.Group>
                    

@@ -29,6 +29,7 @@ public class Dto {
     private boolean benchStatus;
     @Column(nullable = true)
     private long benchPeriod;
+    private boolean activeStatus;
 
 
 
