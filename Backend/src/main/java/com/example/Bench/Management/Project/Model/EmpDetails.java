@@ -39,6 +39,12 @@ public class EmpDetails {
     private boolean active;
     private String empLocation;
 
+    private String email;
+
+    private String businessUnit;
+
+    private boolean blocked;
+
     @OneToMany(
             cascade = CascadeType.ALL
     )
@@ -51,6 +57,8 @@ public class EmpDetails {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="skills_id",referencedColumnName = "id")
     private Skill skill;
+
+    private String Resume;
 
     public boolean getActive() {
         return active;

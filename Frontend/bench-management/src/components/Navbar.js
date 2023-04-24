@@ -14,25 +14,13 @@ export default function NavBar() {
           <img className="logoImageClass" src={logoImage} alt="accoliteLogo" />
         </div>
 
-        <div className="NavbarHeading">
-          <div class="col-md-5 mobile-inlineBlock">
-            <div
-            
-              class="search-header searchbar-home focusIcon"
-              data-step="1"
-              data-tooltipclass="db-intro-step-first"
-              data-intro="<b>Search Bar</b> <hr style = 'padding: 0px; border:1px dashed #cccccc;'> Top navigation is replaced by universal search across the application to easily search colleagues and visit their profile "
-              data-position="bottom"
-            >
-              <input
-                type="text"
-                class="global-search ui-autocomplete-input"
-                id="employee-search_dashboard"
-                placeholder="Search by Employee Name"
-                autocomplete="off"
-              />
-            </div>
+        <div className="NavbarSearch">
+          <div className="search-icon">
+          <i class="fa-sharp fa-solid fa-magnifying-glass "style={{color:"#1e2c3f"}}></i>
           </div>
+          <form>
+              <input className="search" type="search" placeholder="Search by Name" aria-label="Search"/>
+           </form>
         </div>
 
         <div className="profile">

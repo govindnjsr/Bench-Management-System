@@ -12,6 +12,8 @@ import AuthContext from "./AuthContext";
 import Form from "react-bootstrap/Form";
 import Table from "react-bootstrap/Table";
 import UploadFile from "./UploadFile";
+import DownloadFile from "./DownloadFile";
+import BlockEmployee from "./BlockEmployee";
 
 export default function AdminDashboard() {
   const authData = useContext(AuthContext);
@@ -278,7 +280,7 @@ console.log(file);
                 <thead className="thread1">
                   <tr className="tableHeader">
                     <th className="table-align-left" scope="col">
-                      Block{" "}
+                      Block
                     </th>
                     <th className="table-align-left" scope="col">
                       Name
@@ -311,7 +313,7 @@ console.log(file);
                         <tr>
                           {/* <th className='pointer-to-profile' title="Click on ID to view profile" scope="row" onClick={() => { handleViewEmployee(); authData.handleEmpId(emp.employeeId); }} >{emp.employeeId}</th> */}
                           <th className="table-align-left">
-                            <Form>
+                            {/* <Form>
                               {["checkbox"].map((type) => (
                                 <div key={`inline-${type}`} className="mb-3">
                                   <Form.Check
@@ -323,17 +325,11 @@ console.log(file);
                                   />
                                 </div>
                               ))}
-                            </Form>
+                            </Form> */}
+                            <BlockEmployee/>
                           </th>
                           <td
-                            className="pointer-to-profile"
-                            title="Click on ID to view profile"
-                            scope="row"
-                            onClick={() => {
-                              handleViewEmployee();
-                              authData.handleEmpId(emp.employeeId);
-                            }}
-                          >
+                            className="pointer-to-profile" title="Click on ID to view profile" scope="row" onClick={() => {handleViewEmployee();authData.handleEmpId(emp.employeeId);}}>                                                                                              
                             {emp.employeeName}
                           </td>
                           <td className="table-align-left">
@@ -355,18 +351,10 @@ console.log(file);
                           </td>
                           {/* <td className="table-align-left"><UpdateEmployee id = {emp.employeeId}/></td> */}
                           <td className="table-align-left">
-                            {/* <button className="button5" onClick={() => inputFile.current.click()}>
-                              <i class="fa-solid fa-upload"></i>
-                            </button>
-                            <input type="file" onChange={handleChange} ref={inputFile} style={{display:'none'}}/>
-                            {file.map(x => x.name)}
-                            &nbsp; */}
-
-                            <UploadFile/>
-                            <button className="button5">
-                              <i class="fa-solid fa-download"></i>
-                            </button>
+                            <UploadFile id={emp.employeeId}/>
+                            <DownloadFile id={emp.employeeId} name={emp.employeeName}/>
                           </td>
+                          
                           <td className="table-align-left-action">
                             <UpdateEmployee id={emp.employeeId}/>
                             {/* {" "} */}
