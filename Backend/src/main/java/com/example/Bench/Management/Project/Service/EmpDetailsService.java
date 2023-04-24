@@ -28,4 +28,6 @@ public interface EmpDetailsService {
      public List<Dto>getAllDto();
 
       public String updateEmployeeById(Long employeeId, EmpDetails empDetails);
+
+ public void saveResume(String originalFilename, Long employeeId);
 }
