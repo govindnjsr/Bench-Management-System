@@ -200,7 +200,7 @@ const handleChange=e=>{
             <div className="buttons">
               <ViewManager />
               <button className="button2" onClick={handleReport}>
-              <i class="fa-solid fa-chart-simple"></i> &nbsp;
+              <i className="fa-solid fa-chart-simple"></i> &nbsp;
                 VIEW REPORT
               </button>
             </div>

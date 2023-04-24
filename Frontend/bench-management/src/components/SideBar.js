@@ -119,7 +119,7 @@ export default function SideBar() {
 
           <div className="filterByBenchTime">
             <p className="pfilter">
-              BENCH TIME{" "}
+              BENCH AGING{" "}
               <span className="span-style">
                 ( {authData.benchTimeValue -1 }+ Months)
               </span>
@@ -144,7 +144,7 @@ export default function SideBar() {
             <span className="sliderParaRightBench">12 Months</span>
           </div>
           <div className="accordian">
-            <Accordion eventKey={["0"]}>
+            <Accordion eventKey={["0"]} alwaysOpen>
               <Accordion.Item eventKey="0">
                 <Accordion.Header><div className="pfilter">BUSINESS UNIT</div></Accordion.Header>
                 <Accordion.Body>
@@ -484,6 +484,8 @@ export default function SideBar() {
                 </Accordion.Body>
               </Accordion.Item>
             </Accordion>
+            <br/>
+            <button className="button4">Apply Filters</button>
           </div>
         </div>
       </div>
