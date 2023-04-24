@@ -9,8 +9,8 @@ export default function AuthState(props) {
     const[currentRole,setCurrentRole]=useState(0)
     const[googleData,setGoogleData]=useState({})
     const[dtoData,setDtoData]=useState()
-    const [benchTimeValue, setBenchTimeValue] = useState(0);
-    const [experienceValue, setExperienceValue] = useState(0);
+    const [benchTimeValue, setBenchTimeValue] = useState(1);
+    const [experienceValue, setExperienceValue] = useState(1);
     const [show, setShow] = useState(false);
     const [post, setPost] = useState()
     const[assignedLocation,setAssignedLocation]=useState({})
