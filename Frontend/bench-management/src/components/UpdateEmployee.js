@@ -25,63 +25,59 @@ function UpdateEmployee(props) {
             "springboot": false
         }
     )
-    const [newSkills, setNewSkills] = useState()
+   
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const [intDetails, setintDetails] = useState({
-        "result": "",
-        "client": "",
-        "date": ""
-    })
+    
 
     const showDetail = async (id) => {
         const fetchedData = await axios.get(`http://localhost:2538/api/empdetails/get/${id}`);
         setFetchEmpDetail(fetchedData.data);
-        setCurrentSkill(fetchedData.data.skill);
+        //setCurrentSkill(fetchedData.data.skill);
         //deep copy
-        setNewSkills(JSON.parse(JSON.stringify(fetchedData.data.skill)));
+       // setNewSkills(JSON.parse(JSON.stringify(fetchedData.data.skill)));
     }
     const handleChangeValue = (e) => {
         setFetchEmpDetail({ ...fetchedEmpDetail, [e.target.name]: e.target.value });
     };
 
-    const handleChangeValueInterview = (e) => {
-        setintDetails({ ...intDetails, [e.target.name]: e.target.value });
-    }
+    // const handleChangeValueInterview = (e) => {
+    //     setintDetails({ ...intDetails, [e.target.name]: e.target.value });
+    // }
 
-    const handleSkillValue = (e) => {
-        const { value, checked } = e.target;
-        let True = true, False = false;
-        if (currentSkills[e.target.name]) {
-            // setCurrentSkill({...currentSkills,[e.target.name]:True});
-            e.target.checked = true;
+    // const handleSkillValue = (e) => {
+    //     const { value, checked } = e.target;
+    //     let True = true, False = false;
+    //     if (currentSkills[e.target.name]) {
+    //         // setCurrentSkill({...currentSkills,[e.target.name]:True});
+    //         e.target.checked = true;
 
-        }
-        else {
-            if (checked) {
-                setNewSkills({ ...newSkills, [e.target.name]: True });
-            }
-            else {
-                setNewSkills({ ...newSkills, [e.target.name]: False });
-            }
-        }
+    //     }
+    //     else {
+    //         if (checked) {
+    //             setNewSkills({ ...newSkills, [e.target.name]: True });
+    //         }
+    //         else {
+    //             setNewSkills({ ...newSkills, [e.target.name]: False });
+    //         }
+    //     }
 
-    }
-    const checkCheck = (value) => {
-        if (value) {
-            return "checked";
-        }
-    }
+    // }
+    // const checkCheck = (value) => {
+    //     if (value) {
+    //         return "checked";
+    //     }
+    // }
 
     const saveDataAtBackend = async () => {
         try {
-            fetchedEmpDetail.skill = newSkills;
+            // fetchedEmpDetail.skill = newSkills;
             // fetchedEmpDetail.interviewDetails.push(intDetails);
-            const { skill, interviewDetails: indetails } = fetchedEmpDetail;
-            indetails.push(intDetails);
-            fetchedEmpDetail.interviewDetails = indetails;
+            //const { skill, interviewDetails: indetails } = fetchedEmpDetail;
+            //indetails.push(intDetails);
+            // fetchedEmpDetail.interviewDetails = indetails;
             console.log("new POST DATA " + JSON.stringify(fetchedEmpDetail));
             //    console.log("ID"+empDetail.id);
             const allEmp = await axios.put(`http://localhost:2538/api/empdetails/update/${fetchedEmpDetail.id}`, fetchedEmpDetail);
@@ -95,12 +91,12 @@ function UpdateEmployee(props) {
 
     const saveData = () => {
         saveDataAtBackend();
-        // handleClose();
+        handleClose();
     }
 
 
     console.log("cur emp " + JSON.stringify(fetchedEmpDetail))
-    console.log("int details" + JSON.stringify(intDetails))
+    // console.log("int details" + JSON.stringify(intDetails))
 
     //    console.log("aaaaaaaaaaa "+JSON.stringify(skill)+" -> "+interviewDetails)
     return (
@@ -110,7 +106,7 @@ function UpdateEmployee(props) {
        View / Update
       </Button> */}
             <button className='button5' onClick={() => { handleShow(); showDetail(props.id); }}>
-                Update
+            <i class="fa-sharp fa-solid fa-pen-to-square"></i>
             </button>
 
 
@@ -125,7 +121,7 @@ function UpdateEmployee(props) {
                 </Modal.Header>
                 <Modal.Body>
                     <Form id='add'>
-                        <Form.Group>
+                        {/* <Form.Group>
                             <Form.Label>Location</Form.Label>
                             <Form.Select aria-label="Default select example" name="empLocation" onChange={handleChangeValue.bind(this)}>
 
@@ -134,9 +130,9 @@ function UpdateEmployee(props) {
                                 <option value={2} selected={fetchedEmpDetail.empLocation == 2} >Bangalore</option>
                                 <option value={3} selected={fetchedEmpDetail.empLocation == 3} >Hyderabad</option>
                             </Form.Select>
-                        </Form.Group><br />
+                        </Form.Group><br /> */}
 
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                        {/* <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label>Name</Form.Label>
                             <Form.Control type="text" placeholder="Enter Name" name="name" defaultValue={fetchedEmpDetail.name} onChange={handleChangeValue.bind(this)} />
                         </Form.Group>
@@ -151,15 +147,15 @@ function UpdateEmployee(props) {
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label>Work Experience</Form.Label>
                             <Form.Control name="workExp" type="number" placeholder="Enter work experience in years" defaultValue={fetchedEmpDetail.workExp} onChange={handleChangeValue.bind(this)} />
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                        </Form.Group> */}
+                        {/* <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label>Bench Start Date</Form.Label>
                             <Form.Control name="benchDate" type="date" placeholder="Enter bench date" defaultValue={fetchedEmpDetail.benchDate} onChange={handleChangeValue.bind(this)} />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label>Last Billable Date</Form.Label>
                             <Form.Control name="billableDate" type="date" placeholder="Enter last billable date" defaultValue={fetchedEmpDetail.billableDate} onChange={handleChangeValue.bind(this)} />
-                        </Form.Group>
+                        </Form.Group> */}
                         <Form.Group>
                             <Form.Label>Bench Status</Form.Label>
                             <Form.Select aria-label="Default select example" name="benchStatus" onChange={handleChangeValue.bind(this)} >
@@ -169,7 +165,7 @@ function UpdateEmployee(props) {
                                 <option value={true} selected={fetchedEmpDetail.benchStatus == true}  >On Bench</option>
                             </Form.Select>
                         </Form.Group><br />
-                        <Form.Group>
+                        {/* <Form.Group>
                             <Form.Label>Skills</Form.Label>
                             {['checkbox'].map((type) => (
                                 <div key={`inline-${type}`} className="mb-3" onChange={handleSkillValue.bind(this)}>
@@ -262,8 +258,8 @@ function UpdateEmployee(props) {
                                     />
                                 </div>
                             ))}
-                        </Form.Group>
-                        <Form.Group>
+                        </Form.Group> */}
+                        {/* <Form.Group>
                             <Form.Label>Active</Form.Label>
                             <Form.Select aria-label="Default select example" name="active" onChange={handleChangeValue.bind(this)}>
 
@@ -285,7 +281,7 @@ function UpdateEmployee(props) {
                                 <option value={true} >Accepted</option>
                                 <option value={false} >Rejected</option>
                             </Form.Select>
-                        </Form.Group>
+                        </Form.Group> */}
 
                     </Form>
                 </Modal.Body>

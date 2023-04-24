@@ -137,4 +137,12 @@ public class EmployeeService implements EmpDetailsService {
         return "updated";
     }
 
+    @Override
+    public void saveResume(String originalFilename,Long employeeId) {
+        EmpDetails empDetails2=empDetailsRepo.findById(employeeId).get();
+        empDetails2.setResume(originalFilename);
+        empDetailsRepo.save(empDetails2);
+
+    }
+
 }

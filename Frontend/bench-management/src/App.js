@@ -13,6 +13,7 @@ import AdminDashboard from './components/AdminDashboard';
 import ManagerDashboard from './components/ManagerDashboard';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ViewReport from './components/ViewReport';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
   const router = createBrowserRouter([
     { path: "/", element: <Login /> },
     { path: "/viewEmployee", element: <ViewEmployee /> },
+    { path: "/viewReport", element: <ViewReport /> },
   ]);
 
   return (
