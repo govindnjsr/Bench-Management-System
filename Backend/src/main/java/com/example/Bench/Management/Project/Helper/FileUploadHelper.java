@@ -11,7 +11,7 @@ import java.nio.file.StandardCopyOption;
 @Setter
 @Component
 public class FileUploadHelper {
-    public final String UPLOAD_DIR="C:/Users/megha.mathur/Desktop/Bench Management System/Bench-Management-System/Backend/src/main/resources/static/image";
+    public final String UPLOAD_DIR="C:/Users/dhruv.bansal/gitRepoProjects/Bench-Management-System/Backend/src/main/resources/static/image";
     public String uploadFile(MultipartFile multipartFile, Long employeeId){
         //eitherwecanuseInputStream/ouputStreamorNIO package
         //NIOpackagehas .copy() method that takes 3 parameters 1.input stream(source) 2. path where you want to store 3.Replace option

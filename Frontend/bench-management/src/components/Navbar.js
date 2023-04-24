@@ -6,7 +6,7 @@ import search from "./Images/search.png";
 export default function NavBar() {
   const authData = useContext(AuthContext);
   const userImageUrl = authData.googleData.picture;
-  const [searchValue, setSearchValue] = useState("");
+  // const [searchValue, setSearchValue] = useState("");
   return (
     <>
       <div className="NavbarComponent">
@@ -19,7 +19,7 @@ export default function NavBar() {
           <i class="fa-sharp fa-solid fa-magnifying-glass "style={{color:"#1e2c3f"}}></i>
           </div>
           <form>
-              <input className="search" type="search" placeholder="Search by Name" aria-label="Search"/>
+              <input className="search" type="text" onChange={(e) => authData.setSearchValue(e.target.value.toLowerCase())} value={authData.searchValue} placeholder="Search by Name" aria-label="Search"/>
            </form>
         </div>
 
