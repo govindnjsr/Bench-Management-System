@@ -16,12 +16,13 @@ import 'react-toastify/dist/ReactToastify.css';
 import ViewReport from './components/ViewReport';
 
 
+
 function App() {
 
   const authData = useContext(AuthContext);
   
   const router = createBrowserRouter([
-    { path: "/", element: <Login /> },
+    { path: "/", element: <Login/> },
     { path: "/viewEmployee", element: <ViewEmployee /> },
     { path: "/viewReport", element: <ViewReport /> },
   ]);

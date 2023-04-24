@@ -95,7 +95,7 @@
   padding-top: 1%;
   position: fixed;
   background-color:#f7f8fa;
-  height: 87.5vh;
+  height: 83vh;
   overflow-y: scroll;
   width: 18vw;
   margin-left: 0%;
@@ -269,7 +269,7 @@
   align-items: center;
   justify-content: center;
   position: fixed;
-  font-size: 20px;
+  font-size: 17px;
   font-weight: 600;
   border-radius: none;
 }
@@ -288,11 +288,11 @@
 
 .search-icon{
   align-items: center;
-  padding-top: 10px;
+  padding-top: 3%;
   width: 5vw;
   height: 9vh;
   margin-top:1.3%;
-  padding-left: 5%;
+  padding-left: 4%;
   margin-left: 2px;
   border-radius: 2px;
   background-color:white;
@@ -441,9 +441,9 @@ input.global-search {
 .button4 {
   height: 5vh;
   width:9vw;
-  background-color: #489fb5;
+  background-color: #01070d;
   border: none;
-  color: rgb(24, 23, 23);
+  color:white;
   padding: 6px 15px 15px 15px;
   margin: 0px 0px 0px 45px;
   text-align: center;
@@ -755,8 +755,34 @@ border: none;
 }
 
 /* ////////////////////////CSS FOR VIEWREPORT//////////////////////////////////////////// */
-.viewReport{
-  margin-top:20px;
-  align-items: center;
+.view-report{
+ display: flex;
+ flex-direction:column;
 }
 
+.report-heading{
+  background-color: #01070d;
+  color: white;
+  align-items: center;
+  width: 100vw;
+  margin-top: 5.8%;
+  padding: 0.1% 0% 0.1% 30%;
+}
+
+.representations{
+  margin-top: 3%;
+  display: flex;
+  flex-direction: row;
+  gap:20px;
+}
+.pie-chart{
+  background-color: #1e2c3f;
+  height: 74vh;
+ 
+}
+
+.bar-graph{
+  height: 74vh;
+  width:100vw;
+  margin-left: 40%;
+}
