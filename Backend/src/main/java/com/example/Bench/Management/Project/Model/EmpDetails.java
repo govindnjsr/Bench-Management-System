@@ -37,7 +37,7 @@ public class EmpDetails {
     private String billableDate;
     private boolean benchStatus;
     private boolean active;
-    private long empLocation;
+    private String empLocation;
 
     @OneToMany(
             cascade = CascadeType.ALL

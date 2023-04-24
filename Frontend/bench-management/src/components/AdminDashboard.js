@@ -214,7 +214,7 @@ export default function AdminDashboard() {
       " " +
       authData.experienceValue
   );
-  // console.log("dtoo " + JSON.stringify(authData.dtoData))
+  console.log("dtoo " + JSON.stringify(authData.dtoData))
 
   // const data = authData.dtoData?.filter(emp => allowData(emp == true))
   // setFilterDataOfDto(data);
