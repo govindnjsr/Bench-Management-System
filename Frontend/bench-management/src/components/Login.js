@@ -69,7 +69,7 @@ export default function Login() {
     fetchApi();
   }, [authData.handleLogout]);
 
-  // console.log(loginApiData)
+  console.log(loginApiData)
   return (
     authData.isAuthentication === false ?
       (
