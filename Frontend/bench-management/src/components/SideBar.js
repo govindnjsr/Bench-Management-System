@@ -78,7 +78,7 @@ export default function SideBar() {
             <p className="pfilter">
               EXPERIENCE{" "}
               <span className="span-style">
-                ( {authData.experienceValue - 1}+ Years)
+                ( {authData.experienceValue -1 }+ Years)
               </span>
             </p>
             <label htmlFor="customRange2" className="form-label"></label>
@@ -101,7 +101,7 @@ export default function SideBar() {
             <p className="pfilter">
               BENCH AGING{" "}
               <span className="span-style">
-                ( {authData.benchTimeValue - 1}+ Months)
+                ( {authData.benchTimeValue -1 }+ Months)
               </span>
             </p>
             <label htmlFor="customRange2" className="form-label"></label>

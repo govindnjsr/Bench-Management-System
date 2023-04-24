@@ -216,13 +216,13 @@ export default function AdminDashboard() {
       " " +
       authData.experienceValue
   );
-  // console.log("dtoo " + JSON.stringify(authData.dtoData))
+  console.log("dtoo " + JSON.stringify(authData.dtoData))
 
   // const data = authData.dtoData?.filter(emp => allowData(emp == true))
   // setFilterDataOfDto(data);
   // console.log("filter data : " + filterDataOfDto);
   // setRowsReturned(filterDataOfDto?.length);
-  console.log(searchValue);
+  console.log(authData.searchValue);
 
 const[file,setFile]=useState([]);
 const inputFile= useRef(null);
@@ -306,10 +306,10 @@ console.log(file);
                   {authData.dtoData &&
                     authData.dtoData.map((emp) =>
                       allowData(emp) == true &&
-                      (searchValue == "" ||
+                      (authData.searchValue == "" ||
                         emp.employeeName
                           .toLowerCase()
-                          .includes(searchValue)) ? (
+                          .includes(authData.searchValue)) ? (
                         <tr>
                           {/* <th className='pointer-to-profile' title="Click on ID to view profile" scope="row" onClick={() => { handleViewEmployee(); authData.handleEmpId(emp.employeeId); }} >{emp.employeeId}</th> */}
                           <th className="table-align-left">
@@ -347,7 +347,7 @@ console.log(file);
                           <td className="table-align-left">
                             {emp.benchStatus == 0
                               ? "Removed From Bench"
-                              : "On Bench"}
+                              : `${Math.round(emp.benchPeriod / 30)} Months, ${emp.benchPeriod%30} Days`}
                           </td>
                           {/* <td className="table-align-left"><UpdateEmployee id = {emp.employeeId}/></td> */}
                           <td className="table-align-left">
