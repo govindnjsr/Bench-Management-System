@@ -14,6 +14,18 @@ export default function AuthState(props) {
     const [show, setShow] = useState(false);
     const [post, setPost] = useState()
     const[assignedLocation,setAssignedLocation]=useState({})
+    const [requestDto,setReqDto]=useState({
+        "experience": 0,
+        "benchPeriod": 0,
+        "java": true,
+        "python": false,
+        "react": false,
+        "angular": true,
+        "html": true,
+        "css": true,
+        "javascript": false,
+        "springboot": false  
+      })
     const[checkFilter,setCheckFilter]=useState({
         "skill":0,
         "location":0,
@@ -63,7 +75,7 @@ export default function AuthState(props) {
         console.log("logged out successfully")
     }
     return (
-        <AuthContext.Provider value={{locationAcess,setLocationAccess,checkFilter,setCheckFilter,appliedFilters,dtoData, googleData, setAppliedFilters,setDtoData,isAuthentication, currentRole,
+        <AuthContext.Provider value={{requestDto,setReqDto,locationAcess,setLocationAccess,checkFilter,setCheckFilter,appliedFilters,dtoData, googleData, setAppliedFilters,setDtoData,isAuthentication, currentRole,
          setGoogleData, handleLogin, setAuthentication,
           setCurrentRole, handleLogout, loopEntry,setLoopEntry, managerId, setManagerId
           ,handleEmpId, viewEmployeeId, benchTimeValue, setBenchTimeValue,

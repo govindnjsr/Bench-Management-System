@@ -17,6 +17,7 @@ public class Skill {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private long id;
+    @Column(nullable = true)
     private boolean java;
     private boolean python;
     private boolean react;

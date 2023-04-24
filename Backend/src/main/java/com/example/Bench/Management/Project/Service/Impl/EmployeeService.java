@@ -1,9 +1,6 @@
 package com.example.Bench.Management.Project.Service.Impl;
 
-import com.example.Bench.Management.Project.Model.Dto;
-import com.example.Bench.Management.Project.Model.EmpDetails;
-import com.example.Bench.Management.Project.Model.Location;
-import com.example.Bench.Management.Project.Model.Skill;
+import com.example.Bench.Management.Project.Model.*;
 import com.example.Bench.Management.Project.Repository.EmpDetailsRepo;
 import com.example.Bench.Management.Project.Service.EmpDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +10,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -78,10 +76,65 @@ public class EmployeeService implements EmpDetailsService {
     @Override
     public List<Dto> getAllDto() {
 
-        return empDetailsRepo.findAll()
+        List<Dto>curList=empDetailsRepo.findAll()
                 .stream()
                 .map(this::convertEntityToDto)
                 .collect(Collectors.toList());
+        List<Dto>sendList=new ArrayList<>();
+
+        for(int i=0;i<curList.size();i++){
+            if(curList.get(i)!=null){
+                sendList.add(curList.get(i));
+            }
+        }
+        return sendList;
+
+    }
+
+    @Override
+    public List<Dto> getAllFilteredDto(RequestDto requestDto) {
+        List<Dto>curList=empDetailsRepo.findAll()
+                .stream()
+                .map(this::convertEntityToDto)
+                .collect(Collectors.toList());
+        List<Dto>sendList=new ArrayList<>();
+
+        for(int i=0;i<curList.size();i++){
+            //check for experience
+            boolean okExp=true;
+            if(curList.get(i).getExperience()<requestDto.getExperience()){
+                okExp=false;
+            }
+           //check for skills atleast one of selected
+            boolean okSkills=false;
+            if((requestDto.isJava() && curList.get(i).isJava()==requestDto.isJava())  ||
+                    (requestDto.isPython() && curList.get(i).isPython()==requestDto.isPython()) ||
+                    (requestDto.isReact() && curList.get(i).isReact()==requestDto.isReact())||
+                    (requestDto.isAngular() && curList.get(i).isAngular()==requestDto.isAngular())||
+                    (requestDto.isHtml() && curList.get(i).isHtml()==requestDto.isHtml())||
+                    (requestDto.isCss() && curList.get(i).isCss()==requestDto.isCss()) ||
+                    (requestDto.isJavascript() && curList.get(i).isJavascript()==requestDto.isJavascript())||
+                    (requestDto.isSpringboot() && curList.get(i).isSpringboot()==requestDto.isSpringboot())){
+                okSkills=true;
+            }
+//            if(!okSkills)okSkills=true;
+            //check for bench period
+            boolean okBench=true;
+            if(curList.get(i).getBenchPeriod()<requestDto.getBenchPeriod()){
+                okBench=false;
+            }
+           //check for location do it in frontent
+            //check bussiness unit in frontend
+
+            //check for blocked do it in frontend
+
+
+            if(okExp && okSkills && okBench)
+            {
+                sendList.add(curList.get(i));
+            }
+        }
+        return sendList;
     }
 
     private Dto convertEntityToDto(EmpDetails empDetails){
@@ -102,6 +155,8 @@ public class EmployeeService implements EmpDetailsService {
         String benchDate=empDetails.getBenchDate();
         String billableDate=empDetails.getBillableDate();
         dto.setActiveStatus(empDetails.getActive());
+        dto.setBusinessUnit(empDetails.getBusinessUnit());
+        dto.setEmail(empDetails.getEmail());
         if(benchDate==null)benchDate=DateTimeFormatter.ofPattern("yyyy-MM-dd").format(LocalDateTime.now());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         try{
@@ -115,7 +170,10 @@ public class EmployeeService implements EmpDetailsService {
             else dto.setBenchPeriod(0);
         }
         catch (ParseException e) {}
+
+
         return dto;
+
 
     }
 

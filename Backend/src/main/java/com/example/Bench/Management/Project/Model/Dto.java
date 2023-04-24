@@ -31,11 +31,7 @@ public class Dto {
     @Column(nullable = true)
     private long benchPeriod;
     private boolean activeStatus;
-
-
-
-
-
-
-
+    private String businessUnit;
+    private String email;
+    private boolean blocked;
 }

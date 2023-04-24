@@ -32,6 +32,20 @@ export default function AdminDashboard() {
   const [filterDataOfDto, setFilterDataOfDto] = useState();
   const [rowsReturned, setRowsReturned] = useState(0);
   const [searchValue, setSearchValue] = useState("");
+  const [newData,setNewData]=useState();
+  
+
+  const fetchNew =async ()=>{
+    try{
+      const allnewDto = await axios.post(
+        "http://localhost:2538/api/dto/get/filterd",authData.requestDto
+      );
+      setNewData(allnewDto.data);
+    }
+    catch {
+      console.log();
+    }
+  }
 
   const fetchApi = async () => {
     try {
@@ -59,8 +73,9 @@ export default function AdminDashboard() {
     }
   };
   useEffect(() => {
-    fetchApi();
-  }, [authData.appliedFilters, authData.dtoDetails, authData.post]);
+    // fetchApi();
+    fetchNew();
+  }, [authData.appliedFilters, authData.dtoDetails, authData.post,authData.requestDto]);
 
   const allowData = (emp) => {
     let Keys = Object.keys(authData.appliedFilters);
@@ -231,7 +246,10 @@ const handleChange=e=>{
   setFile([...file,e.target.files[0]]);
   
 }
-console.log(file);
+// console.log(file);
+console.log("new Data "+JSON.stringify(newData));
+console.log("exppppp "+authData.requestDto.experience+" "+authData.requestDto.benchPeriod);
+
   
   return (
     <div className="window">
@@ -303,13 +321,14 @@ console.log(file);
                   </tr>
                 </thead>
                 <tbody className="thread1">
-                  {authData.dtoData &&
-                    authData.dtoData.map((emp) =>
-                      allowData(emp) == true &&
-                      (searchValue == "" ||
-                        emp.employeeName
-                          .toLowerCase()
-                          .includes(searchValue)) ? (
+                  {newData &&
+                    newData.map((emp) =>
+                      // allowData(emp) == true &&
+                      // (searchValue == "" ||
+                      //   emp.employeeName
+                      //     .toLowerCase()
+                      //     .includes(searchValue)) ?
+                           (
                         <tr>
                           {/* <th className='pointer-to-profile' title="Click on ID to view profile" scope="row" onClick={() => { handleViewEmployee(); authData.handleEmpId(emp.employeeId); }} >{emp.employeeId}</th> */}
                           <th className="table-align-left">
@@ -361,9 +380,10 @@ console.log(file);
                             &nbsp; &nbsp;
                           </td>
                         </tr>
-                      ) : (
-                        <tr></tr>
                       )
+                      //  : (
+                      //   <tr></tr>
+                      // )
                     )}
                 </tbody>
               </table>

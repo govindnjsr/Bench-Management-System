@@ -78,7 +78,7 @@ export default function SideBar() {
             <p className="pfilter">
               EXPERIENCE{" "}
               <span className="span-style">
-                ( {authData.experienceValue - 1}+ Years)
+                ( {authData.requestDto.experience}+ Years)
               </span>
             </p>
             <label htmlFor="customRange2" className="form-label"></label>
@@ -89,7 +89,11 @@ export default function SideBar() {
               max="10"
               defaultValue="0"
               onChange={(e) => {
-                authData.setExperienceValue(e.target.value);
+                // authData.setExperienceValue(e.target.value);
+                authData.setReqDto({
+                  ...authData.requestDto,
+                  ["experience"]: e.target.value-1,
+                });
               }}
               id="customRange2"
             />
@@ -112,7 +116,11 @@ export default function SideBar() {
               max="12"
               defaultValue="0"
               onChange={(e) => {
-                authData.setBenchTimeValue(e.target.value);
+                // authData.setBenchTimeValue(e.target.value);
+                authData.setReqDto({
+                  ...authData.requestDto,
+                  ["benchPeriod"]: e.target.value-1,
+                });
               }}
               id="customRange2"
             />

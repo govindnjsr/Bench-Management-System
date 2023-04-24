@@ -3,6 +3,7 @@ package com.example.Bench.Management.Project.Service;
 import com.example.Bench.Management.Project.Model.Dto;
 import com.example.Bench.Management.Project.Model.EmpDetails;
 import com.example.Bench.Management.Project.Model.ManagerDetails;
+import com.example.Bench.Management.Project.Model.RequestDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -26,6 +27,9 @@ public interface EmpDetailsService {
      public EmpDetails getEmployeeById(Long employeeId);
 
      public List<Dto>getAllDto();
+
+       public List<Dto>getAllFilteredDto(RequestDto requestDto);
+
 
       public String updateEmployeeById(Long employeeId, EmpDetails empDetails);
 
