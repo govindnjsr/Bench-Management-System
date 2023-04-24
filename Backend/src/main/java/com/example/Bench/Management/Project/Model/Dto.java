@@ -17,6 +17,7 @@ public class Dto {
      private long employeeId;
     private String employeeName;
      private long experience;
+     @Column(nullable = true)
      private boolean java;
      private boolean python;
     private boolean react;
@@ -25,7 +26,7 @@ public class Dto {
     private boolean css;
     private boolean javascript;
     private boolean springboot;
-    private long location;
+    private String location;
     private boolean benchStatus;
     @Column(nullable = true)
     private long benchPeriod;

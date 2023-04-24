@@ -13,6 +13,7 @@ import Form from "react-bootstrap/Form";
 import Table from "react-bootstrap/Table";
 import UploadFile from "./UploadFile";
 import DownloadFile from "./DownloadFile";
+import BlockEmployee from "./BlockEmployee";
 
 export default function AdminDashboard() {
   const authData = useContext(AuthContext);
@@ -215,7 +216,7 @@ export default function AdminDashboard() {
       " " +
       authData.experienceValue
   );
-  // console.log("dtoo " + JSON.stringify(authData.dtoData))
+  console.log("dtoo " + JSON.stringify(authData.dtoData))
 
   // const data = authData.dtoData?.filter(emp => allowData(emp == true))
   // setFilterDataOfDto(data);
@@ -279,7 +280,7 @@ console.log(file);
                 <thead className="thread1">
                   <tr className="tableHeader">
                     <th className="table-align-left" scope="col">
-                      Block{" "}
+                      Block
                     </th>
                     <th className="table-align-left" scope="col">
                       Name
@@ -312,7 +313,7 @@ console.log(file);
                         <tr>
                           {/* <th className='pointer-to-profile' title="Click on ID to view profile" scope="row" onClick={() => { handleViewEmployee(); authData.handleEmpId(emp.employeeId); }} >{emp.employeeId}</th> */}
                           <th className="table-align-left">
-                            <Form>
+                            {/* <Form>
                               {["checkbox"].map((type) => (
                                 <div key={`inline-${type}`} className="mb-3">
                                   <Form.Check
@@ -324,17 +325,11 @@ console.log(file);
                                   />
                                 </div>
                               ))}
-                            </Form>
+                            </Form> */}
+                            <BlockEmployee/>
                           </th>
                           <td
-                            className="pointer-to-profile"
-                            title="Click on ID to view profile"
-                            scope="row"
-                            onClick={() => {
-                              handleViewEmployee();
-                              authData.handleEmpId(emp.employeeId);
-                            }}
-                          >
+                            className="pointer-to-profile" title="Click on ID to view profile" scope="row" onClick={() => {handleViewEmployee();authData.handleEmpId(emp.employeeId);}}>                                                                                              
                             {emp.employeeName}
                           </td>
                           <td className="table-align-left">
