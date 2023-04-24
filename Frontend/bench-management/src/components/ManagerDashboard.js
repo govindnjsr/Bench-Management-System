@@ -30,30 +30,42 @@ export default function ManagerDashboard() {
     try{
     //  / const Data = await axios.get(`http://localhost:2538/api/manager/get/1`); // ${authData.managerId} instead of 1
      
-      const allEmp=await axios.get(`http://localhost:2538/api/manager/get/${authData.managerId}`)
+      const managerDetails=await axios.get(`http://localhost:2538/api/manager/get/${authData.managerId}`)
            .then((response) => {
             setManagerData(response.data)  ;                  
           });
-      const dtoDetails = await axios.get('http://localhost:2538/api/dto/get');
-      authData.setDtoData(dtoDetails.data);
+      // const dtoDetails = await axios.get('http://localhost:2538/api/dto/get');
+      // authData.setDtoData(dtoDetails.data);
 
-      const allBenchedEmp = await axios.get('http://localhost:2538/api/empdetails/get/benchedemployee');
-      setEmpOnBench(allBenchedEmp.data);
+      // const allBenchedEmp = await axios.get('http://localhost:2538/api/empdetails/get/benchedemployee');
+      // setEmpOnBench(allBenchedEmp.data);
 
     }
     catch{
       console.log()
     }
   }
+  const fetchNew =async ()=>{
+    try{
+      const allnewDto = await axios.post(
+        "http://localhost:2538/api/dto/get/filterd",authData.requestDto
+      );
+      authData.setNewData(allnewDto.data);
+    }
+    catch {
+      console.log();
+    }
+  }
 
   useEffect(()=>{
+    fetchNew();
     fetchManagerTable();
+       
+  },[authData.requestDto])
+  // useEffect(()=>{
+  //   setLocations();
      
-  },[authData.post])
-  useEffect(()=>{
-    setLocations();
-     
-  },[managerData, authData.post])
+  // },[authData.requestDto])
  
   const setLocations=()=>{
       managerData.assignedLocation && managerData.assignedLocation.map((key)=>{
@@ -153,8 +165,13 @@ export default function ManagerDashboard() {
     else if(authData.benchTimeValue>1 && okStatus)return okBench;
     else return okStatus;
  }
- console.log(authData.dtoData);
- console.log("filter" + JSON.stringify(authData.checkFilter));
+console.log("new Data "+JSON.stringify(authData.newData));
+// console.log("exppppp "+authData.requestDto.experience+" "+authData.requestDto.benchPeriod);
+console.log("request dto "+JSON.stringify(authData.requestDto))
+// console.log("applied filters "+JSON.stringify(authData.appliedFilters))
+console.log("manager data "+JSON.stringify(managerData))
+// console.log("check filters "+JSON.stringify(authData.checkFilter))
+// console.log("default data "+JSON.stringify(authData.defaultData))
   return (
     <div className="window">
       <div className='top'>

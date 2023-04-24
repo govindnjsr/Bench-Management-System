@@ -32,7 +32,7 @@ export default function AdminDashboard() {
   const [filterDataOfDto, setFilterDataOfDto] = useState();
   const [rowsReturned, setRowsReturned] = useState(0);
   const [searchValue, setSearchValue] = useState("");
-  const [newData,setNewData]=useState();
+  
   
 
   const fetchNew =async ()=>{
@@ -40,7 +40,7 @@ export default function AdminDashboard() {
       const allnewDto = await axios.post(
         "http://localhost:2538/api/dto/get/filterd",authData.requestDto
       );
-      setNewData(allnewDto.data);
+      authData.setNewData(allnewDto.data);
     }
     catch {
       console.log();
@@ -234,8 +234,8 @@ const handleChange=e=>{
                   </tr>
                 </thead>
                 <tbody className="thread1">
-                  {newData &&
-                    newData.map((emp) =>
+                  {authData.newData &&
+                    authData.newData.map((emp) =>
                       // allowData(emp) == true &&
                       // (searchValue == "" ||
                       //   emp.employeeName
