@@ -2,8 +2,10 @@ import React, { useState, useRef } from "react";
 // import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
+import axios from "axios";
+import AuthContext from './AuthContext';
 
-function UploadFile() {
+function UploadFile(props) {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -14,6 +16,34 @@ function UploadFile() {
   const handleChange = (e) => {
     setFile([...file, e.target.files[0]]);
   };
+
+  const saveData =async (id) => {
+    try {
+      console.log("i am in try");
+        const formData = new FormData();
+        formData.append("file", file[0]);
+
+        fetch(`http://localhost:2538/api/empdetails/upload-file/${id}`,{
+          method: 'PUT',
+          body: formData
+      }).then( alert("File uploaded successfully.")).catch(err=>console.log(err));
+  }
+
+        // console.log(file)
+        // await axios.put(`http://localhost:2538/api/empdetails/upload-file/${id}`,formData,{
+        //   headers:{
+        //     'Content-Type' : 'multipart/form-data',
+        //   },
+        // })
+        // .then((Response)=>{console.log(Response);
+        // })
+        // .catch((error)=>{console.log(error)});
+        //    console.log("Result"+allEmp);
+        // authData.setPost({});
+    catch {
+        console.log()
+    }
+}
 
   return (
     <>
@@ -31,21 +61,7 @@ function UploadFile() {
         </Modal.Header>
         <Modal.Body>
           <Form id="upload">
-            <button
-              className="button5"
-              onClick={() => inputFile.current.click()}
-            >
-              {/* <i class="fa-solid fa-upload"></i> */}
-            </button>
-            <input type="file" onChange={handleChange} ref={inputFile} />
-            &nbsp;
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          {/* <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary">Understood</Button> */}
+            <input type="file" name ="file" onChange={handleChange} />
            <button className='button3' onClick={handleClose}>Cancel</button> &nbsp;
            <button className='button3' form="upload" >Upload</button>
         </Modal.Footer>
