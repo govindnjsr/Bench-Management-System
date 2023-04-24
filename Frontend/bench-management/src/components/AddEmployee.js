@@ -1,12 +1,26 @@
 // import React from 'react'
 import React, { useState,useEffect, useContext } from 'react';
-import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form'
 import axios from 'axios';
 import AuthContext from './AuthContext';
 function AddEmployee() {
     const authData = useContext(AuthContext);
+    const assignedLocationman = () => {
+        let countries = [
+            "Bangalore",
+            "Hyderabad",
+            "Gurugram"
+        ]
+        // countries.filter() // filter function here
+        let countriesList = countries.length > 0
+		&& countries.map((item, i) => { // 
+		return (
+			<option key={i} value={item}>{item}</option>
+		)
+	});
+    return countriesList;
+    }
     
     // const handleClose = () => setShow(false);
     // const handleShow = () => setShow(true);
@@ -93,6 +107,10 @@ function AddEmployee() {
                     <Form.Label>Location</Form.Label>
                     <Form.Select aria-label="Default select example" name="empLocation" onChange={handleChangeValue.bind(this)}>                        
                         <option>Select from below</option>
+                        {
+                            assignedLocationman()
+                        }
+                        
                         {/* {
                             authData.assignedLocation["gurugram"] ? <option value={1} >Gurugram</option> : <option></option>
                         }
@@ -102,9 +120,9 @@ function AddEmployee() {
                         {
                             authData.assignedLocation["hyderabad"] ? <option value={3} >Hyderabad</option> : <option></option>
                         } */}
-                        <option value={1} >Gurugram</option>
+                        {/* <option value={1} >Gurugram</option>
                         <option value={2}>Bangalore</option>
-                        <option value={3}>Hyderabad</option>
+                        <option value={3}>Hyderabad</option> */}
                     </Form.Select>
                 </Form.Group><br/>
 

@@ -21,7 +21,7 @@ function App() {
   const authData = useContext(AuthContext);
   
   const router = createBrowserRouter([
-    { path: "/", element: <AdminDashboard /> },
+    { path: "/", element: <Login /> },
     { path: "/viewEmployee", element: <ViewEmployee /> },
     { path: "/viewReport", element: <ViewReport /> },
   ]);

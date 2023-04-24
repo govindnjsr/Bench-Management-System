@@ -79,6 +79,7 @@ export default function SideBar() {
               EXPERIENCE{" "}
               <span className="span-style">
                 ( {authData.requestDto.experience}+ Years)
+                
               </span>
             </p>
             <label htmlFor="customRange2" className="form-label"></label>
@@ -105,7 +106,7 @@ export default function SideBar() {
             <p className="pfilter">
               BENCH TIME{" "}
               <span className="span-style">
-                ( {authData.benchTimeValue - 1}+ Months)
+                ( {authData.benchTimeValue -1 }+ Months)
               </span>
             </p>
             <label htmlFor="customRange2" className="form-label"></label>

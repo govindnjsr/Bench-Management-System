@@ -237,7 +237,7 @@ export default function AdminDashboard() {
   // setFilterDataOfDto(data);
   // console.log("filter data : " + filterDataOfDto);
   // setRowsReturned(filterDataOfDto?.length);
-  console.log(searchValue);
+  console.log(authData.searchValue);
 
 const[file,setFile]=useState([]);
 const inputFile= useRef(null);
@@ -329,6 +329,7 @@ console.log("exppppp "+authData.requestDto.experience+" "+authData.requestDto.be
                       //     .toLowerCase()
                       //     .includes(searchValue)) ?
                            (
+                  
                         <tr>
                           {/* <th className='pointer-to-profile' title="Click on ID to view profile" scope="row" onClick={() => { handleViewEmployee(); authData.handleEmpId(emp.employeeId); }} >{emp.employeeId}</th> */}
                           <th className="table-align-left">
@@ -366,7 +367,7 @@ console.log("exppppp "+authData.requestDto.experience+" "+authData.requestDto.be
                           <td className="table-align-left">
                             {emp.benchStatus == 0
                               ? "Removed From Bench"
-                              : "On Bench"}
+                              : `${Math.round(emp.benchPeriod / 30)} Months, ${emp.benchPeriod%30} Days`}
                           </td>
                           {/* <td className="table-align-left"><UpdateEmployee id = {emp.employeeId}/></td> */}
                           <td className="table-align-left">
