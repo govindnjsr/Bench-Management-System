@@ -43,7 +43,7 @@ function BlockEmployee() {
               <Form.Control type="text" placeholder="" />
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>From Date</Form.Label>
+              <Form.Label>From  Date</Form.Label>
               <Form.Control type="date" placeholder="" />
             </Form.Group>
           </Form>
