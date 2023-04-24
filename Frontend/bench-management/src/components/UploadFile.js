@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import Button from "react-bootstrap/Button";
+// import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 
@@ -47,7 +47,7 @@ function UploadFile() {
           </Button>
           <Button variant="primary">Understood</Button> */}
            <button className='button3' onClick={handleClose}>Cancel</button> &nbsp;
-           <button className='button3' form="update" >Upload</button>
+           <button className='button3' form="upload" >Upload</button>
         </Modal.Footer>
       </Modal>
     </>
