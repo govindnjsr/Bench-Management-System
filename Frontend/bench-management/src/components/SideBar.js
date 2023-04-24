@@ -19,6 +19,11 @@ export default function SideBar() {
         ...authData.appliedFilters,
         [e.target.name]: True,
       });
+     //new apply filter to request dto
+      // authData.setReqDto({
+      //   ...authData.requestDto,
+      //   [e.target.name]: True,
+      // });
 
       if (
         e.target.name == "gurugram" ||
@@ -29,12 +34,16 @@ export default function SideBar() {
           ...authData.checkFilter,
           ["location"]: authData.checkFilter["location"] + 1,
         });
-      } else if (e.target.name === "active" || e.target.name === "benched") {
+      } else if (e.target.name === "notblocked" || e.target.name === "blocked") {
         authData.setCheckFilter({
           ...authData.checkFilter,
           ["status"]: authData.checkFilter["status"] + 1,
         });
       } else {
+        authData.setReqDto({
+          ...authData.requestDto,
+          [e.target.name]: True,
+        });
         authData.setCheckFilter({
           ...authData.checkFilter,
           ["skill"]: authData.checkFilter["skill"] + 1,
@@ -54,7 +63,7 @@ export default function SideBar() {
           ...authData.checkFilter,
           ["location"]: authData.checkFilter["location"] - 1,
         });
-      } else if (e.target.name === "active" || e.target.name === "benched") {
+      } else if (e.target.name === "notblocked" || e.target.name === "blocked") {
         authData.setCheckFilter({
           ...authData.checkFilter,
           ["status"]: authData.checkFilter["status"] - 1,
@@ -64,6 +73,12 @@ export default function SideBar() {
           ...authData.checkFilter,
           ["skill"]: authData.checkFilter["skill"] - 1,
         });
+
+         //new apply filter to request dto
+      authData.setReqDto({
+        ...authData.requestDto,
+        [e.target.name]: false,
+      });
       }
     }
   };
@@ -437,7 +452,7 @@ export default function SideBar() {
                       <input
                         className="form-check-input"
                         type="checkbox"
-                        name="active"
+                        name="notblocked"
                         value={true}
                         onChange={handleFiltersValue.bind(this)}
                         id="status-1"
@@ -452,7 +467,7 @@ export default function SideBar() {
                       <input
                         className="form-check-input"
                         type="checkbox"
-                        name="benched"
+                        name="blocked"
                         value={true}
                         onChange={handleFiltersValue.bind(this)}
                         id="status-2"

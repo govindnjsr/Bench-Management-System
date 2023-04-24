@@ -67,4 +67,7 @@ public class EmpDetails {
     public boolean getBenchStatus() {
         return benchStatus;
     }
+    public boolean getBlocked(){
+        return blocked;
+    }
 }

@@ -1,6 +1,7 @@
 import React from 'react'
 import AuthContext from './AuthContext'
 import { useState } from 'react';
+
 export default function AuthState(props) {
 
 
@@ -18,17 +19,17 @@ export default function AuthState(props) {
     const [requestDto,setReqDto]=useState({
         "experience": 0,
         "benchPeriod": 0,
-        "java": true,
+        "java": false,
         "python": false,
         "react": false,
-        "angular": true,
-        "html": true,
-        "css": true,
+        "angular": false,
+        "html": false,
+        "css": false,
         "javascript": false,
         "springboot": false  
       })
+      
     const [checkFilter, setCheckFilter] = useState({
-        "skill": 0,
         "location": 0,
         "status": 0
     })
@@ -39,21 +40,13 @@ export default function AuthState(props) {
 
     })
     const [appliedFilters, setAppliedFilters] = useState({
-        "experience": false,
-        "benchtime": false,
-        "java": false,
-        "python": false,
-        "react": false,
-        "angular": false,
-        "html": false,
-        "css": false,
-        "javascript": false,
-        "springboot": false,
         "gurugram": false,
         "bangalore": false,
         "hyderabad": false,
         "active": false,
-        "benched": false
+        "benched": false,
+        "notblocked":false,
+        "blocked":false
     })
     const handleClose = () => {
         setShow(false);

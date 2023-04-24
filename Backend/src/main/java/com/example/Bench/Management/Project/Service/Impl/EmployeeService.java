@@ -120,15 +120,9 @@ public class EmployeeService implements EmpDetailsService {
 //            if(!okSkills)okSkills=true;
             //check for bench period
             boolean okBench=true;
-            if(curList.get(i).getBenchPeriod()<requestDto.getBenchPeriod()){
-                okBench=false;
+            if(curList.get(i).getBenchPeriod()<requestDto.getBenchPeriod()) {
+                okBench = false;
             }
-           //check for location do it in frontent
-            //check bussiness unit in frontend
-
-            //check for blocked do it in frontend
-
-
             if(okExp && okSkills && okBench)
             {
                 sendList.add(curList.get(i));
@@ -157,6 +151,7 @@ public class EmployeeService implements EmpDetailsService {
         dto.setActiveStatus(empDetails.getActive());
         dto.setBusinessUnit(empDetails.getBusinessUnit());
         dto.setEmail(empDetails.getEmail());
+        dto.setBlocked(empDetails.getBlocked());
         if(benchDate==null)benchDate=DateTimeFormatter.ofPattern("yyyy-MM-dd").format(LocalDateTime.now());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         try{

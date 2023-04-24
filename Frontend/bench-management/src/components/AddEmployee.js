@@ -33,8 +33,7 @@ function AddEmployee() {
         "billableDate": null,
         "benchStatus": null,   
         "active": true,
-        "empLocation": null, 
-        
+        "empLocation": null,  
        
     });
     const[skills,setSkills]=useState(

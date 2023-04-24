@@ -79,73 +79,11 @@ export default function AdminDashboard() {
 
   const allowData = (emp) => {
     let Keys = Object.keys(authData.appliedFilters);
-    let ok = true,
-      okSkill = true,
-      okLocation = false;
-    let selectDataKey = Object.keys(authData.checkFilter);
-    //iterate over the filter section
-
-    //By default
-    // if (!authData.checkFilter["skill"] && !authData.checkFilter["location"] && !authData.checkFilter["status"])
-    //   return true;
-
-    // let okExp = true;
-
-    // if (authData.experienceValue > emp.experience) {
-    //   okExp = false;
-    // }
-
-    // let okBench = true;
-    // if (authData.benchTimeValue > emp.benchPeriod) {
-    //   okBench = false;
-    // }
-
-    // if(okExp)return true;
-    //for skills
-    //By default
-    if (emp.activeStatus == false) return false;
-    if (
-      !authData.checkFilter["skill"] &&
-      !authData.checkFilter["location"] &&
-      !authData.checkFilter["status"] &&
-      authData.experienceValue == 1 &&
-      authData.benchTimeValue == 1
-    )
-      return true;
-    //for bench
-    let okBench = false;
-    if (authData.benchTimeValue <= emp.benchPeriod / 30) {
-      okBench = true;
-    }
-    // return okBench;
-    //for exp
-    let okExp = false;
-    if (authData.experienceValue <= emp.experience) {
-      okExp = true;
-    }
-
-    if (authData.checkFilter["skill"]) {
-      //iterate over the filters..
-      Keys.forEach((filterKey) => {
-        if (
-          filterKey != "gurugram" &&
-          filterKey != "hyderabad" &&
-          filterKey != "bangalore" &&
-          filterKey != "active" &&
-          filterKey != "benched"
-        ) {
-          if (
-            authData.appliedFilters[filterKey] === true &&
-            emp[filterKey] != true
-          )
-            okSkill = false;
-        }
-      });
-    }
-
-    //for location
-
-    if (authData.checkFilter["location"]) {
+  
+           
+    //------------check for the location--------------------------//
+    let okLocation = false; 
+        if (authData.checkFilter["location"]) {
       //iterate over the filters..
       Keys.forEach((filterKey) => {
         if (
@@ -172,58 +110,37 @@ export default function AdminDashboard() {
         }
       });
     }
+  //------Check for Blocked status ----////
     let okStatus = false;
-    //for Active status
+    // for Active status
     if (authData.checkFilter["status"]) {
       Keys.forEach((filterKey) => {
         if (
-          filterKey === "active" &&
+          filterKey === "blocked" &&
           authData.appliedFilters[filterKey] === true &&
-          emp.benchStatus == false
+          emp.blocked == true
         ) {
           okStatus = true;
         }
 
         if (
-          filterKey === "benched" &&
+          filterKey === "notblocked" &&
           authData.appliedFilters[filterKey] === true &&
-          emp.benchStatus == true
+          emp.blocked == false
         ) {
           okStatus = true;
         }
       });
     }
-    if (
-      authData.checkFilter["skill"] &&
+    // return okStatus;
+   if (
       authData.checkFilter["location"] &&
       authData.checkFilter["status"]
-    ) {
-      return okSkill && okLocation && okStatus;
-    } else if (
-      authData.checkFilter["skill"] &&
-      authData.checkFilter["location"]
-    ) {
-      return okSkill && okLocation;
-    } else if (
-      authData.checkFilter["skill"] &&
-      authData.checkFilter["status"]
-    ) {
-      return okSkill && okStatus;
-    } else if (
-      authData.checkFilter["location"] &&
-      authData.checkFilter["status"]
-    ) {
-      return okLocation && okStatus;
-    } else if (authData.checkFilter["location"]) {
-      return okLocation;
-    } else if (authData.checkFilter["skill"]) {
-      return okSkill;
-    }
-    // else return okStatus;
-    else if (authData.experienceValue > 1) {
-      return okExp;
-    } else if (authData.benchTimeValue > 1 && okStatus) return okBench;
-    else return okStatus;
+    ) 
+    return okStatus && okLocation;
+    else if(authData.checkFilter["status"])return okStatus;
+    else
+    return okLocation;
   };
   console.log(
     "Render..  " +
@@ -231,14 +148,7 @@ export default function AdminDashboard() {
       " " +
       authData.experienceValue
   );
-  console.log("dtoo " + JSON.stringify(authData.dtoData))
-
-  // const data = authData.dtoData?.filter(emp => allowData(emp == true))
-  // setFilterDataOfDto(data);
-  // console.log("filter data : " + filterDataOfDto);
-  // setRowsReturned(filterDataOfDto?.length);
-  console.log(authData.searchValue);
-
+ 
 const[file,setFile]=useState([]);
 const inputFile= useRef(null);
 
@@ -247,10 +157,13 @@ const handleChange=e=>{
   
 }
 // console.log(file);
-console.log("new Data "+JSON.stringify(newData));
-console.log("exppppp "+authData.requestDto.experience+" "+authData.requestDto.benchPeriod);
+// console.log("new Data "+JSON.stringify(newData));
+// console.log("exppppp "+authData.requestDto.experience+" "+authData.requestDto.benchPeriod);
+// console.log("request dto "+JSON.stringify(authData.requestDto))
+// console.log("applied filters "+JSON.stringify(authData.appliedFilters))
 
-  
+// console.log("check filters "+JSON.stringify(authData.checkFilter))
+// console.log("default data "+JSON.stringify(authData.defaultData))
   return (
     <div className="window">
       <div className="top">
@@ -328,7 +241,7 @@ console.log("exppppp "+authData.requestDto.experience+" "+authData.requestDto.be
                       //   emp.employeeName
                       //     .toLowerCase()
                       //     .includes(searchValue)) ?
-                           (
+                          allowData(emp)==true? (
                   
                         <tr>
                           {/* <th className='pointer-to-profile' title="Click on ID to view profile" scope="row" onClick={() => { handleViewEmployee(); authData.handleEmpId(emp.employeeId); }} >{emp.employeeId}</th> */}
@@ -382,9 +295,9 @@ console.log("exppppp "+authData.requestDto.experience+" "+authData.requestDto.be
                           </td>
                         </tr>
                       )
-                      //  : (
-                      //   <tr></tr>
-                      // )
+                       : (
+                        <tr></tr>
+                      )
                     )}
                 </tbody>
               </table>
