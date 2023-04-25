@@ -18,6 +18,7 @@ export default function AuthState(props) {
     const [benchPeriodEmp, setBenchPeriodEmp] = useState(0);
     const [newData,setNewData]=useState();
     const [allData,setAlldata]=useState()
+    const [showSearchBar, setShowSearchBar] = useState(true);
     const [requestDto,setReqDto]=useState({
         "experience": 0,
         "benchPeriod": 0,
@@ -92,7 +93,7 @@ export default function AuthState(props) {
            experienceValue, setExperienceValue, handleClose,
             setShow, show, handleShow, post, setPost,
             assignedLocation, setAssignedLocation, searchValue,
-            setSearchValue, benchPeriodEmp, setBenchPeriodEmp
+            setSearchValue, benchPeriodEmp, setBenchPeriodEmp, showSearchBar, setShowSearchBar
         }}>
             {props.children}
         </AuthContext.Provider>

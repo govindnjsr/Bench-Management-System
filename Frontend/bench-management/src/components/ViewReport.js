@@ -15,6 +15,7 @@ function ViewReport() {
   const authData = useContext(AuthContext);
   const navigate = useNavigate();
   function handleBackButton() {
+    authData.setShowSearchBar(true);
     navigate("/");
   }
  
@@ -42,16 +43,9 @@ function ViewReport() {
         .datasetIndex;
       const dataPoint = getElementsAtEvent(chartRef.current, event)[0].index;
       setCurrentIndex(dataPoint);
-      // console.log(`Dataset:${datasetIndexNum} and Data: ${dataPoint}`);
-      // console.log("link "+data.datasets[datasetIndexNum].link[dataPoint]);
-      // window.open(data.datasets[datasetIndexNum].link[dataPoint], "_blank");
     }
   };
-//  console.log("current index  "+curIndex)
-//  console.log("all data "+JSON.stringify(authData.allData))
-//  console.log("dataset "+JSON.stringify(mydata.datasets[0].data))
-//  console.log("gurugramBU "+authData.gurugramBU);
-//  data.datasets[0].data=arr;
+
   return (
     <>
      {(<div>
@@ -66,7 +60,7 @@ function ViewReport() {
           onClick={handleBackButton}
           style={{ position: "fixed", right: "0.1%" }}
         >
-          <i class="fa-sharp fa-solid fa-arrow-left"></i> &nbsp;BACK
+          <i className="fa-sharp fa-solid fa-arrow-left"></i> &nbsp;BACK
         </button>
       </div>
       }

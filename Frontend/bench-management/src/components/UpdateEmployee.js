@@ -106,7 +106,7 @@ function UpdateEmployee(props) {
        View / Update
       </Button> */}
             <button className='button5' onClick={() => { handleShow(); showDetail(props.id); }}>
-            <i class="fa-sharp fa-solid fa-pen-to-square"></i>
+            <i className="fa-sharp fa-solid fa-pen-to-square"></i>
             </button>
 
 

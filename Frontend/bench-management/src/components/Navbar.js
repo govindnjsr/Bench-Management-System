@@ -13,16 +13,20 @@ export default function NavBar() {
         <div className="logoContainer">
           <img className="logoImageClass" src={logoImage} alt="accoliteLogo" />
         </div>
-
+        {
+        authData.showSearchBar === true ? (
         <div className="NavbarSearch">
           <div className="search-icon">
-          <i class="fa-sharp fa-solid fa-magnifying-glass "style={{color:"#1e2c3f"}}></i>
+          <i className="fa-sharp fa-solid fa-magnifying-glass "style={{color:"#1e2c3f"}}></i>
           </div>
           <form>
               <input className="search" type="text" onChange={(e) => authData.setSearchValue(e.target.value.toLowerCase())} value={authData.searchValue} placeholder="Search by Name" aria-label="Search"/>
            </form>
         </div>
-
+        )
+        :
+        null
+        }
         <div className="profile">
           <div className="NavbarDropDown">
             <Dropdown className="MainprofileDiv">

@@ -16,6 +16,7 @@ export default function ViewEmployee() {
   const navigate = useNavigate();
 
   function handleBackButton() {
+    authData.setShowSearchBar(true);
     navigate('/');
   }
   // console.log(empId);
@@ -53,7 +54,7 @@ export default function ViewEmployee() {
           <div className='shadow1 p-3 mb-5'>
             <div className='for-back'>
               <h6 className='profile-heading'>PROFILE</h6>
-              <button className='button3' onClick={handleBackButton} style={{position : 'fixed', right: '7%'}}><i class="fa-sharp fa-solid fa-arrow-left"></i> &nbsp;BACK</button>
+              <button className='button3' onClick={handleBackButton} style={{position : 'fixed', right: '7%'}}><i className="fa-sharp fa-solid fa-arrow-left"></i> &nbsp;BACK</button>
             </div>
 
             <hr></hr>
