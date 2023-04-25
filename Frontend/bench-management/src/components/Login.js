@@ -47,6 +47,7 @@ export default function Login() {
       const loginData = await axios.get('http://localhost:2538/api/login/get')
       setLoginApiData(loginData.data);
       // authData.setLoginDetails(loginData.data);
+      
     }
     catch {
       console.log()

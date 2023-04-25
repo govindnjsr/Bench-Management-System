@@ -33,6 +33,91 @@ export default function AdminDashboard() {
   const [rowsReturned, setRowsReturned] = useState(0);
   const [searchValue, setSearchValue] = useState("");
   
+  //----Precalculatino Stuff -----//
+  const checkBU=(BU)=>{
+    if(BU=="BFSI Financial Services")return 1;
+    if(BU=="BFSI Insurance")return 2;
+    if(BU=="Media Telecom")return 3;
+    if(BU=="Logistics")return 4;
+    if(BU=="Consulting Services")return 5;
+    if(BU=="Technology")return 6;
+    if(BU=="Healthcare")return 7;
+
+  }
+  const preLoadData=()=>{
+
+    //count total no of employee on a particular location
+      let g=0,b=0,h=0;
+      let g1=0,g2=0,g3=0,g4=0,g5=0,g6=0,g7=0;
+      let h1=0,h2=0,h3=0,h4=0,h5=0,h6=0,h7=0;
+      let b1=0,b2=0,b3=0,b4=0,b5=0,b6=0,b7=0;
+      authData.allData && authData.allData.map((emp)=>{
+        console.log(emp.empLocation+" "+typeof(emp.empLocation))
+        // 
+           if(emp.empLocation==1){
+            g++;
+           if(checkBU(emp.businessUnit)==1)g1++;
+           if(checkBU(emp.businessUnit)==2)g2++;
+           if(checkBU(emp.businessUnit)==3)g3++;
+           if(checkBU(emp.businessUnit)==4)g4++;
+           if(checkBU(emp.businessUnit)==5)g5++;
+           if(checkBU(emp.businessUnit)==6)g6++;
+           if(checkBU(emp.businessUnit)==7)g7++;
+           
+          }
+          else if(emp.empLocation==2){
+                  h++;
+                  if(checkBU(emp.businessUnit)==1)h1++;
+                  if(checkBU(emp.businessUnit)==2)h2++;
+                  if(checkBU(emp.businessUnit)==3)h3++;
+                  if(checkBU(emp.businessUnit)==4)h4++;
+                  if(checkBU(emp.businessUnit)==5)h5++;
+                  if(checkBU(emp.businessUnit)==6)h6++;
+                  if(checkBU(emp.businessUnit)==7)h7++;
+          }
+          else{
+            b++;
+            if(checkBU(emp.businessUnit)==1)b1++;
+            if(checkBU(emp.businessUnit)==2)b2++;
+            if(checkBU(emp.businessUnit)==3)b3++;
+            if(checkBU(emp.businessUnit)==4)b4++;
+            if(checkBU(emp.businessUnit)==5)b5++;
+            if(checkBU(emp.businessUnit)==6)b6++;
+            if(checkBU(emp.businessUnit)==7)b7++;
+          }          
+      })
+      //locations
+      authData.locationWiseEmployeeCount.push(parseInt(g));
+      authData.locationWiseEmployeeCount.push(parseInt(b));
+      authData.locationWiseEmployeeCount.push(parseInt(h));
+      //gurugram
+      authData.gurugramBU.push(parseInt(g1));
+      authData.gurugramBU.push(parseInt(g2));
+      authData.gurugramBU.push(parseInt(g3));
+      authData.gurugramBU.push(parseInt(g4));
+      authData.gurugramBU.push(parseInt(g5));
+      authData.gurugramBU.push(parseInt(g6));
+      authData.gurugramBU.push(parseInt(g7));
+      //hyderabad
+      authData.hyderabadBU.push(parseInt(h1));
+      authData.hyderabadBU.push(parseInt(h2));
+      authData.hyderabadBU.push(parseInt(h3));
+      authData.hyderabadBU.push(parseInt(h4));
+      authData.hyderabadBU.push(parseInt(h5));
+      authData.hyderabadBU.push(parseInt(h6));
+      authData.hyderabadBU.push(parseInt(h7));
+      //banglore
+      authData.bangaloreBU.push(parseInt(b1));
+      authData.bangaloreBU.push(parseInt(b2));
+      authData.bangaloreBU.push(parseInt(b3));
+      authData.bangaloreBU.push(parseInt(b4));
+      authData.bangaloreBU.push(parseInt(b5));
+      authData.bangaloreBU.push(parseInt(b6));
+      authData.bangaloreBU.push(parseInt(b7));
+
+      //
+
+  }
   
 
   const fetchNew =async ()=>{
@@ -42,42 +127,26 @@ export default function AdminDashboard() {
         "http://localhost:2538/api/dto/get/filterd",authData.requestDto
       );
       authData.setNewData(allnewDto.data);
+
+      const allData = await axios.get(
+        "http://localhost:2538/api/empdetails/get"
+      ).then((response)=>{
+        authData.setAlldata(response.data);
+      })
     }
     catch {
       console.log();
     }
   }
 
-  // const fetchApi = async () => {
-  //   try {
-  //     const allEmp = await axios.get(
-  //       "http://localhost:2538/api/empdetails/get/allemployee"
-  //     );
-  //     setCountAllEmployees(allEmp.data);
-  //     const allActiveEmp = await axios.get(
-  //       "http://localhost:2538/api/empdetails/get/activeemployee"
-  //     );
-  //     setCountActiveEmp(allActiveEmp.data);
-  //     const allBenchedEmp = await axios.get(
-  //       "http://localhost:2538/api/empdetails/get/benchedemployee"
-  //     );
-  //     setCountBenchedEmp(allBenchedEmp.data);
-  //     const employeeDetails = await axios.get(
-  //       "http://localhost:2538/api/empdetails/get"
-  //     );
-  //     setEmpDetails(employeeDetails.data);
-
-  //     const dtoDetails = await axios.get("http://localhost:2538/api/dto/get");
-  //     authData.setDtoData(dtoDetails.data);
-  //   } catch {
-  //     console.log();
-  //   }
-  // };
   useEffect(() => {
     // fetchApi();
     fetchNew();
+  
   }, [authData.appliedFilters, authData.dtoDetails, authData.post,authData.requestDto]);
-
+ useEffect(()=>{
+  preLoadData();
+ },[authData.allData])
   const allowData = (emp) => {
     let Keys = Object.keys(authData.appliedFilters);
     //-------------byDefault Based on Skill--------------------------//
