@@ -33,7 +33,7 @@ const handleDownload=(e,id,name)=>{
   return (
     <>
       <button className="button5" onClick={handleShow}>
-        <i class="fa-solid fa-download"></i>
+        <i className="fa-solid fa-download"></i>
       </button>
       <Modal
         show={show}

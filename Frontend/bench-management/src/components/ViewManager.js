@@ -85,7 +85,7 @@ function ViewManager() {
     return (
       <>
         <button className='button2' onClick={handleShow}>
-        <i class="fa-solid fa-user"></i> &nbsp; BENCH MANAGERS 
+        <i className="fa-solid fa-user"></i> &nbsp; BENCH MANAGERS 
         </button>
   
         <Modal
