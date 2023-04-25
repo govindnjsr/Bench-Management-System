@@ -200,6 +200,7 @@ export default function SideBar() {
                 });
               }}
               id="customRange2"
+              value={authData.requestDto.experience}
             />
             <p className="sliderParaLeft">0 Years</p>
             <span className="sliderParaRightExpereince">10 Years</span>
@@ -227,6 +228,7 @@ export default function SideBar() {
                 });
               }}
               id="customRange2"
+              value={authData.requestDto.benchPeriod}
             />
             <p className="sliderParaLeft">0 Months</p>
             <span className="sliderParaRightBench">12 Months</span>
@@ -241,7 +243,7 @@ export default function SideBar() {
                       <input
                         className="form-check-input"
                         type="checkbox"
-                        name="BFSI Financial Services"
+                        name="BFSIFinancialServices"
                         value={true}
                         onChange={handleBUFilter.bind(this)}
                         id="status-1"
@@ -257,7 +259,7 @@ export default function SideBar() {
                       <input
                         className="form-check-input"
                         type="checkbox"
-                        name="BFSI Insurance"
+                        name="BFSIInsurance"
                         value={true}
                         onChange={handleBUFilter.bind(this)}
                         id="status-2"
@@ -273,7 +275,7 @@ export default function SideBar() {
                       <input
                         className="form-check-input"
                         type="checkbox"
-                        name="Media Telecom"
+                        name="MediaTelecom"
                         value={true}
                         onChange={handleBUFilter.bind(this)}
                         id="status-2"
@@ -305,7 +307,7 @@ export default function SideBar() {
                       <input
                         className="form-check-input"
                         type="checkbox"
-                        name="Consulting Services"
+                        name="ConsultingServices"
                         value={true}
                         onChange={handleBUFilter.bind(this)}
                         id="status-2"
