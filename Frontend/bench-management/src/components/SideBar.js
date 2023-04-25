@@ -240,7 +240,7 @@ export default function SideBar() {
                       <input
                         className="form-check-input"
                         type="checkbox"
-                        name="BFSI Financial Services"
+                        name="BFSIFinancialServices"
                         value={true}
                         onChange={handleBUFilter.bind(this)}
                         id="status-1"
@@ -255,7 +255,7 @@ export default function SideBar() {
                       <input
                         className="form-check-input"
                         type="checkbox"
-                        name="BFSI Insurance"
+                        name="BFSIInsurance"
                         value={true}
                         onChange={handleBUFilter.bind(this)}
                         id="status-2"
@@ -270,7 +270,7 @@ export default function SideBar() {
                       <input
                         className="form-check-input"
                         type="checkbox"
-                        name="Media Telecom"
+                        name="MediaTelecom"
                         value={true}
                         onChange={handleBUFilter.bind(this)}
                         id="status-2"
@@ -300,7 +300,7 @@ export default function SideBar() {
                       <input
                         className="form-check-input"
                         type="checkbox"
-                        name="Consulting Services"
+                        name="ConsultingServices"
                         value={true}
                         onChange={handleBUFilter.bind(this)}
                         id="status-2"
