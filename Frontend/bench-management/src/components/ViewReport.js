@@ -24,11 +24,11 @@ function ViewReport() {
         data: [10, 20, 15],
         borderColor: "black",
         backgroundColor: ["red", "blue", "purple"],
-        link: [
-          "https://www.chartjs3.com",
-          "https://www.chartjs4.com",
-          "https://www.chartjs.com",
-        ],
+        // link: [
+        //   "https://www.chartjs3.com",
+        //   "https://www.chartjs4.com",
+        //   "https://www.chartjs.com",
+        // ],
       },
     ],
   };
@@ -42,8 +42,8 @@ function ViewReport() {
         .datasetIndex;
       const dataPoint = getElementsAtEvent(chartRef.current, event)[0].index;
       console.log(`Dataset:${datasetIndexNum} and Data: ${dataPoint}`);
-      console.log(data.datasets[datasetIndexNum].link[dataPoint]);
-      window.open(data.datasets[datasetIndexNum].link[dataPoint], "_blank");
+      // console.log(data.datasets[datasetIndexNum].link[dataPoint]);
+      // window.open(data.datasets[datasetIndexNum].link[dataPoint], "_blank");
     }
   };
 
@@ -59,7 +59,7 @@ function ViewReport() {
           onClick={handleBackButton}
           style={{ position: "fixed", right: "0.1%" }}
         >
-          <i class="fa-sharp fa-solid fa-arrow-left"></i> &nbsp;BACK
+          <i className="fa-sharp fa-solid fa-arrow-left"></i> &nbsp;BACK
         </button>
       </div>
       <div className="representations">

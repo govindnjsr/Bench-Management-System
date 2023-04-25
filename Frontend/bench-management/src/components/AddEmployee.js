@@ -89,7 +89,7 @@ function AddEmployee() {
       <>
         
           <button className='button2' onClick={authData.handleShow}>
-            <i class="fa-solid fa-user-plus"></i> &nbsp; EMPLOYEE 
+            <i className="fa-solid fa-user-plus"></i> &nbsp; EMPLOYEE 
          </button>
         <Modal
           show={authData.show}

@@ -41,7 +41,7 @@ function UploadFile(props) {
   return (
     <>
       <button className="button5" onClick={handleShow}>
-        <i class="fa-solid fa-upload"></i>
+        <i className="fa-solid fa-upload"></i>
       </button>
       <Modal
         show={show}
