@@ -17,6 +17,7 @@ export default function AuthState(props) {
     const [assignedLocation, setAssignedLocation] = useState({})
     const [benchPeriodEmp, setBenchPeriodEmp] = useState(0);
     const [newData,setNewData]=useState();
+    const [showSearchBar, setShowSearchBar] = useState(true);
     const [requestDto,setReqDto]=useState({
         "experience": 0,
         "benchPeriod": 0,
@@ -51,13 +52,13 @@ export default function AuthState(props) {
         "benched": false,
         "notblocked":false,
         "blocked":false,
-        "BFSI Financial Services":false,
-        "Media Telecom":false,
+        "BFSIFinancialServices":false,
+        "MediaTelecom":false,
         "Logistics":false,
         "Technology":false,
         "Healthcare":false,
-        "Consulting Services":false,
-        "BFSI Insurance":false
+        "ConsultingServices":false,
+        "BFSIInsurance":false
     })
     const handleClose = () => {
         setShow(false);
@@ -87,7 +88,7 @@ export default function AuthState(props) {
            experienceValue, setExperienceValue, handleClose,
             setShow, show, handleShow, post, setPost,
             assignedLocation, setAssignedLocation, searchValue,
-            setSearchValue, benchPeriodEmp, setBenchPeriodEmp
+            setSearchValue, benchPeriodEmp, setBenchPeriodEmp, showSearchBar, setShowSearchBar
         }}>
             {props.children}
         </AuthContext.Provider>

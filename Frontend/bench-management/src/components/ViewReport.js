@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useContext, useRef } from "react";
 import { Bar, Pie, getElementsAtEvent } from "react-chartjs-2";
 import { Category } from "react-chartjs-2";
 import Chart from "chart.js/auto";
@@ -7,12 +7,15 @@ import "./Project.css";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import AuthContext from "./AuthContext";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 function ViewReport() {
+  const authData = useContext(AuthContext);
   const navigate = useNavigate();
   function handleBackButton() {
+    authData.setShowSearchBar(true);
     navigate("/");
   }
 
