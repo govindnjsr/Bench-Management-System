@@ -276,9 +276,9 @@
 }
 .search{
   width: 35vw;
-  height: 9vh;
+  height: 8.3vh;
   margin-top:1.5%;
-  margin-left: 1.5px;
+  margin-left: 1.6px;
   padding-left: 4.5%;
   border-top-left-radius: 0px;
   background-color:#020911 ;
@@ -654,7 +654,7 @@ border: none;
 .button3 {
   height: 5vh;
   width: 8vw;
-  background-color: #489fb5;
+  background-color: #01070d;
   border: none;
   color: white;
   padding: 8px 15px 15px 15px;
@@ -663,7 +663,7 @@ border: none;
   display: inline-block;
   font-size: 12px;
   font-weight: 500;
-  margin: 3px 3px;
+  margin: 3px 0px 4px 0px;
   cursor: pointer;
   border-radius: 12px;
 }
@@ -762,6 +762,9 @@ border: none;
 }
 
 .report-heading{
+  display: flex;
+  flex-direction: row;
+  position: fixed;
   background-color: #01070d;
   color: white;
   align-items: center;
@@ -771,19 +774,26 @@ border: none;
 }
 
 .representations{
-  margin-top: 3%;
+  margin-top: 8.5%;
+  padding: 1%;
   display: flex;
   flex-direction: row;
-  gap:20px;
+  gap:0.1%;
 }
 .pie-chart{
-  background-color: #1e2c3f;
-  height: 74vh;
+  background-color: white;
+  padding: 2%;
+  height: 77.5vh;
+  /* width: 500vw; */
+  box-shadow: 2px 2px 5px 2px #989a9c;
+  
  
 }
 
 .bar-graph{
-  height: 74vh;
-  width:100vw;
-  margin-left: 40%;
+  height: 77.5vh;
+  /* width: 400vw; */
+  padding: 2%;
+  margin-left: 1%;
+  box-shadow: 2px 2px 5px 2px #989a9c;
 }
