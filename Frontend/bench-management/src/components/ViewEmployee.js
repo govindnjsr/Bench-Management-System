@@ -16,6 +16,7 @@ export default function ViewEmployee() {
   const navigate = useNavigate();
 
   function handleBackButton() {
+    authData.setShowSearchBar(true);
     navigate('/');
   }
   // console.log(empId);
