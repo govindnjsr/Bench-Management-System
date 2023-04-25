@@ -39,6 +39,7 @@ export default function SideBar() {
   //    filterDataByBenchTime();
   //  }, [authData.benchTimeValue])
   //Handle BU filters
+
   const handleBUFilter=(e)=>{
     const { value, checked } = e.target;
     let True = true,
@@ -244,6 +245,7 @@ export default function SideBar() {
                         value={true}
                         onChange={handleBUFilter.bind(this)}
                         id="status-1"
+                        checked={authData.appliedFilters.BFSIFinancialServices}
                       />
                       <label
                         className="form-check-label skillsLabel"
@@ -259,6 +261,7 @@ export default function SideBar() {
                         value={true}
                         onChange={handleBUFilter.bind(this)}
                         id="status-2"
+                        checked={authData.appliedFilters.BFSIInsurance}
                       />
                       <label
                         className="form-check-label skillsLabel"
@@ -274,6 +277,7 @@ export default function SideBar() {
                         value={true}
                         onChange={handleBUFilter.bind(this)}
                         id="status-2"
+                        checked={authData.appliedFilters.MediaTelecom}
                       />
                       <label
                         className="form-check-label skillsLabel"
@@ -289,6 +293,7 @@ export default function SideBar() {
                         value={true}
                         onChange={handleBUFilter.bind(this)}
                         id="status-2"
+                        checked={authData.appliedFilters.Logistics}
                       />
                       <label
                         className="form-check-label skillsLabel"
@@ -304,6 +309,7 @@ export default function SideBar() {
                         value={true}
                         onChange={handleBUFilter.bind(this)}
                         id="status-2"
+                        checked={authData.appliedFilters.ConsultingServices}
                       />
                       <label
                         className="form-check-label skillsLabel"
@@ -319,6 +325,7 @@ export default function SideBar() {
                         value={true}
                         onChange={handleBUFilter.bind(this)}
                         id="status-2"
+                        checked={authData.appliedFilters.Technology}
                       />
                       <label
                         className="form-check-label skillsLabel"
@@ -334,6 +341,7 @@ export default function SideBar() {
                         value={true}
                         onChange={handleBUFilter.bind(this)}
                         id="status-2"
+                        checked={authData.appliedFilters.Healthcare}
                       />
                       <label
                         className="form-check-label skillsLabel"
@@ -360,6 +368,7 @@ export default function SideBar() {
                         value={true}
                         onChange={handleLocationFilter.bind(this)}
                         id="loc-1"
+                        checked={authData.appliedFilters.gurugram}
                       />
                       <label
                         className="form-check-label skillsLabel"
@@ -375,6 +384,7 @@ export default function SideBar() {
                         value={true}
                         onChange={handleLocationFilter.bind(this)}
                         id="loc-2"
+                        checked={authData.appliedFilters.bangalore}
                       />
                       <label
                         className="form-check-label skillsLabel"
@@ -390,6 +400,7 @@ export default function SideBar() {
                         value={true}
                         onChange={handleLocationFilter.bind(this)}
                         id="loc-3"
+                        checked={authData.appliedFilters.hyderabad}
                       />
                       <label
                         className="form-check-label skillsLabel"
@@ -414,6 +425,7 @@ export default function SideBar() {
                         value={"1"}
                         onChange={handleSkillsFilter.bind(this)}
                         id="skill-1"
+                        checked={authData.requestDto.java}
                       />
                       <label
                         className="form-check-label skillsLabel"
@@ -429,6 +441,7 @@ export default function SideBar() {
                         value={"1"}
                         onChange={handleSkillsFilter.bind(this)}
                         id="skill-2"
+                        checked={authData.requestDto.python}
                       />
                       <label
                         className="form-check-label skillsLabel"
@@ -444,6 +457,7 @@ export default function SideBar() {
                         value={"1"}
                         onChange={handleSkillsFilter.bind(this)}
                         id="skill-3"
+                        checked={authData.requestDto.react}
                       />
                       <label
                         className="form-check-label skillsLabel"
@@ -459,6 +473,7 @@ export default function SideBar() {
                         value={"1"}
                         onChange={handleSkillsFilter.bind(this)}
                         id="skill-4"
+                        checked={authData.requestDto.angular}
                       />
                       <label
                         className="form-check-label skillsLabel"
@@ -474,6 +489,7 @@ export default function SideBar() {
                         value={"1"}
                         onChange={handleSkillsFilter.bind(this)}
                         id="skill-5"
+                        checked={authData.requestDto.html}
                       />
                       <label
                         className="form-check-label skillsLabel"
@@ -489,6 +505,7 @@ export default function SideBar() {
                         value={"1"}
                         onChange={handleSkillsFilter.bind(this)}
                         id="skill-6"
+                        checked={authData.requestDto.css}
                       />
                       <label
                         className="form-check-label skillsLabel"
@@ -504,6 +521,7 @@ export default function SideBar() {
                         value={"1"}
                         onChange={handleSkillsFilter.bind(this)}
                         id="skill-7"
+                        checked={authData.requestDto.javascript}
                       />
                       <label
                         className="form-check-label skillsLabel"
@@ -519,6 +537,7 @@ export default function SideBar() {
                         value={"1"}
                         onChange={handleSkillsFilter.bind(this)}
                         id="skill-8"
+                        checked={authData.requestDto.springboot}
                       />
                       <label
                         className="form-check-label skillsLabel"
@@ -543,6 +562,7 @@ export default function SideBar() {
                         value={true}
                         onChange={handleStateFilters.bind(this)}
                         id="status-1"
+                        checked={authData.appliedFilters.notblocked}
                       />
                       <label
                         className="form-check-label skillsLabel"
@@ -558,6 +578,7 @@ export default function SideBar() {
                         value={true}
                         onChange={handleStateFilters.bind(this)}
                         id="status-2"
+                        checked={authData.appliedFilters.blocked}
                       />
                       <label
                         className="form-check-label skillsLabel"
