@@ -5,8 +5,7 @@ import Accordion from "react-bootstrap/Accordion";
 
 export default function SideBar() {
   const authData = useContext(AuthContext);
-
-   
+  
 
   const checkDefault=()=>{
       
@@ -244,6 +243,7 @@ export default function SideBar() {
                         value={true}
                         onChange={handleBUFilter.bind(this)}
                         id="status-1"
+                        
                       />
                       <label
                         className="form-check-label skillsLabel"
@@ -289,6 +289,7 @@ export default function SideBar() {
                         value={true}
                         onChange={handleBUFilter.bind(this)}
                         id="status-2"
+                        
                       />
                       <label
                         className="form-check-label skillsLabel"
