@@ -120,10 +120,13 @@ public class EmployeeService implements EmpDetailsService {
 //            if(!okSkills)okSkills=true;
             //check for bench period
             boolean okBench=true;
-            if(curList.get(i).getBenchPeriod()<requestDto.getBenchPeriod()) {
+            if(curList.get(i).getBenchPeriod()/30<requestDto.getBenchPeriod()) {
                 okBench = false;
             }
-            if(okExp && okSkills && okBench)
+            if(requestDto.isByDefault()){
+                sendList.add(curList.get(i));
+            }else
+            if(okExp && okSkills && okBench )
             {
                 sendList.add(curList.get(i));
             }

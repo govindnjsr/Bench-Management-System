@@ -95,7 +95,7 @@ function UpdateEmployee(props) {
     }
 
 
-    console.log("cur emp " + JSON.stringify(fetchedEmpDetail))
+    // console.log("cur emp " + JSON.stringify(fetchedEmpDetail))
     // console.log("int details" + JSON.stringify(intDetails))
 
     //    console.log("aaaaaaaaaaa "+JSON.stringify(skill)+" -> "+interviewDetails)

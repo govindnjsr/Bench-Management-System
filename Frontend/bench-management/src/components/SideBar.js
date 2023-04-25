@@ -6,40 +6,104 @@ import Accordion from "react-bootstrap/Accordion";
 export default function SideBar() {
   const authData = useContext(AuthContext);
 
+   
+
+  const checkDefault=()=>{
+      
+    // if(authData.requestDto.experience==0 && authData.requestDto.benchPeriod==0 &&
+    //    authData.checkFilter["skill"]<=0 && authData.checkFilter["location"]<=0 &&
+    //    authData.checkFilter["BU"]<=0 && authData.checkFilter["status"]<=0){
+    //     authData.setReqDto({
+    //       ...authData.requestDto,
+    //       ["byDefault"]: true,
+    //     });
+
+    //    }
+    //    else{
+    //     authData.setReqDto({
+    //       ...authData.requestDto,
+    //       ["byDefault"]: false,
+    //     });
+
+    //    }
+
+
+
+  }
+  
+  // useEffect(()=>{
+  //  checkDefault();
+  // },[]);
+
   //  useEffect(() => {
   //    filterDataByBenchTime();
   //  }, [authData.benchTimeValue])
-  const handleApplyFilter = () => {};
-  const handleFiltersValue = (e) => {
+  //Handle BU filters
+  const handleBUFilter=(e)=>{
     const { value, checked } = e.target;
     let True = true,
       False = false;
-    if (checked) {
-      authData.setAppliedFilters({
-        ...authData.appliedFilters,
-        [e.target.name]: True,
-      });
-     //new apply filter to request dto
-      // authData.setReqDto({
-      //   ...authData.requestDto,
-      //   [e.target.name]: True,
-      // });
+      if(checked){
+        authData.setAppliedFilters({
+          ...authData.appliedFilters,
+          [e.target.name]: True,
+        });
+          
+        authData.setCheckFilter({
+          ...authData.checkFilter,
+          ["BU"]: authData.checkFilter["BU"] + 1,
+        });
 
-      if (
-        e.target.name == "gurugram" ||
-        e.target.name == "bangalore" ||
-        e.target.name == "hyderabad"
-      ) {
+        checkDefault();
+      }
+      else{
+        authData.setAppliedFilters({
+          ...authData.appliedFilters,
+          [e.target.name]: false,
+        });
+        authData.setCheckFilter({
+          ...authData.checkFilter,
+          ["BU"]: authData.checkFilter["BU"] - 1,
+        });
+        checkDefault();
+      }
+  }
+  //Handle Location filters
+  const handleLocationFilter=(e)=>{
+    const { value, checked } = e.target;
+    let True = true,
+      False = false;
+
+      if(checked){
+        authData.setAppliedFilters({
+          ...authData.appliedFilters,
+          [e.target.name]: True,
+        });
         authData.setCheckFilter({
           ...authData.checkFilter,
           ["location"]: authData.checkFilter["location"] + 1,
         });
-      } else if (e.target.name === "notblocked" || e.target.name === "blocked") {
+        checkDefault();
+      }
+      else{
+        authData.setAppliedFilters({
+          ...authData.appliedFilters,
+          [e.target.name]: false,
+        });
         authData.setCheckFilter({
           ...authData.checkFilter,
-          ["status"]: authData.checkFilter["status"] + 1,
+          ["location"]: authData.checkFilter["location"] - 1,
         });
-      } else {
+        checkDefault();
+      }
+
+  }
+  //Handle Skills Filters
+  const handleSkillsFilter=(e)=>{
+    const { value, checked } = e.target;
+    let True = true,
+      False = false;
+      if(checked){       
         authData.setReqDto({
           ...authData.requestDto,
           [e.target.name]: True,
@@ -48,40 +112,63 @@ export default function SideBar() {
           ...authData.checkFilter,
           ["skill"]: authData.checkFilter["skill"] + 1,
         });
+        checkDefault();
+        //  if(authData.checkFilter.skill>0){
+        //   authData.setReqDto({
+        //     ...authData.requestDto,
+        //     ["byDefault"]: False,
+        //   });
+        //  }
       }
-    } else {
-      authData.setAppliedFilters({
-        ...authData.appliedFilters,
-        [e.target.name]: False,
-      });
-      if (
-        e.target.name == "gurugram" ||
-        e.target.name == "bangalore" ||
-        e.target.name == "hyderabad"
-      ) {
-        authData.setCheckFilter({
-          ...authData.checkFilter,
-          ["location"]: authData.checkFilter["location"] - 1,
+      else{
+        authData.setReqDto({
+          ...authData.requestDto,
+          [e.target.name]: False,
         });
-      } else if (e.target.name === "notblocked" || e.target.name === "blocked") {
-        authData.setCheckFilter({
-          ...authData.checkFilter,
-          ["status"]: authData.checkFilter["status"] - 1,
-        });
-      } else {
         authData.setCheckFilter({
           ...authData.checkFilter,
           ["skill"]: authData.checkFilter["skill"] - 1,
         });
-
-         //new apply filter to request dto
-      authData.setReqDto({
-        ...authData.requestDto,
-        [e.target.name]: false,
-      });
+        
+        checkDefault();
       }
-    }
-  };
+   
+  }
+  //Handle State Filters
+  const handleStateFilters=(e)=>{
+    const { value, checked } = e.target;
+    let True = true,
+      False = false;
+      if(checked){
+        if (e.target.name === "notblocked" || e.target.name === "blocked")
+        {authData.setAppliedFilters({
+          ...authData.appliedFilters,
+          [e.target.name]: True,
+        });
+        authData.setCheckFilter({
+          ...authData.checkFilter,
+          ["status"]: authData.checkFilter["status"] + 1,
+        });
+
+      }
+      checkDefault();
+      }
+      else{
+        if (e.target.name === "notblocked" || e.target.name === "blocked")
+        {authData.setAppliedFilters({
+          ...authData.appliedFilters,
+          [e.target.name]: False,
+        });
+        authData.setCheckFilter({
+          ...authData.checkFilter,
+          ["status"]: authData.checkFilter["status"] - 1,
+        });
+      }
+      checkDefault();
+      }
+
+  }
+  
   return (
     <>
       <div className="filterHeading">
@@ -121,7 +208,7 @@ export default function SideBar() {
             <p className="pfilter">
               BENCH AGING{" "}
               <span className="span-style">
-                ( {authData.benchTimeValue -1 }+ Months)
+                ( {authData.requestDto.benchPeriod } + Months)
               </span>
             </p>
             <label htmlFor="customRange2" className="form-label"></label>
@@ -153,9 +240,9 @@ export default function SideBar() {
                       <input
                         className="form-check-input"
                         type="checkbox"
-                        name="1"
+                        name="BFSI Financial Services"
                         value={true}
-                        onChange={handleFiltersValue.bind(this)}
+                        onChange={handleBUFilter.bind(this)}
                         id="status-1"
                       />
                       <label
@@ -168,9 +255,9 @@ export default function SideBar() {
                       <input
                         className="form-check-input"
                         type="checkbox"
-                        name="2"
+                        name="BFSI Insurance"
                         value={true}
-                        onChange={handleFiltersValue.bind(this)}
+                        onChange={handleBUFilter.bind(this)}
                         id="status-2"
                       />
                       <label
@@ -183,9 +270,9 @@ export default function SideBar() {
                       <input
                         className="form-check-input"
                         type="checkbox"
-                        name="3"
+                        name="Media Telecom"
                         value={true}
-                        onChange={handleFiltersValue.bind(this)}
+                        onChange={handleBUFilter.bind(this)}
                         id="status-2"
                       />
                       <label
@@ -198,9 +285,9 @@ export default function SideBar() {
                       <input
                         className="form-check-input"
                         type="checkbox"
-                        name="4"
+                        name="Logistics"
                         value={true}
-                        onChange={handleFiltersValue.bind(this)}
+                        onChange={handleBUFilter.bind(this)}
                         id="status-2"
                       />
                       <label
@@ -213,9 +300,9 @@ export default function SideBar() {
                       <input
                         className="form-check-input"
                         type="checkbox"
-                        name="5"
+                        name="Consulting Services"
                         value={true}
-                        onChange={handleFiltersValue.bind(this)}
+                        onChange={handleBUFilter.bind(this)}
                         id="status-2"
                       />
                       <label
@@ -228,9 +315,9 @@ export default function SideBar() {
                       <input
                         className="form-check-input"
                         type="checkbox"
-                        name="6"
+                        name="Technology"
                         value={true}
-                        onChange={handleFiltersValue.bind(this)}
+                        onChange={handleBUFilter.bind(this)}
                         id="status-2"
                       />
                       <label
@@ -243,9 +330,9 @@ export default function SideBar() {
                       <input
                         className="form-check-input"
                         type="checkbox"
-                        name="7"
+                        name="Healthcare"
                         value={true}
-                        onChange={handleFiltersValue.bind(this)}
+                        onChange={handleBUFilter.bind(this)}
                         id="status-2"
                       />
                       <label
@@ -271,7 +358,7 @@ export default function SideBar() {
                         type="checkbox"
                         name="gurugram"
                         value={true}
-                        onChange={handleFiltersValue.bind(this)}
+                        onChange={handleLocationFilter.bind(this)}
                         id="loc-1"
                       />
                       <label
@@ -286,7 +373,7 @@ export default function SideBar() {
                         type="checkbox"
                         name="bangalore"
                         value={true}
-                        onChange={handleFiltersValue.bind(this)}
+                        onChange={handleLocationFilter.bind(this)}
                         id="loc-2"
                       />
                       <label
@@ -301,7 +388,7 @@ export default function SideBar() {
                         type="checkbox"
                         name="hyderabad"
                         value={true}
-                        onChange={handleFiltersValue.bind(this)}
+                        onChange={handleLocationFilter.bind(this)}
                         id="loc-3"
                       />
                       <label
@@ -325,7 +412,7 @@ export default function SideBar() {
                         type="checkbox"
                         name="java"
                         value={"1"}
-                        onChange={handleFiltersValue.bind(this)}
+                        onChange={handleSkillsFilter.bind(this)}
                         id="skill-1"
                       />
                       <label
@@ -340,7 +427,7 @@ export default function SideBar() {
                         type="checkbox"
                         name="python"
                         value={"1"}
-                        onChange={handleFiltersValue.bind(this)}
+                        onChange={handleSkillsFilter.bind(this)}
                         id="skill-2"
                       />
                       <label
@@ -355,7 +442,7 @@ export default function SideBar() {
                         type="checkbox"
                         name="react"
                         value={"1"}
-                        onChange={handleFiltersValue.bind(this)}
+                        onChange={handleSkillsFilter.bind(this)}
                         id="skill-3"
                       />
                       <label
@@ -370,7 +457,7 @@ export default function SideBar() {
                         type="checkbox"
                         name="angular"
                         value={"1"}
-                        onChange={handleFiltersValue.bind(this)}
+                        onChange={handleSkillsFilter.bind(this)}
                         id="skill-4"
                       />
                       <label
@@ -385,7 +472,7 @@ export default function SideBar() {
                         type="checkbox"
                         name="html"
                         value={"1"}
-                        onChange={handleFiltersValue.bind(this)}
+                        onChange={handleSkillsFilter.bind(this)}
                         id="skill-5"
                       />
                       <label
@@ -400,7 +487,7 @@ export default function SideBar() {
                         type="checkbox"
                         name="css"
                         value={"1"}
-                        onChange={handleFiltersValue.bind(this)}
+                        onChange={handleSkillsFilter.bind(this)}
                         id="skill-6"
                       />
                       <label
@@ -415,7 +502,7 @@ export default function SideBar() {
                         type="checkbox"
                         name="javascript"
                         value={"1"}
-                        onChange={handleFiltersValue.bind(this)}
+                        onChange={handleSkillsFilter.bind(this)}
                         id="skill-7"
                       />
                       <label
@@ -430,7 +517,7 @@ export default function SideBar() {
                         type="checkbox"
                         name="springboot"
                         value={"1"}
-                        onChange={handleFiltersValue.bind(this)}
+                        onChange={handleSkillsFilter.bind(this)}
                         id="skill-8"
                       />
                       <label
@@ -454,7 +541,7 @@ export default function SideBar() {
                         type="checkbox"
                         name="notblocked"
                         value={true}
-                        onChange={handleFiltersValue.bind(this)}
+                        onChange={handleStateFilters.bind(this)}
                         id="status-1"
                       />
                       <label
@@ -469,7 +556,7 @@ export default function SideBar() {
                         type="checkbox"
                         name="blocked"
                         value={true}
-                        onChange={handleFiltersValue.bind(this)}
+                        onChange={handleStateFilters.bind(this)}
                         id="status-2"
                       />
                       <label

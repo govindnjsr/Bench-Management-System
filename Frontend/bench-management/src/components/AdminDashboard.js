@@ -37,6 +37,7 @@ export default function AdminDashboard() {
 
   const fetchNew =async ()=>{
     try{
+    
       const allnewDto = await axios.post(
         "http://localhost:2538/api/dto/get/filterd",authData.requestDto
       );
@@ -47,31 +48,31 @@ export default function AdminDashboard() {
     }
   }
 
-  const fetchApi = async () => {
-    try {
-      const allEmp = await axios.get(
-        "http://localhost:2538/api/empdetails/get/allemployee"
-      );
-      setCountAllEmployees(allEmp.data);
-      const allActiveEmp = await axios.get(
-        "http://localhost:2538/api/empdetails/get/activeemployee"
-      );
-      setCountActiveEmp(allActiveEmp.data);
-      const allBenchedEmp = await axios.get(
-        "http://localhost:2538/api/empdetails/get/benchedemployee"
-      );
-      setCountBenchedEmp(allBenchedEmp.data);
-      const employeeDetails = await axios.get(
-        "http://localhost:2538/api/empdetails/get"
-      );
-      setEmpDetails(employeeDetails.data);
+  // const fetchApi = async () => {
+  //   try {
+  //     const allEmp = await axios.get(
+  //       "http://localhost:2538/api/empdetails/get/allemployee"
+  //     );
+  //     setCountAllEmployees(allEmp.data);
+  //     const allActiveEmp = await axios.get(
+  //       "http://localhost:2538/api/empdetails/get/activeemployee"
+  //     );
+  //     setCountActiveEmp(allActiveEmp.data);
+  //     const allBenchedEmp = await axios.get(
+  //       "http://localhost:2538/api/empdetails/get/benchedemployee"
+  //     );
+  //     setCountBenchedEmp(allBenchedEmp.data);
+  //     const employeeDetails = await axios.get(
+  //       "http://localhost:2538/api/empdetails/get"
+  //     );
+  //     setEmpDetails(employeeDetails.data);
 
-      const dtoDetails = await axios.get("http://localhost:2538/api/dto/get");
-      authData.setDtoData(dtoDetails.data);
-    } catch {
-      console.log();
-    }
-  };
+  //     const dtoDetails = await axios.get("http://localhost:2538/api/dto/get");
+  //     authData.setDtoData(dtoDetails.data);
+  //   } catch {
+  //     console.log();
+  //   }
+  // };
   useEffect(() => {
     // fetchApi();
     fetchNew();
@@ -79,8 +80,46 @@ export default function AdminDashboard() {
 
   const allowData = (emp) => {
     let Keys = Object.keys(authData.appliedFilters);
-  
+    //-------------byDefault Based on Skill--------------------------//
+    if(authData.checkFilter["skill"]===0){
+      return true;
+    }
            
+   //----------Check for BU-----------------------------//
+    let okBU=false;
+    if(authData.checkFilter["BU"]){
+      Keys.forEach((filterKey)=>{
+        if(filterKey==="BFSI Financial Services" && authData.appliedFilters[filterKey]===true &&
+           emp.businessUnit==="BFSI Financial Services")
+           okBU=true;
+
+           if(filterKey==="Media Telecom" && authData.appliedFilters[filterKey]===true &&
+           emp.businessUnit==="Media Telecom")
+           okBU=true;
+
+           if(filterKey==="Logistics" && authData.appliedFilters[filterKey]===true &&
+           emp.businessUnit==="Logistics")
+           okBU=true;
+
+           if(filterKey==="Technology" && authData.appliedFilters[filterKey]===true &&
+           emp.businessUnit==="Technology")
+           okBU=true;
+
+           if(filterKey==="Healthcare" && authData.appliedFilters[filterKey]===true &&
+           emp.businessUnit==="Healthcare")
+           okBU=true;
+
+           if(filterKey==="Consulting Services" && authData.appliedFilters[filterKey]===true &&
+           emp.businessUnit==="Consulting Services")
+           okBU=true;
+
+           if(filterKey==="BFSI Insurance" && authData.appliedFilters[filterKey]===true &&
+           emp.businessUnit==="BFSI Insurance")
+           okBU=true;
+          
+      })
+    }
+
     //------------check for the location--------------------------//
     let okLocation = false; 
         if (authData.checkFilter["location"]) {
@@ -135,13 +174,22 @@ export default function AdminDashboard() {
     // return okStatus;
    if (
       authData.checkFilter["location"] &&
-      authData.checkFilter["status"]
+      authData.checkFilter["status"] && authData.checkFilter["BU"]
     ) 
-    return okStatus && okLocation;
+    return okStatus && okLocation && okBU;
+    else if(authData.checkFilter["location"] && authData.checkFilter["status"])
+    return okLocation && okStatus;
+    else if(authData.checkFilter["location"] && authData.checkFilter["BU"])
+    return okLocation && okBU;
+    else if(authData.checkFilter["status"] && authData.checkFilter["BU"])
+    return okBU && okStatus;
     else if(authData.checkFilter["status"])return okStatus;
-    else
-    return okLocation;
+    else if(authData.checkFilter["BU"])return okBU;
+   else if(authData.checkFilter["location"]) return okLocation;
+    else return true;
   };
+
+
   console.log(
     "Render..  " +
       JSON.stringify(authData.checkFilter) +
@@ -157,12 +205,12 @@ const handleChange=e=>{
   
 }
 // console.log(file);
-// console.log("new Data "+JSON.stringify(newData));
-// console.log("exppppp "+authData.requestDto.experience+" "+authData.requestDto.benchPeriod);
-// console.log("request dto "+JSON.stringify(authData.requestDto))
-// console.log("applied filters "+JSON.stringify(authData.appliedFilters))
+console.log("new Data "+JSON.stringify(authData.newData));
+console.log("exppppp "+authData.requestDto.experience+" "+authData.requestDto.benchPeriod);
+console.log("request dto "+JSON.stringify(authData.requestDto))
+console.log("applied filters "+JSON.stringify(authData.appliedFilters))
 
-// console.log("check filters "+JSON.stringify(authData.checkFilter))
+console.log("check filters "+JSON.stringify(authData.checkFilter))
 // console.log("default data "+JSON.stringify(authData.defaultData))
   return (
     <div className="window">
@@ -280,7 +328,7 @@ const handleChange=e=>{
                           <td className="table-align-left">
                             {emp.benchStatus == 0
                               ? "Removed From Bench"
-                              : `${Math.round(emp.benchPeriod / 30)} Months, ${emp.benchPeriod%30} Days`}
+                              : `${Math.round(emp.benchPeriod * 0.032855)} Months, ${emp.benchPeriod%30} Days`}
                           </td>
                           {/* <td className="table-align-left"><UpdateEmployee id = {emp.employeeId}/></td> */}
                           <td className="table-align-left">

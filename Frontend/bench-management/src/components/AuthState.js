@@ -27,12 +27,15 @@ export default function AuthState(props) {
         "html": false,
         "css": false,
         "javascript": false,
-        "springboot": false  
+        "springboot": false,
+        "byDefault":false  
       })
       
     const [checkFilter, setCheckFilter] = useState({
+        "skill":0,
         "location": 0,
-        "status": 0
+        "status": 0,
+        "BU":0
     })
     const [locationAcess, setLocationAccess] = useState({
         "gurugram": true,
@@ -47,7 +50,14 @@ export default function AuthState(props) {
         "active": false,
         "benched": false,
         "notblocked":false,
-        "blocked":false
+        "blocked":false,
+        "BFSI Financial Services":false,
+        "Media Telecom":false,
+        "Logistics":false,
+        "Technology":false,
+        "Healthcare":false,
+        "Consulting Services":false,
+        "BFSI Insurance":false
     })
     const handleClose = () => {
         setShow(false);

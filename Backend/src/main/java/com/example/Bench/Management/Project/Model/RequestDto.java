@@ -30,5 +30,7 @@ public class RequestDto {
     private boolean benchStatus;
     private boolean activeStatus;
     private boolean blocked;
+    //byDefault
+    private boolean byDefault;
 
 }

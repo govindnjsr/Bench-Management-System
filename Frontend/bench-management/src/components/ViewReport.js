@@ -5,7 +5,8 @@ import NavBar from "./Navbar";
 import "./Project.css";
 import React, { Component } from "react";
 import CanvasJSReact from "../canvasjs.react";
-
+import { Category } from "react-chartjs-2";
+import Chart from "chart.js/auto";
 
 var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
