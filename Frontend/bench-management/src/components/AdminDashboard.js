@@ -121,7 +121,10 @@ export default function AdminDashboard() {
 
   }
   
-
+// console.log("gurugram "+authData.gurugramBU);
+// console.log("hyderabad "+authData.hyderabadBU);
+// console.log("all data at admin "+authData.allData)
+// console.log("locationWise "+authData.locationWiseEmployeeCount)
 
 
   const fetchNew = async () => {

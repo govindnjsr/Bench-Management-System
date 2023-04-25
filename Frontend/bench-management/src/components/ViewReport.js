@@ -12,7 +12,7 @@ import axios from "axios";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 function ViewReport() {
-  const authData = useContext(AuthContext);
+  const authData=useContext(AuthContext);
   const navigate = useNavigate();
   function handleBackButton() {
     authData.setShowSearchBar(true);
@@ -45,7 +45,17 @@ function ViewReport() {
       setCurrentIndex(dataPoint);
     }
   };
+//  console.log("current index  "+curIndex)
+//  console.log("all data "+JSON.stringify(authData.allData))
+//  console.log("dataset "+JSON.stringify(mydata.datasets[0].data))
+//  console.log("gurugramBU "+authData.gurugramBU);
 
+console.log("view gurugram "+authData.gurugramBU);
+console.log("view hyderabad "+authData.hyderabadBU);
+// console.log("all data at admin "+authData.allData)
+console.log("view locationWise "+authData.locationWiseEmployeeCount)
+// console.log("dto "+authData.dtoData)
+ 
   return (
     <>
      {(<div>
