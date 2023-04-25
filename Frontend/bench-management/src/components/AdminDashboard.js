@@ -243,7 +243,7 @@ console.log("check filters "+JSON.stringify(authData.checkFilter))
               </div>
             </div>
           </div> */}
-          <div className="actions">
+          <div className="actions-admin">
             <p className="employees">EMPLOYEES</p>
             <div className="buttons">
               <ViewManager />
