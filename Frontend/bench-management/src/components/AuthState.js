@@ -53,12 +53,12 @@ export default function AuthState(props) {
         "notblocked":false,
         "blocked":false,
         "BFSIFinancialServices":false,
-        "MediaTelecom":false,
+        "Media Telecom":false,
         "Logistics":false,
         "Technology":false,
         "Healthcare":false,
-        "ConsultingServices":false,
-        "BFSIInsurance":false
+        "Consulting Services":false,
+        "BFSI Insurance":false
     })
     const handleClose = () => {
         setShow(false);
