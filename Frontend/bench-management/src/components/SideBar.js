@@ -561,7 +561,6 @@ export default function SideBar() {
               </Accordion.Item>
             </Accordion>
             <br/>
-            <button className="button4">Apply Filters</button>
           </div>
         </div>
       </div>
