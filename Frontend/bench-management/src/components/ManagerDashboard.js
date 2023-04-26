@@ -21,10 +21,12 @@ export default function AdminDashboard() {
   const [allManagerDetails, setAllManagerDetails] = useState();
   const navigate = useNavigate();
   const handleViewEmployee = () => {
+    authData.setShowSearchBar(false);
     navigate("/viewEmployee");
   };
 
   const handleReport = () => {
+    authData.setShowSearchBar(false);
     navigate('/viewReport');
   }
 

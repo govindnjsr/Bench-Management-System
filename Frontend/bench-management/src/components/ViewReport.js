@@ -23,7 +23,7 @@ function ViewReport() {
   const [curIndex,setCurrentIndex]=useState(-1);
 
   const loactionCounts=[];
-  
+  console.log(authData.bangaloreBU)
   const [mydata,setData]=useState({
     labels: ["Gurugram", "Banglore", "Hyderabad"],
     datasets: [
@@ -99,7 +99,7 @@ function ViewReport() {
            ],
            datasets: [
              {
-               label: "On bench",
+               label: "On bench : Gurugram",
                // Data or value of your each variable
                data: authData.gurugramBU,
                // Color of each bar
@@ -165,7 +165,7 @@ function ViewReport() {
           ],
           datasets: [
             {
-              label: "On bench",
+              label: "On bench : Bangalore",
               // Data or value of your each variable
               data: authData.bangaloreBU,
               // Color of each bar
@@ -232,7 +232,7 @@ function ViewReport() {
           ],
           datasets: [
             {
-              label: "On bench",
+              label: "On bench : Hyderabad",
               // Data or value of your each variable
               data: authData.hyderabadBU,
               // Color of each bar
@@ -298,7 +298,7 @@ function ViewReport() {
           ],
           datasets: [
             {
-              label: "On bench",
+              label: "On bench : All Locations",
               // Data or value of your each variable
               // data: authData.hyderabadBU,
               // Color of each bar
