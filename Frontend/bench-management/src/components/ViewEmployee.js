@@ -60,7 +60,7 @@ export default function ViewEmployee() {
             <hr></hr>
             <img className='profile-photo' src={profileImageEmployee} alt='profileImageEmployee' />
             <div className='content'><center>{empDetail.name}</center></div>
-            <div className='content'><center>ID : {empId}</center></div>
+            <div className='content'><center>ID : AU2023{empId}</center></div>
           </div>
 
           <div className="shadow2 p-3 mb-5">
@@ -69,6 +69,8 @@ export default function ViewEmployee() {
             <div className='details-personal'>
               <div className="details1">
                 <p className="labels">Name</p>
+                <p className="content">{empDetail.name}</p>
+                <p className="labels">Email ID</p>
                 <p className="content">{empDetail.name}</p>
               </div>
               <div className="details1">
@@ -92,6 +94,8 @@ export default function ViewEmployee() {
                 <p className="labels">Location</p>
                 <p className="content">{empDetail.empLocation === 1 ? "Gurugram" :
                   empDetail.empLocation === 2 ? "Banglore" : "Hyderabad"}</p>
+                <p className="labels">Business Unit</p>
+                <p className="content">{empDetail.workExp} Years</p>
               </div>
               <div className="details1">
                 <p className="labels">Last Billable Date</p>

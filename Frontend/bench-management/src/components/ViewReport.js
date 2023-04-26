@@ -29,8 +29,8 @@ function ViewReport() {
       {
         label: "On Bench",
         data: authData.countOfEachLocation,
-        borderColor: "black",
-        backgroundColor: ["red", "blue", "purple"],
+        borderColor: "brown",
+        backgroundColor: ['rgba(250, 10, 10, 0.5)', 'rgba(95, 60, 64, 0.5)', 'rgba(25, 10, 104, 0.5)'],
         link: [],
       },
     ],
@@ -70,6 +70,7 @@ function ViewReport() {
     {<div className="view-report">      
       <div className="representations">
         <div className="pie-chart">
+          <h5><i><center>Click on pie to view data according to business units</center></i></h5>
           <Pie
             data={mydata}
             options={options}
@@ -79,17 +80,19 @@ function ViewReport() {
         </div>   
         {      
       curIndex===0? (<div className="bar-graph">
+        <h5><i><center>Data according to business units</center></i></h5>
        <Bar
          data={{
            // Name of the variables on x-axies for each bar
            labels: [
              "BFSI Financial Services",
              "BFSI Insurance",
-             "Media Telecom",
-             "Logistics",
              "Consulting Services",
-             "Technology",
              "Healthcare",
+             "Logistics",
+             "Media Telecom",
+             "Technology",
+             
            ],
            datasets: [
              {
@@ -98,23 +101,23 @@ function ViewReport() {
                data: authData.gurugramBU,
                // Color of each bar
                backgroundColor: [
-                 "aqua",
-                 "green",
-                 "red",
-                 "gray",
-                 "orange",
-                 "black",
-                 "yellow",
+                'rgba(255, 26, 104, 0.5)',
+          'rgba(54, 162, 235, 0.5)',
+          'rgba(255, 206, 86, 0.5)',
+          'rgba(75, 192, 192, 0.5)',
+          'rgba(153, 102, 255, 0.5)',
+          'rgba(255, 159, 64, 0.5)',
+          'rgba(0, 0, 0, 0.5)'
                ],
                // Border color of each bar
                borderColor: [
-                "aqua",
-                "green",
-                "red",
-                "gray",
-                "orange",
-                "black",
-                "yellow",
+                'rgba(255, 26, 104, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+          'rgba(0, 0, 0, 1)'
                ],
                borderWidth: 0.5,
              },
@@ -125,14 +128,14 @@ function ViewReport() {
          options={{
            maintainAspectRatio: false,
            scales: {
-             yAxes: [
+             y: 
                {
                  ticks: {
                    // The y-axis value will start from zero
                    beginAtZero: true,
+                   precision: 0,
                  },
                },
-             ],
            },
            legend: {
              labels: {
@@ -144,17 +147,18 @@ function ViewReport() {
      </div>):
      curIndex===1?(
       <div className="bar-graph">
+        <h5><i><center>Data according to business units</center></i></h5>
       <Bar
         data={{
           // Name of the variables on x-axies for each bar
           labels: [
             "BFSI Financial Services",
-            "BFSI Insurance",
-            "Media Telecom",
-            "Logistics",
-            "Consulting Services",
-            "Technology",
-            "Healthcare",
+             "BFSI Insurance",
+             "Consulting Services",
+             "Healthcare",
+             "Logistics",
+             "Media Telecom",
+             "Technology",
           ],
           datasets: [
             {
@@ -163,23 +167,23 @@ function ViewReport() {
               data: authData.bangaloreBU,
               // Color of each bar
               backgroundColor: [
-                "aqua",
-                 "green",
-                 "red",
-                 "gray",
-                 "orange",
-                 "black",
-                 "yellow",
+                'rgba(255, 26, 104, 0.5)',
+                'rgba(54, 162, 235, 0.5)',
+                'rgba(255, 206, 86, 0.5)',
+                'rgba(75, 192, 192, 0.5)',
+                'rgba(153, 102, 255, 0.5)',
+                'rgba(255, 159, 64, 0.5)',
+                'rgba(0, 0, 0, 0.5)'
               ],
               // Border color of each bar
               borderColor: [
-                "aqua",
-                 "green",
-                 "red",
-                 "gray",
-                 "orange",
-                 "black",
-                 "yellow",
+                'rgba(255, 26, 104, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(0, 0, 0, 1)'
               ],
               borderWidth: 0.5,
             },
@@ -190,14 +194,81 @@ function ViewReport() {
         options={{
           maintainAspectRatio: false,
           scales: {
-            yAxes: [
+            y: 
               {
                 ticks: {
                   // The y-axis value will start from zero
                   beginAtZero: true,
+                  precision: 0,
                 },
               },
-            ],
+          },
+          legend: {
+            labels: {
+              fontSize: 15,
+            },
+          },
+        }}
+      />
+    </div>
+     ):
+     curIndex===2?(
+      <div className="bar-graph">
+        <h5><i><center>Data according to business units</center></i></h5>
+      <Bar
+        data={{
+          // Name of the variables on x-axies for each bar
+          labels: [
+            "BFSI Financial Services",
+            "BFSI Insurance",
+            "Consulting Services",
+            "Healthcare",
+            "Logistics",
+            "Media Telecom",
+            "Technology",
+          ],
+          datasets: [
+            {
+              label: "On bench",
+              // Data or value of your each variable
+              data: authData.hyderabadBU,
+              // Color of each bar
+              backgroundColor: [
+                'rgba(255, 26, 104, 0.5)',
+                'rgba(54, 162, 235, 0.5)',
+                'rgba(255, 206, 86, 0.5)',
+                'rgba(75, 192, 192, 0.5)',
+                'rgba(153, 102, 255, 0.5)',
+                'rgba(255, 159, 64, 0.5)',
+                'rgba(0, 0, 0, 0.5)'
+              ],
+              // Border color of each bar
+              borderColor: [
+                'rgba(255, 26, 104, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(0, 0, 0, 1)'
+              ],
+              borderWidth: 0.5,
+            },
+          ],
+        }}
+        // Height of graph
+        // height={400}
+        options={{
+          maintainAspectRatio: false,
+          scales: {
+            y:
+              {
+                ticks: {
+                  // The y-axis value will start from zero
+                  beginAtZero: true,
+                  precision: 0,
+                },
+              },
           },
           legend: {
             labels: {
@@ -208,61 +279,62 @@ function ViewReport() {
       />
     </div>
      ):(
-      <div className="bar-graph">
+      <div className="bar-graph" >
+        <h5><i><center>Data according to business units</center></i></h5>
       <Bar
         data={{
           // Name of the variables on x-axies for each bar
           labels: [
             "BFSI Financial Services",
-            "BFSI Insurance",
-            "Media Telecom",
-            "Logistics",
-            "Consulting Services",
-            "Technology",
-            "Healthcare",
+             "BFSI Insurance",
+             "Consulting Services",
+             "Healthcare",
+             "Logistics",
+             "Media Telecom",
+             "Technology",
           ],
           datasets: [
             {
               label: "On bench",
               // Data or value of your each variable
-              data: authData.hyderabadBU,
+              // data: authData.hyderabadBU,
               // Color of each bar
               backgroundColor: [
-                "aqua",
-                "green",
-                "red",
-                "gray",
-                "orange",
-                "black",
-                "yellow",
+                'rgba(255, 26, 104, 0.5)',
+                'rgba(54, 162, 235, 0.5)',
+                'rgba(255, 206, 86, 0.5)',
+                'rgba(75, 192, 192, 0.5)',
+                'rgba(153, 102, 255, 0.5)',
+                'rgba(255, 159, 64, 0.5)',
+                'rgba(0, 0, 0, 0.5)'
               ],
               // Border color of each bar
               borderColor: [
-                "aqua",
-                 "green",
-                 "red",
-                 "gray",
-                 "orange",
-                 "black",
-                 "yellow",
+                'rgba(255, 26, 104, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)',
+          'rgba(0, 0, 0, 1)'
               ],
               borderWidth: 0.5,
             },
           ],
         }}
         // Height of graph
-        // height={400}
+        // height={900}
         options={{
           maintainAspectRatio: false,
           scales: {
-            yAxes: [
+            y:
               {
                 ticks: {
                   // The y-axis value will start from zero
                   beginAtZero: true,
+                  precision: 0,
                 },
               },
-            ],
           },
           legend: {
             labels: {

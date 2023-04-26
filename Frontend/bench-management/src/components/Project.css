@@ -77,10 +77,10 @@
   margin-left: 0%;
   color: white;
   background-color: #01070d;
-  height: 4vh;
+  height: 7vh;
   font-size: 14px;
   font-weight: bold;
-  margin-top:11%;
+  margin-top:5%;
 }
 
 .pfilterHeading {
@@ -95,7 +95,7 @@
   padding-top: 1%;
   position: fixed;
   background-color:#f7f8fa;
-  height: 83vh;
+  height: 86vh;
   overflow-y: scroll;
   width: 18vw;
   margin-left: 0%;
@@ -206,7 +206,7 @@
 .button6 {
   height: 5vh;
   width:9vw;
-  background-color: #489fb5;
+  background-color: #01070d;
   border: none;
   color:white;
   padding: 6px 15px 15px 15px;
@@ -235,7 +235,7 @@
   flex-direction: row;
   margin: 0px;
   padding: 0px;
-  height: 12%;
+  height: 10%;
   width: 100%;
   background-color: #020911;
   color: white;
@@ -244,24 +244,25 @@
 }
 
 .logoContainer {
-  height: 10%;
+  height: 8%;
   object-fit: contain;
   width: 18%;
   padding-top: 0%;
-  padding-bottom: 1%;
+  padding-bottom: 2%;
   padding-left: 1%;
   position: fixed;
 }
 
 .logoImageClass {
-  height: 12vh;
+  height: 10vh;
   width: 20vw;
   object-fit: contain;
 }
 
 .NavbarSearch {
+  height:10vh;
   margin-left: 34%;
-  margin-top: 2px;
+  margin-top: 0.1px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -273,8 +274,8 @@
 }
 .search{
   width: 35vw;
-  height: 8.3vh;
-  margin-top:1.5%;
+  height: 5.4vh;
+  margin-top:0%;
   margin-left: 1.6px;
   padding-left: 4.5%;
   border-top-left-radius: 0px;
@@ -283,55 +284,31 @@
   border-radius: 0;
   color: white;
 }
-
 .search-icon{
   align-items: center;
-  padding-top: 3%;
-  width: 5vw;
-  height: 9vh;
-  margin-top:1.3%;
-  padding-left: 4%;
+  padding-top: 1.3%;
+  width: 3vw;
+  height: 6vh;
+  margin-top:0%;
+  padding-left: 2.3%;
+  padding-bottom: 2%;
   margin-left: 2px;
-  border-radius: 2px;
+  border-radius: 0px;
+  border-top-left-radius: 10%;
+  border-bottom-left-radius: 10%;
   background-color:white;
 }
 
-
-input.global-search {
-  border-radius: 2px;
-  background: rgba(255, 255, 255, 0.1);
-  box-shadow: none;
-  border: 1px solid transparent;
-  height: 50px;
-  width: 40vw;
-  padding-left: 60px;
-  font-size: 14px;
-  font-weight: 400;
-  color: #fff;
-  background-position: 24px 15px;
-  background-size: 20px;
-  font-family: "Roboto", sans-serif;
-  transition: none !important;
-}
-
-.searchbar-home.focusIcon:before {
-  color: #bcc6d6;
-}
-
-.searchbar-home {
-  position: relative;
-  margin: 9px 0;
-}
 
 .profile {
   background-color: #020911;
   opacity:1;
   width: 0%;
-  height: 12vh;
+  height: 10vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-left: 97%;
+  margin-left: 96%;
 }
 
 .profileUserName{
@@ -418,7 +395,7 @@ input.global-search {
 
 .actions-admin {
   height: 7%;
-  margin-top: 2%;
+  margin-top:0.9%;
   color: white;
   background-color: #01070d;
   display: flex;
@@ -462,9 +439,9 @@ input.global-search {
 
 
 .table-format {
-  height: 78vh;
+  height: 80.5vh;
   width: 81.7vw;
-  margin-top: 8%;
+  margin-top: 5.2%;
   overflow-y: auto;
   background-color:#ffffff;
 }
@@ -568,13 +545,13 @@ input.global-search {
   background-color: #01070d;
   border: none;
   color: white;
-  padding: 8px 15px 15px 15px;
+  padding: 6px 15px 18px 15px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 12px;
   font-weight: 500;
-  margin: 3px 0px 4px 0px;
+  margin: 3px 0px 4px 4px;
   cursor: pointer;
   border-radius: 12px;
 }
@@ -598,9 +575,9 @@ input.global-search {
 /*///////////////////////////////////////////// CSS FOR VIEW EMPLOYEE////////////////////////////////////// */
 
 .profile-window{
- 
   display: flex;
   flex-direction: column;
+  gap:0 px
 }
 
 .for-back{
@@ -618,14 +595,14 @@ input.global-search {
 
 .shadow1{
   margin: 5% 4.5% 0% 4.5%;
-  background-color:#fcfcfa;
-  box-shadow: 10px 10px 10px rgb(125, 125, 125);
+  background-color:#e1e1de;
+  box-shadow: 5px 5px 5px 5px rgb(125, 125, 125);
 }
 
 .shadow2{
   margin: 0% 4.5% 0% 4.5%;
-  background-color:#fcfcfa;
-  box-shadow: 10px 10px 10px rgb(125, 125, 125);
+  background-color:#e1e1de;
+  box-shadow: 5px 5px 5px 5px rgb(125, 125, 125);
 }
 
 .profile-headings{
@@ -656,7 +633,7 @@ input.global-search {
 }
 
 .labels{
-  color:rgb(170, 169, 169);
+  color:rgb(146, 144, 144);
   margin-bottom: 0px;
   
 }
@@ -680,32 +657,32 @@ input.global-search {
   color: white;
   align-items: center;
   width: 100vw;
-  margin-top: 5.8%;
+  margin-top: 4.8%;
   padding: 0.1% 0% 0.1% 30%;
 }
 
 .representations{
-  margin-top: 8.5%;
+  position: fixed;
+  margin-top: 7%;
   padding: 1%;
   display: flex;
   flex-direction: row;
   gap:0.1%;
 }
 .pie-chart{
+  position: fixed;
   background-color: white;
-  padding: 1% 1% 1% 4%;
- 
-  height: 77.5vh;
-  width: 450vw;
+  padding: 1% 2% 8% 2%;
+  height: 82vh;
+  width: 40vw;
   box-shadow: 2px 2px 5px 2px #989a9c;
-  
- 
 }
 
 .bar-graph{
-  height: 77.5vh;
-  width: 550vw;
-  padding: 2%;
-  margin-left: 1%;
+  position: fixed;
+  height: 82vh;
+  width: 57vw;
+  padding: 1% 1% 2.5% 1%;
+  margin-left: 41%;
   box-shadow: 2px 2px 5px 2px #989a9c;
 }
