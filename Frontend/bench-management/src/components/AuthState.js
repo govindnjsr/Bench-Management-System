@@ -4,7 +4,10 @@ import { useState } from 'react';
 
 export default function AuthState(props) {
 
-
+    const [countOfEachLocation,setCountOfEachLocation]=useState([])
+    const [gurugramBU,setGurugramBU]=useState([])
+    const [bangaloreBU,setBangaloreBU]=useState([])
+    const [hyderabadBU,setHyderabadBU]=useState([])
     const [isAuthentication, setAuthentication] = useState(false);
     const [currentRole, setCurrentRole] = useState(0)
     const [googleData, setGoogleData] = useState({})
@@ -19,6 +22,7 @@ export default function AuthState(props) {
     const [newData,setNewData]=useState();
     const [allData,setAlldata]=useState()
     const [showSearchBar, setShowSearchBar] = useState(true);
+ 
     const [requestDto,setReqDto]=useState({
         "experience": 0,
         "benchPeriod": 0,
@@ -34,9 +38,6 @@ export default function AuthState(props) {
       })
       //Pie chart stuff
     const locationWiseEmployeeCount=[];
-    const gurugramBU=[];
-    const bangaloreBU=[];
-    const hyderabadBU=[];
     const [checkFilter, setCheckFilter] = useState({
         "skill":0,
         "location": 0,
@@ -86,7 +87,7 @@ export default function AuthState(props) {
         console.log("logged out successfully")
     }
     return (
-        <AuthContext.Provider value={{hyderabadBU,gurugramBU,bangaloreBU,locationWiseEmployeeCount,allData,setAlldata,setNewData,newData,requestDto,setReqDto,locationAcess,setLocationAccess,checkFilter,setCheckFilter,appliedFilters,dtoData, googleData, setAppliedFilters,setDtoData,isAuthentication, currentRole,
+        <AuthContext.Provider value={{hyderabadBU,setHyderabadBU,bangaloreBU,setBangaloreBU,gurugramBU,setGurugramBU,countOfEachLocation,setCountOfEachLocation,locationWiseEmployeeCount,allData,setAlldata,setNewData,newData,requestDto,setReqDto,locationAcess,setLocationAccess,checkFilter,setCheckFilter,appliedFilters,dtoData, googleData, setAppliedFilters,setDtoData,isAuthentication, currentRole,
          setGoogleData, handleLogin, setAuthentication,
           setCurrentRole, handleLogout, loopEntry,setLoopEntry, managerId, setManagerId
           ,handleEmpId, viewEmployeeId, benchTimeValue, setBenchTimeValue,

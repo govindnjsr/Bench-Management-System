@@ -7,6 +7,7 @@ import com.example.Bench.Management.Project.Model.RequestDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Map;
 
 public interface EmpDetailsService {
     //save the employee
@@ -34,4 +35,9 @@ public interface EmpDetailsService {
       public String updateEmployeeById(Long employeeId, EmpDetails empDetails);
 
  public void saveResume(String originalFilename, Long employeeId);
+      public List<Map<Long,Long>>getCountOfEachLocation();
+      public List<Map<String,Long>>getAllGurugramBU();
+ public List<Map<String,Long>>getAllBangaloreBU();
+ public List<Map<String,Long>>getAllHyderabadBU();
+
 }

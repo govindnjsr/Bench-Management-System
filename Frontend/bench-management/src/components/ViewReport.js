@@ -20,22 +20,23 @@ function ViewReport() {
   }
  
   const [curIndex,setCurrentIndex]=useState(-1);
-  const dataSet=[];
+
+  const loactionCounts=[];
+  
   const [mydata,setData]=useState({
     labels: ["Gurugram", "Banglore", "Hyderabad"],
     datasets: [
       {
         label: "On Bench",
-        data: authData.locationWiseEmployeeCount,
+        data: authData.countOfEachLocation,
         borderColor: "black",
         backgroundColor: ["red", "blue", "purple"],
         link: [],
       },
     ],
   })
-  console.log("locationWiseEmployeeCount "+authData.locationWiseEmployeeCount)
-  const options = {};
-  
+
+  const options = {};  
   const chartRef = useRef();
   const onClick = (event) => {
     if (getElementsAtEvent(chartRef.current, event).length > 0) {
@@ -45,16 +46,7 @@ function ViewReport() {
       setCurrentIndex(dataPoint);
     }
   };
-//  console.log("current index  "+curIndex)
-//  console.log("all data "+JSON.stringify(authData.allData))
-//  console.log("dataset "+JSON.stringify(mydata.datasets[0].data))
-//  console.log("gurugramBU "+authData.gurugramBU);
 
-console.log("view gurugram "+authData.gurugramBU);
-console.log("view hyderabad "+authData.hyderabadBU);
-// console.log("all data at admin "+authData.allData)
-console.log("view locationWise "+authData.locationWiseEmployeeCount)
-// console.log("dto "+authData.dtoData)
  
   return (
     <>

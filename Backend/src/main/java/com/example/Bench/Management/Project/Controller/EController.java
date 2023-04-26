@@ -22,6 +22,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Map;
 
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -66,6 +67,17 @@ public class EController {
         return empDetailsService.getAllEmployees();
     }
 
+    //get count of each location
+    @GetMapping("/get/countOfEachLocation")
+    public List<Map<Long,Long>>getCountOfEachLocation(){return empDetailsService.getCountOfEachLocation();}
+    @GetMapping("/get/gurugramBU")
+    public List<Map<String, Long>> getAllGurugramBU(){return empDetailsService.getAllGurugramBU();}
+
+    @GetMapping("/get/bangaloreBU")
+    public List<Map<String, Long>> getAllBangaloreBU(){return empDetailsService.getAllBangaloreBU();}
+
+    @GetMapping("/get/hyderabadBU")
+    public List<Map<String, Long>> getAllHyderabadBU(){return empDetailsService.getAllHyderabadBU();}
     //to change the Company Status of employee
     @PutMapping("updateactiveness/{employeeId}")
     public String updateCompanyActiveness(@PathVariable Long employeeId){

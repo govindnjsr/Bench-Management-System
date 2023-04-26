@@ -10,10 +10,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -199,6 +196,26 @@ public class EmployeeService implements EmpDetailsService {
         empDetails2.setResume(originalFilename);
         empDetailsRepo.save(empDetails2);
 
+    }
+
+    @Override
+    public List<Map<Long,Long>> getCountOfEachLocation() {
+        return empDetailsRepo.getCountOfEachLocation();
+    }
+
+    @Override
+    public List<Map<String, Long>> getAllGurugramBU() {
+        return empDetailsRepo.getAllGurugramBU();
+    }
+
+    @Override
+    public List<Map<String, Long>> getAllBangaloreBU() {
+        return empDetailsRepo.getAllBangaloreBU();
+    }
+
+    @Override
+    public List<Map<String, Long>> getAllHyderabadBU() {
+        return empDetailsRepo.getAllHyderabadBU();
     }
 
 }
