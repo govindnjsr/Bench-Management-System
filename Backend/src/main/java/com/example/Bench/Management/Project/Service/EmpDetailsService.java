@@ -39,5 +39,8 @@ public interface EmpDetailsService {
       public List<Map<String,Long>>getAllGurugramBU();
  public List<Map<String,Long>>getAllBangaloreBU();
  public List<Map<String,Long>>getAllHyderabadBU();
+ public String updateOnGoing(Long employeeId, Long srNo);
+
+ public String updateBlockedById(Long employeeId);
 
 }

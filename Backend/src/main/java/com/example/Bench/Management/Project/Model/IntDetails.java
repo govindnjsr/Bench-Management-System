@@ -26,8 +26,11 @@ public class IntDetails {
             strategy = GenerationType.SEQUENCE,
             generator = "intdetails_seq"
     )
+
     private long srNo;
-    private String result;
+
+    private long id;
+    private boolean result;
     private String client;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private String date;
