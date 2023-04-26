@@ -146,4 +146,14 @@ public class EController {
         }
     }
 
+    @PutMapping("/ongoing/{employeeId}/{srNo}")
+    public String updateOnGoing(@PathVariable Long employeeId, @PathVariable Long srNo){
+        return empDetailsService.updateOnGoing(employeeId,srNo);
+    }
+
+    @PutMapping("/blockedstatus/{employeeId}")
+    public String updateBlockedById(@PathVariable Long employeeId){
+        return empDetailsService.updateBlockedById(employeeId);
+    }
+
 }

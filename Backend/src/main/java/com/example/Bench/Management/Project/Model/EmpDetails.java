@@ -70,4 +70,5 @@ public class EmpDetails {
     public boolean getBlocked(){
         return blocked;
     }
+    public Long onGoing;
 }

@@ -218,4 +218,22 @@ public class EmployeeService implements EmpDetailsService {
         return empDetailsRepo.getAllHyderabadBU();
     }
 
+
+    @Override
+    public String updateOnGoing(Long employeeId, Long srNo) {
+        EmpDetails empDetails3=empDetailsRepo.findById(employeeId).get();
+        empDetails3.setOnGoing(srNo);
+        empDetails3.setBlocked(true);
+        empDetailsRepo.save(empDetails3);
+        return "updated";
+    }
+
+    @Override
+    public String updateBlockedById(Long employeeId) {
+        EmpDetails empDetaills4 = empDetailsRepo.findById(employeeId).get();
+        empDetaills4.setBlocked(false);
+        empDetailsRepo.save(empDetaills4);
+        return "updated";
+    }
+
 }

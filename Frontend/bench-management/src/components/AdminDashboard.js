@@ -352,7 +352,7 @@ export default function AdminDashboard() {
                             .includes(authData.searchValue)) ? (
                         <tr>                
                           <th className="table-align-left">                           
-                            <BlockEmployee />
+                            <BlockEmployee id={emp.employeeId} blocked={emp.blocked}/>
                           </th>
                           <td
                             className="pointer-to-profile" title="Click on Name to view profile" scope="row" onClick={() => { handleViewEmployee(); authData.handleEmpId(emp.employeeId); }}>
