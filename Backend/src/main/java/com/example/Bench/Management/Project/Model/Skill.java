@@ -28,6 +28,7 @@ public class Skill {
     private boolean springboot;
 
 
+
     public boolean getJava() {
         return java;
     }

@@ -7,36 +7,6 @@ export default function SideBar() {
   const authData = useContext(AuthContext);
   
 
-  const checkDefault=()=>{
-      
-    // if(authData.requestDto.experience==0 && authData.requestDto.benchPeriod==0 &&
-    //    authData.checkFilter["skill"]<=0 && authData.checkFilter["location"]<=0 &&
-    //    authData.checkFilter["BU"]<=0 && authData.checkFilter["status"]<=0){
-    //     authData.setReqDto({
-    //       ...authData.requestDto,
-    //       ["byDefault"]: true,
-    //     });
-
-    //    }
-    //    else{
-    //     authData.setReqDto({
-    //       ...authData.requestDto,
-    //       ["byDefault"]: false,
-    //     });
-
-    //    }
-
-
-
-  }
-  
-  // useEffect(()=>{
-  //  checkDefault();
-  // },[]);
-
-  //  useEffect(() => {
-  //    filterDataByBenchTime();
-  //  }, [authData.benchTimeValue])
   //Handle BU filters
 
   const handleBUFilter=(e)=>{
@@ -54,7 +24,7 @@ export default function SideBar() {
           ["BU"]: authData.checkFilter["BU"] + 1,
         });
 
-        checkDefault();
+       
       }
       else{
         authData.setAppliedFilters({
@@ -65,7 +35,7 @@ export default function SideBar() {
           ...authData.checkFilter,
           ["BU"]: authData.checkFilter["BU"] - 1,
         });
-        checkDefault();
+       
       }
   }
   //Handle Location filters
@@ -83,7 +53,7 @@ export default function SideBar() {
           ...authData.checkFilter,
           ["location"]: authData.checkFilter["location"] + 1,
         });
-        checkDefault();
+        
       }
       else{
         authData.setAppliedFilters({
@@ -94,7 +64,7 @@ export default function SideBar() {
           ...authData.checkFilter,
           ["location"]: authData.checkFilter["location"] - 1,
         });
-        checkDefault();
+        
       }
 
   }
@@ -112,13 +82,7 @@ export default function SideBar() {
           ...authData.checkFilter,
           ["skill"]: authData.checkFilter["skill"] + 1,
         });
-        checkDefault();
-        //  if(authData.checkFilter.skill>0){
-        //   authData.setReqDto({
-        //     ...authData.requestDto,
-        //     ["byDefault"]: False,
-        //   });
-        //  }
+        
       }
       else{
         authData.setReqDto({
@@ -130,8 +94,8 @@ export default function SideBar() {
           ["skill"]: authData.checkFilter["skill"] - 1,
         });
         
-        checkDefault();
       }
+ 
    
   }
   //Handle State Filters
@@ -151,7 +115,7 @@ export default function SideBar() {
         });
 
       }
-      checkDefault();
+     
       }
       else{
         if (e.target.name === "notblocked" || e.target.name === "blocked")
@@ -164,7 +128,6 @@ export default function SideBar() {
           ["status"]: authData.checkFilter["status"] - 1,
         });
       }
-      checkDefault();
       }
 
   }

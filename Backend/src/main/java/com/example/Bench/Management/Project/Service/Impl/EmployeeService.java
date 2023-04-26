@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @Service
 public class EmployeeService implements EmpDetailsService {
     @Autowired
-    private EmpDetailsRepo empDetailsRepo;
+     private EmpDetailsRepo empDetailsRepo;
 
     public  EmployeeService(EmpDetailsRepo empDetailsRepo){
         super();
@@ -94,9 +94,20 @@ public class EmployeeService implements EmpDetailsService {
                 .stream()
                 .map(this::convertEntityToDto)
                 .collect(Collectors.toList());
+
         List<Dto>sendList=new ArrayList<>();
+        int haveSkill=0;
+        if(requestDto.isJava()==true)haveSkill++;
+        if(requestDto.isPython()==true)haveSkill++;
+        if(requestDto.isReact()==true)haveSkill++;
+        if(requestDto.isAngular()==true)haveSkill++;
+        if(requestDto.isHtml()==true)haveSkill++;
+        if(requestDto.isCss()==true)haveSkill++;
+        if(requestDto.isJavascript()==true)haveSkill++;
+        if(requestDto.isSpringboot()==true)haveSkill++;
 
         for(int i=0;i<curList.size();i++){
+            int reqSkill=0;
             //check for experience
             boolean okExp=true;
             if(curList.get(i).getExperience()<requestDto.getExperience()){
@@ -104,25 +115,24 @@ public class EmployeeService implements EmpDetailsService {
             }
            //check for skills atleast one of selected
             boolean okSkills=false;
-            if((requestDto.isJava() && curList.get(i).isJava()==requestDto.isJava())  ||
-                    (requestDto.isPython() && curList.get(i).isPython()==requestDto.isPython()) ||
-                    (requestDto.isReact() && curList.get(i).isReact()==requestDto.isReact())||
-                    (requestDto.isAngular() && curList.get(i).isAngular()==requestDto.isAngular())||
-                    (requestDto.isHtml() && curList.get(i).isHtml()==requestDto.isHtml())||
-                    (requestDto.isCss() && curList.get(i).isCss()==requestDto.isCss()) ||
-                    (requestDto.isJavascript() && curList.get(i).isJavascript()==requestDto.isJavascript())||
-                    (requestDto.isSpringboot() && curList.get(i).isSpringboot()==requestDto.isSpringboot())){
-                okSkills=true;
-            }
+            if(requestDto.isJava()==true && (curList.get(i).isJava()==true))reqSkill++;
+            if(requestDto.isPython()==true && (curList.get(i).isPython()==true))reqSkill++;
+            if(requestDto.isReact()==true && (curList.get(i).isReact()==true))reqSkill++;
+            if(requestDto.isAngular()==true && (curList.get(i).isAngular()==true))reqSkill++;
+            if(requestDto.isHtml()==true && (curList.get(i).isHtml()==true))reqSkill++;
+            if(requestDto.isCss()==true && (curList.get(i).isCss()==true))reqSkill++;
+            if(requestDto.isJavascript()==true && (curList.get(i).isJavascript()==true))reqSkill++;
+            if(requestDto.isSpringboot()==true && (curList.get(i).isSpringboot()==true))reqSkill++;
+
+            if(haveSkill==reqSkill) okSkills=true;
+
 //            if(!okSkills)okSkills=true;
             //check for bench period
             boolean okBench=true;
             if(curList.get(i).getBenchPeriod()/30<requestDto.getBenchPeriod()) {
                 okBench = false;
             }
-            if(requestDto.isByDefault()){
-                sendList.add(curList.get(i));
-            }else
+            System.out.println(okSkills);
             if(okExp && okSkills && okBench )
             {
                 sendList.add(curList.get(i));

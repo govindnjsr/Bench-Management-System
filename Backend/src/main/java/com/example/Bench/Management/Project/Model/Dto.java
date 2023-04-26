@@ -34,4 +34,5 @@ public class Dto {
     private String businessUnit;
     private String email;
     private boolean blocked;
+
 }

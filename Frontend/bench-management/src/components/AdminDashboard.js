@@ -37,7 +37,7 @@ export default function AdminDashboard() {
   
   const fetchNew = async () => {
     try {
-
+      
       const allnewDto = await axios.post(
         "http://localhost:2538/api/dto/get/filterd", authData.requestDto
       );
@@ -62,7 +62,7 @@ export default function AdminDashboard() {
         ).then((res)=>{
         let tempData=[];
            res.data.forEach(element => {
-                console.log(element.BU)
+                // console.log(element.BU)
                 if(element.BU==="BFSI Financial Services"){
                   tempData.push(parseInt(element.count));
                 }
@@ -97,7 +97,7 @@ export default function AdminDashboard() {
       ).then((res)=>{
         let tempData=[];
            res.data.forEach(element => {
-                console.log(element.BU)
+                // console.log(element.BU)
                 if(element.BU==="BFSI Financial Services"){
                   tempData.push(parseInt(element.count));
                 }
@@ -132,7 +132,7 @@ export default function AdminDashboard() {
       ).then((res)=>{
         let tempData=[];
            res.data.forEach(element => {
-                console.log(element.BU)
+                // console.log(element.BU)
                 if(element.BU==="BFSI Financial Services"){
                   tempData.push(parseInt(element.count));
                 }
@@ -171,7 +171,7 @@ export default function AdminDashboard() {
     // fetchApi();
     fetchNew();
   
-  }, [authData.appliedFilters, authData.dtoDetails, authData.post,authData.requestDto]);
+  }, [authData.dtoDetails, authData.post,authData.requestDto]);
   const allowData = (emp) => {
     let Keys = Object.keys(authData.appliedFilters);
     //----------Check for BU-----------------------------//
@@ -293,7 +293,8 @@ export default function AdminDashboard() {
     setFile([...file, e.target.files[0]]);
 
   }
- 
+  // console.log("new data "+JSON.stringify(authData.newData))
+  console.log("req dto "+JSON.stringify(authData.requestDto))
   return (
     <div className="window">
       <div className="top">
