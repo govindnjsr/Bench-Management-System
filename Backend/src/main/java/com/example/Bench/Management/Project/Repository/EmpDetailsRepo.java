@@ -25,18 +25,18 @@ public interface EmpDetailsRepo extends JpaRepository<EmpDetails,Long> {
     public long getAllEmployees();
 
     //get location wise counts
-    @Query(value = "select emp_location as location ,count(*) as count from phase2.emp_details  group by emp_location Order by emp_location",nativeQuery = true)
+    @Query(value = "select emp_location as location ,count(*) as count from bench.emp_details  group by emp_location Order by emp_location",nativeQuery = true)
     public List<Map<Long,Long>>getCountOfEachLocation();
     //get count of each BU from gurugram 1
-    @Query(value="select business_unit as BU,count(*) as count from phase2.emp_details where emp_location=1 group by business_unit order by business_unit",nativeQuery = true)
+    @Query(value="select business_unit as BU,count(*) as count from bench.emp_details where emp_location=1 group by business_unit order by business_unit",nativeQuery = true)
     public List<Map<String,Long>>getAllGurugramBU();
 
     //count of all BU from Banagalore 2
-    @Query(value = "select business_unit as BU,count(*) as count from phase2.emp_details where emp_location=2 group by business_unit order by business_unit",nativeQuery = true)
+    @Query(value = "select business_unit as BU,count(*) as count from bench.emp_details where emp_location=2 group by business_unit order by business_unit",nativeQuery = true)
     public List<Map<String,Long>>getAllBangaloreBU();
 
     //count of all BU from Hyderabad 3
-    @Query(value ="select business_unit as BU,count(*) as count from phase2.emp_details where emp_location=3 group by business_unit order by business_unit",nativeQuery = true)
+    @Query(value ="select business_unit as BU,count(*) as count from bench.emp_details where emp_location=3 group by business_unit order by business_unit",nativeQuery = true)
     public List<Map<String,Long>>getAllHyderabadBU();
 //    @Modifying
 //    @Query(value="update bench.emp_details set resume =:originalFilename where id =:employeeId",nativeQuery = true)
