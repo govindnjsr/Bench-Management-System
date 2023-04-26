@@ -85,11 +85,12 @@ function ViewReport() {
            labels: [
              "BFSI Financial Services",
              "BFSI Insurance",
-             "Media Telecom",
-             "Logistics",
              "Consulting Services",
-             "Technology",
              "Healthcare",
+             "Logistics",
+             "Media Telecom",        
+             "Technology",
+             
            ],
            datasets: [
              {
@@ -149,12 +150,12 @@ function ViewReport() {
           // Name of the variables on x-axies for each bar
           labels: [
             "BFSI Financial Services",
-            "BFSI Insurance",
-            "Media Telecom",
-            "Logistics",
-            "Consulting Services",
-            "Technology",
-            "Healthcare",
+             "BFSI Insurance",
+             "Consulting Services",
+             "Healthcare",
+             "Logistics",
+             "Media Telecom",        
+             "Technology",
           ],
           datasets: [
             {
@@ -214,12 +215,12 @@ function ViewReport() {
           // Name of the variables on x-axies for each bar
           labels: [
             "BFSI Financial Services",
-            "BFSI Insurance",
-            "Media Telecom",
-            "Logistics",
-            "Consulting Services",
-            "Technology",
-            "Healthcare",
+             "BFSI Insurance",
+             "Consulting Services",
+             "Healthcare",
+             "Logistics",
+             "Media Telecom",        
+             "Technology",
           ],
           datasets: [
             {

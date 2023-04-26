@@ -132,7 +132,7 @@ public class EmployeeService implements EmpDetailsService {
             if(curList.get(i).getBenchPeriod()/30<requestDto.getBenchPeriod()) {
                 okBench = false;
             }
-            System.out.println(okSkills);
+          
             if(okExp && okSkills && okBench )
             {
                 sendList.add(curList.get(i));

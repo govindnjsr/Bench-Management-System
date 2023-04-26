@@ -60,32 +60,35 @@ export default function AdminDashboard() {
       const countOfGurugramBU = await axios.get(
         "http://localhost:2538/api/empdetails/get/gurugramBU"
         ).then((res)=>{
-        let tempData=[];
+        let tempData=[0,0,0,0,0,0,0];
+        /*
+           0   1   2   3   4   5   6   
+          BFS BI  CS  Hel  Log  MT  T
+            
+        */
            res.data.forEach(element => {
-                // console.log(element.BU)
-                if(element.BU==="BFSI Financial Services"){
-                  tempData.push(parseInt(element.count));
+             
+                if(element.BU==="BFSI Financial Services"){                
+                  tempData[0]=parseInt(element.count);
                 }
-                else if(element.BU==="BFSI Insurance"){
-                  tempData.push(parseInt(element.count));
+                else if(element.BU==="BFSI Insurance"){                 
+                  tempData[1]=parseInt(element.count);
                 }
-                else if(element.BU==="Media Telecom"){
-                  tempData.push(parseInt(element.count));
+                else if(element.BU==="Media Telecom"){                 
+                  tempData[5]=parseInt(element.count);
                 }
-                else if(element.BU==="Logistics"){
-                  tempData.push(parseInt(element.count));
+                else if(element.BU==="Logistics"){                 
+                  tempData[4]=parseInt(element.count);
                 }
-                else if(element.BU==="Consulting Services"){
-                  tempData.push(parseInt(element.count));
+                else if(element.BU==="Consulting Services"){                
+                  tempData[2]=parseInt(element.count);
                 }
-                else if(element.BU==="Technology"){
-                  tempData.push(parseInt(element.count));
+                else if(element.BU==="Technology"){                
+                  tempData[6]=parseInt(element.count);
                 }
-                else if(element.BU==="Healthcare"){
-                  tempData.push(parseInt(element.count));
+                else if(element.BU==="Healthcare"){                
+                  tempData[3]=parseInt(element.count);
                 }
-                else 
-                tempData.push(parseInt(0));
             
            });
             authData.setGurugramBU(tempData);      
@@ -95,32 +98,29 @@ export default function AdminDashboard() {
       const countOfBangaloreBU = await axios.get(
         "http://localhost:2538/api/empdetails/get/bangaloreBU"
       ).then((res)=>{
-        let tempData=[];
+        let tempData=[0,0,0,0,0,0,0];
            res.data.forEach(element => {
-                // console.log(element.BU)
-                if(element.BU==="BFSI Financial Services"){
-                  tempData.push(parseInt(element.count));
-                }
-                else if(element.BU==="BFSI Insurance"){
-                  tempData.push(parseInt(element.count));
-                }
-                else if(element.BU==="Media Telecom"){
-                  tempData.push(parseInt(element.count));
-                }
-                else if(element.BU==="Logistics"){
-                  tempData.push(parseInt(element.count));
-                }
-                else if(element.BU==="Consulting Services"){
-                  tempData.push(parseInt(element.count));
-                }
-                else if(element.BU==="Technology"){
-                  tempData.push(parseInt(element.count));
-                }
-                else if(element.BU==="Healthcare"){
-                  tempData.push(parseInt(element.count));
-                }
-                else 
-                tempData.push(parseInt(0));
+            if(element.BU==="BFSI Financial Services"){                
+              tempData[0]=parseInt(element.count);
+            }
+            else if(element.BU==="BFSI Insurance"){                 
+              tempData[1]=parseInt(element.count);
+            }
+            else if(element.BU==="Media Telecom"){                 
+              tempData[5]=parseInt(element.count);
+            }
+            else if(element.BU==="Logistics"){                 
+              tempData[4]=parseInt(element.count);
+            }
+            else if(element.BU==="Consulting Services"){                
+              tempData[2]=parseInt(element.count);
+            }
+            else if(element.BU==="Technology"){                
+              tempData[6]=parseInt(element.count);
+            }
+            else if(element.BU==="Healthcare"){                
+              tempData[3]=parseInt(element.count);
+            }
             
            });
             authData.setBangaloreBU(tempData);         
@@ -130,32 +130,29 @@ export default function AdminDashboard() {
        const countOfHyderabadBU = await axios.get(
         "http://localhost:2538/api/empdetails/get/hyderabadBU"
       ).then((res)=>{
-        let tempData=[];
+        let tempData=[0,0,0,0,0,0,0];
            res.data.forEach(element => {
-                // console.log(element.BU)
-                if(element.BU==="BFSI Financial Services"){
-                  tempData.push(parseInt(element.count));
-                }
-                else if(element.BU==="BFSI Insurance"){
-                  tempData.push(parseInt(element.count));
-                }
-                else if(element.BU==="Media Telecom"){
-                  tempData.push(parseInt(element.count));
-                }
-                else if(element.BU==="Logistics"){
-                  tempData.push(parseInt(element.count));
-                }
-                else if(element.BU==="Consulting Services"){
-                  tempData.push(parseInt(element.count));
-                }
-                else if(element.BU==="Technology"){
-                  tempData.push(parseInt(element.count));
-                }
-                else if(element.BU==="Healthcare"){
-                  tempData.push(parseInt(element.count));
-                }
-                else 
-                tempData.push(parseInt(0));
+            if(element.BU==="BFSI Financial Services"){                
+              tempData[0]=parseInt(element.count);
+            }
+            else if(element.BU==="BFSI Insurance"){                 
+              tempData[1]=parseInt(element.count);
+            }
+            else if(element.BU==="Media Telecom"){                 
+              tempData[5]=parseInt(element.count);
+            }
+            else if(element.BU==="Logistics"){                 
+              tempData[4]=parseInt(element.count);
+            }
+            else if(element.BU==="Consulting Services"){                
+              tempData[2]=parseInt(element.count);
+            }
+            else if(element.BU==="Technology"){                
+              tempData[6]=parseInt(element.count);
+            }
+            else if(element.BU==="Healthcare"){                
+              tempData[3]=parseInt(element.count);
+            }
               
            });
             authData.setHyderabadBU(tempData);       
