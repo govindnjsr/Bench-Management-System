@@ -1,16 +1,12 @@
-import React, { useState, useEffect, useCallback, useContext, useRef } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import "./Project.css";
 import Navbar from "./Navbar";
 import SideBar from "./SideBar";
-import AddEmployee from "./AddEmployee";
 import ViewManager from "./ViewManager";
 import axios from "axios";
-import search from "./Images/search.png";
 import UpdateEmployee from "./UpdateEmployee";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "./AuthContext";
-import Form from "react-bootstrap/Form";
-import Table from "react-bootstrap/Table";
 import UploadFile from "./UploadFile";
 import DownloadFile from "./DownloadFile";
 import BlockEmployee from "./BlockEmployee";
@@ -27,14 +23,6 @@ export default function AdminDashboard() {
     authData.setShowSearchBar(false);
     navigate('/viewReport');
   }
-  const [countAllEmployees, setCountAllEmployees] = useState();
-  const [countActiveEmp, setCountActiveEmp] = useState();
-  const [countBenchedEmp, setCountBenchedEmp] = useState();
-  const [empdetails, setEmpDetails] = useState();
-  const [filterDataOfDto, setFilterDataOfDto] = useState();
-  const [rowsReturned, setRowsReturned] = useState(0);
-  const [searchValue, setSearchValue] = useState("");
-  
   const fetchNew = async () => {
     try {
       

@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import AuthContext from "./AuthContext";
 import axios from "axios";
+import Login from "./Login";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 function ViewReport() {
@@ -49,6 +50,7 @@ function ViewReport() {
 
  
   return (
+    authData.isAuthentication ?
     <>
      {(<div>
         <NavBar />
@@ -60,7 +62,7 @@ function ViewReport() {
         <button
           className="button3"
           onClick={handleBackButton}
-          style={{ position: "fixed", right: "0.1%" }}
+          style={{ position: "fixed", right: "0.1%"}}
         >
           <i className="fa-sharp fa-solid fa-arrow-left"></i> &nbsp;BACK
         </button>
@@ -353,7 +355,8 @@ function ViewReport() {
     }
     
     </>
-    
+   :
+   <Login /> 
   );
 }
 

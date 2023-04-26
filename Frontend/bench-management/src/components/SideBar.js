@@ -2,110 +2,147 @@ import React, { useState, useContext, useEffect } from "react";
 import "./Project.css";
 import AuthContext from "./AuthContext";
 import Accordion from "react-bootstrap/Accordion";
-
+import axios from "axios";
 export default function SideBar() {
   const authData = useContext(AuthContext);
-  
+  const [verifyLocation, setVerifyLocation] = useState({
+    '1': false,
+    '2': false,
+    '3': false
+  })
+  {
+    if(authData.currentRole === 1) {
+      verifyLocation[1] = true;
+      verifyLocation[2] = true;
+      verifyLocation[3] = true;
+    }
+  }
+console.log(authData.currentRole);
+  useEffect(() => {
+    try {
+      const managerApiDetails = axios.get('http://localhost:2538/api/manager/get')
+        .then((response) => {
+          response.data.map(key => {
+            if (key.id === authData.managerId) {
+              key.assignedLocation.map(loc => {
+                if(authData.currentRole === 2){
+                  if (loc.locName == "Gurugram") {
+                    verifyLocation[1] = true;
+                  }
+                  if (loc.locName == "Bangalore") {
+                    verifyLocation[2] = true;
+                  }
+                  if (loc.locName == "Hyderabad") {
+                    verifyLocation[3] = true;
+                  }
+              }
+              })
+            }
+          })
+        })
+  }
+    catch {}
+  }, [])
 
   //Handle BU filters
 
-  const handleBUFilter=(e)=>{
+  const handleBUFilter = (e) => {
     const { value, checked } = e.target;
     let True = true,
       False = false;
-      if(checked){
-        authData.setAppliedFilters({
-          ...authData.appliedFilters,
-          [e.target.name]: True,
-        });
-          
-        authData.setCheckFilter({
-          ...authData.checkFilter,
-          ["BU"]: authData.checkFilter["BU"] + 1,
-        });
+    if (checked) {
+      authData.setAppliedFilters({
+        ...authData.appliedFilters,
+        [e.target.name]: True,
+      });
 
-       
-      }
-      else{
-        authData.setAppliedFilters({
-          ...authData.appliedFilters,
-          [e.target.name]: false,
-        });
-        authData.setCheckFilter({
-          ...authData.checkFilter,
-          ["BU"]: authData.checkFilter["BU"] - 1,
-        });
-       
-      }
+      authData.setCheckFilter({
+        ...authData.checkFilter,
+        ["BU"]: authData.checkFilter["BU"] + 1,
+      });
+
+
+    }
+    else {
+      authData.setAppliedFilters({
+        ...authData.appliedFilters,
+        [e.target.name]: false,
+      });
+      authData.setCheckFilter({
+        ...authData.checkFilter,
+        ["BU"]: authData.checkFilter["BU"] - 1,
+      });
+
+    }
   }
   //Handle Location filters
-  const handleLocationFilter=(e)=>{
+  const handleLocationFilter = (e) => {
     const { value, checked } = e.target;
     let True = true,
       False = false;
 
-      if(checked){
-        authData.setAppliedFilters({
-          ...authData.appliedFilters,
-          [e.target.name]: True,
-        });
-        authData.setCheckFilter({
-          ...authData.checkFilter,
-          ["location"]: authData.checkFilter["location"] + 1,
-        });
-        
-      }
-      else{
-        authData.setAppliedFilters({
-          ...authData.appliedFilters,
-          [e.target.name]: false,
-        });
-        authData.setCheckFilter({
-          ...authData.checkFilter,
-          ["location"]: authData.checkFilter["location"] - 1,
-        });
-        
-      }
+    if (checked) {
+      authData.setAppliedFilters({
+        ...authData.appliedFilters,
+        [e.target.name]: True,
+      });
+      authData.setCheckFilter({
+        ...authData.checkFilter,
+        ["location"]: authData.checkFilter["location"] + 1,
+      });
+
+    }
+    else {
+      authData.setAppliedFilters({
+        ...authData.appliedFilters,
+        [e.target.name]: false,
+      });
+      authData.setCheckFilter({
+        ...authData.checkFilter,
+        ["location"]: authData.checkFilter["location"] - 1,
+      });
+
+    }
 
   }
   //Handle Skills Filters
-  const handleSkillsFilter=(e)=>{
+  const handleSkillsFilter = (e) => {
     const { value, checked } = e.target;
     let True = true,
       False = false;
-      if(checked){       
-        authData.setReqDto({
-          ...authData.requestDto,
-          [e.target.name]: True,
-        });
-        authData.setCheckFilter({
-          ...authData.checkFilter,
-          ["skill"]: authData.checkFilter["skill"] + 1,
-        });
-        
-      }
-      else{
-        authData.setReqDto({
-          ...authData.requestDto,
-          [e.target.name]: False,
-        });
-        authData.setCheckFilter({
-          ...authData.checkFilter,
-          ["skill"]: authData.checkFilter["skill"] - 1,
-        });
-        
-      }
- 
-   
+    if (checked) {
+      authData.setReqDto({
+        ...authData.requestDto,
+        [e.target.name]: True,
+      });
+      authData.setCheckFilter({
+        ...authData.checkFilter,
+        ["skill"]: authData.checkFilter["skill"] + 1,
+      });
+
+    }
+    else {
+      authData.setReqDto({
+        ...authData.requestDto,
+        [e.target.name]: False,
+      });
+      authData.setCheckFilter({
+        ...authData.checkFilter,
+        ["skill"]: authData.checkFilter["skill"] - 1,
+      });
+
+    }
+
+
   }
   //Handle State Filters
-  const handleStateFilters=(e)=>{
+  const handleStateFilters = (e) => {
     const { value, checked } = e.target;
     let True = true,
       False = false;
-      if(checked){
-        if (e.target.name === "notblocked" || e.target.name === "blocked")
-        {authData.setAppliedFilters({
+    if (checked) {
+      if (e.target.name === "notblocked" || e.target.name === "blocked") {
+        authData.setAppliedFilters({
           ...authData.appliedFilters,
           [e.target.name]: True,
         });
@@ -115,11 +152,11 @@ export default function SideBar() {
         });
 
       }
-     
-      }
-      else{
-        if (e.target.name === "notblocked" || e.target.name === "blocked")
-        {authData.setAppliedFilters({
+
+    }
+    else {
+      if (e.target.name === "notblocked" || e.target.name === "blocked") {
+        authData.setAppliedFilters({
           ...authData.appliedFilters,
           [e.target.name]: False,
         });
@@ -128,10 +165,10 @@ export default function SideBar() {
           ["status"]: authData.checkFilter["status"] - 1,
         });
       }
-      }
+    }
 
   }
-  
+
   return (
     <>
       <div className="filterHeading">
@@ -144,7 +181,7 @@ export default function SideBar() {
               EXPERIENCE{" "}
               <span className="span-style">
                 ( {authData.requestDto.experience}+ Years)
-                
+
               </span>
             </p>
             <label htmlFor="customRange2" className="form-label"></label>
@@ -158,7 +195,7 @@ export default function SideBar() {
                 // authData.setExperienceValue(e.target.value);
                 authData.setReqDto({
                   ...authData.requestDto,
-                  ["experience"]: e.target.value-1,
+                  ["experience"]: e.target.value - 1,
                 });
               }}
               id="customRange2"
@@ -172,7 +209,7 @@ export default function SideBar() {
             <p className="pfilter">
               BENCH AGING{" "}
               <span className="span-style">
-                ( {authData.requestDto.benchPeriod } + Months)
+                ( {authData.requestDto.benchPeriod} + Months)
               </span>
             </p>
             <label htmlFor="customRange2" className="form-label"></label>
@@ -186,7 +223,7 @@ export default function SideBar() {
                 // authData.setBenchTimeValue(e.target.value);
                 authData.setReqDto({
                   ...authData.requestDto,
-                  ["benchPeriod"]: e.target.value-1,
+                  ["benchPeriod"]: e.target.value - 1,
                 });
               }}
               id="customRange2"
@@ -200,7 +237,7 @@ export default function SideBar() {
               <Accordion.Item eventKey="0">
                 <Accordion.Header><div className="pfilter">BUSINESS UNIT</div></Accordion.Header>
                 <Accordion.Body>
-                <div className="filterByBusinessUnit">
+                  <div className="filterByBusinessUnit">
                     <div className="form-check-sidebar">
                       <input
                         className="form-check-input"
@@ -217,7 +254,7 @@ export default function SideBar() {
                         className="form-check-label skillsLabel"
                         htmlFor="status-1"
                       >
-                       BFSI Financial Services
+                        BFSI Financial Services
                       </label>
                       <br />
                       <input
@@ -233,7 +270,7 @@ export default function SideBar() {
                         className="form-check-label skillsLabel"
                         htmlFor="status-2"
                       >
-                     BFSI Insurance
+                        BFSI Insurance
                       </label>
                       <br />
                       <input
@@ -249,7 +286,7 @@ export default function SideBar() {
                         className="form-check-label skillsLabel"
                         htmlFor="status-2"
                       >
-                      Media Telecom
+                        Media Telecom
                       </label>
                       <br />
                       <input
@@ -267,7 +304,7 @@ export default function SideBar() {
                         className="form-check-label skillsLabel"
                         htmlFor="status-2"
                       >
-                      Logistics
+                        Logistics
                       </label>
                       <br />
                       <input
@@ -283,7 +320,7 @@ export default function SideBar() {
                         className="form-check-label skillsLabel"
                         htmlFor="status-2"
                       >
-                       Consulting Services
+                        Consulting Services
                       </label>
                       <br />
                       <input
@@ -299,7 +336,7 @@ export default function SideBar() {
                         className="form-check-label skillsLabel"
                         htmlFor="status-2"
                       >
-                       Technology
+                        Technology
                       </label>
                       <br />
                       <input
@@ -315,7 +352,7 @@ export default function SideBar() {
                         className="form-check-label skillsLabel"
                         htmlFor="status-2"
                       >
-                       Healthcare
+                        Healthcare
                       </label>
                       <br />
                     </div>
@@ -324,61 +361,77 @@ export default function SideBar() {
               </Accordion.Item>
               <Accordion.Item eventKey="1">
                 <Accordion.Header>
-                <div className="pfilter">LOCATION</div>
+                  <div className="pfilter">LOCATION</div>
                 </Accordion.Header>
                 <Accordion.Body>
                   <div className="filterByLocation">
                     <div className="form-check-sidebar">
-                      <input
-                        className="form-check-input"
-                        type="checkbox"
-                        name="gurugram"
-                        value={true}
-                        onChange={handleLocationFilter.bind(this)}
-                        id="loc-1"
-                        checked={authData.appliedFilters.gurugram}
-                      />
-                      <label
-                        className="form-check-label skillsLabel"
-                        htmlFor="skill-1"
-                      >
-                        Gurugram
-                      </label>
-                      <br />
-                      <input
-                        className="form-check-input"
-                        type="checkbox"
-                        name="bangalore"
-                        value={true}
-                        onChange={handleLocationFilter.bind(this)}
-                        id="loc-2"
-                        checked={authData.appliedFilters.bangalore}
-                      />
-                      <label
-                        className="form-check-label skillsLabel"
-                        htmlFor="skill-2"
-                      >
-                        Bangalore
-                      </label>
-                      <br />
-                      <input
-                        className="form-check-input"
-                        type="checkbox"
-                        name="hyderabad"
-                        value={true}
-                        onChange={handleLocationFilter.bind(this)}
-                        id="loc-3"
-                        checked={authData.appliedFilters.hyderabad}
-                      />
-                      <label
-                        className="form-check-label skillsLabel"
-                        htmlFor="skill-3"
-                      >
-                        Hyderabad
-                      </label>
-                      <br />
+                      {
+                        verifyLocation[1] &&
+                        <>
+                          <input
+                            className="form-check-input"
+                            type="checkbox"
+                            name="gurugram"
+                            value={true}
+                            onChange={handleLocationFilter.bind(this)}
+                            id="loc-1"
+                            checked={authData.appliedFilters.gurugram}
+                          />
+                          <label
+                            className="form-check-label skillsLabel"
+                            htmlFor="skill-1"
+                          >
+                            Gurugram
+                          </label>
+                          <br />
+                        </>
+                      }
+                      {
+                        verifyLocation[2] &&
+                        <>
+                          <input
+                            className="form-check-input"
+                            type="checkbox"
+                            name="bangalore"
+                            value={true}
+                            onChange={handleLocationFilter.bind(this)}
+                            id="loc-2"
+                            checked={authData.appliedFilters.bangalore}
+                          />
+                          <label
+                            className="form-check-label skillsLabel"
+                            htmlFor="skill-2"
+                          >
+                            Bangalore
+                          </label>
+                          <br />
+                        </>
+                      }
+                      {
+                        verifyLocation[3] &&
+                        <>
+                        <input
+                          className="form-check-input"
+                          type="checkbox"
+                          name="hyderabad"
+                          value={true}
+                          onChange={handleLocationFilter.bind(this)}
+                          id="loc-3"
+                          checked={authData.appliedFilters.hyderabad}
+                        />
+                        <label
+                          className="form-check-label skillsLabel"
+                          htmlFor="skill-3"
+                        >
+                          Hyderabad
+                        </label>
+                        <br />
+                      </>
+                      }
                     </div>
                   </div>
+
                 </Accordion.Body>
               </Accordion.Item>
               <Accordion.Item eventKey="2">
@@ -560,7 +613,7 @@ export default function SideBar() {
                 </Accordion.Body>
               </Accordion.Item>
             </Accordion>
-            <br/>
+            <br />
           </div>
         </div>
       </div>
