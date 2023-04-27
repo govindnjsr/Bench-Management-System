@@ -26,7 +26,7 @@ public class InterviewServiceImpl implements InterviewService {
     @Override
     public String updateResult(Long employeeId, IntDetails intDetails) {
         IntDetails intDetails1 = interviewRepo.getByIdAndOngoing(employeeId);
-        System.out.println("Intdetails"+intDetails1);
+//        System.out.println("Intdetails"+intDetails1);
         intDetails1.setResult(intDetails.isResult());
         //intDetails1.setOngoing(false);
         interviewRepo.save(intDetails1);

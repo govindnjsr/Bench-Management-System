@@ -132,7 +132,7 @@ public class EmployeeService implements EmpDetailsService {
             if(curList.get(i).getBenchPeriod()/30<requestDto.getBenchPeriod()) {
                 okBench = false;
             }
-          
+
             if(okExp && okSkills && okBench )
             {
                 sendList.add(curList.get(i));
@@ -214,17 +214,17 @@ public class EmployeeService implements EmpDetailsService {
     }
 
     @Override
-    public List<Map<String, Long>> getAllGurugramBU() {
+    public List<Integer> getAllGurugramBU() {
         return empDetailsRepo.getAllGurugramBU();
     }
 
     @Override
-    public List<Map<String, Long>> getAllBangaloreBU() {
+    public List<Integer> getAllBangaloreBU() {
         return empDetailsRepo.getAllBangaloreBU();
     }
 
     @Override
-    public List<Map<String, Long>> getAllHyderabadBU() {
+    public List<Integer> getAllHyderabadBU() {
         return empDetailsRepo.getAllHyderabadBU();
     }
 
