@@ -80,7 +80,7 @@ function ViewReport() {
         </div>   
         {      
       curIndex===0? (<div className="bar-graph">
-        <h5><i><center>Data according to business units</center></i></h5>
+        <h5><i><center>Data according to business units of Gurugram</center></i></h5>
        <Bar
          data={{
            // Name of the variables on x-axies for each bar
@@ -91,8 +91,7 @@ function ViewReport() {
              "Healthcare",
              "Logistics",
              "Media Telecom",
-             "Technology",
-             
+             "Technology",      
              
            ],
            datasets: [
