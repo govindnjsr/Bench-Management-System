@@ -161,8 +161,8 @@ function UpdateEmployee(props) {
                             <Form.Select aria-label="Default select example" name="benchStatus" onChange={handleChangeValue.bind(this)} >
 
                                 <option>Select from below</option>
-                                <option value={false} selected={fetchedEmpDetail.benchStatus == false} >Remove From Bench</option>
-                                <option value={true} selected={fetchedEmpDetail.benchStatus == true}  >On Bench</option>
+                                <option value={false} selected={fetchedEmpDetail.benchStatus == false} >Remove from Bench</option>
+                                <option value={true} selected={fetchedEmpDetail.benchStatus == true}  >Add on Bench</option>
                             </Form.Select>
                         </Form.Group><br />
                         {/* <Form.Group>
