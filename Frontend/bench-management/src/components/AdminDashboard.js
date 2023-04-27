@@ -23,7 +23,17 @@ export default function AdminDashboard() {
     authData.setShowSearchBar(false);
     navigate('/viewReport');
   }
-  const fetchNew = async () => {
+
+  const [countAllEmployees, setCountAllEmployees] = useState();
+  const [countActiveEmp, setCountActiveEmp] = useState();
+  const [countBenchedEmp, setCountBenchedEmp] = useState();
+  const [empdetails, setEmpDetails] = useState();
+  const [filterDataOfDto, setFilterDataOfDto] = useState();
+  const [rowsReturned, setRowsReturned] = useState(0);
+  const [searchValue, setSearchValue] = useState("");
+  
+  const fetchApis = async () => {
+
     try {
       
       const allnewDto = await axios.post(
@@ -34,8 +44,7 @@ export default function AdminDashboard() {
       //count emp locatin wise 
       const countOfEachLoc = await axios.get(
         "http://localhost:2538/api/empdetails/get/countOfEachLocation"
-      ).then((res)=>{
-        
+      ).then((res)=>{        
         let tempData=[];
            res.data.forEach(element => {
                 console.log(element.count)
@@ -48,102 +57,19 @@ export default function AdminDashboard() {
       const countOfGurugramBU = await axios.get(
         "http://localhost:2538/api/empdetails/get/gurugramBU"
         ).then((res)=>{
-        let tempData=[0,0,0,0,0,0,0];
-        /*
-           0   1   2   3   4   5   6   
-          BFS BI  CS  Hel  Log  MT  T
-            
-        */
-           res.data.forEach(element => {
-             
-                if(element.BU==="BFSI Financial Services"){                
-                  tempData[0]=parseInt(element.count);
-                }
-                else if(element.BU==="BFSI Insurance"){                 
-                  tempData[1]=parseInt(element.count);
-                }
-                else if(element.BU==="Media Telecom"){                 
-                  tempData[5]=parseInt(element.count);
-                }
-                else if(element.BU==="Logistics"){                 
-                  tempData[4]=parseInt(element.count);
-                }
-                else if(element.BU==="Consulting Services"){                
-                  tempData[2]=parseInt(element.count);
-                }
-                else if(element.BU==="Technology"){                
-                  tempData[6]=parseInt(element.count);
-                }
-                else if(element.BU==="Healthcare"){                
-                  tempData[3]=parseInt(element.count);
-                }
-            
-           });
-            authData.setGurugramBU(tempData);      
+            authData.setGurugramBU(res.data);      
       })
-
       //Bangalore
       const countOfBangaloreBU = await axios.get(
         "http://localhost:2538/api/empdetails/get/bangaloreBU"
-      ).then((res)=>{
-        let tempData=[0,0,0,0,0,0,0];
-           res.data.forEach(element => {
-            if(element.BU==="BFSI Financial Services"){                
-              tempData[0]=parseInt(element.count);
-            }
-            else if(element.BU==="BFSI Insurance"){                 
-              tempData[1]=parseInt(element.count);
-            }
-            else if(element.BU==="Media Telecom"){                 
-              tempData[5]=parseInt(element.count);
-            }
-            else if(element.BU==="Logistics"){                 
-              tempData[4]=parseInt(element.count);
-            }
-            else if(element.BU==="Consulting Services"){                
-              tempData[2]=parseInt(element.count);
-            }
-            else if(element.BU==="Technology"){                
-              tempData[6]=parseInt(element.count);
-            }
-            else if(element.BU==="Healthcare"){                
-              tempData[3]=parseInt(element.count);
-            }
-            
-           });
-            authData.setBangaloreBU(tempData);         
+      ).then((res)=>{       
+            authData.setBangaloreBU(res.data);         
       })
-
        //hyderabad
        const countOfHyderabadBU = await axios.get(
         "http://localhost:2538/api/empdetails/get/hyderabadBU"
       ).then((res)=>{
-        let tempData=[0,0,0,0,0,0,0];
-           res.data.forEach(element => {
-            if(element.BU==="BFSI Financial Services"){                
-              tempData[0]=parseInt(element.count);
-            }
-            else if(element.BU==="BFSI Insurance"){                 
-              tempData[1]=parseInt(element.count);
-            }
-            else if(element.BU==="Media Telecom"){                 
-              tempData[5]=parseInt(element.count);
-            }
-            else if(element.BU==="Logistics"){                 
-              tempData[4]=parseInt(element.count);
-            }
-            else if(element.BU==="Consulting Services"){                
-              tempData[2]=parseInt(element.count);
-            }
-            else if(element.BU==="Technology"){                
-              tempData[6]=parseInt(element.count);
-            }
-            else if(element.BU==="Healthcare"){                
-              tempData[3]=parseInt(element.count);
-            }
-              
-           });
-            authData.setHyderabadBU(tempData);       
+            authData.setHyderabadBU(res.data);       
       })
 
     }
@@ -152,11 +78,9 @@ export default function AdminDashboard() {
     }
   }
  
-  useEffect(() => {
-    // fetchApi();
-    fetchNew();
-  
-  }, [authData.dtoDetails, authData.post,authData.requestDto]);
+  useEffect(() => {   
+    fetchApis();  
+  }, [authData.dtoDetails, authData.post,authData.requestDto,authData.appliedFilters]);
   const allowData = (emp) => {
     let Keys = Object.keys(authData.appliedFilters);
     //----------Check for BU-----------------------------//
@@ -278,6 +202,13 @@ export default function AdminDashboard() {
     setFile([...file, e.target.files[0]]);
 
   }
+
+  //--------------------------------
+  const getColor = (color) => {
+    if (color) return 'red';
+    return '';
+};
+  //--------------------------------
   // console.log("new data "+JSON.stringify(authData.newData))
   console.log("req dto "+JSON.stringify(authData.requestDto))
   return (
@@ -336,7 +267,7 @@ export default function AdminDashboard() {
                           emp.employeeName
                             .toLowerCase()
                             .includes(authData.searchValue)) ? (
-                        <tr>                
+                        <tr style={{color:getColor(emp.blocked)}}>                
                           <th className="table-align-left">                           
                             <BlockEmployee id={emp.employeeId} blocked={emp.blocked}/>
                           </th>

@@ -3,7 +3,6 @@ package com.example.Bench.Management.Project.Controller;
 import com.example.Bench.Management.Project.Helper.FileUploadHelper;
 import com.example.Bench.Management.Project.Model.EmpDetails;
 import com.example.Bench.Management.Project.Service.EmpDetailsService;
-import com.example.Bench.Management.Project.Service.Impl.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -13,11 +12,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -71,13 +68,13 @@ public class EController {
     @GetMapping("/get/countOfEachLocation")
     public List<Map<Long,Long>>getCountOfEachLocation(){return empDetailsService.getCountOfEachLocation();}
     @GetMapping("/get/gurugramBU")
-    public List<Map<String, Long>> getAllGurugramBU(){return empDetailsService.getAllGurugramBU();}
+    public List<Integer> getAllGurugramBU(){return empDetailsService.getAllGurugramBU();}
 
     @GetMapping("/get/bangaloreBU")
-    public List<Map<String, Long>> getAllBangaloreBU(){return empDetailsService.getAllBangaloreBU();}
+    public List<Integer> getAllBangaloreBU(){return empDetailsService.getAllBangaloreBU();}
 
     @GetMapping("/get/hyderabadBU")
-    public List<Map<String, Long>> getAllHyderabadBU(){return empDetailsService.getAllHyderabadBU();}
+    public List<Integer> getAllHyderabadBU(){return empDetailsService.getAllHyderabadBU();}
     //to change the Company Status of employee
     @PutMapping("updateactiveness/{employeeId}")
     public String updateCompanyActiveness(@PathVariable Long employeeId){

@@ -10,6 +10,7 @@ function BlockEmployee(props) {
   const [show, setShow] = useState(false);
   const [res, setRes]=useState({})
   const [isChecked, setIsChecked] = useState(false);
+  const [eventx,setEvent]=useState();
   const [intDetails, setIntDetails] = useState({
     "id": null,
     "result": null,
@@ -17,15 +18,11 @@ function BlockEmployee(props) {
     "date": null,
   });
   const[empDetails,setEmpDetails]=useState(null);
-  const[isblocked, setIsBlocked]=useState(false);
+  
   const handleCloseBlocked = (e) => {
     setShow(false);
     setIsChecked(false);
-    console.log("checked value " + isChecked)
   }
-  useEffect(()=>{
-    console.log("new emp out"+JSON.stringify(empDetails));
-  })
   const handleApplyResult =async(e,id)=>{
     e.preventDefault();
     const srNo=empDetails.onGoing;
@@ -33,23 +30,13 @@ function BlockEmployee(props) {
     try{
       await axios.put(`http://localhost:2538/api/empdetails/blockedstatus/${id}`);
       await axios.put(`http://localhost:2538/api/empdetails/interview/updateresultbysrno/${srNo}`,intDetails)
-      .then(setIsBlocked(false))
+      authData.setAppliedFilters({
+        ...authData.appliedFilters,
+        ["statusBlocked"]: false,
+      });
+      setIsChecked(false)
+      eventx.target.checked=false;      
     }
-    //console.log()
-    //var srNo = empDetails.data.onGoing;
-    //console.log(empDetails.blocked);
-      // await axios.put(`http://localhost:2538/api/empdetails/interview/updateresultbysrno/${srno}`,intDetails)
-      // .then((response)=>{
-      //   console.log("Unblock"+response.data);
-      //   axios.put(`http://localhost:2538/api/empdetails/update/${id}`, empDetails)
-  //   empDetails.blocked=false;
-  //   setEmpDetails(empDetails);
-  //   const allEmp =
-  //   .then(
-  //     e.preventDefault()
-  // )
-  // .then(setShow(false))
-    //
     catch{
     }
   }
@@ -58,27 +45,37 @@ console.log(intDetails);
     try {
         await axios.post('http://localhost:2538/api/empdetails/interview/save', intDetails)
         .then((response)=>{
+          // authData.setIsBlocked(true);
           console.log("Data"+JSON.stringify(response.data.srNo));
           axios.put(`http://localhost:2538/api/empdetails/ongoing/${response.data.id}/${response.data.srNo}`)
           // axios returns API response body in .data
+          authData.setAppliedFilters({
+            ...authData.appliedFilters,
+            ["statusBlocked"]: true,
+          });
         })
         .then(
-          e.preventDefault()
+          e.preventDefault()          
       )
-      .then(setShow(false))
-      .then(setIsBlocked(true))
-      //.then(setIsChecked(false))
+      .then(setShow(false))       
+      .then(setIsChecked(true))
+       eventx.target.checked=true;
     }
     catch {}
   }
-  const isOngoing = (value) => {
-        if (value) {
-            return "checked";
-        }
-    }
+     
   const handleShowApply = async(e,id) => {
     const { value, checked } = e.target;
-    setIsChecked(checked);
+     if(checked)
+     {e.target.checked=false;
+     setEvent(e);
+     }
+     else{
+      e.target.checked=true;
+      setEvent(e);
+      setIsChecked(true);
+     }
+    // setIsChecked(checked);
     intDetails.id = id;
     setIntDetails(intDetails);
     await axios.get(`http://localhost:2538/api/empdetails/get/${id}`)
@@ -86,10 +83,7 @@ console.log(intDetails);
        setEmpDetails(response.data);
       //  console.log("in get"+JSON.stringify(empDetails));
     })
-    .then(
-      e.preventDefault()
-  )
-  .then(setShow(false))
+     .then(setShow(false))
   }
   const handleChangeValue = (e) => {
     setIntDetails({ ...intDetails, [e.target.name]: e.target.value });
@@ -107,9 +101,12 @@ console.log(intDetails);
     console.log("Date"+date);
     return date;
   }
+  // useEffect(()=>{
+  //   //force rendering ...
+  // },[authData.appliedFilters])
   return (
     <>
-      <button className="button5" variant="primary" onClick={(e) => { handleShowApply(e,props.id); handleShow(); }}>
+      {<button className="button5" variant="primary" onClick={(e) => { handleShowApply(e,props.id); handleShow(); }}>
         <Form name="shambhavi">
           {["checkbox"].map((type) => (
             <div key={`inline-${type}`} className="mb-3">
@@ -118,17 +115,14 @@ console.log(intDetails);
                 label=""
                 name="group1"
                 type={type}
-                defaultChecked={isOngoing(props.blocked)}
+                checked={(props.blocked)}
                 id={`inline-${type}-1`}
-                checked={isblocked}
-                // checked={() => {isOngoing(props.id)}}
-              // onChange={handleCheckboxChange
               />
             </div>
           ))}
         </Form>
-      </button>
-      {(!isChecked) ? <Modal
+      </button>}
+      {(isChecked) ? <Modal
         show={show}
         onHide={handleClose}
         backdrop="static"

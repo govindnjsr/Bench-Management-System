@@ -2,9 +2,7 @@ package com.example.Bench.Management.Project.Service;
 
 import com.example.Bench.Management.Project.Model.Dto;
 import com.example.Bench.Management.Project.Model.EmpDetails;
-import com.example.Bench.Management.Project.Model.ManagerDetails;
 import com.example.Bench.Management.Project.Model.RequestDto;
-import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 import java.util.Map;
@@ -36,9 +34,9 @@ public interface EmpDetailsService {
 
  public void saveResume(String originalFilename, Long employeeId);
       public List<Map<Long,Long>>getCountOfEachLocation();
-      public List<Map<String,Long>>getAllGurugramBU();
- public List<Map<String,Long>>getAllBangaloreBU();
- public List<Map<String,Long>>getAllHyderabadBU();
+      public List<Integer> getAllGurugramBU();
+ public List<Integer>getAllBangaloreBU();
+ public List<Integer>getAllHyderabadBU();
  public String updateOnGoing(Long employeeId, Long srNo);
 
  public String updateBlockedById(Long employeeId);

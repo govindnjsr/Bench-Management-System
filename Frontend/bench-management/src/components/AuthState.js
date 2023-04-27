@@ -3,7 +3,8 @@ import AuthContext from './AuthContext'
 import { useState } from 'react';
 
 export default function AuthState(props) {
-
+   
+    const[isblocked, setIsBlocked]=useState(false);
     const [countOfEachLocation,setCountOfEachLocation]=useState([])
     const [gurugramBU,setGurugramBU]=useState([])
     const [bangaloreBU,setBangaloreBU]=useState([])
@@ -64,7 +65,8 @@ export default function AuthState(props) {
         "Technology":false,
         "Healthcare":false,
         "ConsultingServices":false,
-        "BFSIInsurance":false
+        "BFSIInsurance":false,
+        "statusBlocked":false
     })
     const handleClose = () => {
         setShow(false);
@@ -87,7 +89,7 @@ export default function AuthState(props) {
         console.log("logged out successfully")
     }
     return (
-        <AuthContext.Provider value={{hyderabadBU,setHyderabadBU,bangaloreBU,setBangaloreBU,gurugramBU,setGurugramBU,countOfEachLocation,setCountOfEachLocation,locationWiseEmployeeCount,allData,setAlldata,setNewData,newData,requestDto,setReqDto,locationAcess,setLocationAccess,checkFilter,setCheckFilter,appliedFilters,dtoData, googleData, setAppliedFilters,setDtoData,isAuthentication, currentRole,
+        <AuthContext.Provider value={{isblocked,setIsBlocked,hyderabadBU,setHyderabadBU,bangaloreBU,setBangaloreBU,gurugramBU,setGurugramBU,countOfEachLocation,setCountOfEachLocation,locationWiseEmployeeCount,allData,setAlldata,setNewData,newData,requestDto,setReqDto,locationAcess,setLocationAccess,checkFilter,setCheckFilter,appliedFilters,dtoData, googleData, setAppliedFilters,setDtoData,isAuthentication, currentRole,
          setGoogleData, handleLogin, setAuthentication,
           setCurrentRole, handleLogout, loopEntry,setLoopEntry, managerId, setManagerId
           ,handleEmpId, viewEmployeeId, benchTimeValue, setBenchTimeValue,
