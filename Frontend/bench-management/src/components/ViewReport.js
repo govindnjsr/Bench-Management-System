@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import AuthContext from "./AuthContext";
 import axios from "axios";
+import Login from "./Login";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 function ViewReport() {
@@ -22,7 +23,7 @@ function ViewReport() {
   const [curIndex,setCurrentIndex]=useState(-1);
 
   const loactionCounts=[];
-  
+  console.log(authData.bangaloreBU)
   const [mydata,setData]=useState({
     labels: ["Gurugram", "Banglore", "Hyderabad"],
     datasets: [
@@ -49,6 +50,7 @@ function ViewReport() {
 
  
   return (
+    authData.isAuthentication ?
     <>
      {(<div>
         <NavBar />
@@ -60,7 +62,7 @@ function ViewReport() {
         <button
           className="button3"
           onClick={handleBackButton}
-          style={{ position: "fixed", right: "0.1%" }}
+          style={{ position: "fixed", right: "0.1%"}}
         >
           <i className="fa-sharp fa-solid fa-arrow-left"></i> &nbsp;BACK
         </button>
@@ -97,7 +99,7 @@ function ViewReport() {
            ],
            datasets: [
              {
-               label: "On bench",
+               label: "On bench : Gurugram",
                // Data or value of your each variable
                data: authData.gurugramBU,
                // Color of each bar
@@ -163,7 +165,7 @@ function ViewReport() {
           ],
           datasets: [
             {
-              label: "On bench",
+              label: "On bench : Bangalore",
               // Data or value of your each variable
               data: authData.bangaloreBU,
               // Color of each bar
@@ -230,7 +232,7 @@ function ViewReport() {
           ],
           datasets: [
             {
-              label: "On bench",
+              label: "On bench : Hyderabad",
               // Data or value of your each variable
               data: authData.hyderabadBU,
               // Color of each bar
@@ -296,7 +298,7 @@ function ViewReport() {
           ],
           datasets: [
             {
-              label: "On bench",
+              label: "On bench : All Locations",
               // Data or value of your each variable
               // data: authData.hyderabadBU,
               // Color of each bar
@@ -353,7 +355,8 @@ function ViewReport() {
     }
     
     </>
-    
+   :
+   <Login /> 
   );
 }
 
