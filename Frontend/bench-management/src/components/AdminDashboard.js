@@ -1,16 +1,12 @@
-import React, { useState, useEffect, useCallback, useContext, useRef } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import "./Project.css";
 import Navbar from "./Navbar";
 import SideBar from "./SideBar";
-import AddEmployee from "./AddEmployee";
 import ViewManager from "./ViewManager";
 import axios from "axios";
-import search from "./Images/search.png";
 import UpdateEmployee from "./UpdateEmployee";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "./AuthContext";
-import Form from "react-bootstrap/Form";
-import Table from "react-bootstrap/Table";
 import UploadFile from "./UploadFile";
 import DownloadFile from "./DownloadFile";
 import BlockEmployee from "./BlockEmployee";
@@ -27,6 +23,7 @@ export default function AdminDashboard() {
     authData.setShowSearchBar(false);
     navigate('/viewReport');
   }
+
   const [countAllEmployees, setCountAllEmployees] = useState();
   const [countActiveEmp, setCountActiveEmp] = useState();
   const [countBenchedEmp, setCountBenchedEmp] = useState();
@@ -36,6 +33,7 @@ export default function AdminDashboard() {
   const [searchValue, setSearchValue] = useState("");
   
   const fetchApis = async () => {
+
     try {
       
       const allnewDto = await axios.post(
@@ -89,12 +87,12 @@ export default function AdminDashboard() {
     let okBU = false;
     if (authData.checkFilter["BU"]) {
       Keys.forEach((filterKey) => {
-        if (filterKey === "BFSI Financial Services" && authData.appliedFilters[filterKey] === true &&
-          emp.businessUnit === "BFSI Financial Services")
+        if (filterKey === "BFSIFinancialServices" && authData.appliedFilters[filterKey] === true &&
+          emp.businessUnit === "BFSIFinancialServices")
           okBU = true;
 
-        if (filterKey === "Media Telecom" && authData.appliedFilters[filterKey] === true &&
-          emp.businessUnit === "Media Telecom")
+        if (filterKey === "MediaTelecom" && authData.appliedFilters[filterKey] === true &&
+          emp.businessUnit === "MediaTelecom")
           okBU = true;
 
         if (filterKey === "Logistics" && authData.appliedFilters[filterKey] === true &&
@@ -109,12 +107,12 @@ export default function AdminDashboard() {
           emp.businessUnit === "Healthcare")
           okBU = true;
 
-        if (filterKey === "Consulting Services" && authData.appliedFilters[filterKey] === true &&
-          emp.businessUnit === "Consulting Services")
+        if (filterKey === "ConsultingServices" && authData.appliedFilters[filterKey] === true &&
+          emp.businessUnit === "ConsultingServices")
           okBU = true;
 
-        if (filterKey === "BFSI Insurance" && authData.appliedFilters[filterKey] === true &&
-          emp.businessUnit === "BFSI Insurance")
+        if (filterKey === "BFSIInsurance" && authData.appliedFilters[filterKey] === true &&
+          emp.businessUnit === "BFSIInsurance")
           okBU = true;
 
       })

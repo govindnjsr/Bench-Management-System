@@ -21,7 +21,8 @@ function ViewManager() {
     authData.setPost({});
   }
   const handleShow = () => setShow(true);
-
+  
+  // console.log(deleteResponse)
   const handleAddLocation = (e) => {
 
     setAddLocation({ ...addlocation, [e.target.name]: e.target.value });
@@ -31,7 +32,7 @@ function ViewManager() {
     try {
       await axios.put(`http://localhost:2538/api/manager/${addlocation.managerId}/location/${addlocation.locationId}`)
         .then((response) => {
-          console.log("response " + response);
+          console.log("response " + response.data);
           setPostResponse(response);
           setAddLocation({
             managerId:null,
@@ -53,7 +54,7 @@ function ViewManager() {
     try {
       await axios.delete(`http://localhost:2538/api/manager/delete/${addlocation.managerId}/locationdelete/${addlocation.locationId}`)
         .then((response) => {
-          console.log("response " + response);
+          console.log("response " + response.data);
           setDeleteResponse(response);
           authData.setPost(response.data);
           handleClose();
@@ -78,7 +79,7 @@ function ViewManager() {
     fetchManagerData();
   }, [postResponse, deleteResponse])
 
-
+console.log(managerDetails)
 
     // console.log(managerDetails) 
     // console.log(addlocation)

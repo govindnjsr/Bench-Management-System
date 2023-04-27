@@ -36,7 +36,7 @@ export default function ViewEmployee() {
       console.log();
     }
   }
-
+console.log(empDetail)
   useEffect(() => {
     getEmpData();
   }, [])
@@ -71,7 +71,7 @@ export default function ViewEmployee() {
                 <p className="labels">Name</p>
                 <p className="content">{empDetail.name}</p>
                 <p className="labels">Email ID</p>
-                <p className="content">{empDetail.name}</p>
+                <p className="content">{empDetail.email}</p>
               </div>
               <div className="details1">
                 <p className="labels">Contact Number</p>
@@ -95,13 +95,13 @@ export default function ViewEmployee() {
                 <p className="content">{empDetail.empLocation === 1 ? "Gurugram" :
                   empDetail.empLocation === 2 ? "Banglore" : "Hyderabad"}</p>
                 <p className="labels">Business Unit</p>
-                <p className="content">{empDetail.workExp} Years</p>
+                <p className="content">{empDetail.businessUnit} Years</p>
               </div>
               <div className="details1">
                 <p className="labels">Last Billable Date</p>
                 <p className="content">{empDetail.billableDate}</p>
                 <p className="labels">Bench Status</p>
-                <p className="content">{empDetail.benchStatus === true ? `On Bench (${Math.round(benchPeriodEmp / 30)} Months, ${benchPeriodEmp%30} Days)` : "Not on Bench"}</p>
+                <p className="content">{empDetail.benchStatus === true ? 'On Bench' : "Not on Bench"}</p>
               </div>
               <div className="details1">
                 <p className='labels'>Bench Start Date</p>
