@@ -297,7 +297,7 @@ console.log("Location access testing"+JSON.stringify(authData.assignedLocation))
                       Resume
                     </th>
                     <th className="table-align-left" scope="col">
-                      Action
+                      Remove
                     </th>
                   </tr>
                 </thead>
