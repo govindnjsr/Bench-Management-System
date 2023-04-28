@@ -9,7 +9,7 @@ import ManagerDashboard from './ManagerDashboard';
 import AdminDashboard from './AdminDashboard';
 export default function Login() {
   const authData = useContext(AuthContext);
-  const manager = 1;
+  const manager = 2;
   const [loginApiData, setLoginApiData] = useState();
 
   function handleCallbackResponse(response) {
@@ -20,7 +20,7 @@ export default function Login() {
 
   }
 
-  // console.log("google " + JSON.stringify(authData.googleData))
+  // console. log("google " + JSON.stringify(authData.googleData))
 
   useEffect(() => {
     loginApiData && loginApiData.forEach(element => {

@@ -29,6 +29,52 @@ export default function AdminDashboard() {
     authData.setShowSearchBar(false);
     navigate('/viewReport');
   }
+console.log("Location access testing"+JSON.stringify(authData.assignedLocation));
+  const fetchApis = async () => {
+
+    try {
+      
+      const allnewDto = await axios.post(
+        "http://localhost:2538/api/dto/get/filterd", authData.requestDto
+      );
+      authData.setNewData(allnewDto.data);
+
+      //count emp locatin wise 
+      const countOfEachLoc = await axios.get(
+        "http://localhost:2538/api/empdetails/get/countOfEachLocation"
+      ).then((res)=>{        
+        let tempData=[];
+           res.data.forEach(element => {
+                console.log(element.count)
+                tempData.push(parseInt(element.count));
+           });
+           authData.setCountOfEachLocation(tempData);           
+      })
+      //count of All BU location wise 
+      //gurugram
+      const countOfGurugramBU = await axios.get(
+        "http://localhost:2538/api/empdetails/get/gurugramBU"
+        ).then((res)=>{
+            authData.setGurugramBU(res.data);      
+      })
+      //Bangalore
+      const countOfBangaloreBU = await axios.get(
+        "http://localhost:2538/api/empdetails/get/bangaloreBU"
+      ).then((res)=>{       
+            authData.setBangaloreBU(res.data);         
+      })
+       //hyderabad
+       const countOfHyderabadBU = await axios.get(
+        "http://localhost:2538/api/empdetails/get/hyderabadBU"
+      ).then((res)=>{
+            authData.setHyderabadBU(res.data);       
+      })
+
+    }
+    catch {
+      console.log();
+    }
+  }
 
   console.log('managerId : ' + authData.managerId)
   console.log(allManagerDetails);
@@ -61,120 +107,6 @@ export default function AdminDashboard() {
         "http://localhost:2538/api/dto/get/filterd", authData.requestDto
       );
       authData.setNewData(allnewDto.data);
-      //count emp locatin wise 
-      const countOfEachLoc = await axios.get(
-        "http://localhost:2538/api/empdetails/get/countOfEachLocation"
-      ).then((res) => {
-
-        let tempData = [];
-        res.data.forEach(element => {
-          console.log(element.count)
-          tempData.push(parseInt(element.count));
-        });
-        authData.setCountOfEachLocation(tempData);
-      })
-      //count of All BU location wise 
-      //gurugram
-      const countOfGurugramBU = await axios.get(
-        "http://localhost:2538/api/empdetails/get/gurugramBU"
-      ).then((res) => {
-        let tempData = [0, 0, 0, 0, 0, 0, 0];
-        /*
-           0   1   2   3   4   5   6   
-          BFS BI  CS  Hel  Log  MT  T
-            
-        */
-        res.data.forEach(element => {
-
-          if (element.BU === "BFSI Financial Services") {
-            tempData[0] = parseInt(element.count);
-          }
-          else if (element.BU === "BFSI Insurance") {
-            tempData[1] = parseInt(element.count);
-          }
-          else if (element.BU === "Media Telecom") {
-            tempData[5] = parseInt(element.count);
-          }
-          else if (element.BU === "Logistics") {
-            tempData[4] = parseInt(element.count);
-          }
-          else if (element.BU === "Consulting Services") {
-            tempData[2] = parseInt(element.count);
-          }
-          else if (element.BU === "Technology") {
-            tempData[6] = parseInt(element.count);
-          }
-          else if (element.BU === "Healthcare") {
-            tempData[3] = parseInt(element.count);
-          }
-
-        });
-        authData.setGurugramBU(tempData);
-      })
-
-      //Bangalore
-      const countOfBangaloreBU = await axios.get(
-        "http://localhost:2538/api/empdetails/get/bangaloreBU"
-      ).then((res) => {
-        let tempData = [0, 0, 0, 0, 0, 0, 0];
-        res.data.forEach(element => {
-          if (element.BU === "BFSI Financial Services") {
-            tempData[0] = parseInt(element.count);
-          }
-          else if (element.BU === "BFSI Insurance") {
-            tempData[1] = parseInt(element.count);
-          }
-          else if (element.BU === "Media Telecom") {
-            tempData[5] = parseInt(element.count);
-          }
-          else if (element.BU === "Logistics") {
-            tempData[4] = parseInt(element.count);
-          }
-          else if (element.BU === "Consulting Services") {
-            tempData[2] = parseInt(element.count);
-          }
-          else if (element.BU === "Technology") {
-            tempData[6] = parseInt(element.count);
-          }
-          else if (element.BU === "Healthcare") {
-            tempData[3] = parseInt(element.count);
-          }
-
-        });
-        authData.setBangaloreBU(tempData);
-      })
-
-      //hyderabad
-      const countOfHyderabadBU = await axios.get(
-        "http://localhost:2538/api/empdetails/get/hyderabadBU"
-      ).then((res) => {
-        let tempData = [0, 0, 0, 0, 0, 0, 0];
-        res.data.forEach(element => {
-          if (element.BU === "BFSI Financial Services") {
-            tempData[0] = parseInt(element.count);
-          }
-          else if (element.BU === "BFSI Insurance") {
-            tempData[1] = parseInt(element.count);
-          }
-          else if (element.BU === "Media Telecom") {
-            tempData[5] = parseInt(element.count);
-          }
-          else if (element.BU === "Logistics") {
-            tempData[4] = parseInt(element.count);
-          }
-          else if (element.BU === "Consulting Services") {
-            tempData[2] = parseInt(element.count);
-          }
-          else if (element.BU === "Technology") {
-            tempData[6] = parseInt(element.count);
-          }
-          else if (element.BU === "Healthcare") {
-            tempData[3] = parseInt(element.count);
-          }
-
-        });
-        authData.setHyderabadBU(tempData);
-      })
     }
     catch {
       console.log();
@@ -185,6 +117,7 @@ export default function AdminDashboard() {
   useEffect(() => {
     // fetchApi();
     fetchNew();
+    fetchApis();
   }, [authData.appliedFilters, authData.dtoDetails, authData.post, authData.requestDto]);
 
   const allowData = (emp) => {
@@ -309,6 +242,11 @@ export default function AdminDashboard() {
     setFile([...file, e.target.files[0]]);
 
   }
+
+  const getColor = (color) => {
+    if (color) return 'red';
+    return '';
+};
   // console.log(file);
   // console.log("new Data "+JSON.stringify(authData.newData));
   // console.log("exppppp "+authData.requestDto.experience+" "+authData.requestDto.benchPeriod);
@@ -359,7 +297,7 @@ export default function AdminDashboard() {
                       Resume
                     </th>
                     <th className="table-align-left" scope="col">
-                      Action
+                      Remove
                     </th>
                   </tr>
                 </thead>
@@ -372,7 +310,7 @@ export default function AdminDashboard() {
                           emp.employeeName
                             .toLowerCase()
                             .includes(authData.searchValue)) ? (
-                        <tr>
+                        <tr style={{color:getColor(emp.blocked)}}>
                           {/* <th className='pointer-to-profile' title="Click on ID to view profile" scope="row" onClick={() => { handleViewEmployee(); authData.handleEmpId(emp.employeeId); }} >{emp.employeeId}</th> */}
                           <th className="table-align-left">
                             <BlockEmployee id={emp.employeeId} blocked={emp.blocked} />

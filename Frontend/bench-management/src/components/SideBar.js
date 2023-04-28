@@ -50,6 +50,8 @@ console.log(authData.currentRole);
     const { value, checked } = e.target;
     let True = true,
       False = false;
+
+
     if (checked) {
       authData.setAppliedFilters({
         ...authData.appliedFilters,
@@ -75,6 +77,9 @@ console.log(authData.currentRole);
 
     }
   }
+
+
+  
   //Handle Location filters
   const handleLocationFilter = (e) => {
     const { value, checked } = e.target;

@@ -255,7 +255,7 @@ export default function AdminDashboard() {
                       Resume
                     </th>
                     <th className="table-align-left" scope="col">
-                      Action
+                      Remove
                     </th>
                   </tr>
                 </thead>
