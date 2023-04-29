@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface ManagerRepo extends JpaRepository<ManagerDetails,Long> {
 
+//    public List<Long>assignedLocationToAManager(Long managerId);
+
 }

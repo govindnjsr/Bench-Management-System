@@ -23,7 +23,7 @@ export default function AuthState(props) {
     const [newData,setNewData]=useState();
     const [allData,setAlldata]=useState()
     const [showSearchBar, setShowSearchBar] = useState(true);
- 
+    const [pieChartLabels,setPieChartLables]=useState([]);
     const [requestDto,setReqDto]=useState({
         "experience": 0,
         "benchPeriod": 0,
@@ -46,9 +46,10 @@ export default function AuthState(props) {
         "BU":0
     })
     const [locationAcess, setLocationAccess] = useState({
-        "gurugram": true,
-        "hyderabad": true,
-        "bangalore": true
+        "Gurugram": true,
+        "Bangalore": true,
+        "Hyderabad": true,
+       
 
     })
     const [appliedFilters, setAppliedFilters] = useState({
@@ -86,10 +87,11 @@ export default function AuthState(props) {
         setAuthentication(false)
         setCurrentRole(0)
         setLoopEntry(false)
+        setManagerId(-1);
         console.log("logged out successfully")
     }
     return (
-        <AuthContext.Provider value={{isblocked,setIsBlocked,hyderabadBU,setHyderabadBU,bangaloreBU,setBangaloreBU,gurugramBU,setGurugramBU,countOfEachLocation,setCountOfEachLocation,locationWiseEmployeeCount,allData,setAlldata,setNewData,newData,requestDto,setReqDto,locationAcess,setLocationAccess,checkFilter,setCheckFilter,appliedFilters,dtoData, googleData, setAppliedFilters,setDtoData,isAuthentication, currentRole,
+        <AuthContext.Provider value={{pieChartLabels,setPieChartLables,isblocked,setIsBlocked,hyderabadBU,setHyderabadBU,bangaloreBU,setBangaloreBU,gurugramBU,setGurugramBU,countOfEachLocation,setCountOfEachLocation,locationWiseEmployeeCount,allData,setAlldata,setNewData,newData,requestDto,setReqDto,locationAcess,setLocationAccess,checkFilter,setCheckFilter,appliedFilters,dtoData, googleData, setAppliedFilters,setDtoData,isAuthentication, currentRole,
          setGoogleData, handleLogin, setAuthentication,
           setCurrentRole, handleLogout, loopEntry,setLoopEntry, managerId, setManagerId
           ,handleEmpId, viewEmployeeId, benchTimeValue, setBenchTimeValue,

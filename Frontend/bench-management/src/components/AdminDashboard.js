@@ -15,7 +15,7 @@ export default function AdminDashboard() {
   const authData = useContext(AuthContext);
   const navigate = useNavigate();
   const handleViewEmployee = () => {
-    authData.setShowSearchBar(false);
+    authData.setShowSearchBar(false);    
     navigate("/viewEmployee");
   };
 
@@ -23,18 +23,18 @@ export default function AdminDashboard() {
     authData.setShowSearchBar(false);
     navigate('/viewReport');
   }
-
-  const [countAllEmployees, setCountAllEmployees] = useState();
-  const [countActiveEmp, setCountActiveEmp] = useState();
-  const [countBenchedEmp, setCountBenchedEmp] = useState();
-  const [empdetails, setEmpDetails] = useState();
-  const [filterDataOfDto, setFilterDataOfDto] = useState();
-  const [rowsReturned, setRowsReturned] = useState(0);
-  const [searchValue, setSearchValue] = useState("");
-  
+ 
   const fetchApis = async () => {
 
     try {
+      //assign default location acess
+      authData.locationAcess.Gurugram=true;
+      authData.locationAcess.Hyderabad=true;
+      authData.locationAcess.Bangalore=true;
+       //set default chart Stuff
+      authData.setPieChartLables(["Gurugram","Bangalore","Hyderabad"]);
+      
+
       
       const allnewDto = await axios.post(
         "http://localhost:2538/api/dto/get/filterd", authData.requestDto
@@ -46,8 +46,7 @@ export default function AdminDashboard() {
         "http://localhost:2538/api/empdetails/get/countOfEachLocation"
       ).then((res)=>{        
         let tempData=[];
-           res.data.forEach(element => {
-                console.log(element.count)
+           res.data.forEach(element => {                
                 tempData.push(parseInt(element.count));
            });
            authData.setCountOfEachLocation(tempData);           
@@ -72,12 +71,15 @@ export default function AdminDashboard() {
             authData.setHyderabadBU(res.data);       
       })
 
+  
+     
+    
     }
     catch {
       console.log();
     }
   }
- 
+  console.log("AssignedLocation Admin"+JSON.stringify(authData.locationAcess)) 
   useEffect(() => {   
     fetchApis();  
   }, [authData.dtoDetails, authData.post,authData.requestDto,authData.appliedFilters]);
