@@ -34,16 +34,16 @@ function UpdateEmployee(props) {
 
     const showDetail = async (id) => {
         const fetchedData = await axios.get(`http://localhost:2538/api/empdetails/get/${id}`);
+        fetchedData.data.benchStatus=false;
         setFetchEmpDetail(fetchedData.data);
       
     }
-    const handleChangeValue = (e) => {
-        setFetchEmpDetail({ ...fetchedEmpDetail, [e.target.name]: e.target.value });
-    };
 
    
     const saveDataAtBackend = async () => {
         try {
+           // setFetchEmpDetail({...fetchedEmpDetail,benchStatus:false});
+            console.log(fetchedEmpDetail.benchStatus)
             console.log("new POST DATA " + JSON.stringify(fetchedEmpDetail));
             //    console.log("ID"+empDetail.id);
             const allEmp = await axios.put(`http://localhost:2538/api/empdetails/update/${fetchedEmpDetail.id}`, fetchedEmpDetail);
@@ -57,7 +57,6 @@ function UpdateEmployee(props) {
 
     const saveData = () => {
         saveDataAtBackend();
-        handleClose();
     }
 
     return (
@@ -78,7 +77,7 @@ function UpdateEmployee(props) {
                 </Modal.Header>
                 <Modal.Body>
                     <Form id='add'>
-                        <p>Are you sure you want to remove 'name' from bench?</p>
+                        <p>Are you sure you want to remove <b>{props.name}</b> from bench?</p>
                       
                         {/* <Form.Group>
                             <Form.Label>Bench Status</Form.Label>

@@ -18,18 +18,23 @@ function BlockEmployee(props) {
     "date": null,
   });
   const[empDetails,setEmpDetails]=useState(null);
-  
   const handleCloseBlocked = (e) => {
     setShow(false);
     setIsChecked(false);
   }
+  
   const handleApplyResult =async(e,id)=>{
     e.preventDefault();
     const srNo=empDetails.onGoing;
     setEmpDetails({...empDetails,blocked:false});
+    console.log(empDetails);
     try{
       await axios.put(`http://localhost:2538/api/empdetails/blockedstatus/${id}`);
       await axios.put(`http://localhost:2538/api/empdetails/interview/updateresultbysrno/${srNo}`,intDetails)
+      
+      if(intDetails.result){
+        const allEmp = await axios.put(`http://localhost:2538/api/empdetails/update/${id}`, empDetails);
+      }
       authData.setAppliedFilters({
         ...authData.appliedFilters,
         ["statusBlocked"]: false,
@@ -129,7 +134,7 @@ function BlockEmployee(props) {
         keyboard={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title>Update Interview Status</Modal.Title>
+          <Modal.Title>Interview Status - {props.name}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form id="block">
@@ -158,7 +163,7 @@ function BlockEmployee(props) {
           keyboard={false}
         >
           <Modal.Header closeButton>
-            <Modal.Title>Block Employee</Modal.Title>
+            <Modal.Title>Block - {props.name}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Form id="block">

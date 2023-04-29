@@ -122,12 +122,12 @@ export default function AdminDashboard() {
     let okBU = false;
     if (authData.checkFilter["BU"]) {
       Keys.forEach((filterKey) => {
-        if (filterKey === "BFSI Financial Services" && authData.appliedFilters[filterKey] === true &&
-          emp.businessUnit === "BFSI Financial Services")
+        if (filterKey === "BFSIFinancialServices" && authData.appliedFilters[filterKey] === true &&
+          emp.businessUnit === "BFSIFinancialServices")
           okBU = true;
 
-        if (filterKey === "Media Telecom" && authData.appliedFilters[filterKey] === true &&
-          emp.businessUnit === "Media Telecom")
+        if (filterKey === "MediaTelecom" && authData.appliedFilters[filterKey] === true &&
+          emp.businessUnit === "MediaTelecom")
           okBU = true;
 
         if (filterKey === "Logistics" && authData.appliedFilters[filterKey] === true &&
@@ -142,12 +142,12 @@ export default function AdminDashboard() {
           emp.businessUnit === "Healthcare")
           okBU = true;
 
-        if (filterKey === "Consulting Services" && authData.appliedFilters[filterKey] === true &&
-          emp.businessUnit === "Consulting Services")
+        if (filterKey === "ConsultingServices" && authData.appliedFilters[filterKey] === true &&
+          emp.businessUnit === "ConsultingServices")
           okBU = true;
 
-        if (filterKey === "BFSI Insurance" && authData.appliedFilters[filterKey] === true &&
-          emp.businessUnit === "BFSI Insurance")
+        if (filterKey === "BFSIInsurance" && authData.appliedFilters[filterKey] === true &&
+          emp.businessUnit === "BFSIInsurance")
           okBU = true;
 
       })
@@ -290,7 +290,7 @@ export default function AdminDashboard() {
                         <tr style={{color:getColor(emp.blocked)}}>
                           {/* <th className='pointer-to-profile' title="Click on ID to view profile" scope="row" onClick={() => { handleViewEmployee(); authData.handleEmpId(emp.employeeId); }} >{emp.employeeId}</th> */}
                           <th className="table-align-left">
-                            <BlockEmployee id={emp.employeeId} blocked={emp.blocked} />
+                            <BlockEmployee id={emp.employeeId} blocked={emp.blocked} name={emp.employeeName} />
                           </th>
                           <td
                             className="pointer-to-profile" title="Click on ID to view profile" scope="row" onClick={() => { handleViewEmployee(); authData.handleEmpId(emp.employeeId); }}>
@@ -320,7 +320,7 @@ export default function AdminDashboard() {
                           </td>
 
                           <td className="table-align-left-action">
-                            <UpdateEmployee id={emp.employeeId} />
+                            <UpdateEmployee id={emp.employeeId} name={emp.employeeName}/>
                             {/* {" "} */}
                             &nbsp; &nbsp;
                           </td>
