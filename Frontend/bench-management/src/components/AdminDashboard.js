@@ -81,6 +81,7 @@ export default function AdminDashboard() {
   useEffect(() => {   
     fetchApis();  
   }, [authData.dtoDetails, authData.post,authData.requestDto,authData.appliedFilters]);
+
   const allowData = (emp) => {
     let Keys = Object.keys(authData.appliedFilters);
     //----------Check for BU-----------------------------//
@@ -167,6 +168,7 @@ export default function AdminDashboard() {
         ) {
           okStatus = true;
         }
+        
       });
     }
     // return okStatus;
@@ -263,13 +265,13 @@ export default function AdminDashboard() {
                   {authData.newData &&
                     authData.newData.map((emp) =>
                       allowData(emp) == true &&
-                        (authData.searchValue == "" ||
+                        ((authData.searchValue == "" ||
                           emp.employeeName
                             .toLowerCase()
-                            .includes(authData.searchValue)) ? (
+                            .includes(authData.searchValue))&& emp.benchStatus==true )? (
                         <tr style={{color:getColor(emp.blocked)}}>                
                           <th className="table-align-left">                           
-                            <BlockEmployee id={emp.employeeId} blocked={emp.blocked}/>
+                            <BlockEmployee id={emp.employeeId} blocked={emp.blocked} name={emp.employeeName}/>
                           </th>
                           <td
                             className="pointer-to-profile" title="Click on Name to view profile" scope="row" onClick={() => { handleViewEmployee(); authData.handleEmpId(emp.employeeId); }}>
@@ -298,7 +300,7 @@ export default function AdminDashboard() {
                           </td>
 
                           <td className="table-align-left-action">
-                            <UpdateEmployee id={emp.employeeId} />                          
+                            <UpdateEmployee id={emp.employeeId} name={emp.employeeName} />                          
                             &nbsp; &nbsp;
                           </td>
                         </tr>
