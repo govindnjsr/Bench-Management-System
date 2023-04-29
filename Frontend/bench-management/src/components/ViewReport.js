@@ -12,23 +12,23 @@ import axios from "axios";
 import Login from "./Login";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-function ViewReport() {
+function ViewReport(props) {
   const authData = useContext(AuthContext);
   const navigate = useNavigate();
+ 
   function handleBackButton() {
     authData.setShowSearchBar(true);
     navigate("/");
   }
-
+ console.log("locationAcess "+JSON.stringify(authData.locationAcess))
   const [curIndex, setCurrentIndex] = useState(-1);
 
   const loactionCounts = [];
-  console.log(authData.bangaloreBU);
   const [mydata, setData] = useState({
-    labels: ["Gurugram", "Banglore", "Hyderabad"],
+    labels: authData.pieChartLabels,
     datasets: [
       {
-        label: "On Bench",
+        // label: "On Bench",
         data: authData.countOfEachLocation,
         borderColor: [
           "rgba(250, 10, 10, 0.5)",
@@ -67,7 +67,9 @@ function ViewReport() {
       setCurrentIndex(dataPoint);
     }
   };
-
+ useEffect(()=>{
+  //rerendering...
+ },[authData.loactionAcess])
   return authData.isAuthentication ? (
     <>
       {

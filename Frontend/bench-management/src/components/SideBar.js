@@ -5,44 +5,9 @@ import Accordion from "react-bootstrap/Accordion";
 import axios from "axios";
 export default function SideBar() {
   const authData = useContext(AuthContext);
-  const [verifyLocation, setVerifyLocation] = useState({
-    '1': false,
-    '2': false,
-    '3': false
-  })
-  {
-    if(authData.currentRole === 1) {
-      verifyLocation[1] = true;
-      verifyLocation[2] = true;
-      verifyLocation[3] = true;
-    }
-  }
-console.log(authData.currentRole);
-  useEffect(() => {
-    try {
-      const managerApiDetails = axios.get('http://localhost:2538/api/manager/get')
-        .then((response) => {
-          response.data.map(key => {
-            if (key.id === authData.managerId) {
-              key.assignedLocation.map(loc => {
-                if(authData.currentRole === 2){
-                  if (loc.locName == "Gurugram") {
-                    verifyLocation[1] = true;
-                  }
-                  if (loc.locName == "Bangalore") {
-                    verifyLocation[2] = true;
-                  }
-                  if (loc.locName == "Hyderabad") {
-                    verifyLocation[3] = true;
-                  }
-              }
-              })
-            }
-          })
-        })
-  }
-    catch {}
-  }, [])
+ 
+// console.log(authData.currentRole);
+ 
 
   //Handle BU filters
 
@@ -372,7 +337,7 @@ console.log(authData.currentRole);
                   <div className="filterByLocation">
                     <div className="form-check-sidebar">
                       {
-                        verifyLocation[1] &&
+                        authData.locationAcess["Gurugram"] &&
                         <>
                           <input
                             className="form-check-input"
@@ -393,7 +358,8 @@ console.log(authData.currentRole);
                         </>
                       }
                       {
-                        verifyLocation[2] &&
+                        authData.locationAcess["Bangalore"]
+                        &&
                         <>
                           <input
                             className="form-check-input"
@@ -414,7 +380,7 @@ console.log(authData.currentRole);
                         </>
                       }
                       {
-                        verifyLocation[3] &&
+                         authData.locationAcess["Hyderabad"] &&
                         <>
                         <input
                           className="form-check-input"

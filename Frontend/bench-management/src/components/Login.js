@@ -47,7 +47,8 @@ export default function Login() {
       const loginData = await axios.get('http://localhost:2538/api/login/get')
       setLoginApiData(loginData.data);
       // authData.setLoginDetails(loginData.data);
-      
+
+
     }
     catch {
       console.log()
@@ -70,7 +71,7 @@ export default function Login() {
     fetchApi();
   }, [authData.handleLogout]);
 
-  console.log(loginApiData)
+  // console.log(loginApiData)
   return (
     authData.isAuthentication === false ?
       (

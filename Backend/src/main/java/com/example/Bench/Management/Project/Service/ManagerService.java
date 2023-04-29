@@ -17,4 +17,9 @@ public interface ManagerService {
     ManagerDetails assignLocationToManager(Long managerId, Long locationId);
     //delete the location Access from a manager
     public void deleteAssignLocation(Long managerId,long locationId);
+
+    //get assigned location a manager by id
+    public List<Long>getAssignedLocationOfAManager(Long managerId);
+    //get count of access location
+  
 }

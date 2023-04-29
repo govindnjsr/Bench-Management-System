@@ -12,28 +12,46 @@ import BlockEmployee from "./BlockEmployee";
 
 export default function AdminDashboard() {
   const authData = useContext(AuthContext);
-  const [verifyLocation, setVerifyLocation] = useState({
-    '1': false,
-    '2': false,
-    '3': false
-  })
-  console.log("loc : " + JSON.stringify(verifyLocation));
+
   const [allManagerDetails, setAllManagerDetails] = useState();
   const navigate = useNavigate();
   const handleViewEmployee = () => {
     authData.setShowSearchBar(false);
     navigate("/viewEmployee");
   };
+ //--------------------------------------
+//---------------------------------
 
-  const handleReport = () => {
+//--------------------------------------------------
+  const handleReport = async () => {
     authData.setShowSearchBar(false);
+ 
     navigate('/viewReport');
   }
-console.log("Location access testing"+JSON.stringify(authData.assignedLocation));
+  
+ 
   const fetchApis = async () => {
 
     try {
-      
+     
+    
+          //get manager Not Assigned Location
+     const getNotAssignedLocations=await axios.get(`http://localhost:2538/api/manager/get/notassignedLocation/${authData.managerId}`).
+     then((res)=>{
+            res.data.map((element)=>{
+             if(element==1){
+               authData.locationAcess.Gurugram=false;
+             }
+             else if(element==2){
+              authData.locationAcess.Bangalore=false;
+             }
+             else if(element==3){
+              authData.locationAcess.Hyderabad=false;
+             }
+            })
+           
+     })
+      //get all filtered data 
       const allnewDto = await axios.post(
         "http://localhost:2538/api/dto/get/filterd", authData.requestDto
       );
@@ -45,12 +63,27 @@ console.log("Location access testing"+JSON.stringify(authData.assignedLocation))
       ).then((res)=>{        
         let tempData=[];
            res.data.forEach(element => {
-                console.log(element.count)
+                // console.log(element.count)              
                 tempData.push(parseInt(element.count));
-           });
-           authData.setCountOfEachLocation(tempData);           
+           });        
+           
+             //set pie chart labels
+              let pieChartLabels=[]
+              //remove bad indexes
+              let one=1,two=1,three=1;
+              if(authData.locationAcess["Gurugram"])
+              {pieChartLabels.push("Gurugram");one=0;}
+              if(authData.locationAcess["Bangalore"])
+              {two=0; pieChartLabels.push("Bangalore");}
+              if(authData.locationAcess["Hyderabad"])
+              {three=0; pieChartLabels.push("Hyderabad")}
+              authData.setPieChartLables(pieChartLabels);
+              if(one)tempData[0]=0;
+              if(two)tempData[1]=0;
+              if(three)tempData[2]=0;
+              authData.setCountOfEachLocation(tempData); 
       })
-      //count of All BU location wise 
+           //count of All BU location wise 
       //gurugram
       const countOfGurugramBU = await axios.get(
         "http://localhost:2538/api/empdetails/get/gurugramBU"
@@ -70,56 +103,18 @@ console.log("Location access testing"+JSON.stringify(authData.assignedLocation))
             authData.setHyderabadBU(res.data);       
       })
 
+    
+
     }
     catch {
       console.log();
     }
   }
+ useEffect(() => {
+    fetchApis();  
+  }, [authData.appliedFilters, authData.dtoDetails, authData.post, authData.requestDto,authData.managerId]);
 
-  console.log('managerId : ' + authData.managerId)
-  console.log(allManagerDetails);
-  const fetchNew = async () => {
-    try {
-      const managerApiDetails = await axios.get('http://localhost:2538/api/manager/get')
-        .then((response) => {
-          setAllManagerDetails(response.data);
-          response.data.map(key => {
-            if (key.id === authData.managerId) {
-              key.assignedLocation.map(loc => {
-                if (loc.locName == "Gurugram") {
-                  verifyLocation[1] = true;
-                }
-                if (loc.locName == "Bangalore") {
-                  verifyLocation[2] = true;
-                }
-                if (loc.locName == "Hyderabad") {
-                  verifyLocation[3] = true;
-                }
-              })
-            }
-          })
-        })
-
-
-
-
-      const allnewDto = await axios.post(
-        "http://localhost:2538/api/dto/get/filterd", authData.requestDto
-      );
-      authData.setNewData(allnewDto.data);
-    }
-    catch {
-      console.log();
-    }
-  }
-
-
-  useEffect(() => {
-    // fetchApi();
-    fetchNew();
-    fetchApis();
-  }, [authData.appliedFilters, authData.dtoDetails, authData.post, authData.requestDto]);
-
+  console.log("manager ID "+authData.managerId)
   const allowData = (emp) => {
     let Keys = Object.keys(authData.appliedFilters);
 
@@ -226,15 +221,6 @@ console.log("Location access testing"+JSON.stringify(authData.assignedLocation))
     else if (authData.checkFilter["location"]) return okLocation;
     else return true;
   };
-
-
-  console.log(
-    "Render..  " +
-    JSON.stringify(authData.checkFilter) +
-    " " +
-    authData.experienceValue
-  );
-
   const [file, setFile] = useState([]);
   const inputFile = useRef(null);
 
@@ -247,14 +233,6 @@ console.log("Location access testing"+JSON.stringify(authData.assignedLocation))
     if (color) return 'red';
     return '';
 };
-  // console.log(file);
-  // console.log("new Data "+JSON.stringify(authData.newData));
-  // console.log("exppppp "+authData.requestDto.experience+" "+authData.requestDto.benchPeriod);
-  // console.log("request dto "+JSON.stringify(authData.requestDto))
-  // console.log("applied filters "+JSON.stringify(authData.appliedFilters))
-
-  // console.log("check filters "+JSON.stringify(authData.checkFilter))
-  // console.log("default data "+JSON.stringify(authData.defaultData))
   return (
     <div className="window">
       <div className="top">
@@ -304,8 +282,7 @@ console.log("Location access testing"+JSON.stringify(authData.assignedLocation))
                 <tbody className="thread1">
                   {authData.newData &&
                     authData.newData.map((emp) =>
-                      allowData(emp) == true &&
-                        (verifyLocation[emp.location]) &&
+                      allowData(emp) == true &&                        
                         (authData.searchValue == "" ||
                           emp.employeeName
                             .toLowerCase()

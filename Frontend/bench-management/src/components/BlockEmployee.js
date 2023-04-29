@@ -40,7 +40,7 @@ function BlockEmployee(props) {
     catch{
     }
   }
-console.log(intDetails);
+// console.log(intDetails);
   const handleApplyBlocked = async (e, id) => {
     try {
         await axios.post('http://localhost:2538/api/empdetails/interview/save', intDetails)

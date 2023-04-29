@@ -53,4 +53,10 @@ public class ManagerController {
         managerService.deleteAssignLocation(managerId,locationId);
         return new ResponseEntity(HttpStatus.OK);
     }
+
+    //get not assigned location
+    @GetMapping("/get/notassignedLocation/{managerId}")
+    public List<Long>getNotAssignedLocation(@PathVariable(required = false) Long managerId){
+        return managerService.getAssignedLocationOfAManager(managerId);
+    }
 }
