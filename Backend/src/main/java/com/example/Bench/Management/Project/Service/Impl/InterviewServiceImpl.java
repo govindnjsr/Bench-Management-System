@@ -29,7 +29,7 @@ public class InterviewServiceImpl implements InterviewService {
     @Override
     public String updateResult(Long employeeId, IntDetails intDetails) {
         IntDetails intDetails1 = interviewRepo.getByIdAndOngoing(employeeId);
-        intDetails1.setResult((intDetails.isResult()));
+        intDetails1.setResult((intDetails.getResult()));
         interviewRepo.save(intDetails1);
 
         return "updated";
@@ -43,7 +43,7 @@ public class InterviewServiceImpl implements InterviewService {
     @Override
     public String updateResultBySrNo(Long srNo, IntDetails intDetails) {
         IntDetails intDetails1 = interviewRepo.getBySrNo(srNo);
-        intDetails1.setResult(intDetails.isResult());
+        intDetails1.setResult(intDetails.getResult());
         interviewRepo.save(intDetails1);
         return "updated";
     }

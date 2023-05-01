@@ -2,6 +2,7 @@ package com.example.Bench.Management.Project.Service;
 
 import com.example.Bench.Management.Project.Model.Dto;
 import com.example.Bench.Management.Project.Model.EmpDetails;
+import com.example.Bench.Management.Project.Model.IntDetails;
 import com.example.Bench.Management.Project.Model.RequestDto;
 
 import java.util.List;
@@ -41,4 +42,5 @@ public interface EmpDetailsService {
 
  public String updateBlockedById(Long employeeId);
 
+    public String updateOnCondition(Long employeeId, IntDetails intDetails);
 }
