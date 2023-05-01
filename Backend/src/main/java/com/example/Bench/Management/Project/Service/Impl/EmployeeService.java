@@ -1,5 +1,6 @@
 package com.example.Bench.Management.Project.Service.Impl;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import com.example.Bench.Management.Project.Model.*;
 import com.example.Bench.Management.Project.Repository.EmpDetailsRepo;
 import com.example.Bench.Management.Project.Service.EmpDetailsService;
@@ -232,6 +233,19 @@ public class EmployeeService implements EmpDetailsService {
         EmpDetails empDetaills4 = empDetailsRepo.findById(employeeId).get();
         empDetaills4.setBlocked(false);
         empDetailsRepo.save(empDetaills4);
+        return "updated";
+    }
+
+    @Override
+    public String updateOnCondition(Long employeeId, IntDetails intDetails) {
+        EmpDetails empDetails1=empDetailsRepo.findById(employeeId).get();
+        System.out.println("REsult:"+intDetails.getResult());
+        if(intDetails.getResult()==true){
+            System.out.println("Hi i am in");
+            empDetails1.setBenchStatus(false);
+            empDetailsRepo.save(empDetails1);
+
+        }
         return "updated";
     }
 

@@ -293,10 +293,10 @@ export default function AdminDashboard() {
                   {authData.newData &&
                     authData.newData.map((emp) =>
                       allowData(emp) == true && checkAssignedLocation(emp) &&                       
-                        (authData.searchValue == "" ||
+                        ((authData.searchValue == "" ||
                           emp.employeeName
                             .toLowerCase()
-                            .includes(authData.searchValue)) ? (
+                            .includes(authData.searchValue))&& emp.benchStatus==true )? (
                         <tr style={{color:getColor(emp.blocked)}}>
                           {/* <th className='pointer-to-profile' title="Click on ID to view profile" scope="row" onClick={() => { handleViewEmployee(); authData.handleEmpId(emp.employeeId); }} >{emp.employeeId}</th> */}
                           <th className="table-align-left">
