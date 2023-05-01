@@ -43,7 +43,7 @@ function ViewReport(props) {
         ],
         hoverOffset: 15,
         link: [],
-        set: 15,
+        set: 10,
       },
     ],
   });
@@ -51,7 +51,7 @@ function ViewReport(props) {
   const options = {
     layout: {
       padding: {
-        left: 35,
+        left: 15,
         right: 0,
         top: 2,
         bottom: 6,
