@@ -2,6 +2,7 @@ package com.example.Bench.Management.Project.Controller;
 
 import com.example.Bench.Management.Project.Helper.FileUploadHelper;
 import com.example.Bench.Management.Project.Model.EmpDetails;
+import com.example.Bench.Management.Project.Model.IntDetails;
 import com.example.Bench.Management.Project.Service.EmpDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -151,6 +152,10 @@ public class EController {
     @PutMapping("/blockedstatus/{employeeId}")
     public String updateBlockedById(@PathVariable Long employeeId){
         return empDetailsService.updateBlockedById(employeeId);
+    }
+    @PutMapping("/updateoncondition/{employeeId}")
+    public String updateOnCondition(@PathVariable Long employeeId, @RequestBody IntDetails intDetails){
+        return empDetailsService.updateOnCondition(employeeId,intDetails);
     }
 
 }

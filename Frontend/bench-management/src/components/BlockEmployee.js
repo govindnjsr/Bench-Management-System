@@ -31,21 +31,19 @@ function BlockEmployee(props) {
     try{
       await axios.put(`http://localhost:2538/api/empdetails/blockedstatus/${id}`);
       await axios.put(`http://localhost:2538/api/empdetails/interview/updateresultbysrno/${srNo}`,intDetails)
-      
-      if(intDetails.result){
-        const allEmp = await axios.put(`http://localhost:2538/api/empdetails/update/${id}`, empDetails);
-      }
+      await axios.put(`http://localhost:2538/api/empdetails/updateoncondition/${id}`,intDetails);
       authData.setAppliedFilters({
         ...authData.appliedFilters,
         ["statusBlocked"]: false,
       });
       setIsChecked(false)
-      eventx.target.checked=false;      
+      eventx.target.checked=false;
+      setIntDetails(...intDetails,{result:null, client:"", date:null})  
     }
     catch{
     }
   }
-// console.log(intDetails);
+console.log(intDetails);
   const handleApplyBlocked = async (e, id) => {
     try {
         await axios.post('http://localhost:2538/api/empdetails/interview/save', intDetails)
