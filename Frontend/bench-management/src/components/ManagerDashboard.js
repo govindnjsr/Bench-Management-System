@@ -38,6 +38,10 @@ export default function AdminDashboard() {
           //get manager Not Assigned Location
      const getNotAssignedLocations=await axios.get(`http://localhost:2538/api/manager/get/notassignedLocation/${authData.managerId}`).
      then((res)=>{
+      //by default location
+      authData.locationAcess.Gurugram=true;
+      authData.locationAcess.Bangalore=true;
+      authData.locationAcess.Hyderabad=true;
             res.data.map((element)=>{
              if(element==1){
                authData.locationAcess.Gurugram=false;
@@ -221,6 +225,12 @@ export default function AdminDashboard() {
     else if (authData.checkFilter["location"]) return okLocation;
     else return true;
   };
+  const checkAssignedLocation=(emp)=>{
+        if(emp.location==1 && authData.locationAcess["Gurugram"])return true;          
+        else if(emp.location==2 && authData.locationAcess["Bangalore"])return true;
+        else if(emp.location==3 && authData.locationAcess["Hyderabad"])return true;
+        return false;
+  }
   const [file, setFile] = useState([]);
   const inputFile = useRef(null);
 
@@ -282,7 +292,7 @@ export default function AdminDashboard() {
                 <tbody className="thread1">
                   {authData.newData &&
                     authData.newData.map((emp) =>
-                      allowData(emp) == true &&                        
+                      allowData(emp) == true && checkAssignedLocation(emp) &&                       
                         (authData.searchValue == "" ||
                           emp.employeeName
                             .toLowerCase()

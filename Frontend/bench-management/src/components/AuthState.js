@@ -48,8 +48,7 @@ export default function AuthState(props) {
     const [locationAcess, setLocationAccess] = useState({
         "Gurugram": true,
         "Bangalore": true,
-        "Hyderabad": true,
-       
+        "Hyderabad": true,      
 
     })
     const [appliedFilters, setAppliedFilters] = useState({

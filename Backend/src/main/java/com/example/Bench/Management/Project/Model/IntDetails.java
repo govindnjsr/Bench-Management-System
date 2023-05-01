@@ -26,7 +26,6 @@ public class IntDetails {
             strategy = GenerationType.SEQUENCE,
             generator = "intdetails_seq"
     )
-
     private long srNo;
 
     private long id;
