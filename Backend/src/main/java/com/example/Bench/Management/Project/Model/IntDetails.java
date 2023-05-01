@@ -34,4 +34,7 @@ public class IntDetails {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private String date;
 
+    public boolean getResult() {
+        return result;
+    }
 }
