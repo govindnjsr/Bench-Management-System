@@ -18,10 +18,10 @@ public class EmployeeService implements EmpDetailsService {
     @Autowired
      private EmpDetailsRepo empDetailsRepo;
 
-    public  EmployeeService(EmpDetailsRepo empDetailsRepo){
-        super();
-        this.empDetailsRepo=empDetailsRepo;
-    }
+//    public  EmployeeService(EmpDetailsRepo empDetailsRepo){
+//        super();
+//        this.empDetailsRepo=empDetailsRepo;
+//    }
     @Override
     public EmpDetails save(EmpDetails empDetails) {
         return empDetailsRepo.save(empDetails);
@@ -124,7 +124,7 @@ public class EmployeeService implements EmpDetailsService {
             if(requestDto.isJavascript()==true && (curList.get(i).isJavascript()==true))reqSkill++;
             if(requestDto.isSpringboot()==true && (curList.get(i).isSpringboot()==true))reqSkill++;
 
-            if(haveSkill==reqSkill) okSkills=true;
+            if(haveSkill<=reqSkill) okSkills=true;
 
 //            if(!okSkills)okSkills=true;
             //check for bench period
@@ -205,7 +205,6 @@ public class EmployeeService implements EmpDetailsService {
         EmpDetails empDetails2=empDetailsRepo.findById(employeeId).get();
         empDetails2.setResume(originalFilename);
         empDetailsRepo.save(empDetails2);
-
     }
 
     @Override

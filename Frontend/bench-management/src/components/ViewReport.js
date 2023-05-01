@@ -29,7 +29,7 @@ function ViewReport(props) {
     datasets: [
       {
         // label: "On Bench",
-        data: authData.countOfEachLocation,
+        data: authData.countOfEachLocation,//[12,23,45]
         borderColor: [
           "rgba(250, 10, 10, 0.5)",
           "rgba(95, 60, 64, 0.5)",

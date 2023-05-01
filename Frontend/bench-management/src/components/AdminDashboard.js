@@ -32,15 +32,13 @@ export default function AdminDashboard() {
       authData.locationAcess.Hyderabad=true;
       authData.locationAcess.Bangalore=true;
        //set default chart Stuff
-      authData.setPieChartLables(["Gurugram","Bangalore","Hyderabad"]);
-      
+      authData.setPieChartLables(["Gurugram","Bangalore","Hyderabad"]);     
 
       
       const allnewDto = await axios.post(
         "http://localhost:2538/api/dto/get/filterd", authData.requestDto
       );
       authData.setNewData(allnewDto.data);
-
       //count emp locatin wise 
       const countOfEachLoc = await axios.get(
         "http://localhost:2538/api/empdetails/get/countOfEachLocation"
@@ -69,10 +67,7 @@ export default function AdminDashboard() {
         "http://localhost:2538/api/empdetails/get/hyderabadBU"
       ).then((res)=>{
             authData.setHyderabadBU(res.data);       
-      })
-
-  
-     
+      })   
     
     }
     catch {
