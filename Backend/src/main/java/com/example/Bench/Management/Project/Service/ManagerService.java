@@ -21,5 +21,5 @@ public interface ManagerService {
     //get assigned location a manager by id
     public List<Long>getAssignedLocationOfAManager(Long managerId);
     //get count of access location
-  
+
 }
