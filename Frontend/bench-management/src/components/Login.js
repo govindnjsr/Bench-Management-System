@@ -13,14 +13,10 @@ export default function Login() {
   const [loginApiData, setLoginApiData] = useState();
 
   function handleCallbackResponse(response) {
-    //console.log("Encoded JWT ID token: " + response.credential);
-
-    var userObject = jwt_decode(response.credential);
+     var userObject = jwt_decode(response.credential);
     authData.setGoogleData(userObject);
 
   }
-
-  // console. log("google " + JSON.stringify(authData.googleData))
 
   useEffect(() => {
     loginApiData && loginApiData.forEach(element => {
@@ -46,10 +42,7 @@ export default function Login() {
     try {
       const loginData = await axios.get('http://localhost:2538/api/login/get')
       setLoginApiData(loginData.data);
-      // authData.setLoginDetails(loginData.data);
-
-
-    }
+     }
     catch {
       console.log()
     }
@@ -71,7 +64,6 @@ export default function Login() {
     fetchApi();
   }, [authData.handleLogout]);
 
-  // console.log(loginApiData)
   return (
     authData.isAuthentication === false ?
       (
