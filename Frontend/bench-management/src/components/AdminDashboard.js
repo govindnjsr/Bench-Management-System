@@ -14,6 +14,7 @@ import BlockEmployee from "./BlockEmployee";
 export default function AdminDashboard() {
   const authData = useContext(AuthContext);
   const navigate = useNavigate();
+
   const handleViewEmployee = () => {
     authData.setShowSearchBar(false);    
     navigate("/viewEmployee");
@@ -31,14 +32,15 @@ export default function AdminDashboard() {
       authData.locationAcess.Gurugram=true;
       authData.locationAcess.Hyderabad=true;
       authData.locationAcess.Bangalore=true;
+
        //set default chart Stuff
       authData.setPieChartLables(["Gurugram","Bangalore","Hyderabad"]);     
 
-      
       const allnewDto = await axios.post(
         "http://localhost:2538/api/dto/get/filterd", authData.requestDto
       );
       authData.setNewData(allnewDto.data);
+
       //count emp locatin wise 
       const countOfEachLoc = await axios.get(
         "http://localhost:2538/api/empdetails/get/countOfEachLocation"
@@ -49,6 +51,7 @@ export default function AdminDashboard() {
            });
            authData.setCountOfEachLocation(tempData);           
       })
+
       //count of All BU location wise 
       //gurugram
       const countOfGurugramBU = await axios.get(
@@ -56,31 +59,35 @@ export default function AdminDashboard() {
         ).then((res)=>{
             authData.setGurugramBU(res.data);      
       })
+
       //Bangalore
       const countOfBangaloreBU = await axios.get(
         "http://localhost:2538/api/empdetails/get/bangaloreBU"
       ).then((res)=>{       
             authData.setBangaloreBU(res.data);         
       })
+
        //hyderabad
        const countOfHyderabadBU = await axios.get(
         "http://localhost:2538/api/empdetails/get/hyderabadBU"
       ).then((res)=>{
             authData.setHyderabadBU(res.data);       
-      })   
-    
+      })    
     }
     catch {
       console.log();
     }
   }
-  console.log("AssignedLocation Admin"+JSON.stringify(authData.locationAcess)) 
+
+ // console.log("AssignedLocation Admin"+JSON.stringify(authData.locationAcess)) 
+
   useEffect(() => {   
     fetchApis();  
-  }, [authData.dtoDetails, authData.post,authData.requestDto,authData.appliedFilters]);
+  }, [authData.requestDto,authData.appliedFilters]);
 
   const allowData = (emp) => {
     let Keys = Object.keys(authData.appliedFilters);
+
     //----------Check for BU-----------------------------//
     let okBU = false;
     if (authData.checkFilter["BU"]) {
@@ -145,6 +152,7 @@ export default function AdminDashboard() {
         }
       });
     }
+
     //------Check for Blocked status ----////
     let okStatus = false;
     // for Active status
@@ -168,6 +176,7 @@ export default function AdminDashboard() {
         
       });
     }
+
     // return okStatus;
     if (
       authData.checkFilter["location"] &&
@@ -187,15 +196,15 @@ export default function AdminDashboard() {
   };
 
 
-  console.log(
-    "Render..  " +
-    JSON.stringify(authData.checkFilter) +
-    " " +
-    authData.experienceValue
-  );
+  // console.log(
+  //   "Render..  " +
+  //   JSON.stringify(authData.checkFilter) +
+  //   " " +
+  //   authData.experienceValue
+  // );
 
   const [file, setFile] = useState([]);
-  const inputFile = useRef(null);
+  // const inputFile = useRef(null);
 
   const handleChange = e => {
     setFile([...file, e.target.files[0]]);

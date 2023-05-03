@@ -10,6 +10,7 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import AuthContext from "./AuthContext";
 import axios from "axios";
 import Login from "./Login";
+
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 function ViewReport(props) {
@@ -20,7 +21,7 @@ function ViewReport(props) {
     authData.setShowSearchBar(true);
     navigate("/");
   }
- console.log("locationAcess "+JSON.stringify(authData.locationAcess))
+ //console.log("locationAcess "+JSON.stringify(authData.locationAcess))
   const [curIndex, setCurrentIndex] = useState(-1);
 
   const loactionCounts = [];
@@ -61,6 +62,7 @@ function ViewReport(props) {
   const chartRef = useRef();
   const onClick = (event) => {
     if (getElementsAtEvent(chartRef.current, event).length > 0) {
+      console.log(getElementsAtEvent(chartRef.current, event));
       const datasetIndexNum = getElementsAtEvent(chartRef.current, event)[0]
         .datasetIndex;
       const dataPoint = getElementsAtEvent(chartRef.current, event)[0].index;
@@ -70,6 +72,8 @@ function ViewReport(props) {
  useEffect(()=>{
   //rerendering...
  },[authData.loactionAcess])
+
+ 
   return authData.isAuthentication ? (
     <>
       {
