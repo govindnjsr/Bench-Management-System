@@ -50,14 +50,14 @@ console.log(empDetail)
           <div>
             <NavBar />
           </div>
+          <div className="viewprofile-heading">
+            <button className="button3" onClick={handleBackButton}>
+              <i className="fa-sharp fa-solid fa-arrow-left"></i> &nbsp;BACK
+            </button>
+            <h5>{empDetail.name}</h5>
+          </div>
 
           <div className='shadow1 p-3 mb-5'>
-            <div className='for-back'>
-              <h6 className='profile-heading'>PROFILE</h6>
-              <button className='button3' onClick={handleBackButton} style={{position : 'fixed', right: '7%'}}><i className="fa-sharp fa-solid fa-arrow-left"></i> &nbsp;BACK</button>
-            </div>
-
-            <hr></hr>
             <img className='profile-photo' src={profileImageEmployee} alt='profileImageEmployee' />
             <div className='content'><center>{empDetail.name}</center></div>
             <div className='content'><center>ID : AU2023{empId}</center></div>

@@ -83,13 +83,12 @@ function ViewReport(props) {
       }
       {
         <div className="report-heading">
-          <h5>Representation of Business Units on the basis of Locations.</h5>
-          <button
-            className="button3"
-            onClick={handleBackButton}
-            style={{ position: "fixed", right: "0.1%" }}
-          >
+          <button className="button3"  onClick={handleBackButton} >
             <i className="fa-sharp fa-solid fa-arrow-left"></i> &nbsp;BACK
+          </button>
+          <h5>Representation of Business Units on the basis of Locations.</h5>
+          <button className="reload"  onClick={handleBackButton} >
+          <i class="fa-solid fa-rotate-right fa-lg"></i>
           </button>
         </div>
       }
