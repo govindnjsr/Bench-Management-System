@@ -10,6 +10,7 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import AuthContext from "./AuthContext";
 import axios from "axios";
 import Login from "./Login";
+
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 function ViewReport(props) {
@@ -20,7 +21,7 @@ function ViewReport(props) {
     authData.setShowSearchBar(true);
     navigate("/");
   }
- console.log("locationAcess "+JSON.stringify(authData.locationAcess))
+ //console.log("locationAcess "+JSON.stringify(authData.locationAcess))
   const [curIndex, setCurrentIndex] = useState(-1);
 
   const loactionCounts = [];
@@ -43,7 +44,7 @@ function ViewReport(props) {
         ],
         hoverOffset: 15,
         link: [],
-        set: 15,
+        set: 10,
       },
     ],
   });
@@ -51,7 +52,7 @@ function ViewReport(props) {
   const options = {
     layout: {
       padding: {
-        left: 35,
+        left: 15,
         right: 0,
         top: 2,
         bottom: 6,
@@ -61,6 +62,7 @@ function ViewReport(props) {
   const chartRef = useRef();
   const onClick = (event) => {
     if (getElementsAtEvent(chartRef.current, event).length > 0) {
+      console.log(getElementsAtEvent(chartRef.current, event));
       const datasetIndexNum = getElementsAtEvent(chartRef.current, event)[0]
         .datasetIndex;
       const dataPoint = getElementsAtEvent(chartRef.current, event)[0].index;
@@ -70,6 +72,8 @@ function ViewReport(props) {
  useEffect(()=>{
   //rerendering...
  },[authData.loactionAcess])
+
+ 
   return authData.isAuthentication ? (
     <>
       {
@@ -79,13 +83,12 @@ function ViewReport(props) {
       }
       {
         <div className="report-heading">
-          <h5>Representation of Business Units on the basis of Locations.</h5>
-          <button
-            className="button3"
-            onClick={handleBackButton}
-            style={{ position: "fixed", right: "0.1%" }}
-          >
+          <button className="button3"  onClick={handleBackButton} >
             <i className="fa-sharp fa-solid fa-arrow-left"></i> &nbsp;BACK
+          </button>
+          <h5>Representation of Business Units on the basis of Locations.</h5>
+          <button className="reload"  onClick={handleBackButton} >
+          <i class="fa-solid fa-rotate-right fa-lg"></i>
           </button>
         </div>
       }

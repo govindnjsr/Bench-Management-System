@@ -50,14 +50,14 @@ console.log(empDetail)
           <div>
             <NavBar />
           </div>
+          <div className="viewprofile-heading">
+            <button className="button3" onClick={handleBackButton}>
+              <i className="fa-sharp fa-solid fa-arrow-left"></i> &nbsp;BACK
+            </button>
+            <h5>{empDetail.name}</h5>
+          </div>
 
           <div className='shadow1 p-3 mb-5'>
-            <div className='for-back'>
-              <h6 className='profile-heading'>PROFILE</h6>
-              <button className='button3' onClick={handleBackButton} style={{position : 'fixed', right: '7%'}}><i className="fa-sharp fa-solid fa-arrow-left"></i> &nbsp;BACK</button>
-            </div>
-
-            <hr></hr>
             <img className='profile-photo' src={profileImageEmployee} alt='profileImageEmployee' />
             <div className='content'><center>{empDetail.name}</center></div>
             <div className='content'><center>ID : AU2023{empId}</center></div>
@@ -95,7 +95,7 @@ console.log(empDetail)
                 <p className="content">{empDetail.empLocation === 1 ? "Gurugram" :
                   empDetail.empLocation === 2 ? "Banglore" : "Hyderabad"}</p>
                 <p className="labels">Business Unit</p>
-                <p className="content">{empDetail.businessUnit} Years</p>
+                <p className="content">{empDetail.businessUnit}</p>
               </div>
               <div className="details1">
                 <p className="labels">Last Billable Date</p>
@@ -156,25 +156,6 @@ console.log(empDetail)
                     })()
                   }
                 </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="shadow2 p-3 mb-5">
-            <h6 className='profile-heading'>LAST CLIENT INTERVIEW</h6>
-            <hr></hr>
-            <div className='details-interview'>
-              <div className="details1">
-                <p className="labels">Client Name</p>
-                <p className="content">Accolite</p>
-              </div>
-              <div className="details1">
-                <p className="labels">Interview Date</p>
-                <p className="content">22/07/2005</p>
-              </div>
-              <div className="details1">
-                <p className="labels">Result</p>
-                <p className='content'>Accepted</p>
               </div>
             </div>
           </div>

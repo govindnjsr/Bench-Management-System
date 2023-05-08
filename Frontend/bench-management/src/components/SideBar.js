@@ -146,12 +146,12 @@ export default function SideBar() {
       </div>
       <div className="left-panel">
         <div className="filterContainer">
+          
           <div className="filterByExperience">
             <p className="pfilter">
               EXPERIENCE{" "}
               <span className="span-style">
                 ( {authData.requestDto.experience}+ Years)
-
               </span>
             </p>
             <label htmlFor="customRange2" className="form-label"></label>
@@ -174,6 +174,7 @@ export default function SideBar() {
             <p className="sliderParaLeft">0 Years</p>
             <span className="sliderParaRightExpereince">10 Years</span>
           </div>
+
 
           <div className="filterByBenchTime">
             <p className="pfilter">
@@ -202,6 +203,8 @@ export default function SideBar() {
             <p className="sliderParaLeft">0 Months</p>
             <span className="sliderParaRightBench">12 Months</span>
           </div>
+
+
           <div className="accordian">
             <Accordion eventKey={["0"]} alwaysOpen>
               <Accordion.Item eventKey="0">
@@ -216,9 +219,7 @@ export default function SideBar() {
                         value={true}
                         onChange={handleBUFilter.bind(this)}
                         id="status-1"
-
                         checked={authData.appliedFilters.BFSIFinancialServices}
-
                       />
                       <label
                         className="form-check-label skillsLabel"
@@ -329,6 +330,8 @@ export default function SideBar() {
                   </div>
                 </Accordion.Body>
               </Accordion.Item>
+
+
               <Accordion.Item eventKey="1">
                 <Accordion.Header>
                   <div className="pfilter">LOCATION</div>
@@ -405,6 +408,8 @@ export default function SideBar() {
 
                 </Accordion.Body>
               </Accordion.Item>
+
+
               <Accordion.Item eventKey="2">
                 <Accordion.Header><div className="pfilter">SKILLS</div></Accordion.Header>
                 <Accordion.Body>
@@ -542,6 +547,8 @@ export default function SideBar() {
                   </div>
                 </Accordion.Body>
               </Accordion.Item>
+
+
               <Accordion.Item eventKey="3">
                 <Accordion.Header><div className="pfilter">STATUS</div></Accordion.Header>
                 <Accordion.Body>
