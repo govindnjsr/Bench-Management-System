@@ -21,4 +21,9 @@ public class SkillService implements com.example.Bench.Management.Project.Servic
     public List<Skill> getSkill() {
         return skillRepo.findAll();
     }
+
+    @Override
+    public List<String> getAllSkill() {
+        return skillRepo.getAllSkill();
+    }
 }

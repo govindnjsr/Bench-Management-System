@@ -163,6 +163,7 @@ public class EmployeeService implements EmpDetailsService {
         dto.setBusinessUnit(empDetails.getBusinessUnit());
         dto.setEmail(empDetails.getEmail());
         dto.setBlocked(empDetails.getBlocked());
+        dto.setResume(empDetails.getResume());
         if(benchDate==null)benchDate=DateTimeFormatter.ofPattern("yyyy-MM-dd").format(LocalDateTime.now());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         try{
@@ -247,6 +248,16 @@ public class EmployeeService implements EmpDetailsService {
 
         }
         return "updated";
+    }
+
+    @Override
+    public List<String> getBU() {
+        return empDetailsRepo.getBU();
+    }
+
+    @Override
+    public List<String> getLocation() {
+        return empDetailsRepo.getLocation();
     }
 
 }

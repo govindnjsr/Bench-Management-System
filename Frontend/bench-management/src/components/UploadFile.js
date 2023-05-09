@@ -10,9 +10,14 @@ function UploadFile(props) {
   const handleShow = () => setShow(true);
   const [file, setFile] = useState([]);
   const inputFile = useRef(null);
+
+
   const handleChange = (e) => {
+   // console.log("Resume"+props.resume)
     setFile([...file, e.target.files[0]]);
   };
+
+
   const saveData =async (id) => {
     try {
       console.log("i am in try");
@@ -23,24 +28,15 @@ function UploadFile(props) {
           body: formData
       }).then( alert("File uploaded successfully.")).catch(err=>console.log(err));
   }
-        // console.log(file)
-        // await axios.put(`http://localhost:2538/api/empdetails/upload-file/${id}`,formData,{
-        //   headers:{
-        //     'Content-Type' : 'multipart/form-data',
-        //   },
-        // })
-        // .then((Response)=>{console.log(Response);
-        // })
-        // .catch((error)=>{console.log(error)});
-        //    console.log("Result"+allEmp);
-        // authData.setPost({});
     catch {
         console.log()
     }
 }
+
+
   return (
     <>
-      <button className="button5" onClick={handleShow}>
+      <button className="button7" style={{backgroundColor: props.resume?'#facfb9' : '#e6e8eb'}} onClick={handleShow}>
         <i className="fa-solid fa-upload"></i>
       </button>
       <Modal
