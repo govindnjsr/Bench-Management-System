@@ -44,6 +44,11 @@ public interface EmpDetailsRepo extends JpaRepository<EmpDetails,Long> {
             "  LEFT JOIN emp_details as e ON bu.business_unit = e.business_unit AND e.emp_location = 3\n" +
             "GROUP BY bu.business_unit order by bu.business_unit",nativeQuery = true)
     public List<Integer>getAllHyderabadBU();
+
+    @Query(value = "select distinct business_unit from emp_details order by business_unit", nativeQuery = true)
+    public List<String> getBU();
+    @Query(value="select distinct emp_location from emp_details order by emp_location", nativeQuery = true)
+    public  List<String> getLocation();
 //    @Modifying
 //    @Query(value="update bench.emp_details set resume =:originalFilename where id =:employeeId",nativeQuery = true)
 //    public void saveResume(@Param("originalFilename") String originalFilename,@Param("employeeId") Long employeeId);

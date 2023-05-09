@@ -158,4 +158,11 @@ public class EController {
         return empDetailsService.updateOnCondition(employeeId,intDetails);
     }
 
+    @GetMapping("/get/BU")
+    public List<String> getBU(){return empDetailsService.getBU();}
+
+    @GetMapping("/get/Location")
+    public List<String> getLocation(){return empDetailsService.getLocation();}
+
+
 }

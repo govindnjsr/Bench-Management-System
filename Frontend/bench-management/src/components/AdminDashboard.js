@@ -79,11 +79,11 @@ export default function AdminDashboard() {
     }
   }
 
- // console.log("AssignedLocation Admin"+JSON.stringify(authData.locationAcess)) 
+ console.log("DTO"+JSON.stringify(authData.newData)) 
 
   useEffect(() => {   
     fetchApis();  
-  }, [authData.requestDto,authData.appliedFilters]);
+  }, [authData.dtoDetails, authData.post,authData.requestDto,authData.appliedFilters]);
 
   const allowData = (emp) => {
     let Keys = Object.keys(authData.appliedFilters);
@@ -131,7 +131,7 @@ export default function AdminDashboard() {
         if (
           filterKey === "gurugram" &&
           authData.appliedFilters[filterKey] === true &&
-          emp.location == 1
+          emp.location == "Gurugram"
         ) {
           okLocation = true;
         }
@@ -139,14 +139,14 @@ export default function AdminDashboard() {
         if (
           filterKey === "bangalore" &&
           authData.appliedFilters[filterKey] === true &&
-          emp.location == 2
+          emp.location == "Bangalore"
         ) {
           okLocation = true;
         }
         if (
           filterKey === "hyderabad" &&
           authData.appliedFilters[filterKey] === true &&
-          emp.location == 3
+          emp.location == "Hyderabad"
         ) {
           okLocation = true;
         }
@@ -287,11 +287,11 @@ export default function AdminDashboard() {
                             {emp.email}
                           </td>
                           <td className="table-align-left">
-                            {emp.location == 1
+                            {emp.location == "Gurugram"
                               ? "Gurugram"
-                              : emp.location == 2
+                              : emp.location == "Bangalore"
                                 ? "Bangalore"
-                                : emp.location == 3
+                                : emp.location == "Hyderabad"
                                   ? "Hyderabad"
                                   : "none"}
                           </td>
@@ -301,7 +301,7 @@ export default function AdminDashboard() {
                               : `${Math.round(emp.benchPeriod * 0.032855)} Months, ${emp.benchPeriod % 30} Days`}
                           </td>                     
                           <td className="table-align-left">
-                            <UploadFile id={emp.employeeId} />
+                            <UploadFile id={emp.employeeId} resume={emp.resume}/>&nbsp;&nbsp;
                             <DownloadFile id={emp.employeeId} name={emp.employeeName} />
                           </td>
 
