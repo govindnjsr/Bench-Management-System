@@ -11,9 +11,6 @@ import java.util.Date;
 
 @Entity
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
 public class IntDetails {
 
     @Id

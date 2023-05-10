@@ -124,90 +124,19 @@ export default function AdminDashboard() {
 
     //----------Check for BU-----------------------------//
     let okBU = false;
-    if (authData.checkFilter["BU"]) {
-      Keys.forEach((filterKey) => {
-        if (filterKey === "BFSIFinancialServices" && authData.appliedFilters[filterKey] === true &&
-          emp.businessUnit === "BFSIFinancialServices")
-          okBU = true;
-
-        if (filterKey === "MediaTelecom" && authData.appliedFilters[filterKey] === true &&
-          emp.businessUnit === "MediaTelecom")
-          okBU = true;
-
-        if (filterKey === "Logistics" && authData.appliedFilters[filterKey] === true &&
-          emp.businessUnit === "Logistics")
-          okBU = true;
-
-        if (filterKey === "Technology" && authData.appliedFilters[filterKey] === true &&
-          emp.businessUnit === "Technology")
-          okBU = true;
-
-        if (filterKey === "Healthcare" && authData.appliedFilters[filterKey] === true &&
-          emp.businessUnit === "Healthcare")
-          okBU = true;
-
-        if (filterKey === "ConsultingServices" && authData.appliedFilters[filterKey] === true &&
-          emp.businessUnit === "ConsultingServices")
-          okBU = true;
-
-        if (filterKey === "BFSIInsurance" && authData.appliedFilters[filterKey] === true &&
-          emp.businessUnit === "BFSIInsurance")
-          okBU = true;
-
-      })
-    }
-
+    let buData=Array.from(authData.buSet);
+    okBU=buData.includes(emp.businessUnit);
     //------------check for the location--------------------------//
     let okLocation = false;
-    if (authData.checkFilter["location"]) {
-      //iterate over the filters..
-      Keys.forEach((filterKey) => {
-        if (
-          filterKey === "gurugram" &&
-          authData.appliedFilters[filterKey] === true &&
-          emp.location == 1
-        ) {
-          okLocation = true;
-        }
-
-        if (
-          filterKey === "bangalore" &&
-          authData.appliedFilters[filterKey] === true &&
-          emp.location == 2
-        ) {
-          okLocation = true;
-        }
-        if (
-          filterKey === "hyderabad" &&
-          authData.appliedFilters[filterKey] === true &&
-          emp.location == 3
-        ) {
-          okLocation = true;
-        }
-      });
-    }
+    let locationData=Array.from(authData.Locations);
+    if(emp.location==1){ okLocation=locationData.includes("gurugram");}
+    if(emp.location==2){ okLocation=locationData.includes("bangalore");}
+    if(emp.location==3){ okLocation=locationData.includes("hyderabad");}
     //------Check for Blocked status ----////
     let okStatus = false;
-    // for Active status
-    if (authData.checkFilter["status"]) {
-      Keys.forEach((filterKey) => {
-        if (
-          filterKey === "blocked" &&
-          authData.appliedFilters[filterKey] === true &&
-          emp.blocked == true
-        ) {
-          okStatus = true;
-        }
-
-        if (
-          filterKey === "notblocked" &&
-          authData.appliedFilters[filterKey] === true &&
-          emp.blocked == false
-        ) {
-          okStatus = true;
-        }
-      });
-    }
+    if(emp.blocked==true){okStatus=Array.from(authData.statusSet).includes("blocked");}
+    else{okStatus=Array.from(authData.statusSet).includes("notblocked");}
+  
     // return okStatus;
     if (
       authData.checkFilter["location"] &&

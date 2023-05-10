@@ -3,7 +3,12 @@ import AuthContext from './AuthContext'
 import { useState } from 'react';
 
 export default function AuthState(props) {
-   
+    // ------------------------------------------------   
+     const [Locations,setLocations]=useState(new Set([]))
+     const [skillsSet,setSkillsSet]=useState(new Set([]))
+     const [buSet,setBuSet]=useState(new Set([]))
+     const [statusSet,setStatusSet]=useState(new Set([]))
+    //------------------------------------------------
     const[isblocked, setIsBlocked]=useState(false);
     const [countOfEachLocation,setCountOfEachLocation]=useState([])
     const [gurugramBU,setGurugramBU]=useState([])
@@ -90,7 +95,7 @@ export default function AuthState(props) {
         console.log("logged out successfully")
     }
     return (
-        <AuthContext.Provider value={{pieChartLabels,setPieChartLables,isblocked,setIsBlocked,hyderabadBU,setHyderabadBU,bangaloreBU,setBangaloreBU,gurugramBU,setGurugramBU,countOfEachLocation,setCountOfEachLocation,locationWiseEmployeeCount,allData,setAlldata,setNewData,newData,requestDto,setReqDto,locationAcess,setLocationAccess,checkFilter,setCheckFilter,appliedFilters,dtoData, googleData, setAppliedFilters,setDtoData,isAuthentication, currentRole,
+        <AuthContext.Provider value={{setAppliedFilters,appliedFilters,setStatusSet,statusSet,setBuSet,buSet,setSkillsSet,skillsSet,Locations,setLocations,pieChartLabels,setPieChartLables,isblocked,setIsBlocked,hyderabadBU,setHyderabadBU,bangaloreBU,setBangaloreBU,gurugramBU,setGurugramBU,countOfEachLocation,setCountOfEachLocation,locationWiseEmployeeCount,allData,setAlldata,setNewData,newData,requestDto,setReqDto,locationAcess,setLocationAccess,checkFilter,setCheckFilter,dtoData, googleData,setDtoData,isAuthentication, currentRole,
          setGoogleData, handleLogin, setAuthentication,
           setCurrentRole, handleLogout, loopEntry,setLoopEntry, managerId, setManagerId
           ,handleEmpId, viewEmployeeId, benchTimeValue, setBenchTimeValue,

@@ -17,11 +17,6 @@ public class DtoController {
     @Autowired
     private EmpDetailsService empDetailsService;
 
-    @GetMapping("/get")
-    public List<Dto>getAllDto(){
-        return empDetailsService.getAllDto();
-    }
-
     @PostMapping("/get/filterd")
     public List<Dto>getallfilterd(@RequestBody RequestDto requestDto){
 

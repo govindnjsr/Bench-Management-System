@@ -8,8 +8,6 @@ import javax.persistence.*;
 
 @Entity
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class Login {
    @Id
    private long id;

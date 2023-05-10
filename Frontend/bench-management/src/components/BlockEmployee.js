@@ -27,7 +27,7 @@ function BlockEmployee(props) {
     e.preventDefault();
     const srNo=empDetails.onGoing;
     setEmpDetails({...empDetails,blocked:false});
-    console.log(empDetails);
+    // console.log(empDetails);
     try{
       await axios.put(`http://localhost:2538/api/empdetails/blockedstatus/${id}`);
       await axios.put(`http://localhost:2538/api/empdetails/interview/updateresultbysrno/${srNo}`,intDetails)
@@ -43,13 +43,13 @@ function BlockEmployee(props) {
     catch{
     }
   }
-console.log(intDetails);
+// console.log(intDetails);
   const handleApplyBlocked = async (e, id) => {
     try {
         await axios.post('http://localhost:2538/api/empdetails/interview/save', intDetails)
         .then((response)=>{
           // authData.setIsBlocked(true);
-          console.log("Data"+JSON.stringify(response.data.srNo));
+          // console.log("Data"+JSON.stringify(response.data.srNo));
           axios.put(`http://localhost:2538/api/empdetails/ongoing/${response.data.id}/${response.data.srNo}`)
           // axios returns API response body in .data
           authData.setAppliedFilters({
@@ -101,7 +101,7 @@ console.log(intDetails);
       var date = today.getFullYear() + '-0' + (today.getMonth() + 1) + '-' + today.getDate();
       return date;
     }
-    console.log("Date"+date);
+    // console.log("Date"+date);
     return date;
   }
   // useEffect(()=>{

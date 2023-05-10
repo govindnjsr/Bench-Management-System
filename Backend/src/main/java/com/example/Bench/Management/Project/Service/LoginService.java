@@ -13,7 +13,6 @@ public interface LoginService {
     public List<Login>getData();
     //get the id of user
     public long getId(String email);
-
     public void deleteLoginById(long id);
 
 }

@@ -20,11 +20,6 @@ public class ManagerController {
     public  ResponseEntity<ManagerDetails>save(@RequestBody ManagerDetails managerDetails){
         return new ResponseEntity<ManagerDetails>(managerService.save(managerDetails),HttpStatus.CREATED);
     }
-//    @GetMapping()
-//    public List<ManagerDetails>getData(){
-//        return managerService.getData();
-//    }
-
     @GetMapping("/get")
     public List<ManagerDetails>getAllManagers(){
         return managerService.getData();
@@ -57,6 +52,6 @@ public class ManagerController {
     //get not assigned location
     @GetMapping("/get/notassignedLocation/{managerId}")
     public List<Long>getNotAssignedLocation(@PathVariable(required = false) Long managerId){
-        return managerService.getAssignedLocationOfAManager(managerId);
+        return managerService.getNotAssignedLocationOfAManager(managerId);
     }
 }

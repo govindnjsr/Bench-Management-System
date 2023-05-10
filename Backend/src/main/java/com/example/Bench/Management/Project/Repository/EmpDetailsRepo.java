@@ -2,9 +2,7 @@ package com.example.Bench.Management.Project.Repository;
 
 import com.example.Bench.Management.Project.Model.EmpDetails;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -44,9 +42,6 @@ public interface EmpDetailsRepo extends JpaRepository<EmpDetails,Long> {
             "  LEFT JOIN emp_details as e ON bu.business_unit = e.business_unit AND e.emp_location = 3\n" +
             "GROUP BY bu.business_unit order by bu.business_unit",nativeQuery = true)
     public List<Integer>getAllHyderabadBU();
-//    @Modifying
-//    @Query(value="update bench.emp_details set resume =:originalFilename where id =:employeeId",nativeQuery = true)
-//    public void saveResume(@Param("originalFilename") String originalFilename,@Param("employeeId") Long employeeId);
 
 
 

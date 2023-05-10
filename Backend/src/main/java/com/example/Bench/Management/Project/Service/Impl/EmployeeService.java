@@ -1,9 +1,11 @@
 package com.example.Bench.Management.Project.Service.Impl;
 
-import ch.qos.logback.core.net.SyslogOutputStream;
-import com.example.Bench.Management.Project.Model.*;
 import com.example.Bench.Management.Project.Repository.EmpDetailsRepo;
 import com.example.Bench.Management.Project.Service.EmpDetailsService;
+import com.example.Bench.Management.Project.Model.Dto;
+import com.example.Bench.Management.Project.Model.EmpDetails;
+import com.example.Bench.Management.Project.Model.IntDetails;
+import com.example.Bench.Management.Project.Model.RequestDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,10 +21,6 @@ public class EmployeeService implements EmpDetailsService {
     @Autowired
      private EmpDetailsRepo empDetailsRepo;
 
-//    public  EmployeeService(EmpDetailsRepo empDetailsRepo){
-//        super();
-//        this.empDetailsRepo=empDetailsRepo;
-//    }
     @Override
     public EmpDetails save(EmpDetails empDetails) {
         return empDetailsRepo.save(empDetails);
@@ -33,32 +31,6 @@ public class EmployeeService implements EmpDetailsService {
         return empDetailsRepo.findAll();
     }
 
-    @Override
-    public long getActiveEmployees() {
-        return empDetailsRepo.getAllActiveEmployees();
-    }
-
-    @Override
-    public long getInactiveEmployees() {
-        return empDetailsRepo.getAllInActiveEmployees();
-    }
-
-    @Override
-    public long getAllEmployees() {
-        return empDetailsRepo.getAllEmployees();
-    }
-
-    @Override
-    public String updateCompanyStatus(Long employeeId) {
-        EmpDetails empDetails=empDetailsRepo.findById(employeeId).get();
-        if(empDetails.getActive()==true){
-            empDetails.setActive(false);
-        }
-        else
-            empDetails.setActive(true);
-      empDetailsRepo.save(empDetails);
-        return "Update";
-    }
 
     @Override
     public EmpDetails getEmployeeById(Long employeeId) {
@@ -69,26 +41,6 @@ public class EmployeeService implements EmpDetailsService {
         }
         else return empDetails;
     }
-
-
-    @Override
-    public List<Dto> getAllDto() {
-
-        List<Dto>curList=empDetailsRepo.findAll()
-                .stream()
-                .map(this::convertEntityToDto)
-                .collect(Collectors.toList());
-        List<Dto>sendList=new ArrayList<>();
-
-        for(int i=0;i<curList.size();i++){
-            if(curList.get(i)!=null){
-                sendList.add(curList.get(i));
-            }
-        }
-        return sendList;
-
-    }
-
     @Override
     public List<Dto> getAllFilteredDto(RequestDto requestDto) {
         List<Dto>curList=empDetailsRepo.findAll()
@@ -127,7 +79,6 @@ public class EmployeeService implements EmpDetailsService {
 
             if(haveSkill<=reqSkill) okSkills=true;
 
-//            if(!okSkills)okSkills=true;
             //check for bench period
             boolean okBench=true;
             if(curList.get(i).getBenchPeriod()/30<requestDto.getBenchPeriod()) {
@@ -176,20 +127,9 @@ public class EmployeeService implements EmpDetailsService {
             else dto.setBenchPeriod(0);
         }
         catch (ParseException e) {}
-
-
         return dto;
-
-
     }
 
-    @Override
-    public String updateEmployeeById(Long employeeId, EmpDetails empDetails) {
-        EmpDetails empDetails1=empDetailsRepo.findById(employeeId).get();
-        empDetails1.setBenchStatus(false);
-        empDetailsRepo.save(empDetails1);
-        return "updated";
-    }
 
     @Override
     public void saveResume(String originalFilename,Long employeeId) {
@@ -239,12 +179,10 @@ public class EmployeeService implements EmpDetailsService {
     @Override
     public String updateOnCondition(Long employeeId, IntDetails intDetails) {
         EmpDetails empDetails1=empDetailsRepo.findById(employeeId).get();
-        System.out.println("REsult:"+intDetails.getResult());
+
         if(intDetails.getResult()==true){
-            System.out.println("Hi i am in");
             empDetails1.setBenchStatus(false);
             empDetailsRepo.save(empDetails1);
-
         }
         return "updated";
     }

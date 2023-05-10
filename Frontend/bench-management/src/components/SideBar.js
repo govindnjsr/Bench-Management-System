@@ -6,6 +6,7 @@ import axios from "axios";
 export default function SideBar() {
   const authData = useContext(AuthContext);
  
+  
 // console.log(authData.currentRole);
  
 
@@ -15,20 +16,18 @@ export default function SideBar() {
     const { value, checked } = e.target;
     let True = true,
       False = false;
-
-
     if (checked) {
       authData.setAppliedFilters({
         ...authData.appliedFilters,
         [e.target.name]: True,
       });
-
       authData.setCheckFilter({
         ...authData.checkFilter,
         ["BU"]: authData.checkFilter["BU"] + 1,
-      });
-
-
+      });      
+      let buTempSet=new Set(authData.buSet)
+      buTempSet.add(e.target.name)
+      authData.setBuSet(buTempSet)
     }
     else {
       authData.setAppliedFilters({
@@ -39,19 +38,18 @@ export default function SideBar() {
         ...authData.checkFilter,
         ["BU"]: authData.checkFilter["BU"] - 1,
       });
-
+      authData.buSet.delete(e.target.name)
     }
   }
 
 
-  
+  const [newSet,setNewSet]=useState(new Set([]));
   //Handle Location filters
   const handleLocationFilter = (e) => {
     const { value, checked } = e.target;
     let True = true,
-      False = false;
-
-    if (checked) {
+      False = false;  
+    if (checked) {    
       authData.setAppliedFilters({
         ...authData.appliedFilters,
         [e.target.name]: True,
@@ -60,6 +58,12 @@ export default function SideBar() {
         ...authData.checkFilter,
         ["location"]: authData.checkFilter["location"] + 1,
       });
+      let locationTempSet=new Set(authData.Locations)
+      locationTempSet.add(e.target.name)
+      authData.setLocations(locationTempSet)
+      ///----
+      // authData.setLocations(prv => new Set([...prv, e.target.name]));
+      //----
 
     }
     else {
@@ -71,6 +75,8 @@ export default function SideBar() {
         ...authData.checkFilter,
         ["location"]: authData.checkFilter["location"] - 1,
       });
+      authData.Locations.delete(e.target.name)
+
 
     }
 
@@ -89,7 +95,6 @@ export default function SideBar() {
         ...authData.checkFilter,
         ["skill"]: authData.checkFilter["skill"] + 1,
       });
-
     }
     else {
       authData.setReqDto({
@@ -100,6 +105,7 @@ export default function SideBar() {
         ...authData.checkFilter,
         ["skill"]: authData.checkFilter["skill"] - 1,
       });
+     
 
     }
 
@@ -120,8 +126,12 @@ export default function SideBar() {
           ...authData.checkFilter,
           ["status"]: authData.checkFilter["status"] + 1,
         });
+        
 
-      }
+    }
+    let statusTempSet=new Set(authData.statusSet)
+        statusTempSet.add(e.target.name)
+        authData.setStatusSet(statusTempSet)
 
     }
     else {
@@ -134,12 +144,14 @@ export default function SideBar() {
           ...authData.checkFilter,
           ["status"]: authData.checkFilter["status"] - 1,
         });
+       
       }
+      authData.statusSet.delete(e.target.name)
     }
 
   }
-
-  return (
+  // console.log("newSet "+(newSet));
+   return (
     <>
       <div className="filterHeading">
         <p className="pfilterHeading">SORT BY FILTERS</p>
@@ -216,9 +228,7 @@ export default function SideBar() {
                         value={true}
                         onChange={handleBUFilter.bind(this)}
                         id="status-1"
-
                         checked={authData.appliedFilters.BFSIFinancialServices}
-
                       />
                       <label
                         className="form-check-label skillsLabel"

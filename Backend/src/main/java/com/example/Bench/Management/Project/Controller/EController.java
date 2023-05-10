@@ -49,21 +49,6 @@ public class EController {
         return empDetailsService.getData();
     }
 
-    //get count of  all active employees
-    @GetMapping("/get/activeemployee")
-    public long getActiveEmployees(){
-        return empDetailsService.getActiveEmployees();
-    }
-    //get count of all inactive employees
-    @GetMapping("/get/benchedemployee")
-    public long getInactiveEmployees(){
-        return empDetailsService.getInactiveEmployees();
-    }
-    //get count of all employees
-    @GetMapping("/get/allemployee")
-    public long getAllEmployees(){
-        return empDetailsService.getAllEmployees();
-    }
 
     //get count of each location
     @GetMapping("/get/countOfEachLocation")
@@ -76,30 +61,15 @@ public class EController {
 
     @GetMapping("/get/hyderabadBU")
     public List<Integer> getAllHyderabadBU(){return empDetailsService.getAllHyderabadBU();}
-    //to change the Company Status of employee
-    @PutMapping("updateactiveness/{employeeId}")
-    public String updateCompanyActiveness(@PathVariable Long employeeId){
-
-        return empDetailsService.updateCompanyStatus(employeeId);
-    }
 
     @GetMapping("/get/{employeeId}")
     public EmpDetails getEmployeeById(@PathVariable Long employeeId){
         return empDetailsService.getEmployeeById(employeeId);
     }
 
-    @PutMapping("/update/{employeeId}")
-    public String updateEmployeeById(@PathVariable Long employeeId, @RequestBody EmpDetails empDetails){
-        return empDetailsService.updateEmployeeById(employeeId,empDetails);
-    }
-
     @PutMapping("/upload-file/{employeeId}")
     public ResponseEntity<String> uploadFile(@PathVariable Long employeeId,@RequestBody MultipartFile file)
     {
-//        System.out.println(file.getOriginalFilename());
-//        System.out.println(file.getSize());
-//        System.out.println(file.getContentType());
-//        System.out.println(file.getName());
         try {
             //validations
 
