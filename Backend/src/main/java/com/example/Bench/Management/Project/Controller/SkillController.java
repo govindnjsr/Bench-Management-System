@@ -25,4 +25,7 @@ public class SkillController {
     public List<Skill>getData(){
         return skillService.getSkill();
     }
+
+    @GetMapping("/get/skill")
+    public List<String> getSkill(){return skillService.getAllSkill();}
 }

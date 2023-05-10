@@ -93,15 +93,23 @@ function BlockEmployee(props) {
   };
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
   const todayDate=()=>{
     var today = new Date();
     var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-    if(today.getMonth()+1 %10==today.getMonth()+1)
-    {
-      var date = today.getFullYear() + '-0' + (today.getMonth() + 1) + '-' + today.getDate();
-      return date;
+    if(today.getDate()%10 == today.getDate() && today.getMonth()+1 %10==today.getMonth()+1 ){
+      date = today.getFullYear() + '-0'+ (today.getMonth() + 1) + '-0' + today.getDate();
+      console.log("Date"+date);
     }
-    // console.log("Date"+date);
+    else if(today.getDate()%10 == today.getDate()){
+      date = today.getFullYear()+ (today.getMonth() + 1) + '-0' + today.getDate();
+      console.log("Date"+date);
+    }
+    else if(today.getMonth()+1 %10==today.getMonth()+1)
+    {
+      date = today.getFullYear() + '-0' + (today.getMonth() + 1) + '-' + today.getDate();
+      console.log("Date"+date);
+    }
     return date;
   }
   // useEffect(()=>{

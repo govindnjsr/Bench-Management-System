@@ -244,12 +244,12 @@
 }
 
 .logoContainer {
-  height: 8%;
+  height: 10%;
   object-fit: contain;
-  width: 18%;
+  width: 20%;
   padding-top: 0%;
-  padding-bottom: 2%;
-  padding-left: 1%;
+  padding-bottom: 0%;
+  padding-left: 0%;
   position: fixed;
 }
 
@@ -311,7 +311,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-left: 96%;
+  margin-left: 97%;
 }
 
 .profileUserName{
@@ -480,13 +480,6 @@
   user-select: none;
 }
 
-/* .table-align-left-action{
-  text-align:left;
-  padding-left: 8%;
-  display: flex;
-  flex-direction: row;
-} */
-
 .pointer-to-profile:hover{
   cursor:pointer;
   transition:ease-in-out 0.01s;
@@ -496,6 +489,18 @@
 .nopointer-to-profile{
   cursor:context-menu;
 
+}
+
+.button7{
+  background-color:#e6e8eb;
+  border-radius: 30px;
+  border: none;
+}
+
+.button8{
+  border: none;
+  background-color: white;
+  font-weight: bold;
 }
 
 .button5 {
@@ -516,6 +521,25 @@
 }
 .button5:hover{
   opacity: 0.8;
+}
+
+thead button {
+  background-color: white;
+  border:none;
+  font-weight:bold;
+  font-size: inherit;
+}
+
+thead button.ascending::after {
+  content: '🡣';
+  display: inline-block;
+  margin-left: 1em;
+}
+
+thead button.descending::after {
+  content: '🡡';
+  display: inline-block;
+  margin-left: 1em;
 }
 
 
@@ -554,7 +578,7 @@
   display: inline-block;
   font-size: 12px;
   font-weight: 500;
-  margin: 3px 0px 4px 4px;
+  margin: 0px 30px 0px 0px;
   cursor: pointer;
   border-radius: 12px;
 }
@@ -583,10 +607,16 @@
   gap:0 px
 }
 
-.for-back{
+.viewprofile-heading{
   display: flex;
   flex-direction: row;
-  gap:85%
+  gap:35%;
+  position: fixed;
+  background-color: #01070d;
+  color: white;
+  width: 100vw;
+  margin-top: 4.8%;
+  padding: 0.2% 0% 0% 0.1%;
 }
 
 .profile-photo{
@@ -597,7 +627,7 @@
 }
 
 .shadow1{
-  margin: 5% 4.5% 0% 4.5%;
+  margin: 8% 4.5% 0% 4.5%;
   background-color:#e1e1de;
   box-shadow: 5px 5px 5px 5px rgb(125, 125, 125);
 }
@@ -655,13 +685,19 @@
 .report-heading{
   display: flex;
   flex-direction: row;
+  gap:17.5%;
   position: fixed;
   background-color: #01070d;
   color: white;
-  align-items: center;
   width: 100vw;
   margin-top: 4.8%;
-  padding: 0.1% 0% 0.1% 30%;
+  padding: 0% 0% 0% 0%;
+}
+.reload{
+  margin-left: 9%;
+  background-color:#01070d;
+  color: white;
+  border: none;
 }
 
 .representations{
@@ -675,7 +711,7 @@
 .pie-chart{
   position: fixed;
   background-color: white;
-  padding: 1% 2% 5% 2%;
+  padding: 1% 2% 5% 3%;
   height: 82vh;
   width: 40vw;
   box-shadow: 2px 2px 5px 2px #989a9c;

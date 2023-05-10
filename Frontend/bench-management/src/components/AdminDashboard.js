@@ -14,6 +14,7 @@ import BlockEmployee from "./BlockEmployee";
 export default function AdminDashboard() {
   const authData = useContext(AuthContext);
   const navigate = useNavigate();
+
   const handleViewEmployee = () => {
     authData.setShowSearchBar(false);    
     navigate("/viewEmployee");
@@ -34,12 +35,16 @@ export default function AdminDashboard() {
       authData.locationAcess.Gurugram=true;
       authData.locationAcess.Hyderabad=true;
       authData.locationAcess.Bangalore=true;
+
        //set default chart Stuff
-      authData.setPieChartLables(["Gurugram","Bangalore","Hyderabad"]);        
+      authData.setPieChartLables(["Gurugram","Bangalore","Hyderabad"]);     
+
       const allnewDto = await axios.post(
         "http://localhost:2538/api/dto/get/filterd", authData.requestDto
       );
       authData.setNewData(allnewDto.data);
+      console.log("aaaaaaaaaaa"+authData.newData);
+
       //count emp locatin wise 
       const countOfEachLoc = await axios.get(
         "http://localhost:2538/api/empdetails/get/countOfEachLocation"
@@ -50,6 +55,7 @@ export default function AdminDashboard() {
            });
            authData.setCountOfEachLocation(tempData);           
       })
+
       //count of All BU location wise 
       //gurugram
       const countOfGurugramBU = await axios.get(
@@ -57,25 +63,28 @@ export default function AdminDashboard() {
         ).then((res)=>{
             authData.setGurugramBU(res.data);      
       })
+
       //Bangalore
       const countOfBangaloreBU = await axios.get(
         "http://localhost:2538/api/empdetails/get/bangaloreBU"
       ).then((res)=>{       
             authData.setBangaloreBU(res.data);         
       })
+
        //hyderabad
        const countOfHyderabadBU = await axios.get(
         "http://localhost:2538/api/empdetails/get/hyderabadBU"
       ).then((res)=>{
             authData.setHyderabadBU(res.data);       
-      })   
-    
+      })    
     }
     catch {
       console.log();
     }
   }
-  console.log("AssignedLocation Admin"+JSON.stringify(authData.locationAcess)) 
+
+ //console.log("DTO"+JSON.stringify(authData.newData)) 
+
   useEffect(() => {   
     fetchApis();  
   }, [authData.dtoDetails, authData.post,authData.requestDto,
@@ -132,6 +141,49 @@ export default function AdminDashboard() {
   console.log("LocationSet "+Array.from(authData.Locations));
   console.log("BUSet "+Array.from(authData.buSet));
   console.log("StatusSet "+Array.from(authData.statusSet));
+ // console.log("req dto "+JSON.stringify(authData.requestDto))
+
+  //--------------------------------
+  //Sorting
+  const useSortableData = (items, config = null) => {
+    const [sortConfig, setSortConfig] = React.useState(config);
+    console.log("aaaaaaaaaaaa"+JSON.stringify(items));
+    const sortedItems = React.useMemo(() => {
+      let sortableItems = items;
+      if (sortConfig !== null) {
+        sortableItems.sort((a, b) => {
+          if (a[sortConfig.key] < b[sortConfig.key]) {
+            return sortConfig.direction === 'ascending' ? -1 : 1;
+          }
+          if (a[sortConfig.key] > b[sortConfig.key]) {
+            return sortConfig.direction === 'ascending' ? 1 : -1;
+          }
+          return 0;
+        });
+      }
+      return sortableItems;
+    }, [items, sortConfig]);  
+    const requestSort = key => {
+      let direction = 'ascending';
+      if (sortConfig && sortConfig.key === key && sortConfig.direction === 'ascending') {
+        direction = 'descending';
+      }
+      setSortConfig({ key, direction });
+    }  
+    return {items: sortedItems, requestSort, sortConfig };
+  };
+//-----------------------------------------
+  const { items, requestSort , sortConfig} = useSortableData(authData.newData);
+  const getClassNamesFor = (name) => {
+    if (!sortConfig) {
+      return;
+    }
+    return sortConfig.key === name ? sortConfig.direction : undefined;
+  };
+
+//-----------------------------------------
+
+
   return (
     <div className="window">
       <div className="top">
@@ -161,16 +213,23 @@ export default function AdminDashboard() {
                       Block
                     </th>
                     <th className="table-align-left" scope="col">
+                    <button  className={getClassNamesFor('employeeName')} type="button" onClick={() => requestSort('employeeName')}>
                       Name
+                    </button>
                     </th>
                     <th className="table-align-left" scope="col">
                       Email
                     </th>
                     <th className="table-align-left" scope="col">
-                      Location
+                    <button  className={getClassNamesFor('location')} type="button" onClick={() => requestSort('location')}>
+                    Location
+                    </button> 
                     </th>
                     <th className="table-align-left" scope="col">
-                      Bench_Aging
+                    <button  className={getClassNamesFor('benchPeriod')} type="button" onClick={() => requestSort('benchPeriod')}>
+                    Bench_Aging
+                    </button> 
+                      
                     </th>
                     <th className="table-align-left" scope="col">
                       Resume
@@ -200,11 +259,11 @@ export default function AdminDashboard() {
                             {emp.email}
                           </td>
                           <td className="table-align-left">
-                            {emp.location == 1
+                            {emp.location == "Gurugram"
                               ? "Gurugram"
-                              : emp.location == 2
+                              : emp.location == "Bangalore"
                                 ? "Bangalore"
-                                : emp.location == 3
+                                : emp.location == "Hyderabad"
                                   ? "Hyderabad"
                                   : "none"}
                           </td>
@@ -214,7 +273,7 @@ export default function AdminDashboard() {
                               : `${Math.round(emp.benchPeriod * 0.032855)} Months, ${emp.benchPeriod % 30} Days`}
                           </td>                     
                           <td className="table-align-left">
-                            <UploadFile id={emp.employeeId} />
+                            <UploadFile id={emp.employeeId} resume={emp.resume}/>&nbsp;&nbsp;
                             <DownloadFile id={emp.employeeId} name={emp.employeeName} />
                           </td>
 

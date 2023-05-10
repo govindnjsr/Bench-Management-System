@@ -31,4 +31,6 @@ public class Dto {
     private String email;
     private boolean blocked;
 
+    private String resume;
+
 }

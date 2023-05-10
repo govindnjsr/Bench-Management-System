@@ -26,4 +26,8 @@ public interface EmpDetailsService {
  public String updateBlockedById(Long employeeId);
 
     public String updateOnCondition(Long employeeId, IntDetails intDetails);
+
+    public  List<String> getBU();
+
+    public List<String> getLocation();
 }

@@ -93,7 +93,8 @@ export default function AuthState(props) {
         setLoopEntry(false)
         setManagerId(-1);
         console.log("logged out successfully")
-    }
+    } const [file, setFile] = useState([]);
+
     return (
         <AuthContext.Provider value={{setAppliedFilters,appliedFilters,setStatusSet,statusSet,setBuSet,buSet,setSkillsSet,skillsSet,Locations,setLocations,pieChartLabels,setPieChartLables,isblocked,setIsBlocked,hyderabadBU,setHyderabadBU,bangaloreBU,setBangaloreBU,gurugramBU,setGurugramBU,countOfEachLocation,setCountOfEachLocation,locationWiseEmployeeCount,allData,setAlldata,setNewData,newData,requestDto,setReqDto,locationAcess,setLocationAccess,checkFilter,setCheckFilter,dtoData, googleData,setDtoData,isAuthentication, currentRole,
          setGoogleData, handleLogin, setAuthentication,
@@ -102,7 +103,7 @@ export default function AuthState(props) {
            experienceValue, setExperienceValue, handleClose,
             setShow, show, handleShow, post, setPost,
             assignedLocation, setAssignedLocation, searchValue,
-            setSearchValue, benchPeriodEmp, setBenchPeriodEmp, showSearchBar, setShowSearchBar
+            setSearchValue, benchPeriodEmp, setBenchPeriodEmp, showSearchBar, setShowSearchBar,file, setFile
         }}>
             {props.children}
         </AuthContext.Provider>

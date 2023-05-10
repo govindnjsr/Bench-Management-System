@@ -8,4 +8,6 @@ public interface SkillService {
 
     public Skill save(Skill skill);
     public List<Skill> getSkill();
+
+    public List<String> getAllSkill();
 }

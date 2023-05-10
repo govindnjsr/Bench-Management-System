@@ -27,21 +27,29 @@ public interface EmpDetailsRepo extends JpaRepository<EmpDetails,Long> {
     public List<Map<Long,Long>>getCountOfEachLocation();
     //get count of each BU from gurugram 1
     @Query(value="SELECT COALESCE(COUNT(e.id), 0) as count FROM (SELECT DISTINCT business_unit FROM emp_details) as bu\n" +
-            "  LEFT JOIN emp_details as e ON bu.business_unit = e.business_unit AND e.emp_location = 1\n" +
+            "LEFT JOIN emp_details as e ON bu.business_unit = e.business_unit AND e.emp_location = \"Gurugram\"\n" +
             "GROUP BY bu.business_unit order by bu.business_unit",nativeQuery = true)
     public List<Integer>getAllGurugramBU();
 
     //count of all BU from Banagalore 2
     @Query(value = "SELECT COALESCE(COUNT(e.id), 0) as count FROM (SELECT DISTINCT business_unit FROM emp_details) as bu\n" +
-            "  LEFT JOIN emp_details as e ON bu.business_unit = e.business_unit AND e.emp_location = 2\n" +
+            "LEFT JOIN emp_details as e ON bu.business_unit = e.business_unit AND e.emp_location = \"Bangalore\"\n" +
             "GROUP BY bu.business_unit order by bu.business_unit",nativeQuery = true)
     public List<Integer>getAllBangaloreBU();
 
     //count of all BU from Hyderabad 3
     @Query(value ="SELECT COALESCE(COUNT(e.id), 0) as count FROM (SELECT DISTINCT business_unit FROM emp_details) as bu\n" +
-            "  LEFT JOIN emp_details as e ON bu.business_unit = e.business_unit AND e.emp_location = 3\n" +
+            "LEFT JOIN emp_details as e ON bu.business_unit = e.business_unit AND e.emp_location = \"Hyderabad\"\n" +
             "GROUP BY bu.business_unit order by bu.business_unit",nativeQuery = true)
     public List<Integer>getAllHyderabadBU();
+
+    @Query(value = "select distinct business_unit from emp_details order by business_unit", nativeQuery = true)
+    public List<String> getBU();
+    @Query(value="select distinct emp_location from emp_details order by emp_location", nativeQuery = true)
+    public  List<String> getLocation();
+//    @Modifying
+//    @Query(value="update bench.emp_details set resume =:originalFilename where id =:employeeId",nativeQuery = true)
+//    public void saveResume(@Param("originalFilename") String originalFilename,@Param("employeeId") Long employeeId);
 
 
 

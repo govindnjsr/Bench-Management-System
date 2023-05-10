@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
@@ -7,40 +7,36 @@ import AuthContext from './AuthContext';
 function UploadFile(props) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-  const [file, setFile] = useState([]);
+  const handleShow = () => setShow(true); 
   const inputFile = useRef(null);
+  const authData = useContext(AuthContext);
+
+
   const handleChange = (e) => {
-    setFile([...file, e.target.files[0]]);
+   // console.log("Resume"+props.resume)
+   authData.setFile([...authData.file, e.target.files[0]]);
   };
+
+
   const saveData =async (id) => {
     try {
       console.log("i am in try");
         const formData = new FormData();
-        formData.append("file", file[0]);
+        formData.append("file", authData.file[0]);
         fetch(`http://localhost:2538/api/empdetails/upload-file/${id}`,{
           method: 'PUT',
           body: formData
       }).then( alert("File uploaded successfully.")).catch(err=>console.log(err));
   }
-        // console.log(file)
-        // await axios.put(`http://localhost:2538/api/empdetails/upload-file/${id}`,formData,{
-        //   headers:{
-        //     'Content-Type' : 'multipart/form-data',
-        //   },
-        // })
-        // .then((Response)=>{console.log(Response);
-        // })
-        // .catch((error)=>{console.log(error)});
-        //    console.log("Result"+allEmp);
-        // authData.setPost({});
     catch {
         console.log()
     }
 }
+
+
   return (
     <>
-      <button className="button5" onClick={handleShow}>
+      <button className="button7" style={{backgroundColor: props.resume?'#facfb9' : '#e6e8eb'}} onClick={handleShow}>
         <i className="fa-solid fa-upload"></i>
       </button>
       <Modal
