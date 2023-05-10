@@ -40,6 +40,7 @@ export default function AdminDashboard() {
         "http://localhost:2538/api/dto/get/filterd", authData.requestDto
       );
       authData.setNewData(allnewDto.data);
+      console.log("aaaaaaaaaaa"+authData.newData);
 
       //count emp locatin wise 
       const countOfEachLoc = await axios.get(
@@ -79,11 +80,11 @@ export default function AdminDashboard() {
     }
   }
 
- console.log("DTO"+JSON.stringify(authData.newData)) 
+ //console.log("DTO"+JSON.stringify(authData.newData)) 
 
   useEffect(() => {   
     fetchApis();  
-  }, [authData.dtoDetails, authData.post,authData.requestDto,authData.appliedFilters]);
+  }, [authData.dtoDetails, authData.post,authData.requestDto,authData.appliedFilters,authData.file]);
 
   const allowData = (emp) => {
     let Keys = Object.keys(authData.appliedFilters);
@@ -218,7 +219,49 @@ export default function AdminDashboard() {
 };
   //--------------------------------
   // console.log("new data "+JSON.stringify(authData.newData))
-  console.log("req dto "+JSON.stringify(authData.requestDto))
+ // console.log("req dto "+JSON.stringify(authData.requestDto))
+
+  //--------------------------------
+  //Sorting
+  const useSortableData = (items, config = null) => {
+    const [sortConfig, setSortConfig] = React.useState(config);
+    console.log("aaaaaaaaaaaa"+JSON.stringify(items));
+    const sortedItems = React.useMemo(() => {
+      let sortableItems = items;
+      if (sortConfig !== null) {
+        sortableItems.sort((a, b) => {
+          if (a[sortConfig.key] < b[sortConfig.key]) {
+            return sortConfig.direction === 'ascending' ? -1 : 1;
+          }
+          if (a[sortConfig.key] > b[sortConfig.key]) {
+            return sortConfig.direction === 'ascending' ? 1 : -1;
+          }
+          return 0;
+        });
+      }
+      return sortableItems;
+    }, [items, sortConfig]);  
+    const requestSort = key => {
+      let direction = 'ascending';
+      if (sortConfig && sortConfig.key === key && sortConfig.direction === 'ascending') {
+        direction = 'descending';
+      }
+      setSortConfig({ key, direction });
+    }  
+    return {items: sortedItems, requestSort, sortConfig };
+  };
+//-----------------------------------------
+  const { items, requestSort , sortConfig} = useSortableData(authData.newData);
+  const getClassNamesFor = (name) => {
+    if (!sortConfig) {
+      return;
+    }
+    return sortConfig.key === name ? sortConfig.direction : undefined;
+  };
+
+//-----------------------------------------
+
+
   return (
     <div className="window">
       <div className="top">
@@ -248,16 +291,23 @@ export default function AdminDashboard() {
                       Block
                     </th>
                     <th className="table-align-left" scope="col">
+                    <button  className={getClassNamesFor('employeeName')} type="button" onClick={() => requestSort('employeeName')}>
                       Name
+                    </button>
                     </th>
                     <th className="table-align-left" scope="col">
                       Email
                     </th>
                     <th className="table-align-left" scope="col">
-                      Location
+                    <button  className={getClassNamesFor('location')} type="button" onClick={() => requestSort('location')}>
+                    Location
+                    </button> 
                     </th>
                     <th className="table-align-left" scope="col">
-                      Bench_Aging
+                    <button  className={getClassNamesFor('benchPeriod')} type="button" onClick={() => requestSort('benchPeriod')}>
+                    Bench_Aging
+                    </button> 
+                      
                     </th>
                     <th className="table-align-left" scope="col">
                       Resume

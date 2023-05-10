@@ -21,6 +21,10 @@ function ViewReport(props) {
     authData.setShowSearchBar(true);
     navigate("/");
   }
+
+  function handleRefresh(){
+    window.location.reload(true);
+  }
  //console.log("locationAcess "+JSON.stringify(authData.locationAcess))
   const [curIndex, setCurrentIndex] = useState(-1);
 
@@ -87,7 +91,7 @@ function ViewReport(props) {
             <i className="fa-sharp fa-solid fa-arrow-left"></i> &nbsp;BACK
           </button>
           <h5>Representation of Business Units on the basis of Locations.</h5>
-          <button className="reload"  onClick={handleBackButton} >
+          <button className="reload"  onClick={handleRefresh} >
           <i class="fa-solid fa-rotate-right fa-lg"></i>
           </button>
         </div>

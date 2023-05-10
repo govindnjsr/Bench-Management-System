@@ -495,8 +495,12 @@
   background-color:#e6e8eb;
   border-radius: 30px;
   border: none;
-  
+}
 
+.button8{
+  border: none;
+  background-color: white;
+  font-weight: bold;
 }
 
 .button5 {
@@ -517,6 +521,25 @@
 }
 .button5:hover{
   opacity: 0.8;
+}
+
+thead button {
+  background-color: white;
+  border:none;
+  font-weight:bold;
+  font-size: inherit;
+}
+
+thead button.ascending::after {
+  content: '🡣';
+  display: inline-block;
+  margin-left: 1em;
+}
+
+thead button.descending::after {
+  content: '🡡';
+  display: inline-block;
+  margin-left: 1em;
 }
 
 
