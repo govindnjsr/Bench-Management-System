@@ -43,7 +43,7 @@ export default function AdminDashboard() {
         "http://localhost:2538/api/dto/get/filterd", authData.requestDto
       );
       authData.setNewData(allnewDto.data);
-      console.log("aaaaaaaaaaa"+authData.newData);
+      // console.log("aaaaaaaaaaa"+authData.newData);
 
       //count emp locatin wise 
       const countOfEachLoc = await axios.get(
@@ -88,9 +88,10 @@ export default function AdminDashboard() {
   useEffect(() => {   
     fetchApis();  
   }, [authData.dtoDetails, authData.post,authData.requestDto,
-      authData.Locations,authData.buSet,authData.statusSet]);
+      authData.Locations,authData.buSet,authData.statusSet,authData.appliedFilters,authData.file]);
 
   const allowData = (emp) => {
+    // console.log("emp "+JSON.stringify(emp))
     //----------Check for BU-----------------------------//
     let okBU = false;
     let buData=Array.from(authData.buSet);
@@ -98,14 +99,11 @@ export default function AdminDashboard() {
     //------------check for the location--------------------------//
     let okLocation = false;
     let locationData=Array.from(authData.Locations);
-    if(emp.location==1){ okLocation=locationData.includes("gurugram");}
-    if(emp.location==2){ okLocation=locationData.includes("bangalore");}
-    if(emp.location==3){ okLocation=locationData.includes("hyderabad");}
+    okLocation=locationData.includes(emp.location);
     //------Check for Blocked status ----////
     let okStatus = false;
     if(emp.blocked==true){okStatus=Array.from(authData.statusSet).includes("blocked");}
     else{okStatus=Array.from(authData.statusSet).includes("notblocked");}
-     // return okStatus;
     if (
       authData.checkFilter["location"] &&
       authData.checkFilter["status"] && authData.checkFilter["BU"]
@@ -134,9 +132,10 @@ export default function AdminDashboard() {
     return '';
 };
   //--------------------------------
-  // console.log("new data "+JSON.stringify(authData.newData))
+  console.log("new data "+JSON.stringify(authData.newData))
   // console.log("req dto "+JSON.stringify(authData.requestDto))
   console.log("applied Filters "+JSON.stringify(authData.appliedFilters))
+  console.log("Checked Filters "+JSON.stringify(authData.checkFilter))
   // console.log("Locationssss "+JSON.stringify(authData.Locations))
   console.log("LocationSet "+Array.from(authData.Locations));
   console.log("BUSet "+Array.from(authData.buSet));
@@ -147,7 +146,7 @@ export default function AdminDashboard() {
   //Sorting
   const useSortableData = (items, config = null) => {
     const [sortConfig, setSortConfig] = React.useState(config);
-    console.log("aaaaaaaaaaaa"+JSON.stringify(items));
+    // console.log("aaaaaaaaaaaa"+JSON.stringify(items));
     const sortedItems = React.useMemo(() => {
       let sortableItems = items;
       if (sortConfig !== null) {

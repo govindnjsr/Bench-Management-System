@@ -22,7 +22,7 @@ export default function SideBar() {
         .then((res) => {
           let tempData=[];
           res.data.forEach(element => {                
-               tempData.push(element.toLowerCase());
+               tempData.push(element);
           })
           setLocationList(tempData);
         });
@@ -53,19 +53,15 @@ export default function SideBar() {
     let True = true,
       False = false;
     if (checked) {
-      authData.setAppliedFilters({
-        ...authData.appliedFilters,
-        [e.target.name]: True,
-      });
       authData.setCheckFilter({
         ...authData.checkFilter,
         ["BU"]: authData.checkFilter["BU"] + 1,
       });
+      //set BU unit
+      let buTempSet=new Set(authData.buSet)
+      buTempSet.add(e.target.name)
+      authData.setBuSet(buTempSet)
     } else {
-      authData.setAppliedFilters({
-        ...authData.appliedFilters,
-        [e.target.name]: false,
-      });
       authData.setCheckFilter({
         ...authData.checkFilter,
         ["BU"]: authData.checkFilter["BU"] - 1,
@@ -75,41 +71,30 @@ export default function SideBar() {
   };
 
 
-  const [newSet,setNewSet]=useState(new Set([]));
+  // const [newSet,setNewSet]=useState(new Set([]));
   //Handle Location filters
   const handleLocationFilter = (e) => {
     const { value, checked } = e.target;
     let True = true,
       False = false;  
     if (checked) {    
-      authData.setAppliedFilters({
-        ...authData.appliedFilters,
-        [e.target.name]: True,
-      });
+      let locationTempSet=new Set(authData.Locations)
+      locationTempSet.add(e.target.name)
+      authData.setLocations(locationTempSet)
       authData.setCheckFilter({
         ...authData.checkFilter,
         ["location"]: authData.checkFilter["location"] + 1,
       });
-      let locationTempSet=new Set(authData.Locations)
-      locationTempSet.add(e.target.name)
-      authData.setLocations(locationTempSet)
       ///----
       // authData.setLocations(prv => new Set([...prv, e.target.name]));
       //----
-
     }
     else {
-      authData.setAppliedFilters({
-        ...authData.appliedFilters,
-        [e.target.name]: false,
-      });
       authData.setCheckFilter({
         ...authData.checkFilter,
         ["location"]: authData.checkFilter["location"] - 1,
       });
       authData.Locations.delete(e.target.name)
-
-
     }
   };
   //Handle Skills Filters
@@ -126,6 +111,9 @@ export default function SideBar() {
         ...authData.checkFilter,
         ["skill"]: authData.checkFilter["skill"] + 1,
       });
+      let skillsTempSet=new Set(authData.skillsSet)
+      skillsTempSet.add(e.target.name)
+      authData.setSkillsSet(skillsTempSet)
     }
     else {
       authData.setReqDto({
@@ -136,6 +124,7 @@ export default function SideBar() {
         ...authData.checkFilter,
         ["skill"]: authData.checkFilter["skill"] - 1,
       });
+      authData.skillsSet.delete(e.target.name)
      
 
     }
@@ -147,16 +136,10 @@ export default function SideBar() {
       False = false;
     if (checked) {
       if (e.target.name === "notblocked" || e.target.name === "blocked") {
-        authData.setAppliedFilters({
-          ...authData.appliedFilters,
-          [e.target.name]: True,
-        });
         authData.setCheckFilter({
           ...authData.checkFilter,
           ["status"]: authData.checkFilter["status"] + 1,
         });
-        
-
     }
     let statusTempSet=new Set(authData.statusSet)
         statusTempSet.add(e.target.name)
@@ -165,10 +148,6 @@ export default function SideBar() {
     }
     else {
       if (e.target.name === "notblocked" || e.target.name === "blocked") {
-        authData.setAppliedFilters({
-          ...authData.appliedFilters,
-          [e.target.name]: False,
-        });
         authData.setCheckFilter({
           ...authData.checkFilter,
           ["status"]: authData.checkFilter["status"] - 1,
@@ -258,7 +237,7 @@ export default function SideBar() {
                           name={item}
                           id={index}
                           value={true}
-                          checked={authData.appliedFilters.this}
+                          defaultChecked={Array.from(authData.buSet).includes(item)}
                           onChange={handleBUFilter.bind(this)}
                         />
                         <label className="form-check-label" htmlFor={index}>
@@ -277,6 +256,7 @@ export default function SideBar() {
                 <Accordion.Body>
                   <div className="filterByBusinessUnit">
                     {LocationList.map((item, index) => (
+                      authData.locationAcess[item] && 
                       <div className="form-check" key={index}>
                         <input
                           className="form-check-input"
@@ -284,7 +264,7 @@ export default function SideBar() {
                           name={item}
                           id={index}
                           value={true}
-                          checked={authData.appliedFilters.this}
+                          defaultChecked={Array.from(authData.Locations).includes(item)}
                           onChange={handleLocationFilter.bind(this)}
                         />
                         <label className="form-check-label" htmlFor={index}>
@@ -310,7 +290,7 @@ export default function SideBar() {
                           name={item}
                           id={index}
                           value={true}
-                          checked={authData.appliedFilters.this}
+                          defaultChecked={Array.from(authData.skillsSet).includes(item)}
                           onChange={handleSkillsFilter.bind(this)}
                         />
                         <label className="form-check-label" htmlFor={index}>
@@ -335,7 +315,7 @@ export default function SideBar() {
                       value={true}
                       onChange={handleStateFilters.bind(this)}
                       id="status-1"
-                      checked={authData.appliedFilters.notblocked}
+                      defaultChecked={Array.from(authData.statusSet).includes("notblocked")}
                     />
                     <label
                       className="form-check-label skillsLabel"
@@ -351,7 +331,7 @@ export default function SideBar() {
                       value={true}
                       onChange={handleStateFilters.bind(this)}
                       id="status-2"
-                      checked={authData.appliedFilters.blocked}
+                      checked={Array.from(authData.statusSet).includes("blocked")}
                     />
                     <label
                       className="form-check-label skillsLabel"

@@ -32,8 +32,7 @@ export default function AdminDashboard() {
  
   const fetchApis = async () => {
 
-    try {
-     
+    try {    
     
           //get manager Not Assigned Location
      const getNotAssignedLocations=await axios.get(`http://localhost:2538/api/manager/get/notassignedLocation/${authData.managerId}`).
@@ -116,12 +115,11 @@ export default function AdminDashboard() {
   }
  useEffect(() => {
     fetchApis();  
-  }, [authData.appliedFilters, authData.dtoDetails, authData.post, authData.requestDto,authData.managerId]);
+  }, [authData.file,authData.appliedFilters, authData.dtoDetails, authData.post, authData.requestDto,authData.managerId]);
 
   console.log("manager ID "+authData.managerId)
   const allowData = (emp) => {
     let Keys = Object.keys(authData.appliedFilters);
-
     //----------Check for BU-----------------------------//
     let okBU = false;
     let buData=Array.from(authData.buSet);
@@ -129,9 +127,8 @@ export default function AdminDashboard() {
     //------------check for the location--------------------------//
     let okLocation = false;
     let locationData=Array.from(authData.Locations);
-    if(emp.location==1){ okLocation=locationData.includes("gurugram");}
-    if(emp.location==2){ okLocation=locationData.includes("bangalore");}
-    if(emp.location==3){ okLocation=locationData.includes("hyderabad");}
+    okLocation=locationData.includes(emp.location);
+   
     //------Check for Blocked status ----////
     let okStatus = false;
     if(emp.blocked==true){okStatus=Array.from(authData.statusSet).includes("blocked");}
@@ -155,9 +152,9 @@ export default function AdminDashboard() {
     else return true;
   };
   const checkAssignedLocation=(emp)=>{
-        if(emp.location==1 && authData.locationAcess["Gurugram"])return true;          
-        else if(emp.location==2 && authData.locationAcess["Bangalore"])return true;
-        else if(emp.location==3 && authData.locationAcess["Hyderabad"])return true;
+        if(emp.location=="Gurugram" && authData.locationAcess["Gurugram"])return true;          
+        else if(emp.location=="Bangalore" && authData.locationAcess["Bangalore"])return true;
+        else if(emp.location=="Hyderabad" && authData.locationAcess["Hyderabad"])return true;
         return false;
   }
   const [file, setFile] = useState([]);
@@ -167,11 +164,12 @@ export default function AdminDashboard() {
     setFile([...file, e.target.files[0]]);
 
   }
-
+ 
   const getColor = (color) => {
     if (color) return 'red';
     return '';
 };
+console.log("new data "+JSON.stringify(authData.newData))
   return (
     <div className="window">
       <div className="top">
@@ -239,13 +237,7 @@ export default function AdminDashboard() {
                             {emp.email}
                           </td>
                           <td className="table-align-left">
-                            {emp.location == 1
-                              ? "Gurugram"
-                              : emp.location == 2
-                                ? "Bangalore"
-                                : emp.location == 3
-                                  ? "Hyderabad"
-                                  : "none"}
+                            {emp.location }
                           </td>
                           <td className="table-align-left">
                             {emp.benchStatus == 0
