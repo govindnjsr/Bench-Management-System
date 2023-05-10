@@ -5,6 +5,7 @@ import Form from 'react-bootstrap/Form';
 import { json } from 'react-router-dom';
 import axios from 'axios';
 import AuthContext from './AuthContext';
+import Accordion from "react-bootstrap/Accordion";
 function BlockEmployee(props) {
   const authData = useContext(AuthContext);
   const [show, setShow] = useState(false);
@@ -17,6 +18,7 @@ function BlockEmployee(props) {
     "client": "",
     "date": null,
   });
+  const [newIntData, setNewIntData] = useState();
   const[empDetails,setEmpDetails]=useState(null);
   const handleCloseBlocked = (e) => {
     setShow(false);
@@ -87,6 +89,12 @@ function BlockEmployee(props) {
       //  console.log("in get"+JSON.stringify(empDetails));
     })
      .then(setShow(false))
+
+     await axios.get(`http://localhost:2538/api/empdetails/interview/get/${id}`)
+    .then((response)=>{
+       setNewIntData(response.data);
+      //  console.log("in get"+JSON.stringify(empDetails));
+    })
   }
   const handleChangeValue = (e) => {
     setIntDetails({ ...intDetails, [e.target.name]: e.target.value });
@@ -182,6 +190,46 @@ function BlockEmployee(props) {
                 <Form.Control type="date" min = {todayDate()} placeholder="" name="date" onChange={handleChangeValue.bind(this)} />
               </Form.Group>
             </Form>
+            <Accordion>
+            <Accordion.Item eventKey="3">
+                <Accordion.Header><div className="pfilter">Previous Interview Details</div></Accordion.Header>
+                <Accordion.Body>
+                <table className="table">
+                <thead className="thread1">
+                  <tr className="tableHeader">
+                    <th className="table-align-left" scope="col">
+                      Client
+                    </th>
+                    <th className="table-align-left" scope="col">
+                      Date
+                    </th>
+                    <th className="table-align-left" scope="col">
+                      Result
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="thread1">
+                { newIntData
+                    &&
+                    newIntData.map((emp) =>
+                        <tr>                
+                          <td
+                            className="pointer-to-profile" title="Click on Name to view profile" scope="row" >
+                            {emp.client}
+                          </td>
+                          <td className="table-align-left">
+                            {emp.date}
+                          </td>
+                          <td className="table-align-left">
+                            {emp.result==true ? "Accepted" : "Rejected"}
+                          </td>
+                        </tr>
+)}
+                </tbody>
+              </table>
+                </Accordion.Body>
+              </Accordion.Item>
+              </Accordion>
           </Modal.Body>
           <Modal.Footer>
             <button className="button3" variant="secondary" onClick={handleCloseBlocked}>

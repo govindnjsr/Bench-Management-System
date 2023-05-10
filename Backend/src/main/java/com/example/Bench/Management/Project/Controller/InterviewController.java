@@ -32,7 +32,7 @@ public class InterviewController {
         return interviewService.updateResult(employeeId,intDetails);
     }
     @GetMapping("/interview/get/{employeeId}")
-    public IntDetails getDataByID(@PathVariable Long employeeId){
+    public List<IntDetails> getDataByID(@PathVariable Long employeeId){
         return interviewService.getDataById(employeeId);
     }
 

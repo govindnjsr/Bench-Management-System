@@ -11,7 +11,7 @@ public interface InterviewService {
 
     public String updateResult(Long employeeId, IntDetails intDetails);
 
-    public IntDetails getDataById(Long employeeId);
+    public List<IntDetails> getDataById(Long employeeId);
 
     public String updateResultBySrNo(Long srNo, IntDetails intDetails);
 }

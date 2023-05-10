@@ -6,6 +6,7 @@ import com.example.Bench.Management.Project.Service.InterviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -34,8 +35,8 @@ public class InterviewServiceImpl implements InterviewService {
     }
 
     @Override
-    public IntDetails getDataById(Long employeeId) {
-        return interviewRepo.findById(employeeId).get();
+    public List<IntDetails> getDataById(Long employeeId) {
+        return interviewRepo.findAllByEmployeeId(employeeId);
     }
 
     @Override
