@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
@@ -7,14 +7,14 @@ import AuthContext from './AuthContext';
 function UploadFile(props) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-  const [file, setFile] = useState([]);
+  const handleShow = () => setShow(true); 
   const inputFile = useRef(null);
+  const authData = useContext(AuthContext);
 
 
   const handleChange = (e) => {
    // console.log("Resume"+props.resume)
-    setFile([...file, e.target.files[0]]);
+   authData.setFile([...authData.file, e.target.files[0]]);
   };
 
 
@@ -22,7 +22,7 @@ function UploadFile(props) {
     try {
       console.log("i am in try");
         const formData = new FormData();
-        formData.append("file", file[0]);
+        formData.append("file", authData.file[0]);
         fetch(`http://localhost:2538/api/empdetails/upload-file/${id}`,{
           method: 'PUT',
           body: formData
