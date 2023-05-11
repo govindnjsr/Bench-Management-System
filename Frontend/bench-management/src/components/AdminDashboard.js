@@ -64,7 +64,8 @@ export default function AdminDashboard() {
         "http://localhost:2538/api/empdetails/get/hyderabadBU"
       ).then((res)=>{
             authData.setHyderabadBU(res.data);       
-      })    
+      })   
+      authData.setBlockStatus(0)  
     }
     catch {
       console.log();
@@ -74,7 +75,7 @@ export default function AdminDashboard() {
   useEffect(() => {   
     fetchApis();  
   }, [authData.post,authData.requestDto,
-      authData.Locations,authData.buSet,authData.statusSet,authData.file]);
+      authData.Locations,authData.buSet,authData.statusSet,authData.file,authData.blockStatus]);
 
   const allowData = (emp) => {
     // console.log("emp "+JSON.stringify(emp))

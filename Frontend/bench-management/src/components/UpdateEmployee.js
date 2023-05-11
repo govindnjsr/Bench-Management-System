@@ -25,13 +25,8 @@ function UpdateEmployee(props) {
             "springboot": false
         }
     )
-   
-
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
-    
-
     const showDetail = async (id) => {
         const fetchedData = await axios.get(`http://localhost:2538/api/empdetails/get/${id}`);
         fetchedData.data.benchStatus=false;
