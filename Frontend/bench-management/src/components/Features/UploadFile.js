@@ -14,6 +14,7 @@ function UploadFile(props) {
 
   const handleChange = (e) => {
    // console.log("Resume"+props.resume)
+
    authData.setFile([...authData.file, e.target.files[0]]);
   };
 
@@ -36,7 +37,6 @@ function UploadFile(props) {
     }
 }
 
-
   return (
     <>
       <button className="button7" style={{backgroundColor: props.resume?'#facfb9' : '#e6e8eb'}} onClick={handleShow}>
@@ -58,7 +58,8 @@ function UploadFile(props) {
         </Modal.Body>
         <Modal.Footer>
         <button className='button3' onClick={handleClose}>Cancel</button> &nbsp;
-           <button className='button3' form="update" onClick={() => { saveData(props.id); handleClose(); }} >Upload</button>
+           <button className='button3' form="update" onClick={() => { saveData(props.id); handleClose(); }} 
+           disabled = {authData.file.length === 0 ? true : false}>Upload</button>
         </Modal.Footer>
       </Modal>
     </>

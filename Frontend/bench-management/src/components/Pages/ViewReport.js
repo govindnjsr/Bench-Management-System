@@ -24,8 +24,6 @@ function ViewReport(props) {
   }
  //console.log("locationAcess "+JSON.stringify(authData.locationAcess))
   const [curIndex, setCurrentIndex] = useState(-1);
-
-  const loactionCounts = [];
   const [mydata, setData] = useState({
     labels: authData.pieChartLabels,
     datasets: [

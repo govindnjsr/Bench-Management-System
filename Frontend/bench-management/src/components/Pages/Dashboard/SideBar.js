@@ -122,8 +122,6 @@ export default function SideBar() {
         ["skill"]: authData.checkFilter["skill"] - 1,
       });
       authData.skillsSet.delete(e.target.name)
-     
-
     }
   };
   //Handle State Filters
@@ -174,7 +172,7 @@ export default function SideBar() {
               type="range"
               className="form-range experienceClass"
               min="1"
-              max="10"
+              max="11"
               defaultValue="0"
               onChange={(e) => {
                 // authData.setExperienceValue(e.target.value);
@@ -202,7 +200,7 @@ export default function SideBar() {
               type="range"
               className="form-range benchTimeSliderClass"
               min="1"
-              max="12"
+              max="13"
               defaultValue="0"
               onChange={(e) => {
                 // authData.setBenchTimeValue(e.target.value);
