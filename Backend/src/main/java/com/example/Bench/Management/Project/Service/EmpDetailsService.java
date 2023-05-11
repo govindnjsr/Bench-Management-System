@@ -32,4 +32,5 @@ public interface EmpDetailsService {
     public List<String> getLocation();
 
     public String updateBenchById(Long employeeId);
+
 }

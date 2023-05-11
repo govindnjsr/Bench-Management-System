@@ -3,6 +3,7 @@ package com.example.Bench.Management.Project.Controller;
 import com.example.Bench.Management.Project.Model.IntDetails;
 import com.example.Bench.Management.Project.Service.InterviewService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,11 +36,12 @@ public class InterviewController {
     public List<IntDetails> getDataByID(@PathVariable Long employeeId){
         return interviewService.getDataById(employeeId);
     }
-
     @PutMapping("/interview/updateresultbysrno/{srNo}")
     public String updateResultBySrNo(@PathVariable Long srNo,@RequestBody IntDetails intDetails){
         return interviewService.updateResultBySrNo(srNo,intDetails);
     }
-
-
+    @GetMapping("/interview/getLastInterview/{employeeId}")
+    public IntDetails getIntBySrNo(@PathVariable Long employeeId){
+        return  interviewService.getLastInterview(employeeId);
+    }
 }

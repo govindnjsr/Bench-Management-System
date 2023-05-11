@@ -15,6 +15,10 @@ public interface InterviewRepo extends JpaRepository<IntDetails,Long> {
 
     @Query(value = "select * from bench.int_details where sr_no=:srNo", nativeQuery = true)
     IntDetails getBySrNo(@Param("srNo") Long srNo);
-    @Query(value = "select * from bench.int_details where id =:employeeId",nativeQuery = true)
+    @Query(value = "select * from bench.int_details where id =:employeeId order by sr_no limit 5",nativeQuery = true)
     List<IntDetails> findAllByEmployeeId(Long employeeId);
+    @Query(value = "select * from bench.int_details where sr_no=:srNo",nativeQuery = true)
+    IntDetails getIntBySrNo(Long srNo);
+    @Query(value = "select * from int_details where id=:employeeId order by sr_no desc limit 1",nativeQuery = true)
+    IntDetails getLastInterview(Long employeeId);
 }

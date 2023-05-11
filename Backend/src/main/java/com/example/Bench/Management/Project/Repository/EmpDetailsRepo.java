@@ -47,6 +47,7 @@ public interface EmpDetailsRepo extends JpaRepository<EmpDetails,Long> {
     public List<String> getBU();
     @Query(value="select distinct emp_location from emp_details order by emp_location", nativeQuery = true)
     public  List<String> getLocation();
+
 //    @Modifying
 //    @Query(value="update bench.emp_details set resume =:originalFilename where id =:employeeId",nativeQuery = true)
 //    public void saveResume(@Param("originalFilename") String originalFilename,@Param("employeeId") Long employeeId);

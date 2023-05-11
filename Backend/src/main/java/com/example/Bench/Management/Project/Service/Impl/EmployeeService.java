@@ -180,7 +180,7 @@ public class EmployeeService implements EmpDetailsService {
     @Override
     public String updateOnCondition(Long employeeId, IntDetails intDetails) {
         EmpDetails empDetails1=empDetailsRepo.findById(employeeId).get();
-
+        empDetails1.setBlocked(false);
         if(intDetails.getResult()==true){
             empDetails1.setBenchStatus(false);
             empDetailsRepo.save(empDetails1);
@@ -205,5 +205,6 @@ public class EmployeeService implements EmpDetailsService {
         empDetailsRepo.save(empDetails);
         return "updated";
     }
+
 
 }

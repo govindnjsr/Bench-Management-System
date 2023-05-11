@@ -29,9 +29,7 @@ function BlockEmployee(props) {
     e.preventDefault();
     const srNo=empDetails.onGoing;
     setEmpDetails({...empDetails,blocked:false});
-    // console.log(empDetails);
     try{
-      await axios.put(`http://localhost:2538/api/empdetails/blockedstatus/${id}`);
       await axios.put(`http://localhost:2538/api/empdetails/interview/updateresultbysrno/${srNo}`,intDetails)
       await axios.put(`http://localhost:2538/api/empdetails/updateoncondition/${id}`,intDetails);
       authData.setAppliedFilters({
@@ -45,13 +43,10 @@ function BlockEmployee(props) {
     catch{
     }
   }
-// console.log(intDetails);
   const handleApplyBlocked = async (e, id) => {
     try {
         await axios.post('http://localhost:2538/api/empdetails/interview/save', intDetails)
         .then((response)=>{
-          // authData.setIsBlocked(true);
-          // console.log("Data"+JSON.stringify(response.data.srNo));
           axios.put(`http://localhost:2538/api/empdetails/ongoing/${response.data.id}/${response.data.srNo}`)
           // axios returns API response body in .data
           authData.setAppliedFilters({
@@ -90,6 +85,11 @@ function BlockEmployee(props) {
     })
      .then(setShow(false))
 
+     await axios.get(`http://localhost:2538/api/empdetails/interview/getLastInterview/${id}`)
+    .then((response)=>{
+      setIntDetails(response.data);
+      //  console.log("in get"+JSON.stringify(empDetails));
+    })
      await axios.get(`http://localhost:2538/api/empdetails/interview/get/${id}`)
     .then((response)=>{
        setNewIntData(response.data);
