@@ -17,7 +17,6 @@ export default function Login() {
     authData.setGoogleData(userObject);
 
   }
-
   useEffect(() => {
     loginApiData && loginApiData.forEach(element => {
       if (!authData.loopEntry) authData.setLoopEntry(true);

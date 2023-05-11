@@ -98,7 +98,7 @@ public class ManagerServiceImp implements ManagerService {
     }
 
     @Override
-    public List<Long> getAssignedLocationOfAManager(Long managerId) {
+    public List<Long> getNotAssignedLocationOfAManager(Long managerId) {
 
         ManagerDetails managerDetails=managerRepo.findById(managerId).get();
         List<Long>notAssigned=new ArrayList<>();

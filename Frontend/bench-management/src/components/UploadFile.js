@@ -26,7 +26,7 @@ function UploadFile(props) {
         fetch(`http://localhost:2538/api/empdetails/upload-file/${id}`,{
           method: 'PUT',
           body: formData
-      }).then(
+      }).then( 
          alert("File uploaded successfully."),
          authData.setFile([])
          ).catch(err=>console.log(err));

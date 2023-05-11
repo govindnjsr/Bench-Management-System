@@ -29,7 +29,7 @@ function App() {
 
   return (
     <div className="App">
-      <AuthState>
+      <AuthState >
         <RouterProvider router={router} />
       </AuthState>
 

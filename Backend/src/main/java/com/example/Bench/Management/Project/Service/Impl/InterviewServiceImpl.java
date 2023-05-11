@@ -1,8 +1,6 @@
 package com.example.Bench.Management.Project.Service.Impl;
 
-import com.example.Bench.Management.Project.Model.EmpDetails;
 import com.example.Bench.Management.Project.Model.IntDetails;
-import com.example.Bench.Management.Project.Repository.EmpDetailsRepo;
 import com.example.Bench.Management.Project.Repository.InterviewRepo;
 import com.example.Bench.Management.Project.Service.InterviewService;
 import org.springframework.beans.factory.annotation.Autowired;

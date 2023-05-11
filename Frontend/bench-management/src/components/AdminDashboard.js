@@ -25,6 +25,9 @@ export default function AdminDashboard() {
     navigate('/viewReport');
   }
  
+  //-------------------------
+ 
+  //------------------------
   const fetchApis = async () => {
 
     try {
@@ -40,7 +43,7 @@ export default function AdminDashboard() {
         "http://localhost:2538/api/dto/get/filterd", authData.requestDto
       );
       authData.setNewData(allnewDto.data);
-      console.log("aaaaaaaaaaa"+authData.newData);
+      // console.log("aaaaaaaaaaa"+authData.newData);
 
       //count emp locatin wise 
       const countOfEachLoc = await axios.get(
@@ -84,101 +87,23 @@ export default function AdminDashboard() {
 
   useEffect(() => {   
     fetchApis();  
-  }, [authData.dtoDetails, authData.post,authData.requestDto,authData.appliedFilters,authData.file]);
+  }, [authData.dtoDetails, authData.post,authData.requestDto,
+      authData.Locations,authData.buSet,authData.statusSet,authData.appliedFilters,authData.file]);
 
   const allowData = (emp) => {
-    let Keys = Object.keys(authData.appliedFilters);
-
+    // console.log("emp "+JSON.stringify(emp))
     //----------Check for BU-----------------------------//
     let okBU = false;
-    if (authData.checkFilter["BU"]) {
-      Keys.forEach((filterKey) => {
-        if (filterKey === "BFSIFinancialServices" && authData.appliedFilters[filterKey] === true &&
-          emp.businessUnit === "BFSIFinancialServices")
-          okBU = true;
-
-        if (filterKey === "MediaTelecom" && authData.appliedFilters[filterKey] === true &&
-          emp.businessUnit === "MediaTelecom")
-          okBU = true;
-
-        if (filterKey === "Logistics" && authData.appliedFilters[filterKey] === true &&
-          emp.businessUnit === "Logistics")
-          okBU = true;
-
-        if (filterKey === "Technology" && authData.appliedFilters[filterKey] === true &&
-          emp.businessUnit === "Technology")
-          okBU = true;
-
-        if (filterKey === "Healthcare" && authData.appliedFilters[filterKey] === true &&
-          emp.businessUnit === "Healthcare")
-          okBU = true;
-
-        if (filterKey === "ConsultingServices" && authData.appliedFilters[filterKey] === true &&
-          emp.businessUnit === "ConsultingServices")
-          okBU = true;
-
-        if (filterKey === "BFSIInsurance" && authData.appliedFilters[filterKey] === true &&
-          emp.businessUnit === "BFSIInsurance")
-          okBU = true;
-
-      })
-    }
-
+    let buData=Array.from(authData.buSet);
+    okBU=buData.includes(emp.businessUnit);
     //------------check for the location--------------------------//
     let okLocation = false;
-    if (authData.checkFilter["location"]) {
-      //iterate over the filters..
-      Keys.forEach((filterKey) => {
-        if (
-          filterKey === "gurugram" &&
-          authData.appliedFilters[filterKey] === true &&
-          emp.location == "Gurugram"
-        ) {
-          okLocation = true;
-        }
-
-        if (
-          filterKey === "bangalore" &&
-          authData.appliedFilters[filterKey] === true &&
-          emp.location == "Bangalore"
-        ) {
-          okLocation = true;
-        }
-        if (
-          filterKey === "hyderabad" &&
-          authData.appliedFilters[filterKey] === true &&
-          emp.location == "Hyderabad"
-        ) {
-          okLocation = true;
-        }
-      });
-    }
-
+    let locationData=Array.from(authData.Locations);
+    okLocation=locationData.includes(emp.location);
     //------Check for Blocked status ----////
     let okStatus = false;
-    // for Active status
-    if (authData.checkFilter["status"]) {
-      Keys.forEach((filterKey) => {
-        if (
-          filterKey === "blocked" &&
-          authData.appliedFilters[filterKey] === true &&
-          emp.blocked == true
-        ) {
-          okStatus = true;
-        }
-
-        if (
-          filterKey === "notblocked" &&
-          authData.appliedFilters[filterKey] === true &&
-          emp.blocked == false
-        ) {
-          okStatus = true;
-        }
-        
-      });
-    }
-
-    // return okStatus;
+    if(emp.blocked==true){okStatus=Array.from(authData.statusSet).includes("blocked");}
+    else{okStatus=Array.from(authData.statusSet).includes("notblocked");}
     if (
       authData.checkFilter["location"] &&
       authData.checkFilter["status"] && authData.checkFilter["BU"]
@@ -196,36 +121,32 @@ export default function AdminDashboard() {
     else return true;
   };
 
-
-  // console.log(
-  //   "Render..  " +
-  //   JSON.stringify(authData.checkFilter) +
-  //   " " +
-  //   authData.experienceValue
-  // );
-
   const [file, setFile] = useState([]);
-  // const inputFile = useRef(null);
-
+  const inputFile = useRef(null);
   const handleChange = e => {
     setFile([...file, e.target.files[0]]);
-
   }
-
   //--------------------------------
   const getColor = (color) => {
     if (color) return 'red';
     return '';
 };
   //--------------------------------
-  // console.log("new data "+JSON.stringify(authData.newData))
+  console.log("new data "+JSON.stringify(authData.newData))
+  // console.log("req dto "+JSON.stringify(authData.requestDto))
+  console.log("applied Filters "+JSON.stringify(authData.appliedFilters))
+  console.log("Checked Filters "+JSON.stringify(authData.checkFilter))
+  // console.log("Locationssss "+JSON.stringify(authData.Locations))
+  console.log("LocationSet "+Array.from(authData.Locations));
+  console.log("BUSet "+Array.from(authData.buSet));
+  console.log("StatusSet "+Array.from(authData.statusSet));
  // console.log("req dto "+JSON.stringify(authData.requestDto))
 
   //--------------------------------
   //Sorting
   const useSortableData = (items, config = null) => {
     const [sortConfig, setSortConfig] = React.useState(config);
-    console.log("aaaaaaaaaaaa"+JSON.stringify(items));
+    // console.log("aaaaaaaaaaaa"+JSON.stringify(items));
     const sortedItems = React.useMemo(() => {
       let sortableItems = items;
       if (sortConfig !== null) {

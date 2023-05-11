@@ -32,8 +32,7 @@ export default function AdminDashboard() {
  
   const fetchApis = async () => {
 
-    try {
-     
+    try {    
     
           //get manager Not Assigned Location
      const getNotAssignedLocations=await axios.get(`http://localhost:2538/api/manager/get/notassignedLocation/${authData.managerId}`).
@@ -116,98 +115,25 @@ export default function AdminDashboard() {
   }
  useEffect(() => {
     fetchApis();  
-  }, [authData.appliedFilters, authData.dtoDetails, authData.post, authData.requestDto,authData.managerId]);
+  }, [authData.file,authData.appliedFilters, authData.dtoDetails, authData.post, authData.requestDto,authData.managerId]);
 
   console.log("manager ID "+authData.managerId)
   const allowData = (emp) => {
     let Keys = Object.keys(authData.appliedFilters);
-
     //----------Check for BU-----------------------------//
     let okBU = false;
-    if (authData.checkFilter["BU"]) {
-      Keys.forEach((filterKey) => {
-        if (filterKey === "BFSIFinancialServices" && authData.appliedFilters[filterKey] === true &&
-          emp.businessUnit === "BFSIFinancialServices")
-          okBU = true;
-
-        if (filterKey === "MediaTelecom" && authData.appliedFilters[filterKey] === true &&
-          emp.businessUnit === "MediaTelecom")
-          okBU = true;
-
-        if (filterKey === "Logistics" && authData.appliedFilters[filterKey] === true &&
-          emp.businessUnit === "Logistics")
-          okBU = true;
-
-        if (filterKey === "Technology" && authData.appliedFilters[filterKey] === true &&
-          emp.businessUnit === "Technology")
-          okBU = true;
-
-        if (filterKey === "Healthcare" && authData.appliedFilters[filterKey] === true &&
-          emp.businessUnit === "Healthcare")
-          okBU = true;
-
-        if (filterKey === "ConsultingServices" && authData.appliedFilters[filterKey] === true &&
-          emp.businessUnit === "ConsultingServices")
-          okBU = true;
-
-        if (filterKey === "BFSIInsurance" && authData.appliedFilters[filterKey] === true &&
-          emp.businessUnit === "BFSIInsurance")
-          okBU = true;
-
-      })
-    }
-
+    let buData=Array.from(authData.buSet);
+    okBU=buData.includes(emp.businessUnit);
     //------------check for the location--------------------------//
     let okLocation = false;
-    if (authData.checkFilter["location"]) {
-      //iterate over the filters..
-      Keys.forEach((filterKey) => {
-        if (
-          filterKey === "gurugram" &&
-          authData.appliedFilters[filterKey] === true &&
-          emp.location == 1
-        ) {
-          okLocation = true;
-        }
-
-        if (
-          filterKey === "bangalore" &&
-          authData.appliedFilters[filterKey] === true &&
-          emp.location == 2
-        ) {
-          okLocation = true;
-        }
-        if (
-          filterKey === "hyderabad" &&
-          authData.appliedFilters[filterKey] === true &&
-          emp.location == 3
-        ) {
-          okLocation = true;
-        }
-      });
-    }
+    let locationData=Array.from(authData.Locations);
+    okLocation=locationData.includes(emp.location);
+   
     //------Check for Blocked status ----////
     let okStatus = false;
-    // for Active status
-    if (authData.checkFilter["status"]) {
-      Keys.forEach((filterKey) => {
-        if (
-          filterKey === "blocked" &&
-          authData.appliedFilters[filterKey] === true &&
-          emp.blocked == true
-        ) {
-          okStatus = true;
-        }
-
-        if (
-          filterKey === "notblocked" &&
-          authData.appliedFilters[filterKey] === true &&
-          emp.blocked == false
-        ) {
-          okStatus = true;
-        }
-      });
-    }
+    if(emp.blocked==true){okStatus=Array.from(authData.statusSet).includes("blocked");}
+    else{okStatus=Array.from(authData.statusSet).includes("notblocked");}
+  
     // return okStatus;
     if (
       authData.checkFilter["location"] &&
@@ -226,9 +152,9 @@ export default function AdminDashboard() {
     else return true;
   };
   const checkAssignedLocation=(emp)=>{
-        if(emp.location==1 && authData.locationAcess["Gurugram"])return true;          
-        else if(emp.location==2 && authData.locationAcess["Bangalore"])return true;
-        else if(emp.location==3 && authData.locationAcess["Hyderabad"])return true;
+        if(emp.location=="Gurugram" && authData.locationAcess["Gurugram"])return true;          
+        else if(emp.location=="Bangalore" && authData.locationAcess["Bangalore"])return true;
+        else if(emp.location=="Hyderabad" && authData.locationAcess["Hyderabad"])return true;
         return false;
   }
   const [file, setFile] = useState([]);
@@ -238,11 +164,12 @@ export default function AdminDashboard() {
     setFile([...file, e.target.files[0]]);
 
   }
-
+ 
   const getColor = (color) => {
     if (color) return 'red';
     return '';
 };
+console.log("new data "+JSON.stringify(authData.newData))
   return (
     <div className="window">
       <div className="top">
@@ -310,13 +237,7 @@ export default function AdminDashboard() {
                             {emp.email}
                           </td>
                           <td className="table-align-left">
-                            {emp.location == 1
-                              ? "Gurugram"
-                              : emp.location == 2
-                                ? "Bangalore"
-                                : emp.location == 3
-                                  ? "Hyderabad"
-                                  : "none"}
+                            {emp.location }
                           </td>
                           <td className="table-align-left">
                             {emp.benchStatus == 0
@@ -325,7 +246,7 @@ export default function AdminDashboard() {
                           </td>
                           {/* <td className="table-align-left"><UpdateEmployee id = {emp.employeeId}/></td> */}
                           <td className="table-align-left">
-                            <UploadFile id={emp.employeeId} />
+                          <UploadFile id={emp.employeeId} resume={emp.resume}/>&nbsp;&nbsp;
                             <DownloadFile id={emp.employeeId} name={emp.employeeName} />
                           </td>
 
