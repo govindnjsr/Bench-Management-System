@@ -1,26 +1,16 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Login from './components/Login';
+import Login from './components/Pages/Home/Login.js';
 import {
   createBrowserRouter,
   RouterProvider,
 } from 'react-router-dom';
-import AuthState from './components/AuthState';
-import ViewEmployee from './components/ViewEmployee';
-import { useContext } from 'react';
-import AuthContext from './components/AuthContext';
-import AdminDashboard from './components/AdminDashboard';
-import ManagerDashboard from './components/ManagerDashboard';
-import { ToastContainer, toast } from 'react-toastify';
+import AuthState from './components/Global/AuthState.js';
+import ViewEmployee from './components/Pages/ViewEmployee.js';
 import 'react-toastify/dist/ReactToastify.css';
-import ViewReport from './components/ViewReport';
-
-
+import ViewReport from './components/Pages/ViewReport.js';
 
 function App() {
-
-  const authData = useContext(AuthContext);
-  
   const router = createBrowserRouter([
     { path: "/", element: <Login/> },
     { path: "/viewEmployee", element: <ViewEmployee /> },
