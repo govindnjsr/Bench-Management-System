@@ -246,13 +246,7 @@ export default function AdminDashboard() {
                             {emp.email}
                           </td>
                           <td className="table-align-left">
-                            {emp.location == "Gurugram"
-                              ? "Gurugram"
-                              : emp.location == "Bangalore"
-                                ? "Bangalore"
-                                : emp.location == "Hyderabad"
-                                  ? "Hyderabad"
-                                  : "none"}
+                            {emp.location}
                           </td>
                           <td className="table-align-left">
                             {emp.benchStatus == 0
