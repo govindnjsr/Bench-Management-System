@@ -28,6 +28,10 @@ export default function AdminDashboard() {
  
     navigate('/viewReport');
   }
+
+  function handleRefresh() {
+    window.location.reload(true);
+  }
   
  
   const fetchApis = async () => {
@@ -222,10 +226,15 @@ const getClassNamesFor = (name) => {
         <div className="bottom-right">
           <div className="actions-manager">
             <p className="employees">EMPLOYEES</p>
+            <div className='buttons'>
             <button className="button2" onClick={handleReport}>
               <i className="fa-solid fa-chart-simple"></i> &nbsp;
               VIEW REPORT
             </button>
+            <button className="reload"  onClick={handleRefresh} >
+          <i class="fa-solid fa-rotate-right fa-lg"></i>
+          </button>
+          </div>
             {/* </div> */}
           </div>
           <div className="table">

@@ -403,7 +403,7 @@
   background-color: #01070d;
   display: flex;
   flex-direction: row;
-  gap: 55%;
+  gap: 50%;
   padding: 0.3%;
   width: 82.8%;
   position: fixed;
@@ -415,14 +415,14 @@
   background-color: #01070d;
   display: flex;
   flex-direction: row;
-  gap: 72%;
+  gap: 68%;
   padding: 0.3%;
   width: 82.8%;
   position: fixed;
 }
 
 .buttons {
-  height: 2px;
+  height: 7%;
   display: flex;
   flex-direction: row;
   gap: 4%;
@@ -547,7 +547,7 @@ thead button.descending::after {
 
 .button2 {
   height: 5vh;
-  width: 14vw;
+  width: 15vw;
   background-color: white;
   border: none;
   color: rgb(24, 23, 23);
@@ -693,11 +693,18 @@ thead button.descending::after {
   margin-top: 4.8%;
   padding: 0% 0% 0% 0%;
 }
+
+.h5heading{
+  padding-right: 9.5%;
+}
 .reload{
-  margin-left: 9%;
+  height: 5vh;
+  width: 2vw;
+  margin-left: 0%;
   background-color:#01070d;
   color: white;
-  border: none;
+  border: 3px;
+  padding-left:0;
 }
 
 .representations{
