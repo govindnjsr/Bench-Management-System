@@ -17,7 +17,7 @@ public interface EmpDetailsService {
      public EmpDetails getEmployeeById(Long employeeId);
        public List<Dto>getAllFilteredDto(RequestDto requestDto);
 
- public void saveResume(String originalFilename, Long employeeId);
+    public void saveResume(String originalFilename, Long employeeId);
       public List<Map<Long,Long>>getCountOfEachLocation();
       public List<Integer> getAllGurugramBU();
  public List<Integer>getAllBangaloreBU();
@@ -30,4 +30,6 @@ public interface EmpDetailsService {
     public  List<String> getBU();
 
     public List<String> getLocation();
+
+    public String updateBenchById(Long employeeId);
 }

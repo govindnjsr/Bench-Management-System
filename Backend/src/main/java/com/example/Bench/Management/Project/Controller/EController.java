@@ -133,6 +133,9 @@ public class EController {
 
     @GetMapping("/get/Location")
     public List<String> getLocation(){return empDetailsService.getLocation();}
-
+    @PutMapping("/update/{employeeId}")
+    public String updateBenchById(@PathVariable Long employeeId){
+            return empDetailsService.updateBenchById(employeeId);
+    }
 
 }

@@ -198,4 +198,12 @@ public class EmployeeService implements EmpDetailsService {
         return empDetailsRepo.getLocation();
     }
 
+    @Override
+    public String updateBenchById(Long employeeId) {
+        EmpDetails empDetails = empDetailsRepo.findById(employeeId).get();
+        empDetails.setBenchStatus(false);
+        empDetailsRepo.save(empDetails);
+        return "updated";
+    }
+
 }
