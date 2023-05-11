@@ -119,7 +119,7 @@ export default function AdminDashboard() {
 
   console.log("manager ID "+authData.managerId)
   const allowData = (emp) => {
-    let Keys = Object.keys(authData.appliedFilters);
+  
     //----------Check for BU-----------------------------//
     let okBU = false;
     let buData=Array.from(authData.buSet);

@@ -24,25 +24,13 @@ export default function AdminDashboard() {
     authData.setShowSearchBar(false);
     navigate('/viewReport');
   }
- 
-  //-------------------------
- 
-  //------------------------
   const fetchApis = async () => {
+    try {         
 
-    try {
-      //assign default location acess
-      authData.locationAcess.Gurugram=true;
-      authData.locationAcess.Hyderabad=true;
-      authData.locationAcess.Bangalore=true;
-
-       //set default chart Stuff
-      authData.setPieChartLables(["Gurugram","Bangalore","Hyderabad"]);     
-
-      const allnewDto = await axios.post(
+      const filteredData = await axios.post(
         "http://localhost:2538/api/dto/get/filterd", authData.requestDto
       );
-      authData.setNewData(allnewDto.data);
+      authData.setNewData(filteredData.data);
       // console.log("aaaaaaaaaaa"+authData.newData);
 
       //count emp locatin wise 
@@ -83,12 +71,10 @@ export default function AdminDashboard() {
     }
   }
 
- //console.log("DTO"+JSON.stringify(authData.newData)) 
-
   useEffect(() => {   
     fetchApis();  
-  }, [authData.dtoDetails, authData.post,authData.requestDto,
-      authData.Locations,authData.buSet,authData.statusSet,authData.appliedFilters,authData.file]);
+  }, [authData.post,authData.requestDto,
+      authData.Locations,authData.buSet,authData.statusSet,authData.file]);
 
   const allowData = (emp) => {
     // console.log("emp "+JSON.stringify(emp))
@@ -134,7 +120,6 @@ export default function AdminDashboard() {
   //--------------------------------
   console.log("new data "+JSON.stringify(authData.newData))
   // console.log("req dto "+JSON.stringify(authData.requestDto))
-  console.log("applied Filters "+JSON.stringify(authData.appliedFilters))
   console.log("Checked Filters "+JSON.stringify(authData.checkFilter))
   // console.log("Locationssss "+JSON.stringify(authData.Locations))
   console.log("LocationSet "+Array.from(authData.Locations));
@@ -166,6 +151,9 @@ export default function AdminDashboard() {
       let direction = 'ascending';
       if (sortConfig && sortConfig.key === key && sortConfig.direction === 'ascending') {
         direction = 'descending';
+      }
+      if (sortConfig && sortConfig.key === key && sortConfig.direction === 'descending') {
+        direction = 'none';       
       }
       setSortConfig({ key, direction });
     }  

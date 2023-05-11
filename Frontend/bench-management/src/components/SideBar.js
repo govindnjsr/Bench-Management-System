@@ -41,11 +41,6 @@ export default function SideBar() {
     fetchApis();
   }, []);
 
-  const itemList = ["Item1", "Item2", "Item3", "Item4", "Item5"];
-  console.log("itemlist" + BUList);
-
-  // console.log(authData.currentRole);
-
   //Handle BU filters
 
   const handleBUFilter = (e) => {
@@ -231,6 +226,7 @@ export default function SideBar() {
                   <div className="filterByBusinessUnit">
                     {BUList.map((item, index) => (
                       <div className="form-check" key={index}>
+                        
                         <input
                           className="form-check-input"
                           type="checkbox"

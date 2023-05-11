@@ -9,6 +9,22 @@ export default function AuthState(props) {
      const [buSet,setBuSet]=useState(new Set([]))
      const [statusSet,setStatusSet]=useState(new Set([]))
     //------------------------------------------------
+    //Reset things
+    const resetDefault = () => {
+        let resetSet=new Set([])
+        setLocations(resetSet)
+        setSkillsSet(resetSet)
+        setBuSet(resetSet)
+        setStatusSet(resetSet)
+        setCheckFilter({...checkFilter,["skill"]:0,["location"]:0,["status"]:0,["BU"]:0})
+        //assign default location acess
+      locationAcess.Gurugram=true;
+      locationAcess.Hyderabad=true;
+      locationAcess.Bangalore=true;
+       //set default chart Stuff
+        setPieChartLables(["Gurugram","Bangalore","Hyderabad"]); 
+    }
+    //--------------------------------------------
     const[isblocked, setIsBlocked]=useState(false);
     const [countOfEachLocation,setCountOfEachLocation]=useState([])
     const [gurugramBU,setGurugramBU]=useState([])
@@ -17,7 +33,6 @@ export default function AuthState(props) {
     const [isAuthentication, setAuthentication] = useState(false);
     const [currentRole, setCurrentRole] = useState(0)
     const [googleData, setGoogleData] = useState({})
-    const [dtoData, setDtoData] = useState()
     const [benchTimeValue, setBenchTimeValue] = useState(0);
     const [experienceValue, setExperienceValue] = useState(0);
     const [show, setShow] = useState(false);
@@ -26,7 +41,6 @@ export default function AuthState(props) {
     const [assignedLocation, setAssignedLocation] = useState({})
     const [benchPeriodEmp, setBenchPeriodEmp] = useState(0);
     const [newData,setNewData]=useState();
-    const [allData,setAlldata]=useState()
     const [showSearchBar, setShowSearchBar] = useState(true);
     const [pieChartLabels,setPieChartLables]=useState([]);
     const [requestDto,setReqDto]=useState({
@@ -53,25 +67,8 @@ export default function AuthState(props) {
     const [locationAcess, setLocationAccess] = useState({
         "Gurugram": true,
         "Bangalore": true,
-        "Hyderabad": true,     
+        "Hyderabad": true,   
 
-    })
-    const [appliedFilters, setAppliedFilters] = useState({
-        "gurugram": false,
-        "bangalore": false,
-        "hyderabad": false,
-        "active": false,
-        "benched": false,
-        "notblocked":false,
-        "blocked":false,
-        "BFSIFinancialServices":false,
-        "MediaTelecom":false,
-        "Logistics":false,
-        "Technology":false,
-        "Healthcare":false,
-        "ConsultingServices":false,
-        "BFSIInsurance":false,
-        "statusBlocked":false
     })
     const handleClose = () => {
         setShow(false);
@@ -92,15 +89,20 @@ export default function AuthState(props) {
         setCurrentRole(0)
         setLoopEntry(false)
         setManagerId(-1);
+        resetDefault();
         console.log("logged out successfully")
     } const [file, setFile] = useState([]);
 
     return (
-        <AuthContext.Provider value={{setAppliedFilters,appliedFilters,setStatusSet,statusSet,setBuSet,buSet,setSkillsSet,skillsSet,Locations,setLocations,pieChartLabels,setPieChartLables,isblocked,setIsBlocked,hyderabadBU,setHyderabadBU,bangaloreBU,setBangaloreBU,gurugramBU,setGurugramBU,countOfEachLocation,setCountOfEachLocation,locationWiseEmployeeCount,allData,setAlldata,setNewData,newData,requestDto,setReqDto,locationAcess,setLocationAccess,checkFilter,setCheckFilter,dtoData, googleData,setDtoData,isAuthentication, currentRole,
-         setGoogleData, handleLogin, setAuthentication,
-          setCurrentRole, handleLogout, loopEntry,setLoopEntry, managerId, setManagerId
-          ,handleEmpId, viewEmployeeId, benchTimeValue, setBenchTimeValue,
-           experienceValue, setExperienceValue, handleClose,
+        <AuthContext.Provider value={{resetDefault,setStatusSet,statusSet,setBuSet,buSet,setSkillsSet,skillsSet,Locations,setLocations,
+            pieChartLabels,setPieChartLables,isblocked,setIsBlocked,hyderabadBU,setHyderabadBU,
+            bangaloreBU,setBangaloreBU,gurugramBU,setGurugramBU,countOfEachLocation,setCountOfEachLocation,
+            locationWiseEmployeeCount,setNewData,newData,requestDto,setReqDto,locationAcess,
+            setLocationAccess,checkFilter,setCheckFilter, googleData,isAuthentication, currentRole,
+            setGoogleData, handleLogin, setAuthentication,
+             setCurrentRole, handleLogout, loopEntry,setLoopEntry, managerId, setManagerId
+            ,handleEmpId, viewEmployeeId, benchTimeValue, setBenchTimeValue,
+            experienceValue, setExperienceValue, handleClose,
             setShow, show, handleShow, post, setPost,
             assignedLocation, setAssignedLocation, searchValue,
             setSearchValue, benchPeriodEmp, setBenchPeriodEmp, showSearchBar, setShowSearchBar,file, setFile
