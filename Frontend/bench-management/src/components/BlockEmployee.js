@@ -153,6 +153,8 @@ function BlockEmployee(props) {
         <Modal.Body>
           <Form id="block">
           <Form.Group>
+          <p><b>Client Name</b>: {intDetails.client}</p>
+          <p><b>Date</b> : {intDetails.date}</p>
                             <Form.Label>Interview Result</Form.Label>
                             <Form.Select aria-label="Default select example" name="result" onChange={handleChangeValue.bind(this)} >
                                 <option>Select from below</option>
@@ -191,14 +193,14 @@ function BlockEmployee(props) {
               </Form.Group>
             </Form>
             <Accordion>
-            <Accordion.Item eventKey="3">
+            <Accordion.Item eventKey="0">
                 <Accordion.Header><div className="pfilter">Previous Interview Details</div></Accordion.Header>
                 <Accordion.Body>
                 <table className="table">
                 <thead className="thread1">
                   <tr className="tableHeader">
                     <th className="table-align-left" scope="col">
-                      Client
+                      Client Name
                     </th>
                     <th className="table-align-left" scope="col">
                       Date
@@ -214,7 +216,7 @@ function BlockEmployee(props) {
                     newIntData.map((emp) =>
                         <tr>                
                           <td
-                            className="pointer-to-profile" title="Click on Name to view profile" scope="row" >
+                            className="table-align-left" scope="row" >
                             {emp.client}
                           </td>
                           <td className="table-align-left">
