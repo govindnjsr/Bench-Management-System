@@ -115,8 +115,8 @@ console.log(managerDetails)
                     </Form.Select>
                 </Form.Group>
                 <div className='btn-mngr'>
-                <button className='button6' type='button' onClick={postLocationToManager}>Grant Access</button>
-                <button className='button6' type='button' onClick={deleteLocationToManager}>Revoke Access</button>
+                <button className='button6' type='button' onClick={postLocationToManager} disabled = {addlocation.locationId === null || addlocation.managerId === null} >Grant Access</button>
+                <button className='button6' type='button' onClick={deleteLocationToManager} disabled = {addlocation.locationId === null || addlocation.managerId === null} >Revoke Access</button>
                 </div>
           </Form>
           <Table striped bordered hover>
