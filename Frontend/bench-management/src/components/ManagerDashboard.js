@@ -246,7 +246,7 @@ console.log("new data "+JSON.stringify(authData.newData))
                           </td>
                           {/* <td className="table-align-left"><UpdateEmployee id = {emp.employeeId}/></td> */}
                           <td className="table-align-left">
-                            <UploadFile id={emp.employeeId} />
+                          <UploadFile id={emp.employeeId} resume={emp.resume}/>&nbsp;&nbsp;
                             <DownloadFile id={emp.employeeId} name={emp.employeeName} />
                           </td>
 
