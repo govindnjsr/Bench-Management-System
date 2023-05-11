@@ -28,11 +28,11 @@ const handleDownload=(e,id,name)=>{
         link.click();
       })
       .catch(error => console.log(error));
-     
+  
 };
   return (
     <>
-      <button className="button7" onClick={handleShow}>
+      <button className="button5" onClick={handleShow}>
         <i  className="fa-solid fa-download"></i>
       </button>
       <Modal

@@ -8,46 +8,16 @@ function UpdateEmployee(props) {
 
     const authData = useContext(AuthContext);
     const [show, setShow] = useState(false);
-    const [fetchedEmpDetail, setFetchEmpDetail] = useState(
-        {
-        }
-    );
-
-    const [currentSkills, setCurrentSkill] = useState(
-        {
-            "java": false,
-            "python": false,
-            "react": false,
-            "angular": false,
-            "html": false,
-            "css": false,
-            "javascript": false,
-            "springboot": false
-        }
-    )
-   
-
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    
-
-    const showDetail = async (id) => {
-        const fetchedData = await axios.get(`http://localhost:2538/api/empdetails/get/${id}`);
-        fetchedData.data.benchStatus=false;
-        setFetchEmpDetail(fetchedData.data);
-      
-    }
 
    
-    const saveDataAtBackend = async () => {
+    const saveDataAtBackend = async (id) => {
         try {
            // setFetchEmpDetail({...fetchedEmpDetail,benchStatus:false});
-            console.log(fetchedEmpDetail.benchStatus)
-            console.log("new POST DATA " + JSON.stringify(fetchedEmpDetail));
             //    console.log("ID"+empDetail.id);
-            const allEmp = await axios.put(`http://localhost:2538/api/empdetails/update/${fetchedEmpDetail.id}`, fetchedEmpDetail);
-            //    console.log("Result"+allEmp);
+            const allEmp = await axios.put(`http://localhost:2538/api/empdetails/update/${id}`);
                authData.setPost({});
         }
         catch {
@@ -56,12 +26,12 @@ function UpdateEmployee(props) {
     }
 
     const saveData = () => {
-        saveDataAtBackend();
+        saveDataAtBackend(props.id);
     }
 
     return (
         <>
-            <button className='button5' onClick={() => { handleShow(); showDetail(props.id); }}>
+            <button className='button5' onClick={() => { handleShow(); }}>
             <i class="fa-solid fa-circle-minus"></i>
             </button>
 
