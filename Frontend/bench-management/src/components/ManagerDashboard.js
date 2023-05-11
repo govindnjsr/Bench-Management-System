@@ -170,6 +170,46 @@ export default function AdminDashboard() {
     return '';
 };
 console.log("new data "+JSON.stringify(authData.newData))
+
+ //Sorting
+ const useSortableData = (items, config = null) => {
+  const [sortConfig, setSortConfig] = React.useState(config);
+  // console.log("aaaaaaaaaaaa"+JSON.stringify(items));
+  const sortedItems = React.useMemo(() => {
+    let sortableItems = items;
+    if (sortConfig !== null) {
+      sortableItems.sort((a, b) => {
+        if (a[sortConfig.key] < b[sortConfig.key]) {
+          return sortConfig.direction === 'ascending' ? -1 : 1;
+        }
+        if (a[sortConfig.key] > b[sortConfig.key]) {
+          return sortConfig.direction === 'ascending' ? 1 : -1;
+        }
+        return 0;
+      });
+    }
+    return sortableItems;
+  }, [items, sortConfig]);  
+  const requestSort = key => {
+    let direction = 'ascending';
+    if (sortConfig && sortConfig.key === key && sortConfig.direction === 'ascending') {
+      direction = 'descending';
+    }
+    setSortConfig({ key, direction });
+  }  
+  return {items: sortedItems, requestSort, sortConfig };
+};
+//-----------------------------------------
+const { items, requestSort , sortConfig} = useSortableData(authData.newData);
+const getClassNamesFor = (name) => {
+  if (!sortConfig) {
+    return;
+  }
+  return sortConfig.key === name ? sortConfig.direction : undefined;
+};
+
+//-----------------------------------------
+
   return (
     <div className="window">
       <div className="top">
@@ -191,22 +231,29 @@ console.log("new data "+JSON.stringify(authData.newData))
           <div className="table">
             <div className="table-format">
               <table className="table">
-                <thead className="thread1">
+              <thead className="thread1">
                   <tr className="tableHeader">
                     <th className="table-align-left" scope="col">
                       Block
                     </th>
                     <th className="table-align-left" scope="col">
+                    <button  className={getClassNamesFor('employeeName')} type="button" onClick={() => requestSort('employeeName')}>
                       Name
+                    </button>
                     </th>
                     <th className="table-align-left" scope="col">
                       Email
                     </th>
                     <th className="table-align-left" scope="col">
-                      Location
+                    <button  className={getClassNamesFor('location')} type="button" onClick={() => requestSort('location')}>
+                    Location
+                    </button> 
                     </th>
                     <th className="table-align-left" scope="col">
-                      Bench_Aging
+                    <button  className={getClassNamesFor('benchPeriod')} type="button" onClick={() => requestSort('benchPeriod')}>
+                    Bench_Aging
+                    </button> 
+                      
                     </th>
                     <th className="table-align-left" scope="col">
                       Resume
