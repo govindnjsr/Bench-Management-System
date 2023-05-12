@@ -24,6 +24,7 @@ export default function AuthState(props) {
         setPieChartLables(["Gurugram","Bangalore","Hyderabad"]); 
     }
     //--------------------------------------------
+    const [blockStatus,setBlockStatus]=useState(0)
     const[isblocked, setIsBlocked]=useState(false);
     const [countOfEachLocation,setCountOfEachLocation]=useState([])
     const [gurugramBU,setGurugramBU]=useState([])
@@ -93,7 +94,7 @@ export default function AuthState(props) {
     } const [file, setFile] = useState([]);
 
     return (
-        <AuthContext.Provider value={{resetDefault,setStatusSet,statusSet,setBuSet,buSet,setSkillsSet,skillsSet,Locations,setLocations,
+        <AuthContext.Provider value={{blockStatus,setBlockStatus,resetDefault,setStatusSet,statusSet,setBuSet,buSet,setSkillsSet,skillsSet,Locations,setLocations,
             pieChartLabels,setPieChartLables,isblocked,setIsBlocked,hyderabadBU,setHyderabadBU,
             bangaloreBU,setBangaloreBU,gurugramBU,setGurugramBU,countOfEachLocation,setCountOfEachLocation,
             locationWiseEmployeeCount,setNewData,newData,requestDto,setReqDto,locationAcess,

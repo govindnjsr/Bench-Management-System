@@ -24,7 +24,7 @@ function BlockEmployee(props) {
     setIsChecked(false);
   }
   
-  const handleApplyResult =async(e,id)=>{
+  const handleUnblockApplyResult =async(e,id)=>{
     e.preventDefault();
     const srNo=empDetails.onGoing;
     setEmpDetails({...empDetails,blocked:false});
@@ -33,10 +33,8 @@ function BlockEmployee(props) {
       await axios.put(`http://localhost:2538/api/empdetails/blockedstatus/${id}`);
       await axios.put(`http://localhost:2538/api/empdetails/interview/updateresultbysrno/${srNo}`,intDetails)
       await axios.put(`http://localhost:2538/api/empdetails/updateoncondition/${id}`,intDetails);
-      authData.setAppliedFilters({
-        ...authData.appliedFilters,
-        ["statusBlocked"]: false,
-      });
+      // authData.setBlockStatus(true)
+      authData.setBlockStatus(1) 
       setIsChecked(false)
       eventx.target.checked=false;
       setIntDetails(...intDetails,{result:null, client:"", date:null})  
@@ -51,15 +49,17 @@ function BlockEmployee(props) {
         .then((response)=>{
           // authData.setIsBlocked(true);
           // console.log("Data"+JSON.stringify(response.data.srNo));
-          axios.put(`http://localhost:2538/api/empdetails/ongoing/${response.data.id}/${response.data.srNo}`)
+          axios.put(`http://localhost:2538/api/empdetails/ongoing/${response.data.id}/${response.data.srNo}`).
+          then((res)=>{
+            authData.setBlockStatus(-1) 
+          })
           // axios returns API response body in .data
-          authData.setAppliedFilters({
-            ...authData.appliedFilters,
-            ["statusBlocked"]: true,
-          });
+      
+        
         })
         .then(
-          e.preventDefault()          
+          e.preventDefault(),
+                                
       )
       .then(setShow(false))       
       .then(setIsChecked(true))
@@ -167,7 +167,7 @@ function BlockEmployee(props) {
           <button className="button3" variant="secondary" onClick={handleCloseBlocked}>
             Close
           </button>
-          <button form="block" className="button3" variant="primary" onClick={(e) => {handleApplyResult(e, props.id); handleClose();}}>Apply</button>
+          <button form="block" className="button3" variant="primary" onClick={(e) => {handleUnblockApplyResult(e, props.id); handleClose();}}>Apply</button>
         </Modal.Footer>
       </Modal>
         :

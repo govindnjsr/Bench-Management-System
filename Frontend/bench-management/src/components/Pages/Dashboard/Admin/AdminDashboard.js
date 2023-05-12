@@ -64,6 +64,7 @@ export default function AdminDashboard() {
           authData.setBangaloreBU(res.data);
         });
 
+
       //hyderabad
       const countOfHyderabadBU = await axios
         .get("http://localhost:2538/api/empdetails/get/hyderabadBU")
@@ -71,9 +72,11 @@ export default function AdminDashboard() {
           authData.setHyderabadBU(res.data);
         });
     } catch {
+
       console.log();
     }
   };
+
 
   useEffect(() => {
     fetchApis();
@@ -85,6 +88,7 @@ export default function AdminDashboard() {
     authData.statusSet,
     authData.file,
   ]);
+
 
   const allowData = (emp) => {
     // console.log("emp "+JSON.stringify(emp))

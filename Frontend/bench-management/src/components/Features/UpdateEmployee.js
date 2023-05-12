@@ -24,13 +24,8 @@ function UpdateEmployee(props) {
             "springboot": false
         }
     )
-   
-
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
-    
-
     const showDetail = async (id) => {
         const fetchedData = await axios.get(`http://localhost:2538/api/empdetails/get/${id}`);
         fetchedData.data.benchStatus=false;
@@ -76,8 +71,7 @@ function UpdateEmployee(props) {
                 </Modal.Header>
                 <Modal.Body>
                     <Form id='add'>
-                        <p>Are you sure you want to remove <b>{props.name}</b> from bench?</p>
-                      
+                        <p>Are you sure you want to remove <b>{props.name}</b> from bench?</p>                      
                         {/* <Form.Group>
                             <Form.Label>Bench Status</Form.Label>
                             <Form.Select aria-label="Default select example" name="benchStatus" onChange={handleChangeValue.bind(this)} >
