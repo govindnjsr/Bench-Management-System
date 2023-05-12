@@ -170,13 +170,6 @@ export default function AdminDashboard() {
       ) {
         direction = "descending";
       }
-      if (
-        sortConfig &&
-        sortConfig.key === key &&
-        sortConfig.direction === "descending"
-      ) {
-        direction = "none";
-      }
       setSortConfig({ key, direction });
     };
     return { items: sortedItems, requestSort, sortConfig };
