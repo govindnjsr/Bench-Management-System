@@ -115,7 +115,7 @@ public class EController {
     }
 
     @PutMapping("/ongoing/{employeeId}/{srNo}")
-    public String updateOnGoing(@PathVariable Long employeeId, @PathVariable Long srNo){
+    public EmpDetails updateOnGoing(@PathVariable Long employeeId, @PathVariable Long srNo){
         return empDetailsService.updateOnGoing(employeeId,srNo);
     }
 
@@ -134,5 +134,9 @@ public class EController {
     @GetMapping("/get/Location")
     public List<String> getLocation(){return empDetailsService.getLocation();}
 
+    @PutMapping("/update/{employeeId}")
+    public String updateBenchById(@PathVariable Long employeeId){
+        return empDetailsService.updateBenchById(employeeId);
+    }
 
 }

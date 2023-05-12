@@ -1,106 +1,73 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 import AuthContext from '../Global/AuthContext';
 import Accordion from "react-bootstrap/Accordion";
-
 function BlockEmployee(props) {
   const authData = useContext(AuthContext);
   const [show, setShow] = useState(false);
   const [res, setRes]=useState({})
   const [isChecked, setIsChecked] = useState(false);
   const [eventx,setEvent]=useState();
+  const [currentDate,setCurrentDate]=useState()
   const [intDetails, setIntDetails] = useState({
     "id": null,
-    "result": null,
+    "result": "",
     "client": "",
-    "date": null,
+    "date": "",
   });
   const [newIntData, setNewIntData] = useState();
+  const [lastInterview, setLastInterview] = useState();
   const[empDetails,setEmpDetails]=useState(null);
   const handleCloseBlocked = (e) => {
     setShow(false);
     setIsChecked(false);
   }
-  
   const handleUnblockApplyResult =async(e,id)=>{
     e.preventDefault();
-    const srNo=empDetails.onGoing;
-    setEmpDetails({...empDetails,blocked:false});
-    // console.log(empDetails);
-    try{
-      await axios.put(`http://localhost:2538/api/empdetails/blockedstatus/${id}`);
-      await axios.put(`http://localhost:2538/api/empdetails/interview/updateresultbysrno/${srNo}`,intDetails)
-      await axios.put(`http://localhost:2538/api/empdetails/updateoncondition/${id}`,intDetails);
-      // authData.setBlockStatus(true)
-      authData.setBlockStatus(1) 
-      setIsChecked(false)
-      eventx.target.checked=false;
-      setIntDetails(...intDetails,{result:null, client:"", date:null})  
-    }
-    catch{
-    }
+    await axios.put(`http://localhost:2538/api/empdetails/interview/updateresultbysrno/${intDetails.srNo}`,intDetails)
+    await axios.put(`http://localhost:2538/api/empdetails/updateoncondition/${intDetails.id}`,intDetails);
+    authData.setBlockStatus(1);
+    setIsChecked(false)
+    // eventx.target.checked=false;
   }
-// console.log(intDetails);
-  const handleApplyBlocked = async (e, id) => {
-    try {
-        await axios.post('http://localhost:2538/api/empdetails/interview/save', intDetails)
-        .then((response)=>{
-          // authData.setIsBlocked(true);
-          // console.log("Data"+JSON.stringify(response.data.srNo));
-          axios.put(`http://localhost:2538/api/empdetails/ongoing/${response.data.id}/${response.data.srNo}`).
-          then((res)=>{
-            authData.setBlockStatus(-1) 
-          })
-          // axios returns API response body in .data
-      
-        
-        })
-        .then(
-          e.preventDefault(),
-                                
-      )
-      .then(setShow(false))       
-      .then(setIsChecked(true))
-       eventx.target.checked=true;
-    }
-    catch {}
+  const handleApplyBlockedResult = async (e, id) => {
+    await axios.post('http://localhost:2538/api/empdetails/interview/save', intDetails)
+    .then((response)=>{
+        axios.put(`http://localhost:2538/api/empdetails/ongoing/${response.data.id}/${response.data.srNo}`)
+    }).then(e.preventDefault()).then((res)=>{
+        authData.setBlockStatus(-1)
+      }).then(handleClose())
   }
-     
   const handleShowApply = async(e,id) => {
     const { value, checked } = e.target;
-     if(checked)
-     {e.target.checked=false;
-     setEvent(e);
-     }
-     else{
-      e.target.checked=true;
-      setEvent(e);
-      setIsChecked(true);
-     }
-    // setIsChecked(checked);
-    intDetails.id = id;
-    setIntDetails(intDetails);
+    if(checked){
+        setIntDetails({...intDetails,id:id})
+    }
+    else{
+        setIsChecked(true);
+        await axios.get(`http://localhost:2538/api/empdetails/interview/getLastInterview/${id}`)
+        .then((response)=>{
+         setIntDetails(response.data);
+       })
+    }
     await axios.get(`http://localhost:2538/api/empdetails/get/${id}`)
     .then((response)=>{
        setEmpDetails(response.data);
-      //  console.log("in get"+JSON.stringify(empDetails));
     })
-     .then(setShow(false))
-
-     await axios.get(`http://localhost:2538/api/empdetails/interview/get/${id}`)
+    await axios.get(`http://localhost:2538/api/empdetails/interview/get/${id}`)
     .then((response)=>{
        setNewIntData(response.data);
-      //  console.log("in get"+JSON.stringify(empDetails));
     })
   }
+  // console.log("INTDETAILS"+JSON.stringify(intDetails));
+  // console.log("Last Interview"+JSON.stringify(lastInterview));
   const handleChangeValue = (e) => {
     setIntDetails({ ...intDetails, [e.target.name]: e.target.value });
   };
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
   const todayDate=()=>{
     var today = new Date();
     var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
@@ -117,14 +84,13 @@ function BlockEmployee(props) {
       date = today.getFullYear() + '-0' + (today.getMonth() + 1) + '-' + today.getDate();
       console.log("Date"+date);
     }
-    return date;
+    // return date;
+    setCurrentDate(date);
   }
-  // useEffect(()=>{
-  //   //force rendering ...
-  // },[authData.appliedFilters])
+ 
   return (
     <>
-      {<button className="button5" variant="primary" onClick={(e) => { handleShowApply(e,props.id); handleShow(); }}>
+      {<button className="button5" variant="primary" onClick={(e) => {handleShowApply(e,props.id);handleShow();  todayDate(); }}>
         <Form name="shambhavi">
           {["checkbox"].map((type) => (
             <div key={`inline-${type}`} className="mb-3">
@@ -157,8 +123,9 @@ function BlockEmployee(props) {
                             <Form.Label>Interview Result</Form.Label>
                             <Form.Select aria-label="Default select example" name="result" onChange={handleChangeValue.bind(this)} >
                                 <option>Select from below</option>
-                                <option value={false} selected={intDetails.result == false} >Rejected</option>
-                                <option value={true} selected={intDetails.result == true}  >Accepted</option>
+                                <option value="Rejected" >Rejected</option>
+                                <option value="Accepted" >Accepted</option>
+                                <option value="Awaited" >Awaited</option>
                             </Form.Select>
                         </Form.Group><br />
           </Form>
@@ -188,7 +155,7 @@ function BlockEmployee(props) {
               </Form.Group>
               <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                 <Form.Label>From  Date</Form.Label>
-                <Form.Control type="date" min = {todayDate()} placeholder="" name="date" onChange={handleChangeValue.bind(this)} />
+                <Form.Control type="date" min = {currentDate} placeholder="" name="date" onChange={handleChangeValue.bind(this)} />
               </Form.Group>
             </Form>
             <Accordion>
@@ -213,7 +180,7 @@ function BlockEmployee(props) {
                 { newIntData
                     &&
                     newIntData.map((emp) =>
-                        <tr>                
+                        <tr>
                           <td
                             className="table-align-left" scope="row" >
                             {emp.client}
@@ -236,7 +203,7 @@ function BlockEmployee(props) {
             <button className="button3" variant="secondary" onClick={handleCloseBlocked}>
               Close
             </button>
-            <button form="block" className="button3" variant="primary" onClick={(e) => handleApplyBlocked(e,props.id)}>Apply</button>
+            <button form="block" className="button3" variant="primary" onClick={(e) => handleApplyBlockedResult(e,props.id)}>Apply</button>
           </Modal.Footer>
         </Modal>}
     </>

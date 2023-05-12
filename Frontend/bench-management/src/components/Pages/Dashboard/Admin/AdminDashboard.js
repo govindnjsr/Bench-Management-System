@@ -119,14 +119,15 @@ export default function AdminDashboard() {
     return '';
 };
   //--------------------------------
-  console.log("new data "+JSON.stringify(authData.newData))
+  // console.log("new data "+JSON.stringify(authData.newData))
   // console.log("req dto "+JSON.stringify(authData.requestDto))
-  console.log("Checked Filters "+JSON.stringify(authData.checkFilter))
+  // console.log("Checked Filters "+JSON.stringify(authData.checkFilter))
   // console.log("Locationssss "+JSON.stringify(authData.Locations))
-  console.log("LocationSet "+Array.from(authData.Locations));
-  console.log("BUSet "+Array.from(authData.buSet));
-  console.log("StatusSet "+Array.from(authData.statusSet));
+  // console.log("LocationSet "+Array.from(authData.Locations));
+  // console.log("BUSet "+Array.from(authData.buSet));
+  // console.log("StatusSet "+Array.from(authData.statusSet));
  // console.log("req dto "+JSON.stringify(authData.requestDto))
+ console.log("block status "+authData.blockStatus)
 
   //--------------------------------
   //Sorting
