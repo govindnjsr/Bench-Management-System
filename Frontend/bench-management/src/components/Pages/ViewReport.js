@@ -19,9 +19,12 @@ function ViewReport(props) {
     navigate("/");
   }
 
-  function handleRefresh(){
-    window.location.reload(true);
+  const [refreshData,setRefresh]=useState(false)
+  function handleRefresh() {
+    setCurrentIndex(-1);
+      setRefresh(!refreshData);
   }
+  
  //console.log("locationAcess "+JSON.stringify(authData.locationAcess))
   const [curIndex, setCurrentIndex] = useState(-1);
   const [mydata, setData] = useState({
@@ -70,7 +73,7 @@ function ViewReport(props) {
   };
  useEffect(()=>{
   //rerendering...
- },[authData.loactionAcess])
+ },[authData.loactionAcess,refreshData])
 
  
   return authData.isAuthentication ? (
@@ -86,7 +89,7 @@ function ViewReport(props) {
             <i className="fa-sharp fa-solid fa-arrow-left"></i> &nbsp;BACK
           </button>
           <h5 className="h5heading">Representation of Business Units on the basis of Locations.</h5>
-          <button className="reload"  onClick={handleRefresh} >
+          <button className="reload" type="button" onClick={handleRefresh} >
           <i class="fa-solid fa-rotate-right fa-lg"></i>
           </button>
         </div>
