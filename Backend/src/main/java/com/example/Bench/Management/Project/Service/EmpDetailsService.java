@@ -22,7 +22,7 @@ public interface EmpDetailsService {
       public List<Integer> getAllGurugramBU();
  public List<Integer>getAllBangaloreBU();
  public List<Integer>getAllHyderabadBU();
- public String updateOnGoing(Long employeeId, Long srNo);
+ public EmpDetails updateOnGoing(Long employeeId, Long srNo);
  public String updateBlockedById(Long employeeId);
 
     public String updateOnCondition(Long employeeId, IntDetails intDetails);
@@ -30,4 +30,6 @@ public interface EmpDetailsService {
     public  List<String> getBU();
 
     public List<String> getLocation();
+
+    String updateBenchById(Long employeeId);
 }

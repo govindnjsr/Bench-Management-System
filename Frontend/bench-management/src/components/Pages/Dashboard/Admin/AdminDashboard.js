@@ -24,13 +24,14 @@ export default function AdminDashboard() {
     authData.setShowSearchBar(false);
     navigate("/viewReport");
   };
-
+   const [refreshData,setRefresh]=useState(false)
   function handleRefresh() {
-    window.location.reload(true);
+      setRefresh(!refreshData);
   }
   
 
   const fetchApis = async () => {
+    authData.setShowSearchBar(true)
     try {
       const filteredData = await axios.post(
         "http://localhost:2538/api/dto/get/filterd",
@@ -65,6 +66,7 @@ export default function AdminDashboard() {
           authData.setBangaloreBU(res.data);
         });
 
+
       //hyderabad
       const countOfHyderabadBU = await axios
         .get("http://localhost:2538/api/empdetails/get/hyderabadBU")
@@ -72,12 +74,15 @@ export default function AdminDashboard() {
           authData.setHyderabadBU(res.data);
         });
     } catch {
+
       console.log();
     }
   };
+ console.log("refresh "+refreshData)
 
   useEffect(() => {
     fetchApis();
+    authData.setBlockStatus(0);
   }, [
     authData.post,
     authData.requestDto,
@@ -85,7 +90,10 @@ export default function AdminDashboard() {
     authData.buSet,
     authData.statusSet,
     authData.file,
+    authData.blockStatus,
+    refreshData
   ]);
+
 
   const allowData = (emp) => {
     // console.log("emp "+JSON.stringify(emp))
@@ -133,14 +141,15 @@ export default function AdminDashboard() {
     return "";
   };
   //--------------------------------
-  console.log("new data " + JSON.stringify(authData.newData));
+  // console.log("new data "+JSON.stringify(authData.newData))
   // console.log("req dto "+JSON.stringify(authData.requestDto))
-  console.log("Checked Filters " + JSON.stringify(authData.checkFilter));
+  // console.log("Checked Filters "+JSON.stringify(authData.checkFilter))
   // console.log("Locationssss "+JSON.stringify(authData.Locations))
-  console.log("LocationSet " + Array.from(authData.Locations));
-  console.log("BUSet " + Array.from(authData.buSet));
-  console.log("StatusSet " + Array.from(authData.statusSet));
-  // console.log("req dto "+JSON.stringify(authData.requestDto))
+  // console.log("LocationSet "+Array.from(authData.Locations));
+  // console.log("BUSet "+Array.from(authData.buSet));
+  // console.log("StatusSet "+Array.from(authData.statusSet));
+ // console.log("req dto "+JSON.stringify(authData.requestDto))
+ console.log("block status "+authData.blockStatus)
 
   //--------------------------------
   //Sorting
@@ -203,7 +212,7 @@ export default function AdminDashboard() {
               <button className="button2" onClick={handleReport}>
                 <i className="fa-solid fa-chart-simple"></i> &nbsp; VIEW REPORT
               </button>
-              <button className="reload" onClick={handleRefresh}>
+              <button className="reload" type="button" onClick={handleRefresh}>
                 <i class="fa-solid fa-rotate-right fa-lg"></i>
               </button>
             </div>

@@ -24,14 +24,10 @@ public class IntDetails {
             generator = "intdetails_seq"
     )
     private long srNo;
-
     private long id;
-    private boolean result;
+    private String result;
     private String client;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private String date;
 
-    public boolean getResult() {
-        return result;
-    }
 }

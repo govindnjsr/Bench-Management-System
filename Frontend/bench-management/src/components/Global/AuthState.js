@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import AuthContext from './AuthContext.js';
 
 export default function AuthState(props) {
+   
     // ------------------------------------------------   
      const [Locations,setLocations]=useState(new Set([]))
      const [skillsSet,setSkillsSet]=useState(new Set([]))
@@ -16,14 +17,34 @@ export default function AuthState(props) {
         setBuSet(resetSet)
         setStatusSet(resetSet)
         setCheckFilter({...checkFilter,["skill"]:0,["location"]:0,["status"]:0,["BU"]:0})
+        setBlockStatus(0)
         //assign default location acess
       locationAcess.Gurugram=true;
       locationAcess.Hyderabad=true;
       locationAcess.Bangalore=true;
        //set default chart Stuff
-        setPieChartLables(["Gurugram","Bangalore","Hyderabad"]); 
+        setPieChartLables(["Gurugram","Bangalore","Hyderabad"]);
+
+        setReqDto({
+            "experience": 0,
+            "benchPeriod": 0,
+            "java": false,
+            "python": false,
+            "react": false,
+            "angular": false,
+            "html": false,
+            "css": false,
+            "javascript": false,
+            "springboot": false,
+            "byDefault":false  
+          })
+
+          setShowSearchBar(true)
+         
     }
     //--------------------------------------------
+    const [isChecked,setIsChecked]=useState(false);
+    const [blockStatus,setBlockStatus]=useState(0)
     const[isblocked, setIsBlocked]=useState(false);
     const [countOfEachLocation,setCountOfEachLocation]=useState([])
     const [gurugramBU,setGurugramBU]=useState([])
@@ -93,7 +114,7 @@ export default function AuthState(props) {
     } const [file, setFile] = useState([]);
 
     return (
-        <AuthContext.Provider value={{resetDefault,setStatusSet,statusSet,setBuSet,buSet,setSkillsSet,skillsSet,Locations,setLocations,
+        <AuthContext.Provider value={{isChecked,setIsChecked,blockStatus,setBlockStatus,resetDefault,setStatusSet,statusSet,setBuSet,buSet,setSkillsSet,skillsSet,Locations,setLocations,
             pieChartLabels,setPieChartLables,isblocked,setIsBlocked,hyderabadBU,setHyderabadBU,
             bangaloreBU,setBangaloreBU,gurugramBU,setGurugramBU,countOfEachLocation,setCountOfEachLocation,
             locationWiseEmployeeCount,setNewData,newData,requestDto,setReqDto,locationAcess,

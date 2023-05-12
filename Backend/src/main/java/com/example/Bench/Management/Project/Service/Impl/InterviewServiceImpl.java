@@ -46,4 +46,8 @@ public class InterviewServiceImpl implements InterviewService {
         interviewRepo.save(intDetails1);
         return "updated";
     }
+    @Override
+    public IntDetails getLastInterview(Long employeeId) {
+        return interviewRepo.getLastInterview(employeeId);
+    }
 }
