@@ -83,10 +83,17 @@ function BlockEmployee(props) {
       date = today.getFullYear() + '-0' + (today.getMonth() + 1) + '-' + today.getDate();
       console.log("Date" + date);
     }
-    // return date;
     setCurrentDate(date);
   }
- 
+  const blockValidation=()=>{
+    if(intDetails["date"] === "")return true;
+    else if(intDetails["client"] === "")return true;
+    return false;
+  }
+  const unblockValidation=()=>{
+    if(intDetails["result"] === "")return true;
+    return false;
+  }
   return (
     <>
       {<button className="button5" variant="primary" onClick={(e) => {handleShowApply(e,props.id);handleShow();  todayDate(); }}>
@@ -133,7 +140,9 @@ function BlockEmployee(props) {
           <button className="button3" variant="secondary" onClick={handleCloseBlocked}>
             Close
           </button>
-          <button form="block" className="button3" variant="primary" onClick={(e) => { handleUnblockApplyResult(e, props.id); handleClose(); }}>Apply</button>
+          <button form="block" className="button3" variant="primary" 
+           disabled={unblockValidation()?true:false}
+           onClick={(e) => { handleUnblockApplyResult(e, props.id); handleClose(); }}>Apply</button>
         </Modal.Footer>
       </Modal>
         :
@@ -202,7 +211,9 @@ function BlockEmployee(props) {
             <button className="button3" variant="secondary" onClick={handleCloseBlocked}>
               Close
             </button>
-            <button form="block" className="button3" variant="primary" onClick={(e) => handleApplyBlockedResult(e,props.id)}>Apply</button>
+            <button form="block" className="button3" variant="primary"
+           disabled = {blockValidation() ? true : false}
+            onClick={(e) => handleApplyBlockedResult(e,props.id)}>Apply</button>
           </Modal.Footer>
         </Modal>}
     </>

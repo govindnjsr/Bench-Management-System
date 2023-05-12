@@ -26,8 +26,9 @@ export default function AdminDashboard() {
     navigate('/viewReport');
   }
 
+  const [refreshData,setRefresh]=useState(false)
   function handleRefresh() {
-    window.location.reload(true);
+      setRefresh(!refreshData);
   }
   
  
@@ -47,7 +48,8 @@ export default function AdminDashboard() {
   }
   useEffect(() => {
     fetchApis();
-  }, [authData.file, authData.requestDto]);
+    authData.setBlockStatus(0);
+  }, [authData.file, authData.requestDto,authData.blockStatus,refreshData]);
 
 
   const fetchCountApi = async () => {
@@ -120,6 +122,7 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     fetchCountApi();
+    
   }, [])
   console.log("manager ID " + authData.managerId)
   const allowData = (emp) => {
