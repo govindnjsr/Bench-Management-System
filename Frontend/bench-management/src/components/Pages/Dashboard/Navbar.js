@@ -3,11 +3,17 @@ import logoImage from '../../../Assets/Images/accoliteLogo.png';
 import Dropdown from "react-bootstrap/Dropdown";
 import AuthContext from '../../Global/AuthContext.js';
 import search from '../../../Assets/Images/search.png';
-
+import { useNavigate } from "react-router-dom";
 export default function NavBar() {
   const authData = useContext(AuthContext);
   const userImageUrl = authData.googleData.picture;
   // const [searchValue, setSearchValue] = useState("");
+  const navigate = useNavigate();
+  const unmount=()=>{
+    navigate("/");
+    authData.handleLogout();
+    
+  }
   return (
     <>
       <div className="NavbarComponent">
@@ -47,7 +53,7 @@ export default function NavBar() {
               </Dropdown.Toggle>
 
               <Dropdown.Menu align="end" className="NavbarDropDownMenu">
-                <Dropdown.Item href="" onClick={authData.handleLogout}>
+                <Dropdown.Item href="" onClick={(e)=>{unmount()}}>
                   <span style={{ fontSize: "12px" }}>Logout</span>
                 </Dropdown.Item>
               </Dropdown.Menu>

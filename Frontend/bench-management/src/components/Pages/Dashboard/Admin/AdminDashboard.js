@@ -1,44 +1,60 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
-import '../../../../Assets/Styles/Project.css';
-import Navbar from '../Navbar.js';
-import SideBar from '../SideBar.js';
-import ViewManager from './ViewManager.js';
+import "../../../../Assets/Styles/Project.css";
+import Navbar from "../Navbar.js";
+import SideBar from "../SideBar.js";
+import ViewManager from "./ViewManager.js";
 import axios from "axios";
-import UpdateEmployee from '../../../Features/UpdateEmployee.js';
+import UpdateEmployee from "../../../Features/UpdateEmployee.js";
 import { useNavigate } from "react-router-dom";
-import AuthContext from '../../../Global/AuthContext.js';
-import UploadFile from '../../../Features/UploadFile.js';
-import DownloadFile from '../../../Features/DownloadFile.js';
-import BlockEmployee from '../../../Features/BlockEmployee.js';
+import AuthContext from "../../../Global/AuthContext.js";
+import UploadFile from "../../../Features/UploadFile.js";
+import DownloadFile from "../../../Features/DownloadFile.js";
+import BlockEmployee from "../../../Features/BlockEmployee.js";
 
 export default function AdminDashboard() {
   const authData = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleViewEmployee = () => {
-    authData.setShowSearchBar(false);    
+    authData.setShowSearchBar(false);
     navigate("/viewEmployee");
   };
 
   const handleReport = () => {
     authData.setShowSearchBar(false);
-    navigate('/viewReport');
+    navigate("/viewReport");
+  };
+   const [refreshData,setRefresh]=useState(false)
+  function handleRefresh() {
+      setRefresh(!refreshData);
   }
-  const fetchApis = async () => {
-    try {         
 
+  const fetchApis = async () => {
+    authData.setShowSearchBar(true)
+    try {
       await axios.post(
         "http://localhost:2538/api/dto/get/filterd", authData.requestDto
       ).then((res) => {
         authData.setNewData(res.data);
       });
-      // console.log("aaaaaaaaaaa"+authData.newData);
-      // authData.setBlockStatus(0)  
     }
-    catch {
-      console.log();
-    }
-  }
+    catch{}
+  };
+ console.log("refresh "+refreshData)
+
+  useEffect(() => {
+    fetchApis();
+    authData.setBlockStatus(0);
+  }, [
+    authData.post,
+    authData.requestDto,
+    authData.Locations,
+    authData.buSet,
+    authData.statusSet,
+    authData.file,
+    authData.blockStatus,
+    refreshData
+  ]);
 
   useEffect(() => {   
     fetchApis();  
@@ -49,7 +65,7 @@ const fetchCountApis = async () => {
   try{
 
     //count emp locatin wise 
-    const countOfEachLoc = await axios.get(
+    await axios.get(
       "http://localhost:2538/api/empdetails/get/countOfEachLocation"
     ).then((res)=>{        
       let tempData=[];
@@ -61,21 +77,21 @@ const fetchCountApis = async () => {
 
     //count of All BU location wise 
     //gurugram
-    const countOfGurugramBU = await axios.get(
+    await axios.get(
       "http://localhost:2538/api/empdetails/get/gurugramBU"
       ).then((res)=>{
           authData.setGurugramBU(res.data);      
     })
 
     //Bangalore
-    const countOfBangaloreBU = await axios.get(
+    await axios.get(
       "http://localhost:2538/api/empdetails/get/bangaloreBU"
     ).then((res)=>{       
           authData.setBangaloreBU(res.data);         
     })
 
      //hyderabad
-     const countOfHyderabadBU = await axios.get(
+     await axios.get(
       "http://localhost:2538/api/empdetails/get/hyderabadBU"
     ).then((res)=>{
           authData.setHyderabadBU(res.data);       
@@ -92,19 +108,23 @@ const fetchCountApis = async () => {
     // console.log("emp "+JSON.stringify(emp))
     //----------Check for BU-----------------------------//
     let okBU = false;
-    let buData=Array.from(authData.buSet);
-    okBU=buData.includes(emp.businessUnit);
+    let buData = Array.from(authData.buSet);
+    okBU = buData.includes(emp.businessUnit);
     //------------check for the location--------------------------//
     let okLocation = false;
-    let locationData=Array.from(authData.Locations);
-    okLocation=locationData.includes(emp.location);
+    let locationData = Array.from(authData.Locations);
+    okLocation = locationData.includes(emp.location);
     //------Check for Blocked status ----////
     let okStatus = false;
-    if(emp.blocked==true){okStatus=Array.from(authData.statusSet).includes("blocked");}
-    else{okStatus=Array.from(authData.statusSet).includes("notblocked");}
+    if (emp.blocked == true) {
+      okStatus = Array.from(authData.statusSet).includes("blocked");
+    } else {
+      okStatus = Array.from(authData.statusSet).includes("notblocked");
+    }
     if (
       authData.checkFilter["location"] &&
-      authData.checkFilter["status"] && authData.checkFilter["BU"]
+      authData.checkFilter["status"] &&
+      authData.checkFilter["BU"]
     )
       return okStatus && okLocation && okBU;
     else if (authData.checkFilter["location"] && authData.checkFilter["status"])
@@ -121,23 +141,24 @@ const fetchCountApis = async () => {
 
   const [file, setFile] = useState([]);
   const inputFile = useRef(null);
-  const handleChange = e => {
+  const handleChange = (e) => {
     setFile([...file, e.target.files[0]]);
-  }
+  };
   //--------------------------------
   const getColor = (color) => {
-    if (color) return 'red';
-    return '';
-};
+    if (color) return "red";
+    return "";
+  };
   //--------------------------------
-  console.log("new data "+JSON.stringify(authData.newData))
+  // console.log("new data "+JSON.stringify(authData.newData))
   // console.log("req dto "+JSON.stringify(authData.requestDto))
-  console.log("Checked Filters "+JSON.stringify(authData.checkFilter))
+  // console.log("Checked Filters "+JSON.stringify(authData.checkFilter))
   // console.log("Locationssss "+JSON.stringify(authData.Locations))
-  console.log("LocationSet "+Array.from(authData.Locations));
-  console.log("BUSet "+Array.from(authData.buSet));
-  console.log("StatusSet "+Array.from(authData.statusSet));
+  // console.log("LocationSet "+Array.from(authData.Locations));
+  // console.log("BUSet "+Array.from(authData.buSet));
+  // console.log("StatusSet "+Array.from(authData.statusSet));
  // console.log("req dto "+JSON.stringify(authData.requestDto))
+ console.log("block status "+authData.blockStatus)
 
   //--------------------------------
   //Sorting
@@ -149,30 +170,31 @@ const fetchCountApis = async () => {
       if (sortConfig !== null) {
         sortableItems.sort((a, b) => {
           if (a[sortConfig.key] < b[sortConfig.key]) {
-            return sortConfig.direction === 'ascending' ? -1 : 1;
+            return sortConfig.direction === "ascending" ? -1 : 1;
           }
           if (a[sortConfig.key] > b[sortConfig.key]) {
-            return sortConfig.direction === 'ascending' ? 1 : -1;
+            return sortConfig.direction === "ascending" ? 1 : -1;
           }
           return 0;
         });
       }
       return sortableItems;
-    }, [items, sortConfig]);  
-    const requestSort = key => {
-      let direction = 'ascending';
-      if (sortConfig && sortConfig.key === key && sortConfig.direction === 'ascending') {
-        direction = 'descending';
-      }
-      if (sortConfig && sortConfig.key === key && sortConfig.direction === 'descending') {
-        direction = 'none';       
+    }, [items, sortConfig]);
+    const requestSort = (key) => {
+      let direction = "ascending";
+      if (
+        sortConfig &&
+        sortConfig.key === key &&
+        sortConfig.direction === "ascending"
+      ) {
+        direction = "descending";
       }
       setSortConfig({ key, direction });
-    }  
-    return {items: sortedItems, requestSort, sortConfig };
+    };
+    return { items: sortedItems, requestSort, sortConfig };
   };
-//-----------------------------------------
-  const { items, requestSort , sortConfig} = useSortableData(authData.newData);
+  //-----------------------------------------
+  const { items, requestSort, sortConfig } = useSortableData(authData.newData);
   const getClassNamesFor = (name) => {
     if (!sortConfig) {
       return;
@@ -180,8 +202,7 @@ const fetchCountApis = async () => {
     return sortConfig.key === name ? sortConfig.direction : undefined;
   };
 
-//-----------------------------------------
-
+  //-----------------------------------------
 
   return (
     <div className="window">
@@ -198,8 +219,10 @@ const fetchCountApis = async () => {
             <div className="buttons">
               <ViewManager />
               <button className="button2" onClick={handleReport}>
-                <i className="fa-solid fa-chart-simple"></i> &nbsp;
-                VIEW REPORT
+                <i className="fa-solid fa-chart-simple"></i> &nbsp; VIEW REPORT
+              </button>
+              <button className="reload" type="button" onClick={handleRefresh}>
+                <i class="fa-solid fa-rotate-right fa-lg"></i>
               </button>
             </div>
           </div>
@@ -212,23 +235,34 @@ const fetchCountApis = async () => {
                       Block
                     </th>
                     <th className="table-align-left" scope="col">
-                    <button  className={getClassNamesFor('employeeName')} type="button" onClick={() => requestSort('employeeName')}>
-                      Name
-                    </button>
+                      <button
+                        className={getClassNamesFor("employeeName")}
+                        type="button"
+                        onClick={() => requestSort("employeeName")}
+                      >
+                        Name
+                      </button>
                     </th>
                     <th className="table-align-left" scope="col">
                       Email
                     </th>
                     <th className="table-align-left" scope="col">
-                    <button  className={getClassNamesFor('location')} type="button" onClick={() => requestSort('location')}>
-                    Location
-                    </button> 
+                      <button
+                        className={getClassNamesFor("location")}
+                        type="button"
+                        onClick={() => requestSort("location")}
+                      >
+                        Location
+                      </button>
                     </th>
                     <th className="table-align-left" scope="col">
-                    <button  className={getClassNamesFor('benchPeriod')} type="button" onClick={() => requestSort('benchPeriod')}>
-                    Bench_Aging
-                    </button> 
-                      
+                      <button
+                        className={getClassNamesFor("benchPeriod")}
+                        type="button"
+                        onClick={() => requestSort("benchPeriod")}
+                      >
+                        Bench_Aging
+                      </button>
                     </th>
                     <th className="table-align-left" scope="col">
                       Resume
@@ -242,43 +276,62 @@ const fetchCountApis = async () => {
                   {authData.newData &&
                     authData.newData.map((emp) =>
                       allowData(emp) == true &&
-                        ((authData.searchValue == "" ||
-                          emp.employeeName
-                            .toLowerCase()
-                            .includes(authData.searchValue))&& emp.benchStatus==true )? (
-                        <tr style={{color:getColor(emp.blocked)}}>                
-                          <th className="table-align-left">                           
-                            <BlockEmployee id={emp.employeeId} blocked={emp.blocked} name={emp.employeeName}/>
+                      (authData.searchValue == "" ||
+                        emp.employeeName
+                          .toLowerCase()
+                          .includes(authData.searchValue)) &&
+                      emp.benchStatus == true ? (
+                        <tr style={{ color: getColor(emp.blocked) }}>
+                          <th className="table-align-left">
+                            <BlockEmployee
+                              id={emp.employeeId}
+                              blocked={emp.blocked}
+                              name={emp.employeeName}
+                            />
                           </th>
                           <td
-                            className="pointer-to-profile" title="Click on Name to view profile" scope="row" onClick={() => { handleViewEmployee(); authData.handleEmpId(emp.employeeId); }}>
+                            className="pointer-to-profile"
+                            title="Click on Name to view profile"
+                            scope="row"
+                            onClick={() => {
+                              handleViewEmployee();
+                              authData.handleEmpId(emp.employeeId);
+                            }}
+                          >
                             {emp.employeeName}
                           </td>
-                          <td className="table-align-left">
-                            {emp.email}
-                          </td>
-                          <td className="table-align-left">
-                            {emp.location}
-                          </td>
+                          <td className="table-align-left">{emp.email}</td>
+                          <td className="table-align-left">{emp.location}</td>
                           <td className="table-align-left">
                             {emp.benchStatus == 0
                               ? "Removed From Bench"
-                              : `${Math.round(emp.benchPeriod * 0.032855)} Months, ${emp.benchPeriod % 30} Days`}
-                          </td>                     
+                              : `${Math.round(
+                                  emp.benchPeriod * 0.032855
+                                )} Months, ${emp.benchPeriod % 30} Days`}
+                          </td>
                           <td className="table-align-left">
-                            <UploadFile id={emp.employeeId} resume={emp.resume}/>&nbsp;&nbsp;
-                            <DownloadFile id={emp.employeeId} name={emp.employeeName} />
+                            <UploadFile
+                              id={emp.employeeId}
+                              resume={emp.resume}
+                            />
+                            &nbsp;&nbsp;
+                            <DownloadFile
+                              id={emp.employeeId}
+                              name={emp.employeeName}
+                            />
                           </td>
 
                           <td className="table-align-left-action">
-                            <UpdateEmployee id={emp.employeeId} name={emp.employeeName} />                          
+                            <UpdateEmployee
+                              id={emp.employeeId}
+                              name={emp.employeeName}
+                            />
                             &nbsp; &nbsp;
                           </td>
                         </tr>
+                      ) : (
+                        <tr></tr>
                       )
-                        : (
-                          <tr></tr>
-                        )
                     )}
                 </tbody>
               </table>

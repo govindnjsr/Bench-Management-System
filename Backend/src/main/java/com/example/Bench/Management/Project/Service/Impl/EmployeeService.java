@@ -161,12 +161,12 @@ public class EmployeeService implements EmpDetailsService {
 
 
     @Override
-    public String updateOnGoing(Long employeeId, Long srNo) {
+    public EmpDetails updateOnGoing(Long employeeId, Long srNo) {
         EmpDetails empDetails3=empDetailsRepo.findById(employeeId).get();
         empDetails3.setOnGoing(srNo);
         empDetails3.setBlocked(true);
         empDetailsRepo.save(empDetails3);
-        return "updated";
+        return empDetails3;
     }
 
     @Override
@@ -180,11 +180,13 @@ public class EmployeeService implements EmpDetailsService {
     @Override
     public String updateOnCondition(Long employeeId, IntDetails intDetails) {
         EmpDetails empDetails1=empDetailsRepo.findById(employeeId).get();
-
-        if(intDetails.getResult()==true){
-            empDetails1.setBenchStatus(false);
-            empDetailsRepo.save(empDetails1);
+        if(!intDetails.getResult().equals("Awaited")) {
+            empDetails1.setBlocked(false);
+            if (intDetails.getResult().equals("Accepted")) {
+                empDetails1.setBenchStatus(false);
+            }
         }
+        empDetailsRepo.save(empDetails1);
         return "updated";
     }
 
@@ -196,6 +198,14 @@ public class EmployeeService implements EmpDetailsService {
     @Override
     public List<String> getLocation() {
         return empDetailsRepo.getLocation();
+    }
+
+    @Override
+    public String updateBenchById(Long employeeId) {
+        EmpDetails empDetails = empDetailsRepo.findById(employeeId).get();
+        empDetails.setBenchStatus(false);
+        empDetailsRepo.save(empDetails);
+        return "updated";
     }
 
 }

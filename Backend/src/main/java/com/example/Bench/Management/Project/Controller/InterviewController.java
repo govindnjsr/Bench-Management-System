@@ -41,5 +41,10 @@ public class InterviewController {
         return interviewService.updateResultBySrNo(srNo,intDetails);
     }
 
+    @GetMapping("/interview/getLastInterview/{employeeId}")
+    public IntDetails getIntBySrNo(@PathVariable Long employeeId){
+        return  interviewService.getLastInterview(employeeId);
+    }
+
 
 }

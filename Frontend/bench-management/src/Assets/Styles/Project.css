@@ -403,7 +403,7 @@
   background-color: #01070d;
   display: flex;
   flex-direction: row;
-  gap: 55%;
+  gap: 50%;
   padding: 0.3%;
   width: 82.8%;
   position: fixed;
@@ -415,14 +415,14 @@
   background-color: #01070d;
   display: flex;
   flex-direction: row;
-  gap: 72%;
+  gap: 68%;
   padding: 0.3%;
   width: 82.8%;
   position: fixed;
 }
 
 .buttons {
-  height: 2px;
+  height: 7%;
   display: flex;
   flex-direction: row;
   gap: 4%;
@@ -447,6 +447,7 @@
   margin-top: 5.2%;
   overflow-y: auto;
   background-color:#ffffff;
+
 }
 
 .tableHeader{
@@ -457,14 +458,13 @@
 
 .pointer-to-profile{
   text-align:left;
-  padding-left: 8%;
   color:#489fb5;
-  width: 15%;
+  width: 18%;
   
 }
 .table-align-left{
   text-align:left;
-  padding-left: 8%;
+  /* padding-left: 9%; */
 }
 .block-checkbox{
   display: block;
@@ -488,7 +488,6 @@
 
 .nopointer-to-profile{
   cursor:context-menu;
-
 }
 
 .button7{
@@ -504,8 +503,8 @@
 }
 
 .button5 {
-  height: 7vh;
-  width: 2vw;
+  height: 0vh;
+  width: 0vw;
   background-color: white;
   border: none;
   color:black;
@@ -518,16 +517,25 @@
   cursor: pointer;
   border-radius: 12px;
   opacity: 8;
+  border-radius: 40px;
 }
 .button5:hover{
   opacity: 0.8;
 }
 
 thead button {
+  text-align: left;
   background-color: white;
   border:none;
   font-weight:bold;
   font-size: inherit;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+thead button::after{
+  content:'⇅';
+  margin-left: 1em;
 }
 
 thead button.ascending::after {
@@ -542,12 +550,17 @@ thead button.descending::after {
   margin-left: 1em;
 }
 
+tbody tr:hover {
+  background-color: #eee;
+}
+
+
 
 /*///////////////////////////////////////// CSS FOR MODAL////////////////////////////////////////////// */
 
 .button2 {
   height: 5vh;
-  width: 14vw;
+  width: 15vw;
   background-color: white;
   border: none;
   color: rgb(24, 23, 23);
@@ -567,18 +580,16 @@ thead button.descending::after {
 }
 
 .button3 {
-  height: 5vh;
-  width: 8vw;
-  background-color: #01070d;
+  height: 3.5vh;
+  width: 5vw;
+  background-color: white;
   border: none;
-  color: white;
-  padding: 6px 15px 18px 15px;
+  color: #01070d;
+  padding: 3px 3px 3px 3px;
   text-align: center;
-  text-decoration: none;
-  display: inline-block;
   font-size: 12px;
-  font-weight: 500;
-  margin: 0px 30px 0px 0px;
+  font-weight: 700;
+  margin: 5px 30px 0px 12px;
   cursor: pointer;
   border-radius: 12px;
 }
@@ -693,11 +704,19 @@ thead button.descending::after {
   margin-top: 4.8%;
   padding: 0% 0% 0% 0%;
 }
+
+.h5heading{
+  padding-left: 6%;
+  padding-right: 5.5%;
+}
 .reload{
-  margin-left: 9%;
+  height: 5vh;
+  width: 2vw;
+  margin-left: 0%;
   background-color:#01070d;
   color: white;
-  border: none;
+  border: 3px;
+  padding-left:0;
 }
 
 .representations{
