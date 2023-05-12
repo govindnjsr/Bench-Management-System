@@ -12,20 +12,17 @@ import BlockEmployee from '../../../Features/BlockEmployee.js';
 
 export default function AdminDashboard() {
   const authData = useContext(AuthContext);
-
-  const [allManagerDetails, setAllManagerDetails] = useState();
   const navigate = useNavigate();
   const handleViewEmployee = () => {
     authData.setShowSearchBar(false);
     navigate("/viewEmployee");
   };
- //--------------------------------------
-//---------------------------------
+  //--------------------------------------
+  //---------------------------------
 
-//--------------------------------------------------
+  //--------------------------------------------------
   const handleReport = async () => {
     authData.setShowSearchBar(false);
- 
     navigate('/viewReport');
   }
 
@@ -35,109 +32,112 @@ export default function AdminDashboard() {
   
  
   const fetchApis = async () => {
-
-    try {    
-    
-          //get manager Not Assigned Location
-     const getNotAssignedLocations=await axios.get(`http://localhost:2538/api/manager/get/notassignedLocation/${authData.managerId}`).
-     then((res)=>{
-      //by default location
-      authData.locationAcess.Gurugram=true;
-      authData.locationAcess.Bangalore=true;
-      authData.locationAcess.Hyderabad=true;
-            res.data.map((element)=>{
-             if(element==1){
-               authData.locationAcess.Gurugram=false;
-             }
-             else if(element==2){
-              authData.locationAcess.Bangalore=false;
-             }
-             else if(element==3){
-              authData.locationAcess.Hyderabad=false;
-             }
-            })
-           
-     })
+    try {
       //get all filtered data 
-      const allnewDto = await axios.post(
+      await axios.post(
         "http://localhost:2538/api/dto/get/filterd", authData.requestDto
-      );
-      authData.setNewData(allnewDto.data);
-
-      //count emp locatin wise 
-      const countOfEachLoc = await axios.get(
-        "http://localhost:2538/api/empdetails/get/countOfEachLocation"
-      ).then((res)=>{        
-        let tempData=[];
-           res.data.forEach(element => {
-                // console.log(element.count)              
-                tempData.push(parseInt(element.count));
-           });        
-           
-             //set pie chart labels
-              let pieChartLabels=[]
-              //remove bad indexes
-              let one=1,two=1,three=1;
-              if(authData.locationAcess["Gurugram"])
-              {pieChartLabels.push("Gurugram");one=0;}
-              if(authData.locationAcess["Bangalore"])
-              {two=0; pieChartLabels.push("Bangalore");}
-              if(authData.locationAcess["Hyderabad"])
-              {three=0; pieChartLabels.push("Hyderabad")}
-              authData.setPieChartLables(pieChartLabels);
-              if(one)tempData[0]=0;
-              if(two)tempData[1]=0;
-              if(three)tempData[2]=0;
-              authData.setCountOfEachLocation(tempData); 
-      })
-           //count of All BU location wise 
-      //gurugram
-      const countOfGurugramBU = await axios.get(
-        "http://localhost:2538/api/empdetails/get/gurugramBU"
-        ).then((res)=>{
-            authData.setGurugramBU(res.data);      
-      })
-      //Bangalore
-      const countOfBangaloreBU = await axios.get(
-        "http://localhost:2538/api/empdetails/get/bangaloreBU"
-      ).then((res)=>{       
-            authData.setBangaloreBU(res.data);         
-      })
-       //hyderabad
-       const countOfHyderabadBU = await axios.get(
-        "http://localhost:2538/api/empdetails/get/hyderabadBU"
-      ).then((res)=>{
-            authData.setHyderabadBU(res.data);       
-      })
-
-    
+      ).then((res) => {
+        authData.setNewData(res.data);
+      });
 
     }
     catch {
       console.log();
     }
   }
- useEffect(() => {
-    fetchApis();  
-  }, [authData.file,authData.appliedFilters, authData.dtoDetails, authData.post, authData.requestDto,authData.managerId]);
+  useEffect(() => {
+    fetchApis();
+  }, [authData.file, authData.requestDto]);
 
-  console.log("manager ID "+authData.managerId)
+
+  const fetchCountApi = async () => {
+    try {
+      //get manager Not Assigned Location
+      await axios.get(`http://localhost:2538/api/manager/get/notassignedLocation/${authData.managerId}`).
+        then((res) => {
+          //by default location
+          authData.locationAcess.Gurugram = true;
+          authData.locationAcess.Bangalore = true;
+          authData.locationAcess.Hyderabad = true;
+          res.data.map((element) => {
+            if (element == 1) {
+              authData.locationAcess.Gurugram = false;
+            }
+            else if (element == 2) {
+              authData.locationAcess.Bangalore = false;
+            }
+            else if (element == 3) {
+              authData.locationAcess.Hyderabad = false;
+            }
+          })
+
+        })
+      //count emp locatin wise 
+      const countOfEachLoc = await axios.get(
+        "http://localhost:2538/api/empdetails/get/countOfEachLocation"
+      ).then((res) => {
+        let tempData = [];
+        res.data.forEach(element => {
+          // console.log(element.count)              
+          tempData.push(parseInt(element.count));
+        });
+
+        //set pie chart labels
+        let pieChartLabels = []
+        //remove bad indexes
+        let one = 1, two = 1, three = 1;
+        if (authData.locationAcess["Gurugram"]) { pieChartLabels.push("Gurugram"); one = 0; }
+        if (authData.locationAcess["Bangalore"]) { two = 0; pieChartLabels.push("Bangalore"); }
+        if (authData.locationAcess["Hyderabad"]) { three = 0; pieChartLabels.push("Hyderabad") }
+        authData.setPieChartLables(pieChartLabels);
+        if (one) tempData[0] = 0;
+        if (two) tempData[1] = 0;
+        if (three) tempData[2] = 0;
+        authData.setCountOfEachLocation(tempData);
+      })
+      //count of All BU location wise 
+      //gurugram
+      const countOfGurugramBU = await axios.get(
+        "http://localhost:2538/api/empdetails/get/gurugramBU"
+      ).then((res) => {
+        authData.setGurugramBU(res.data);
+      })
+      //Bangalore
+      const countOfBangaloreBU = await axios.get(
+        "http://localhost:2538/api/empdetails/get/bangaloreBU"
+      ).then((res) => {
+        authData.setBangaloreBU(res.data);
+      })
+      //hyderabad
+      const countOfHyderabadBU = await axios.get(
+        "http://localhost:2538/api/empdetails/get/hyderabadBU"
+      ).then((res) => {
+        authData.setHyderabadBU(res.data);
+      })
+    }
+    catch { }
+  }
+
+  useEffect(() => {
+    fetchCountApi();
+  }, [])
+  console.log("manager ID " + authData.managerId)
   const allowData = (emp) => {
-  
+
     //----------Check for BU-----------------------------//
     let okBU = false;
-    let buData=Array.from(authData.buSet);
-    okBU=buData.includes(emp.businessUnit);
+    let buData = Array.from(authData.buSet);
+    okBU = buData.includes(emp.businessUnit);
     //------------check for the location--------------------------//
     let okLocation = false;
-    let locationData=Array.from(authData.Locations);
-    okLocation=locationData.includes(emp.location);
-   
+    let locationData = Array.from(authData.Locations);
+    okLocation = locationData.includes(emp.location);
+
     //------Check for Blocked status ----////
     let okStatus = false;
-    if(emp.blocked==true){okStatus=Array.from(authData.statusSet).includes("blocked");}
-    else{okStatus=Array.from(authData.statusSet).includes("notblocked");}
-  
+    if (emp.blocked == true) { okStatus = Array.from(authData.statusSet).includes("blocked"); }
+    else { okStatus = Array.from(authData.statusSet).includes("notblocked"); }
+
     // return okStatus;
     if (
       authData.checkFilter["location"] &&
@@ -155,11 +155,11 @@ export default function AdminDashboard() {
     else if (authData.checkFilter["location"]) return okLocation;
     else return true;
   };
-  const checkAssignedLocation=(emp)=>{
-        if(emp.location=="Gurugram" && authData.locationAcess["Gurugram"])return true;          
-        else if(emp.location=="Bangalore" && authData.locationAcess["Bangalore"])return true;
-        else if(emp.location=="Hyderabad" && authData.locationAcess["Hyderabad"])return true;
-        return false;
+  const checkAssignedLocation = (emp) => {
+    if (emp.location == "Gurugram" && authData.locationAcess["Gurugram"]) return true;
+    else if (emp.location == "Bangalore" && authData.locationAcess["Bangalore"]) return true;
+    else if (emp.location == "Hyderabad" && authData.locationAcess["Hyderabad"]) return true;
+    return false;
   }
   const [file, setFile] = useState([]);
   const inputFile = useRef(null);
@@ -168,51 +168,51 @@ export default function AdminDashboard() {
     setFile([...file, e.target.files[0]]);
 
   }
- 
+
   const getColor = (color) => {
     if (color) return 'red';
     return '';
-};
-console.log("new data "+JSON.stringify(authData.newData))
+  };
+  console.log("new data " + JSON.stringify(authData.newData))
 
- //Sorting
- const useSortableData = (items, config = null) => {
-  const [sortConfig, setSortConfig] = React.useState(config);
-  // console.log("aaaaaaaaaaaa"+JSON.stringify(items));
-  const sortedItems = React.useMemo(() => {
-    let sortableItems = items;
-    if (sortConfig !== null) {
-      sortableItems.sort((a, b) => {
-        if (a[sortConfig.key] < b[sortConfig.key]) {
-          return sortConfig.direction === 'ascending' ? -1 : 1;
-        }
-        if (a[sortConfig.key] > b[sortConfig.key]) {
-          return sortConfig.direction === 'ascending' ? 1 : -1;
-        }
-        return 0;
-      });
+  //Sorting
+  const useSortableData = (items, config = null) => {
+    const [sortConfig, setSortConfig] = React.useState(config);
+    // console.log("aaaaaaaaaaaa"+JSON.stringify(items));
+    const sortedItems = React.useMemo(() => {
+      let sortableItems = items;
+      if (sortConfig !== null) {
+        sortableItems.sort((a, b) => {
+          if (a[sortConfig.key] < b[sortConfig.key]) {
+            return sortConfig.direction === 'ascending' ? -1 : 1;
+          }
+          if (a[sortConfig.key] > b[sortConfig.key]) {
+            return sortConfig.direction === 'ascending' ? 1 : -1;
+          }
+          return 0;
+        });
+      }
+      return sortableItems;
+    }, [items, sortConfig]);
+    const requestSort = key => {
+      let direction = 'ascending';
+      if (sortConfig && sortConfig.key === key && sortConfig.direction === 'ascending') {
+        direction = 'descending';
+      }
+      setSortConfig({ key, direction });
     }
-    return sortableItems;
-  }, [items, sortConfig]);  
-  const requestSort = key => {
-    let direction = 'ascending';
-    if (sortConfig && sortConfig.key === key && sortConfig.direction === 'ascending') {
-      direction = 'descending';
+    return { items: sortedItems, requestSort, sortConfig };
+  };
+  //-----------------------------------------
+  const { items, requestSort, sortConfig } = useSortableData(authData.newData);
+  const getClassNamesFor = (name) => {
+    if (!sortConfig) {
+      return;
     }
-    setSortConfig({ key, direction });
-  }  
-  return {items: sortedItems, requestSort, sortConfig };
-};
-//-----------------------------------------
-const { items, requestSort , sortConfig} = useSortableData(authData.newData);
-const getClassNamesFor = (name) => {
-  if (!sortConfig) {
-    return;
-  }
-  return sortConfig.key === name ? sortConfig.direction : undefined;
-};
+    return sortConfig.key === name ? sortConfig.direction : undefined;
+  };
 
-//-----------------------------------------
+  //-----------------------------------------
 
   return (
     <div className="window">
@@ -240,29 +240,29 @@ const getClassNamesFor = (name) => {
           <div className="table">
             <div className="table-format">
               <table className="table">
-              <thead className="thread1">
+                <thead className="thread1">
                   <tr className="tableHeader">
                     <th className="table-align-left" scope="col">
                       Block
                     </th>
                     <th className="table-align-left" scope="col">
-                    <button  className={getClassNamesFor('employeeName')} type="button" onClick={() => requestSort('employeeName')}>
-                      Name
-                    </button>
+                      <button className={getClassNamesFor('employeeName')} type="button" onClick={() => requestSort('employeeName')}>
+                        Name
+                      </button>
                     </th>
                     <th className="table-align-left" scope="col">
                       Email
                     </th>
                     <th className="table-align-left" scope="col">
-                    <button  className={getClassNamesFor('location')} type="button" onClick={() => requestSort('location')}>
-                    Location
-                    </button> 
+                      <button className={getClassNamesFor('location')} type="button" onClick={() => requestSort('location')}>
+                        Location
+                      </button>
                     </th>
                     <th className="table-align-left" scope="col">
-                    <button  className={getClassNamesFor('benchPeriod')} type="button" onClick={() => requestSort('benchPeriod')}>
-                    Bench_Aging
-                    </button> 
-                      
+                      <button className={getClassNamesFor('benchPeriod')} type="button" onClick={() => requestSort('benchPeriod')}>
+                        Bench_Aging
+                      </button>
+
                     </th>
                     <th className="table-align-left" scope="col">
                       Resume
@@ -275,12 +275,12 @@ const getClassNamesFor = (name) => {
                 <tbody className="thread1">
                   {authData.newData &&
                     authData.newData.map((emp) =>
-                      allowData(emp) == true && checkAssignedLocation(emp) &&                       
+                      allowData(emp) == true && checkAssignedLocation(emp) &&
                         ((authData.searchValue == "" ||
                           emp.employeeName
                             .toLowerCase()
-                            .includes(authData.searchValue))&& emp.benchStatus==true )? (
-                        <tr style={{color:getColor(emp.blocked)}}>
+                            .includes(authData.searchValue)) && emp.benchStatus == true) ? (
+                        <tr style={{ color: getColor(emp.blocked) }}>
                           {/* <th className='pointer-to-profile' title="Click on ID to view profile" scope="row" onClick={() => { handleViewEmployee(); authData.handleEmpId(emp.employeeId); }} >{emp.employeeId}</th> */}
                           <th className="table-align-left">
                             <BlockEmployee id={emp.employeeId} blocked={emp.blocked} name={emp.employeeName} />
@@ -293,7 +293,7 @@ const getClassNamesFor = (name) => {
                             {emp.email}
                           </td>
                           <td className="table-align-left">
-                            {emp.location }
+                            {emp.location}
                           </td>
                           <td className="table-align-left">
                             {emp.benchStatus == 0
@@ -302,12 +302,12 @@ const getClassNamesFor = (name) => {
                           </td>
                           {/* <td className="table-align-left"><UpdateEmployee id = {emp.employeeId}/></td> */}
                           <td className="table-align-left">
-                          <UploadFile id={emp.employeeId} resume={emp.resume}/>&nbsp;&nbsp;
+                            <UploadFile id={emp.employeeId} resume={emp.resume} />&nbsp;&nbsp;
                             <DownloadFile id={emp.employeeId} name={emp.employeeName} />
                           </td>
 
                           <td className="table-align-left-action">
-                            <UpdateEmployee id={emp.employeeId} name={emp.employeeName}/>
+                            <UpdateEmployee id={emp.employeeId} name={emp.employeeName} />
                             {/* {" "} */}
                             &nbsp; &nbsp;
                           </td>

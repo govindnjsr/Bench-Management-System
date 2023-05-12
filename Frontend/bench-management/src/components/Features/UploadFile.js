@@ -5,8 +5,11 @@ import Form from "react-bootstrap/Form";
 import AuthContext from '../Global/AuthContext.js';
 function UploadFile(props) {
   const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleClose = () => {
+    setShow(false)
+    authData.setFile([]);
+  };
+  const handleShow = () => setShow(true); 
   const inputFile = useRef(null);
   const authData = useContext(AuthContext);
   const handleChange = (e) => {
@@ -53,7 +56,9 @@ function UploadFile(props) {
         <Modal.Footer>
         <button className='button3' onClick={handleClose}>Cancel</button> &nbsp;
            <button className='button3' form="update" onClick={() => { saveData(props.id); handleClose(); }} 
-           disabled = {authData.file.length === 0 ? true : false}>Upload</button>
+           disabled = {authData.file.length === 0 ? true : false}
+           style={authData.file.length === 0 ? {backgroundColor:'grey'} : {}}
+            >Upload</button>
         </Modal.Footer>
       </Modal>
     </>

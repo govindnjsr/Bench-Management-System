@@ -32,50 +32,13 @@ export default function AdminDashboard() {
   const fetchApis = async () => {
     authData.setShowSearchBar(true)
     try {
-      const filteredData = await axios.post(
-        "http://localhost:2538/api/dto/get/filterd",
-        authData.requestDto
-      );
-      authData.setNewData(filteredData.data);
-      // console.log("aaaaaaaaaaa"+authData.newData);
-
-      //count emp locatin wise
-      const countOfEachLoc = await axios
-        .get("http://localhost:2538/api/empdetails/get/countOfEachLocation")
-        .then((res) => {
-          let tempData = [];
-          res.data.forEach((element) => {
-            tempData.push(parseInt(element.count));
-          });
-          authData.setCountOfEachLocation(tempData);
-        });
-
-      //count of All BU location wise
-      //gurugram
-      const countOfGurugramBU = await axios
-        .get("http://localhost:2538/api/empdetails/get/gurugramBU")
-        .then((res) => {
-          authData.setGurugramBU(res.data);
-        });
-
-      //Bangalore
-      const countOfBangaloreBU = await axios
-        .get("http://localhost:2538/api/empdetails/get/bangaloreBU")
-        .then((res) => {
-          authData.setBangaloreBU(res.data);
-        });
-
-
-      //hyderabad
-      const countOfHyderabadBU = await axios
-        .get("http://localhost:2538/api/empdetails/get/hyderabadBU")
-        .then((res) => {
-          authData.setHyderabadBU(res.data);
-        });
-    } catch {
-
-      console.log();
+      await axios.post(
+        "http://localhost:2538/api/dto/get/filterd", authData.requestDto
+      ).then((res) => {
+        authData.setNewData(res.data);
+      });
     }
+    catch{}
   };
  console.log("refresh "+refreshData)
 
@@ -93,6 +56,53 @@ export default function AdminDashboard() {
     refreshData
   ]);
 
+  useEffect(() => {   
+    fetchApis();  
+  }, [authData.requestDto,authData.file,authData.blockStatus]);
+
+const fetchCountApis = async () => {
+  
+  try{
+
+    //count emp locatin wise 
+    await axios.get(
+      "http://localhost:2538/api/empdetails/get/countOfEachLocation"
+    ).then((res)=>{        
+      let tempData=[];
+         res.data.forEach(element => {                
+              tempData.push(parseInt(element.count));
+         });
+         authData.setCountOfEachLocation(tempData);           
+    })
+
+    //count of All BU location wise 
+    //gurugram
+    await axios.get(
+      "http://localhost:2538/api/empdetails/get/gurugramBU"
+      ).then((res)=>{
+          authData.setGurugramBU(res.data);      
+    })
+
+    //Bangalore
+    await axios.get(
+      "http://localhost:2538/api/empdetails/get/bangaloreBU"
+    ).then((res)=>{       
+          authData.setBangaloreBU(res.data);         
+    })
+
+     //hyderabad
+     await axios.get(
+      "http://localhost:2538/api/empdetails/get/hyderabadBU"
+    ).then((res)=>{
+          authData.setHyderabadBU(res.data);       
+    })
+  }
+  catch{}
+}
+
+  useEffect(() => {
+    fetchCountApis();
+  }, [])
 
   const allowData = (emp) => {
     // console.log("emp "+JSON.stringify(emp))

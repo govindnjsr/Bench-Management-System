@@ -7,7 +7,7 @@ import Accordion from "react-bootstrap/Accordion";
 function BlockEmployee(props) {
   const authData = useContext(AuthContext);
   const [show, setShow] = useState(false);
-  const [res, setRes]=useState({})
+  const [res, setRes] = useState({})
   const [isChecked, setIsChecked] = useState(false);
   const [eventx,setEvent]=useState();
   const [currentDate,setCurrentDate]=useState()
@@ -71,18 +71,17 @@ function BlockEmployee(props) {
   const todayDate=()=>{
     var today = new Date();
     var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-    if(today.getDate()%10 == today.getDate() && today.getMonth()+1 %10==today.getMonth()+1 ){
-      date = today.getFullYear() + '-0'+ (today.getMonth() + 1) + '-0' + today.getDate();
-      console.log("Date"+date);
+    if (today.getDate() % 10 == today.getDate() && today.getMonth() + 1 % 10 == today.getMonth() + 1) {
+      date = today.getFullYear() + '-0' + (today.getMonth() + 1) + '-0' + today.getDate();
+      console.log("Date" + date);
     }
-    else if(today.getDate()%10 == today.getDate()){
-      date = today.getFullYear()+ (today.getMonth() + 1) + '-0' + today.getDate();
-      console.log("Date"+date);
+    else if (today.getDate() % 10 == today.getDate()) {
+      date = today.getFullYear() + (today.getMonth() + 1) + '-0' + today.getDate();
+      console.log("Date" + date);
     }
-    else if(today.getMonth()+1 %10==today.getMonth()+1)
-    {
+    else if (today.getMonth() + 1 % 10 == today.getMonth() + 1) {
       date = today.getFullYear() + '-0' + (today.getMonth() + 1) + '-' + today.getDate();
-      console.log("Date"+date);
+      console.log("Date" + date);
     }
     // return date;
     setCurrentDate(date);
@@ -134,7 +133,7 @@ function BlockEmployee(props) {
           <button className="button3" variant="secondary" onClick={handleCloseBlocked}>
             Close
           </button>
-          <button form="block" className="button3" variant="primary" onClick={(e) => {handleUnblockApplyResult(e, props.id); handleClose();}}>Apply</button>
+          <button form="block" className="button3" variant="primary" onClick={(e) => { handleUnblockApplyResult(e, props.id); handleClose(); }}>Apply</button>
         </Modal.Footer>
       </Modal>
         :
@@ -159,7 +158,7 @@ function BlockEmployee(props) {
               </Form.Group>
             </Form>
             <Accordion>
-            <Accordion.Item eventKey="0">
+              <Accordion.Item eventKey="0">
                 <Accordion.Header><div className="pfilter">Previous Interview Details</div></Accordion.Header>
                 <Accordion.Body>
                 <table className="table">
@@ -197,7 +196,7 @@ function BlockEmployee(props) {
               </table>
                 </Accordion.Body>
               </Accordion.Item>
-              </Accordion>
+            </Accordion>
           </Modal.Body>
           <Modal.Footer>
             <button className="button3" variant="secondary" onClick={handleCloseBlocked}>

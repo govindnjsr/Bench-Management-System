@@ -28,21 +28,21 @@ function UpdateEmployee(props) {
     const handleShow = () => setShow(true);
     const showDetail = async (id) => {
         const fetchedData = await axios.get(`http://localhost:2538/api/empdetails/get/${id}`);
-        fetchedData.data.benchStatus=false;
+        fetchedData.data.benchStatus = false;
         setFetchEmpDetail(fetchedData.data);
-      
+
     }
 
-   
+
     const saveDataAtBackend = async () => {
         try {
-           // setFetchEmpDetail({...fetchedEmpDetail,benchStatus:false});
+            // setFetchEmpDetail({...fetchedEmpDetail,benchStatus:false});
             console.log(fetchedEmpDetail.benchStatus)
             console.log("new POST DATA " + JSON.stringify(fetchedEmpDetail));
             //    console.log("ID"+empDetail.id);
             const allEmp = await axios.put(`http://localhost:2538/api/empdetails/update/${fetchedEmpDetail.id}`, fetchedEmpDetail);
             //    console.log("Result"+allEmp);
-               authData.setPost({});
+            authData.setPost({});
         }
         catch {
             console.log()
@@ -56,7 +56,7 @@ function UpdateEmployee(props) {
     return (
         <>
             <button className='button5' onClick={() => { handleShow(); showDetail(props.id); }}>
-            <i class="fa-solid fa-circle-minus"></i>
+                <i class="fa-solid fa-circle-minus"></i>
             </button>
 
 
@@ -71,7 +71,7 @@ function UpdateEmployee(props) {
                 </Modal.Header>
                 <Modal.Body>
                     <Form id='add'>
-                        <p>Are you sure you want to remove <b>{props.name}</b> from bench?</p>                      
+                        <p>Are you sure you want to remove <b>{props.name}</b> from bench?</p>
                         {/* <Form.Group>
                             <Form.Label>Bench Status</Form.Label>
                             <Form.Select aria-label="Default select example" name="benchStatus" onChange={handleChangeValue.bind(this)} >
@@ -81,7 +81,7 @@ function UpdateEmployee(props) {
                                 <option value={true} selected={fetchedEmpDetail.benchStatus == true}  >Add on Bench</option>
                             </Form.Select>
                         </Form.Group><br /> */}
-                       
+
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
