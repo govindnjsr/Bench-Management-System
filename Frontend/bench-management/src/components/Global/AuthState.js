@@ -38,6 +38,8 @@ export default function AuthState(props) {
             "springboot": false,
             "byDefault":false  
           })
+
+          setShowSearchBar(true)
          
     }
     //--------------------------------------------

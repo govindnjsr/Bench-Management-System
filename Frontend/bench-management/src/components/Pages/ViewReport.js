@@ -24,8 +24,6 @@ function ViewReport(props) {
   }
  //console.log("locationAcess "+JSON.stringify(authData.locationAcess))
   const [curIndex, setCurrentIndex] = useState(-1);
-
-  const loactionCounts = [];
   const [mydata, setData] = useState({
     labels: authData.pieChartLabels,
     datasets: [
@@ -87,7 +85,7 @@ function ViewReport(props) {
           <button className="button3"  onClick={handleBackButton} >
             <i className="fa-sharp fa-solid fa-arrow-left"></i> &nbsp;BACK
           </button>
-          <h5>Representation of Business Units on the basis of Locations.</h5>
+          <h5 className="h5heading">Representation of Business Units on the basis of Locations.</h5>
           <button className="reload"  onClick={handleRefresh} >
           <i class="fa-solid fa-rotate-right fa-lg"></i>
           </button>
