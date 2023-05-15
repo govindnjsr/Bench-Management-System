@@ -24,11 +24,12 @@ export default function AdminDashboard() {
     authData.setShowSearchBar(false);
     navigate("/viewReport");
   };
-   const [refreshData,setRefresh]=useState(false)
+  const [refreshData, setRefresh] = useState(false)
   function handleRefresh() {
-      setRefresh(!refreshData);
+    navigate("/")
+    setRefresh(!refreshData);
   }
-  
+
 
   const fetchApis = async () => {
     authData.setShowSearchBar(true)
@@ -39,9 +40,9 @@ export default function AdminDashboard() {
         authData.setNewData(res.data);
       });
     }
-    catch{}
+    catch { }
   };
- console.log("refresh "+refreshData)
+  console.log("refresh " + refreshData)
 
   useEffect(() => {
     fetchApis();
@@ -57,49 +58,49 @@ export default function AdminDashboard() {
     refreshData
   ]);
 
-  useEffect(() => {   
-    fetchApis();  
-  }, [authData.requestDto,authData.file,authData.blockStatus]);
+  useEffect(() => {
+    fetchApis();
+  }, [authData.requestDto, authData.file, authData.blockStatus]);
 
-const fetchCountApis = async () => {
-  
-  try{
+  const fetchCountApis = async () => {
 
-    //count emp locatin wise 
-    await axios.get(
-      "http://localhost:2538/api/empdetails/get/countOfEachLocation"
-    ).then((res)=>{        
-      let tempData=[];
-         res.data.forEach(element => {                
-              tempData.push(parseInt(element.count));
-         });
-         authData.setCountOfEachLocation(tempData);           
-    })
+    try {
 
-    //count of All BU location wise 
-    //gurugram
-    await axios.get(
-      "http://localhost:2538/api/empdetails/get/gurugramBU"
-      ).then((res)=>{
-          authData.setGurugramBU(res.data);      
-    })
+      //count emp locatin wise 
+      await axios.get(
+        "http://localhost:2538/api/empdetails/get/countOfEachLocation"
+      ).then((res) => {
+        let tempData = [];
+        res.data.forEach(element => {
+          tempData.push(parseInt(element.count));
+        });
+        authData.setCountOfEachLocation(tempData);
+      })
 
-    //Bangalore
-    await axios.get(
-      "http://localhost:2538/api/empdetails/get/bangaloreBU"
-    ).then((res)=>{       
-          authData.setBangaloreBU(res.data);         
-    })
+      //count of All BU location wise 
+      //gurugram
+      await axios.get(
+        "http://localhost:2538/api/empdetails/get/gurugramBU"
+      ).then((res) => {
+        authData.setGurugramBU(res.data);
+      })
 
-     //hyderabad
-     await axios.get(
-      "http://localhost:2538/api/empdetails/get/hyderabadBU"
-    ).then((res)=>{
-          authData.setHyderabadBU(res.data);       
-    })
+      //Bangalore
+      await axios.get(
+        "http://localhost:2538/api/empdetails/get/bangaloreBU"
+      ).then((res) => {
+        authData.setBangaloreBU(res.data);
+      })
+
+      //hyderabad
+      await axios.get(
+        "http://localhost:2538/api/empdetails/get/hyderabadBU"
+      ).then((res) => {
+        authData.setHyderabadBU(res.data);
+      })
+    }
+    catch { }
   }
-  catch{}
-}
 
   useEffect(() => {
     fetchCountApis();
@@ -158,8 +159,8 @@ const fetchCountApis = async () => {
   // console.log("LocationSet "+Array.from(authData.Locations));
   // console.log("BUSet "+Array.from(authData.buSet));
   // console.log("StatusSet "+Array.from(authData.statusSet));
- // console.log("req dto "+JSON.stringify(authData.requestDto))
- console.log("block status "+authData.blockStatus)
+  // console.log("req dto "+JSON.stringify(authData.requestDto))
+  console.log("block status " + authData.blockStatus)
 
   //--------------------------------
   //Sorting
@@ -277,11 +278,11 @@ const fetchCountApis = async () => {
                   {authData.newData &&
                     authData.newData.map((emp) =>
                       allowData(emp) == true &&
-                      (authData.searchValue == "" ||
-                        emp.employeeName
-                          .toLowerCase()
-                          .includes(authData.searchValue)) &&
-                      emp.benchStatus == true ? (
+                        (authData.searchValue == "" ||
+                          emp.employeeName
+                            .toLowerCase()
+                            .includes(authData.searchValue)) &&
+                        emp.benchStatus == true ? (
                         <tr style={{ color: getColor(emp.blocked) }}>
                           <th className="table-align-left">
                             <BlockEmployee
@@ -292,7 +293,7 @@ const fetchCountApis = async () => {
                           </th>
                           <td
                             className="pointer-to-profile"
-                            title="Click on Name to view profile"
+                            title="View profile"
                             scope="row"
                             onClick={() => {
                               handleViewEmployee();
@@ -307,8 +308,8 @@ const fetchCountApis = async () => {
                             {emp.benchStatus == 0
                               ? "Removed From Bench"
                               : `${Math.round(
-                                  emp.benchPeriod * 0.032855
-                                )} Months, ${emp.benchPeriod % 30} Days`}
+                                emp.benchPeriod * 0.032855
+                              )} Months, ${emp.benchPeriod % 30} Days`}
                           </td>
                           <td className="table-align-left">
                             <UploadFile
@@ -331,7 +332,7 @@ const fetchCountApis = async () => {
                           </td>
                         </tr>
                       ) : (
-                        <tr></tr>
+                        null
                       )
                     )}
                 </tbody>
