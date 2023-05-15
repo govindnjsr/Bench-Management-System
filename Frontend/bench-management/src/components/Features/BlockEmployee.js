@@ -142,6 +142,7 @@ function BlockEmployee(props) {
           </button>
           <button form="block" className="button3" variant="primary" 
            disabled={unblockValidation()?true:false}
+           style={unblockValidation()? {backgroundColor:'grey'} : {}}
            onClick={(e) => { handleUnblockApplyResult(e, props.id); handleClose(); }}>Apply</button>
         </Modal.Footer>
       </Modal>
@@ -213,6 +214,7 @@ function BlockEmployee(props) {
             </button>
             <button form="block" className="button3" variant="primary"
            disabled = {blockValidation() ? true : false}
+           style={blockValidation() ? {backgroundColor:'grey'} : {}}
             onClick={(e) => handleApplyBlockedResult(e,props.id)}>Apply</button>
           </Modal.Footer>
         </Modal>}
