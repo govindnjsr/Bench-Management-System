@@ -26,12 +26,13 @@ export default function AdminDashboard() {
     navigate('/viewReport');
   }
 
-  const [refreshData,setRefresh]=useState(false)
+  const [refreshData, setRefresh] = useState(false)
   function handleRefresh() {
-      setRefresh(!refreshData);
+    navigate("/")
+    setRefresh(!refreshData);
   }
-  
- 
+
+
   const fetchApis = async () => {
     try {
       //get all filtered data 
@@ -49,7 +50,7 @@ export default function AdminDashboard() {
   useEffect(() => {
     fetchApis();
     authData.setBlockStatus(0);
-  }, [authData.file, authData.requestDto,authData.blockStatus,refreshData]);
+  }, [authData.file, authData.requestDto, authData.blockStatus, refreshData]);
 
 
   const fetchCountApi = async () => {
@@ -122,7 +123,7 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     fetchCountApi();
-    
+
   }, [])
   console.log("manager ID " + authData.managerId)
   const allowData = (emp) => {
@@ -230,14 +231,14 @@ export default function AdminDashboard() {
           <div className="actions-manager">
             <p className="employees">EMPLOYEES</p>
             <div className='buttons'>
-            <button className="button2" onClick={handleReport}>
-              <i className="fa-solid fa-chart-simple"></i> &nbsp;
-              VIEW REPORT
-            </button>
-            <button className="reload"  onClick={handleRefresh} >
-          <i class="fa-solid fa-rotate-right fa-lg"></i>
-          </button>
-          </div>
+              <button className="button2" onClick={handleReport}>
+                <i className="fa-solid fa-chart-simple"></i> &nbsp;
+                VIEW REPORT
+              </button>
+              <button className="reload" onClick={handleRefresh} >
+                <i class="fa-solid fa-rotate-right fa-lg"></i>
+              </button>
+            </div>
             {/* </div> */}
           </div>
           <div className="table">

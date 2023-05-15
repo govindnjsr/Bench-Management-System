@@ -4,26 +4,33 @@ import axios from 'axios';
 import logoImage from '../../../Assets/Images/accoliteLogo.png';
 import jwt_decode from "jwt-decode";
 import AuthContext from '../../Global/AuthContext.js';
-import ManagerDashboard from '../Dashboard/Manager/ManagerDashboard.js';
-import AdminDashboard from '../Dashboard/Admin/AdminDashboard.js';
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const authData = useContext(AuthContext);
   const manager = 2;
   const [loginApiData, setLoginApiData] = useState();
-
+  const navigate = useNavigate();
   function handleCallbackResponse(response) {
-     var userObject = jwt_decode(response.credential);
+    var userObject = jwt_decode(response.credential);
     authData.setGoogleData(userObject);
 
   }
+
+  const showDashboard = () => {
+    if (authData.currentRole === manager) {
+      navigate("/manager");
+    }
+    else navigate("/admin");
+  }
+
   useEffect(() => {
     loginApiData && loginApiData.forEach(element => {
       if (!authData.loopEntry) authData.setLoopEntry(true);
       if (authData.googleData && element.email == authData.googleData.email) {
         authData.handleLogin();
         authData.setCurrentRole(element.role);
-        if(element.role === manager) {
+        if (element.role === manager) {
           authData.setManagerId(element.empId);
 
         }
@@ -41,7 +48,7 @@ export default function Login() {
     try {
       const loginData = await axios.get('http://localhost:2538/api/login/get')
       setLoginApiData(loginData.data);
-     }
+    }
     catch {
       console.log()
     }
@@ -83,11 +90,7 @@ export default function Login() {
 
         </>)
       : (
-        (authData.currentRole === manager) ? 
-          (
-            <ManagerDashboard />
-          )
-          : <AdminDashboard />
+        showDashboard()
       )
   )
 }
