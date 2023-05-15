@@ -49,7 +49,17 @@ export default function AdminDashboard() {
   useEffect(() => {
     fetchApis();
     authData.setBlockStatus(0);
-  }, [authData.file, authData.requestDto,authData.blockStatus,refreshData]);
+
+  },[
+    authData.post,
+    authData.requestDto,
+    authData.Locations,
+    authData.buSet,
+    authData.statusSet,
+    authData.file,
+    authData.blockStatus,
+    refreshData
+  ]);
 
 
   const fetchCountApi = async () => {
@@ -119,7 +129,7 @@ export default function AdminDashboard() {
     }
     catch { }
   }
-
+  
   useEffect(() => {
     fetchCountApi();
     
