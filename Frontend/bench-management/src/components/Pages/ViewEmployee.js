@@ -15,6 +15,13 @@ export default function ViewEmployee() {
   const [benchPeriodEmp, setBenchPeriodEmp] = useState(0);
   const navigate = useNavigate();
 
+const navigateToLogin = () => {
+  navigate("/");
+  return (
+    <Login/>
+  )
+}
+
   function handleBackButton() {
     authData.setShowSearchBar(true);
     navigate('/');
@@ -28,9 +35,9 @@ export default function ViewEmployee() {
           setEmpDetail(response.data);
         });
 
-      authData.dtoData &&  authData.dtoData.map(key => {
-        if(key.employeeId === empId) setBenchPeriodEmp(key.benchPeriod);
-      })
+      // authData.dtoData &&  authData.dtoData.map(key => {
+      //   if(key.employeeId === empId) setBenchPeriodEmp(key.benchPeriod);
+      // })
     }
     catch {
       console.log();
@@ -43,7 +50,7 @@ console.log(empDetail)
 
   // console.log(empSkills);
   return (
-    authData.isAuthentication ?
+    authData.isAuthentication === true ?
       <div >
         <div className='profile-window'>
 
@@ -162,6 +169,8 @@ console.log(empDetail)
         </div>
       </div>
       :
-      <Login />
+      (
+      navigateToLogin()
+      )
   )
 }

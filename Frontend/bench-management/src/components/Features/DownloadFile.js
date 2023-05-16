@@ -26,7 +26,7 @@ export default function DownloadFile(props) {
         document.body.appendChild(link);
         link.click();
       })
-      .catch(error => console.log(error));
+      .catch(error => alert("Sorry, No resume Available !"));
 
   };
   return (
@@ -46,7 +46,7 @@ export default function DownloadFile(props) {
         <Modal.Body>
           <Form id="download">
             <button className='button3' form="download" onClick={(e) => { handleDownload(e, props.id, props.name); handleClose(); }}>Download</button>
-            <button className='button3' type="button">Cancel</button> &nbsp;
+            <button className='button3' type="button" onClick={handleClose}>Cancel</button> &nbsp;
           </Form>
         </Modal.Body>
       </Modal>
