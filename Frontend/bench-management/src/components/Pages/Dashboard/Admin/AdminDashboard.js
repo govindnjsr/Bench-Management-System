@@ -10,6 +10,7 @@ import AuthContext from "../../../Global/AuthContext.js";
 import UploadFile from "../../../Features/UploadFile.js";
 import DownloadFile from "../../../Features/DownloadFile.js";
 import BlockEmployee from "../../../Features/BlockEmployee.js";
+import Login from "../../Home/Login";
 
 export default function AdminDashboard() {
   const authData = useContext(AuthContext);
@@ -26,10 +27,9 @@ export default function AdminDashboard() {
   };
   const [refreshData, setRefresh] = useState(false)
   function handleRefresh() {
-    navigate("/")
+    authData.setNewData([]);
     setRefresh(!refreshData);
   }
-
 
   const fetchApis = async () => {
     authData.setShowSearchBar(true)
@@ -42,30 +42,15 @@ export default function AdminDashboard() {
     }
     catch { }
   };
-  console.log("refresh " + refreshData)
-
+  // console.log("refresh " + refreshData)
   useEffect(() => {
-    fetchApis();
+    const timeout = setTimeout(() => fetchApis(), 200)
     authData.setBlockStatus(0);
-  }, [
-    authData.post,
-    authData.requestDto,
-    authData.Locations,
-    authData.buSet,
-    authData.statusSet,
-    authData.file,
-    authData.blockStatus,
-    refreshData
-  ]);
-
-  useEffect(() => {
-    fetchApis();
-  }, [authData.requestDto, authData.file, authData.blockStatus]);
+    return () => clearTimeout(timeout);
+  }, [authData.requestDto, authData.file, authData.blockStatus, refreshData]);
 
   const fetchCountApis = async () => {
-
     try {
-
       //count emp locatin wise 
       await axios.get(
         "http://localhost:2538/api/empdetails/get/countOfEachLocation"
@@ -75,28 +60,6 @@ export default function AdminDashboard() {
           tempData.push(parseInt(element.count));
         });
         authData.setCountOfEachLocation(tempData);
-      })
-
-      //count of All BU location wise 
-      //gurugram
-      await axios.get(
-        "http://localhost:2538/api/empdetails/get/gurugramBU"
-      ).then((res) => {
-        authData.setGurugramBU(res.data);
-      })
-
-      //Bangalore
-      await axios.get(
-        "http://localhost:2538/api/empdetails/get/bangaloreBU"
-      ).then((res) => {
-        authData.setBangaloreBU(res.data);
-      })
-
-      //hyderabad
-      await axios.get(
-        "http://localhost:2538/api/empdetails/get/hyderabadBU"
-      ).then((res) => {
-        authData.setHyderabadBU(res.data);
       })
     }
     catch { }
@@ -207,6 +170,9 @@ export default function AdminDashboard() {
   //-----------------------------------------
 
   return (
+    authData.isAuthentication === true ? 
+    ( 
+      <>
     <div className="window">
       <div className="top">
         <Navbar />
@@ -342,5 +308,10 @@ export default function AdminDashboard() {
         </div>
       </div>
     </div>
+    </> 
+    )
+    : (
+      <Login/>
+    )
   );
 }

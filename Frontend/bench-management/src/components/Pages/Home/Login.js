@@ -11,10 +11,10 @@ export default function Login() {
   const manager = 2;
   const [loginApiData, setLoginApiData] = useState();
   const navigate = useNavigate();
+  
   function handleCallbackResponse(response) {
     var userObject = jwt_decode(response.credential);
     authData.setGoogleData(userObject);
-
   }
 
   const showDashboard = () => {

@@ -9,6 +9,7 @@ import AuthContext from '../../../Global/AuthContext.js';
 import UploadFile from '../../../Features/UploadFile.js';
 import DownloadFile from '../../../Features/DownloadFile.js';
 import BlockEmployee from '../../../Features/BlockEmployee.js';
+import Login from "../../Home/Login";
 
 export default function AdminDashboard() {
   const authData = useContext(AuthContext);
@@ -28,12 +29,12 @@ export default function AdminDashboard() {
 
   const [refreshData, setRefresh] = useState(false)
   function handleRefresh() {
-    navigate("/")
+    authData.setNewData([]);
     setRefresh(!refreshData);
   }
 
-
   const fetchApis = async () => {
+    authData.setShowSearchBar(true)
     try {
       //get all filtered data 
       await axios.post(
@@ -48,8 +49,9 @@ export default function AdminDashboard() {
     }
   }
   useEffect(() => {
-    fetchApis();
+    const timeout = setTimeout(() => fetchApis(), 200)
     authData.setBlockStatus(0);
+    return () => clearTimeout(timeout);
   }, [authData.file, authData.requestDto, authData.blockStatus, refreshData]);
 
 
@@ -98,33 +100,14 @@ export default function AdminDashboard() {
         if (three) tempData[2] = 0;
         authData.setCountOfEachLocation(tempData);
       })
-      //count of All BU location wise 
-      //gurugram
-      const countOfGurugramBU = await axios.get(
-        "http://localhost:2538/api/empdetails/get/gurugramBU"
-      ).then((res) => {
-        authData.setGurugramBU(res.data);
-      })
-      //Bangalore
-      const countOfBangaloreBU = await axios.get(
-        "http://localhost:2538/api/empdetails/get/bangaloreBU"
-      ).then((res) => {
-        authData.setBangaloreBU(res.data);
-      })
-      //hyderabad
-      const countOfHyderabadBU = await axios.get(
-        "http://localhost:2538/api/empdetails/get/hyderabadBU"
-      ).then((res) => {
-        authData.setHyderabadBU(res.data);
-      })
     }
     catch { }
   }
   
   useEffect(() => {
     fetchCountApi();
-
   }, [])
+
   console.log("manager ID " + authData.managerId)
   const allowData = (emp) => {
 
@@ -219,6 +202,7 @@ export default function AdminDashboard() {
   //-----------------------------------------
 
   return (
+    authData.isAuthentication === true ?
     <div className="window">
       <div className="top">
         <Navbar />
@@ -277,7 +261,8 @@ export default function AdminDashboard() {
                   </tr>
                 </thead>
                 <tbody className="thread1">
-                  {authData.newData &&
+                  {
+                  authData.newData &&
                     authData.newData.map((emp) =>
                       allowData(emp) == true && checkAssignedLocation(emp) &&
                         ((authData.searchValue == "" ||
@@ -328,5 +313,7 @@ export default function AdminDashboard() {
         </div>
       </div>
     </div>
+    :
+    <Login/>
   );
 }
