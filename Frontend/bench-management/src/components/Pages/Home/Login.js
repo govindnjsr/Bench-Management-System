@@ -8,11 +8,13 @@ import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const authData = useContext(AuthContext);
+  const { REACT_APP_GOOGLE_CLIENT_ID, REACT_APP_URL} = process.env;
   const manager = 2;
   const [loginApiData, setLoginApiData] = useState();
   const navigate = useNavigate();
-  
+
   function handleCallbackResponse(response) {
+    // console.log(response.credential);
     var userObject = jwt_decode(response.credential);
     authData.setGoogleData(userObject);
   }
@@ -46,7 +48,7 @@ export default function Login() {
   //calling api
   const fetchApi = async () => {
     try {
-      const loginData = await axios.get('http://localhost:2538/api/login/get')
+      const loginData = await axios.get(`${REACT_APP_URL}/login/get`) // add local url in .env file
       setLoginApiData(loginData.data);
     }
     catch {
@@ -59,7 +61,7 @@ export default function Login() {
     /* global google */
     const google = window.google;
     google?.accounts.id.initialize({ // eslint-disable-line 
-      client_id: "305985372566-gu0rl4u8sm3ceu06m92tc52t0v8um5ne.apps.googleusercontent.com",
+      client_id: `${REACT_APP_GOOGLE_CLIENT_ID}`, // add client id in .env file
       callback: handleCallbackResponse
     });
 
