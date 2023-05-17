@@ -251,19 +251,19 @@ export default function SideBar() {
                 </Accordion.Header>
                 <Accordion.Body>
                   <div className="filterByBusinessUnit">
-                    {LocationList.map((item, index) => (
+                    {LocationList.map((item, ind) => (
                       authData.locationAcess[item] && 
-                      <div className="form-check" key={index}>
+                      <div className="form-check" key={ind}>
                         <input
                           className="form-check-input"
                           type="checkbox"
                           name={item}
-                          id={index}
+                          id={item}
                           value={true}
                           defaultChecked={Array.from(authData.Locations).includes(item)}
                           onChange={handleLocationFilter.bind(this)}
                         />
-                        <label className="form-check-label" htmlFor={index}>
+                        <label className="form-check-label" htmlFor={item}>
                           {item.charAt(0).toUpperCase()+item.slice(1)}
                         </label>
                       </div>
@@ -284,12 +284,12 @@ export default function SideBar() {
                           className="form-check-input"
                           type="checkbox"
                           name={item}
-                          id={index}
+                          id={item}
                           value={true}
                           defaultChecked={Array.from(authData.skillsSet).includes(item)}
                           onChange={handleSkillsFilter.bind(this)}
                         />
-                        <label className="form-check-label" htmlFor={index}>
+                        <label className="form-check-label" htmlFor={item}>
                           {item.charAt(0).toUpperCase()+item.slice(1)}
                         </label>
                       </div>
