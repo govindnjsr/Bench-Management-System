@@ -30,7 +30,9 @@ function ViewManager() {
 
   const postLocationToManager = async () => {
     try {
-      await axios.put(`http://localhost:2538/api/manager/${addlocation.managerId}/location/${addlocation.locationId}`)
+      await axios.put(`http://localhost:2538/api/manager/${addlocation.managerId}/location/${addlocation.locationId}`,{
+        headers : {Authorization : authData.accessToken}
+      })
         .then((response) => {
           console.log("response " + response.data);
           setPostResponse(response);
@@ -52,7 +54,9 @@ function ViewManager() {
 
   const deleteLocationToManager = async () => {
     try {
-      await axios.delete(`http://localhost:2538/api/manager/delete/${addlocation.managerId}/locationdelete/${addlocation.locationId}`)
+      await axios.delete(`http://localhost:2538/api/manager/delete/${addlocation.managerId}/locationdelete/${addlocation.locationId}`,{
+        headers : {Authorization : authData.accessToken}
+      })
         .then((response) => {
           console.log("response " + response.data);
           setDeleteResponse(response);
@@ -67,7 +71,9 @@ function ViewManager() {
 
   const fetchManagerData = async () => {
     try {
-      const managerApiDetails = await axios.get('http://localhost:2538/api/manager/get');
+      const managerApiDetails = await axios.get('http://localhost:2538/api/manager/get',{
+        headers : {Authorization : authData.accessToken}
+      });
       setManagerDetails(managerApiDetails.data);
 
     }

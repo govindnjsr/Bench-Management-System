@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useCallback, useContext, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import axios from 'axios';
+import AuthContext from "../Global/AuthContext";
 
 export default function DownloadFile(props) {
-
+  const authData = useContext(AuthContext);
   const [show, setShow] = useState(false);
   const [file, setFile] = useState([]);
   const handleClose = () => setShow(false);
@@ -16,6 +17,7 @@ export default function DownloadFile(props) {
     e.preventDefault();
     axios.get(`http://localhost:2538/api/empdetails/download/${id}`, {
       responseType: 'blob',
+      headers : {Authorization : authData.accessToken}
     })
       .then(response => {
         const url = window.URL.createObjectURL(new Blob([response.data]));

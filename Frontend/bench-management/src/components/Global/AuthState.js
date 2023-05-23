@@ -8,6 +8,7 @@ export default function AuthState(props) {
      const [skillsSet,setSkillsSet]=useState(new Set([]))
      const [buSet,setBuSet]=useState(new Set([]))
      const [statusSet,setStatusSet]=useState(new Set([]))
+     const [accessToken, setAccessToken] = useState("");
     //------------------------------------------------
     //Reset things
     const resetDefault = () => {
@@ -51,7 +52,7 @@ export default function AuthState(props) {
     const [bangaloreBU,setBangaloreBU]=useState([])
     const [hyderabadBU,setHyderabadBU]=useState([])
     const [isAuthentication, setAuthentication] = useState(false);
-    const [currentRole, setCurrentRole] = useState(0)
+    const [currentRole, setCurrentRole] = useState("0")
     const [googleData, setGoogleData] = useState({})
     const [benchTimeValue, setBenchTimeValue] = useState(0);
     const [experienceValue, setExperienceValue] = useState(0);
@@ -94,7 +95,7 @@ export default function AuthState(props) {
         setShow(false);
     }
     const handleShow = () => setShow(true);
-    const [managerId, setManagerId] = useState(-1);
+    const [managerId, setManagerId] = useState("-1");
     const [loopEntry, setLoopEntry] = useState(false);
     const [viewEmployeeId, setViewEmployeeId] = useState(0);
     const handleEmpId = (id) => {
@@ -126,6 +127,7 @@ export default function AuthState(props) {
             setShow, show, handleShow, post, setPost,
             assignedLocation, setAssignedLocation, searchValue,
             setSearchValue, benchPeriodEmp, setBenchPeriodEmp, showSearchBar, setShowSearchBar,file, setFile
+            , accessToken, setAccessToken
         }}>
             {props.children}
         </AuthContext.Provider>

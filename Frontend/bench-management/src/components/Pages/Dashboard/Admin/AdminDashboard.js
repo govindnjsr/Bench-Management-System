@@ -35,8 +35,9 @@ export default function AdminDashboard() {
     authData.setShowSearchBar(true)
     try {
       await axios.post(
-        "http://localhost:2538/api/dto/get/filterd", authData.requestDto
-      ).then((res) => {
+        "http://localhost:2538/api/dto/get/filterd", authData.requestDto,{
+          headers : {Authorization : authData.accessToken}
+        }).then((res) => {
         authData.setNewData(res.data);
       });
     }
@@ -53,8 +54,9 @@ export default function AdminDashboard() {
     try {
       //count emp locatin wise 
       await axios.get(
-        "http://localhost:2538/api/empdetails/get/countOfEachLocation"
-      ).then((res) => {
+        "http://localhost:2538/api/empdetails/get/countOfEachLocation",{
+          headers : {Authorization : authData.accessToken}
+        }).then((res) => {
         let tempData = [];
         res.data.forEach(element => {
           tempData.push(parseInt(element.count));

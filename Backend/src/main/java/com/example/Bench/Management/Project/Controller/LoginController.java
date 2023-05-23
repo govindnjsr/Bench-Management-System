@@ -19,6 +19,12 @@ public class LoginController {
     public ResponseEntity<Login>save(@RequestBody  Login login){
         return new ResponseEntity<Login>(loginService.save(login), HttpStatus.CREATED);
     }
+
+    @PostMapping("/verify")
+    public String verify(@RequestBody String token){
+        return loginService.verify(token);
+    }
+
     @GetMapping("/get")
     public List<Login>getData(){
         return loginService.getData();

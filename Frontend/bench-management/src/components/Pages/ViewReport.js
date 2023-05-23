@@ -17,7 +17,11 @@ function ViewReport(props) {
 
   function handleBackButton() {
     authData.setShowSearchBar(true);
-    navigate("/");
+    if(authData.currentRole == "admin")
+    navigate("/admin");
+    else{
+      navigate("/manager");
+    }
   }
 
   const navigateToLogin = () => {
@@ -38,22 +42,25 @@ function ViewReport(props) {
       //count of All BU location wise 
       //gurugram
       await axios.get(
-        "http://localhost:2538/api/empdetails/get/gurugramBU"
-      ).then((res) => {
+        "http://localhost:2538/api/empdetails/get/gurugramBU",{
+          headers : {Authorization : authData.accessToken}
+        }).then((res) => {
         authData.setGurugramBU(res.data);
       })
 
       //Bangalore
       await axios.get(
-        "http://localhost:2538/api/empdetails/get/bangaloreBU"
-      ).then((res) => {
+        "http://localhost:2538/api/empdetails/get/bangaloreBU",{
+          headers : {Authorization : authData.accessToken}
+        }).then((res) => {
         authData.setBangaloreBU(res.data);
       })
 
       //hyderabad
       await axios.get(
-        "http://localhost:2538/api/empdetails/get/hyderabadBU"
-      ).then((res) => {
+        "http://localhost:2538/api/empdetails/get/hyderabadBU",{
+          headers : {Authorization : authData.accessToken}
+        }).then((res) => {
         authData.setHyderabadBU(res.data);
       })
     }

@@ -15,12 +15,16 @@ export default function SideBar() {
     // let itemList=[];
     try {
       const list1 = await axios
-        .get("http://localhost:2538/api/empdetails/get/BU")
+        .get("http://localhost:2538/api/empdetails/get/BU",{
+          headers : {Authorization : authData.accessToken}
+        })
         .then((res) => {
           setBUList(res.data);
         });
       const List2 = await axios
-        .get("http://localhost:2538/api/empdetails/get/Location")
+        .get("http://localhost:2538/api/empdetails/get/Location",{
+          headers : {Authorization : authData.accessToken}
+        })
         .then((res) => {
           let tempData=[];
           res.data.forEach(element => {                
@@ -30,7 +34,9 @@ export default function SideBar() {
         });
 
       const List3 = await axios
-        .get("http://localhost:2538/api/skill/get/skill")
+        .get("http://localhost:2538/api/skill/get/skill",{
+          headers : {Authorization : authData.accessToken}
+        })
         .then((res) => {
           setSkillList(res.data);
         });

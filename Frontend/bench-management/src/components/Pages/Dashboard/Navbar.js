@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 export default function NavBar() {
   const authData = useContext(AuthContext);
   const userImageUrl = authData.googleData.picture;
-  // const [searchValue, setSearchValue] = useState("");
   const navigate = useNavigate();
   const unmount=()=>{
     navigate("/");

@@ -26,16 +26,28 @@ function BlockEmployee(props) {
   }
   const handleUnblockApplyResult =async(e,id)=>{
     e.preventDefault();
-    await axios.put(`http://localhost:2538/api/empdetails/interview/updateresultbysrno/${intDetails.srNo}`,intDetails)
-    await axios.put(`http://localhost:2538/api/empdetails/updateoncondition/${intDetails.id}`,intDetails);
+    await axios.put(`http://localhost:2538/api/empdetails/interview/updateresultbysrno/${intDetails.srNo}`,intDetails,
+    {
+      headers : {Authorization : authData.accessToken}
+    })
+    await axios.put(`http://localhost:2538/api/empdetails/updateoncondition/${intDetails.id}`,intDetails,
+    {
+      headers : {Authorization : authData.accessToken}
+    });
     authData.setBlockStatus(1);
     setIsChecked(false)
     // eventx.target.checked=false;
   }
   const handleApplyBlockedResult = async (e, id) => {
-    await axios.post('http://localhost:2538/api/empdetails/interview/save', intDetails)
+    await axios.post('http://localhost:2538/api/empdetails/interview/save', intDetails,
+    {
+      headers : {Authorization : authData.accessToken}
+    })
     .then((response)=>{
-        axios.put(`http://localhost:2538/api/empdetails/ongoing/${response.data.id}/${response.data.srNo}`)
+        axios.put(`http://localhost:2538/api/empdetails/ongoing/${response.data.id}/${response.data.srNo}`,
+        {
+          headers : {Authorization : authData.accessToken}
+        })
     }).then(e.preventDefault()).then((res)=>{
         authData.setBlockStatus(-1)
       }).then(handleClose())
@@ -47,16 +59,25 @@ function BlockEmployee(props) {
     }
     else{
         setIsChecked(true);
-        await axios.get(`http://localhost:2538/api/empdetails/interview/getLastInterview/${id}`)
+        await axios.get(`http://localhost:2538/api/empdetails/interview/getLastInterview/${id}`,
+        {
+          headers : {Authorization : authData.accessToken}
+        })
         .then((response)=>{
          setIntDetails(response.data);
        })
     }
-    await axios.get(`http://localhost:2538/api/empdetails/get/${id}`)
+    await axios.get(`http://localhost:2538/api/empdetails/get/${id}`,
+    {
+      headers : {Authorization : authData.accessToken}
+    })
     .then((response)=>{
        setEmpDetails(response.data);
     })
-    await axios.get(`http://localhost:2538/api/empdetails/interview/get/${id}`)
+    await axios.get(`http://localhost:2538/api/empdetails/interview/get/${id}`,
+    {
+      headers : {Authorization : authData.accessToken}
+    })
     .then((response)=>{
        setNewIntData(response.data);
     })
