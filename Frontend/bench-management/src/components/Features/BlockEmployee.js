@@ -49,7 +49,7 @@ function BlockEmployee(props) {
           headers : {Authorization : authData.accessToken}
         })
     }).then(e.preventDefault()).then((res)=>{
-        authData.setBlockStatus(-1)
+        authData.setBlockStatus(-1);
       }).then(handleClose())
   }
   const handleShowApply = async(e,id) => {

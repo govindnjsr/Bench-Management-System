@@ -19,6 +19,13 @@ export default function AdminDashboard() {
     navigate("/viewEmployee");
   };
 
+  const handleUnauthorized = () => {
+    navigate("/");
+    return (
+      <Login/>
+    )
+  }
+
   //--------------------------------------
 
   const handleReport = async () => {
@@ -318,6 +325,6 @@ export default function AdminDashboard() {
       </div>
     </div>
     :
-    <Login/>
+    handleUnauthorized()
   );
 }

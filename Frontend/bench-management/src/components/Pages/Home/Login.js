@@ -30,9 +30,7 @@ export default function Login() {
           let data = res.data;
           authData.setAccessToken(data.substring(data.indexOf('+ ') + 2));
           // authData.setAccessToken("rmcqlfy47ykj4byp7ksm8qgwuezy7w");
-          // console.log(data.substring(data.indexOf('+ ') + 2))
           authData.setCurrentRole(data.substring(0, data.indexOf(' ')));
-          // console.log(data.substring(0, data.indexOf(' ')));
           if (authData.currentRole != "admin") {
             authData.setManagerId(data.substring(0, data.indexOf(' ')));
           }
@@ -41,24 +39,24 @@ export default function Login() {
       });
   }
 // console.log(authData.accessToken)
-  const showDashboard = () => {
-    if (authData.currentRole === "admin") {
-      navigate("/admin");
-    }
-    else navigate("/manager");
-  }
-  
+  // const showDashboard = () => {
+  //   console.log("inside showDashboard");
+  //   if (authData.currentRole != "admin") {
+  //     navigate("/manager");
+  //   }
+  //   navigate("/admin");
+  // }
   //calling google api
 
   useEffect(() => {
     /* global google */
     const google = window.google;
-    google?.accounts.id.initialize({ // eslint-disable-line 
+    google?.accounts.id.initialize({
       client_id: `${REACT_APP_GOOGLE_CLIENT_ID}`, // add client id in .env file
       callback: handleCallbackResponse
     });
 
-    google?.accounts.id.renderButton( // eslint-disable-line
+    google?.accounts.id.renderButton(
       document.getElementById("loginButton"),
       { theme: "outline", size: "large", shape: "pill", width: "400", height: "300" }
     );
@@ -84,7 +82,10 @@ export default function Login() {
 
         </>)
       : (
-        showDashboard()
+        authData.currentRole === "admin" ? (
+          navigate("/admin", { replace: true })
+        )
+        : navigate("/manager", { replace: true })
       )
   )
 }

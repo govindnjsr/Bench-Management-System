@@ -25,6 +25,14 @@ export default function AdminDashboard() {
     authData.setShowSearchBar(false);
     navigate("/viewReport");
   };
+
+const handleUnauthorized = () => {
+  navigate("/");
+  return (
+    <Login/>
+  )
+}
+
   const [refreshData, setRefresh] = useState(false)
   function handleRefresh() {
     authData.setNewData([]);
@@ -192,7 +200,7 @@ export default function AdminDashboard() {
                 <i className="fa-solid fa-chart-simple"></i> &nbsp; VIEW REPORT
               </button>
               <button className="reload" type="button" onClick={handleRefresh}>
-                <i class="fa-solid fa-rotate-right fa-lg"></i>
+                <i className="fa-solid fa-rotate-right fa-lg"></i>
               </button>
             </div>
           </div>
@@ -292,7 +300,7 @@ export default function AdminDashboard() {
                           </td>
 
                           <td className="table-align-left-action">
-                            <UpdateEmployee
+                            <UpdateEmployee 
                               id={emp.employeeId}
                               name={emp.employeeName}
                             />
@@ -313,7 +321,7 @@ export default function AdminDashboard() {
     </> 
     )
     : (
-      <Login/>
+      handleUnauthorized()
     )
   );
 }

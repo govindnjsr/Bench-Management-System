@@ -102,7 +102,7 @@ export default function AuthState(props) {
         setViewEmployeeId(id);
     }
     function handleLogin() {
-        setAuthentication(true)
+        setAuthentication(true);
         console.log("logged in Successfully")
     }
     function handleLogout() {
