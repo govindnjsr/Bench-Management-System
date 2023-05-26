@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import '../../../Assets/Styles/Project.css';
-import axios from 'axios';
+import axios, { AxiosHeaders } from 'axios';
 import logoImage from '../../../Assets/Images/accoliteLogo.png';
 import jwt_decode from "jwt-decode";
 import AuthContext from '../../Global/AuthContext.js';
@@ -8,68 +8,58 @@ import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const authData = useContext(AuthContext);
-  const { REACT_APP_GOOGLE_CLIENT_ID, REACT_APP_URL} = process.env;
-  const manager = 2;
-  const [loginApiData, setLoginApiData] = useState();
+  const { REACT_APP_GOOGLE_CLIENT_ID, REACT_APP_URL } = process.env;
   const navigate = useNavigate();
 
+  function handleNotVerfied() {
+    alert("Sorry you are not authorized to access!!");
+  }
+
   function handleCallbackResponse(response) {
-    // console.log(response.credential);
+    // console.log(response.credential); jwt
     var userObject = jwt_decode(response.credential);
     authData.setGoogleData(userObject);
-  }
 
-  const showDashboard = () => {
-    if (authData.currentRole === manager) {
-      navigate("/manager");
-    }
-    else navigate("/admin");
-  }
-
-  useEffect(() => {
-    loginApiData && loginApiData.forEach(element => {
-      if (!authData.loopEntry) authData.setLoopEntry(true);
-      if (authData.googleData && element.email == authData.googleData.email) {
-        authData.handleLogin();
-        authData.setCurrentRole(element.role);
-        if (element.role === manager) {
-          authData.setManagerId(element.empId);
-
+    axios.post(`${REACT_APP_URL}/login/verify`, response.credential, {
+      headers: {'Content-Type': 'text/plain'}
+    })
+      .then((res) => {
+        console.log(res.data);
+        if (res.data === "not verified") handleNotVerfied();
+        else {
+          let data = res.data;
+          authData.setAccessToken(data.substring(data.indexOf('+ ') + 2));
+          // authData.setAccessToken("rmcqlfy47ykj4byp7ksm8qgwuezy7w");
+          authData.setCurrentRole(data.substring(0, data.indexOf(' ')));
+          if (authData.currentRole != "admin") {
+            authData.setManagerId(data.substring(0, data.indexOf(' ')));
+          }
+          authData.handleLogin();
         }
-      }
-    });
-  }, [authData.googleData])
-  {
-    if (authData.loopEntry && authData.currentRole === 0) {
-      alert("Sorry you are not authorized to access!!");
-      authData.setLoopEntry(false);
-    }
+      });
   }
-  //calling api
-  const fetchApi = async () => {
-    try {
-      const loginData = await axios.get(`${REACT_APP_URL}/login/get`) // add local url in .env file
-      setLoginApiData(loginData.data);
-    }
-    catch {
-      console.log()
-    }
-  }
-  //useEFFECT
+// console.log(authData.accessToken)
+  // const showDashboard = () => {
+  //   console.log("inside showDashboard");
+  //   if (authData.currentRole != "admin") {
+  //     navigate("/manager");
+  //   }
+  //   navigate("/admin");
+  // }
+  //calling google api
 
   useEffect(() => {
     /* global google */
     const google = window.google;
-    google?.accounts.id.initialize({ // eslint-disable-line 
+    google?.accounts.id.initialize({
       client_id: `${REACT_APP_GOOGLE_CLIENT_ID}`, // add client id in .env file
       callback: handleCallbackResponse
     });
 
-    google?.accounts.id.renderButton( // eslint-disable-line
+    google?.accounts.id.renderButton(
       document.getElementById("loginButton"),
       { theme: "outline", size: "large", shape: "pill", width: "400", height: "300" }
     );
-    fetchApi();
   }, [authData.handleLogout]);
 
   return (
@@ -92,7 +82,10 @@ export default function Login() {
 
         </>)
       : (
-        showDashboard()
+        authData.currentRole === "admin" ? (
+          navigate("/admin", { replace: true })
+        )
+        : navigate("/manager", { replace: true })
       )
   )
 }

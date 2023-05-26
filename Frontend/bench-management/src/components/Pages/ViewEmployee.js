@@ -24,13 +24,19 @@ const navigateToLogin = () => {
 
   function handleBackButton() {
     authData.setShowSearchBar(true);
-    navigate('/');
+    if(authData.currentRole == "admin")
+    navigate("/admin");
+    else{
+      navigate("/manager");
+    }
   }
   // console.log(empId);
   // console.log(empDetail);
   const getEmpData = async () => {
     try {
-      const emp = await axios.get(`http://localhost:2538/api/empdetails/get/${empId}`)
+      const emp = await axios.get(`http://localhost:2538/api/empdetails/get/${empId}`,{
+        headers : {Authorization : authData.accessToken}
+      })
         .then((response) => {
           setEmpDetail(response.data);
         });

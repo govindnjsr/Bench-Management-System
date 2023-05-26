@@ -25,6 +25,14 @@ export default function AdminDashboard() {
     authData.setShowSearchBar(false);
     navigate("/viewReport");
   };
+
+const handleUnauthorized = () => {
+  navigate("/");
+  return (
+    <Login/>
+  )
+}
+
   const [refreshData, setRefresh] = useState(false)
   function handleRefresh() {
     authData.setNewData([]);
@@ -35,8 +43,9 @@ export default function AdminDashboard() {
     authData.setShowSearchBar(true)
     try {
       await axios.post(
-        "http://localhost:2538/api/dto/get/filterd", authData.requestDto
-      ).then((res) => {
+        "http://localhost:2538/api/dto/get/filterd", authData.requestDto,{
+          headers : {Authorization : authData.accessToken}
+        }).then((res) => {
         authData.setNewData(res.data);
       });
     }
@@ -53,8 +62,9 @@ export default function AdminDashboard() {
     try {
       //count emp locatin wise 
       await axios.get(
-        "http://localhost:2538/api/empdetails/get/countOfEachLocation"
-      ).then((res) => {
+        "http://localhost:2538/api/empdetails/get/countOfEachLocation",{
+          headers : {Authorization : authData.accessToken}
+        }).then((res) => {
         let tempData = [];
         res.data.forEach(element => {
           tempData.push(parseInt(element.count));
@@ -123,7 +133,7 @@ export default function AdminDashboard() {
   // console.log("BUSet "+Array.from(authData.buSet));
   // console.log("StatusSet "+Array.from(authData.statusSet));
   // console.log("req dto "+JSON.stringify(authData.requestDto))
-  console.log("block status " + authData.blockStatus)
+  // console.log("block status " + authData.blockStatus)
 
   //--------------------------------
   //Sorting
@@ -185,12 +195,12 @@ export default function AdminDashboard() {
           <div className="actions-admin">
             <p className="employees">EMPLOYEES</p>
             <div className="buttons">
-              <ViewManager />
+              <ViewManager/>
               <button className="button2" onClick={handleReport}>
                 <i className="fa-solid fa-chart-simple"></i> &nbsp; VIEW REPORT
               </button>
               <button className="reload" type="button" onClick={handleRefresh}>
-                <i class="fa-solid fa-rotate-right fa-lg"></i>
+                <i className="fa-solid fa-rotate-right fa-lg"></i>
               </button>
             </div>
           </div>
@@ -251,7 +261,7 @@ export default function AdminDashboard() {
                         emp.benchStatus == true ? (
                         <tr style={{ color: getColor(emp.blocked) }}>
                           <th className="table-align-left">
-                            <BlockEmployee
+                            <BlockEmployee 
                               id={emp.employeeId}
                               blocked={emp.blocked}
                               name={emp.employeeName}
@@ -290,7 +300,7 @@ export default function AdminDashboard() {
                           </td>
 
                           <td className="table-align-left-action">
-                            <UpdateEmployee
+                            <UpdateEmployee 
                               id={emp.employeeId}
                               name={emp.employeeName}
                             />
@@ -311,7 +321,7 @@ export default function AdminDashboard() {
     </> 
     )
     : (
-      <Login/>
+      handleUnauthorized()
     )
   );
 }

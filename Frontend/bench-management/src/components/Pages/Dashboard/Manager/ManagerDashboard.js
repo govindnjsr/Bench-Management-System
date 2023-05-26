@@ -18,10 +18,16 @@ export default function AdminDashboard() {
     authData.setShowSearchBar(false);
     navigate("/viewEmployee");
   };
-  //--------------------------------------
-  //---------------------------------
 
-  //--------------------------------------------------
+  const handleUnauthorized = () => {
+    navigate("/");
+    return (
+      <Login/>
+    )
+  }
+
+  //--------------------------------------
+
   const handleReport = async () => {
     authData.setShowSearchBar(false);
     navigate('/viewReport');
@@ -38,7 +44,9 @@ export default function AdminDashboard() {
     try {
       //get all filtered data 
       await axios.post(
-        "http://localhost:2538/api/dto/get/filterd", authData.requestDto
+        "http://localhost:2538/api/dto/get/filterd", authData.requestDto,{
+          headers : {Authorization : authData.accessToken}
+        }
       ).then((res) => {
         authData.setNewData(res.data);
       });
@@ -58,7 +66,9 @@ export default function AdminDashboard() {
   const fetchCountApi = async () => {
     try {
       //get manager Not Assigned Location
-      await axios.get(`http://localhost:2538/api/manager/get/notassignedLocation/${authData.managerId}`).
+      await axios.get(`http://localhost:2538/api/manager/get/notassignedLocation/${authData.managerId}`,{
+        headers : {Authorization : authData.accessToken}
+      }).
         then((res) => {
           //by default location
           authData.locationAcess.Gurugram = true;
@@ -75,11 +85,12 @@ export default function AdminDashboard() {
               authData.locationAcess.Hyderabad = false;
             }
           })
-
         })
       //count emp locatin wise 
       const countOfEachLoc = await axios.get(
-        "http://localhost:2538/api/empdetails/get/countOfEachLocation"
+        "http://localhost:2538/api/empdetails/get/countOfEachLocation",{
+          headers : {Authorization : authData.accessToken}
+        }
       ).then((res) => {
         let tempData = [];
         res.data.forEach(element => {
@@ -108,7 +119,7 @@ export default function AdminDashboard() {
     fetchCountApi();
   }, [])
 
-  console.log("manager ID " + authData.managerId)
+  // console.log("manager ID " + authData.managerId)
   const allowData = (emp) => {
 
     //----------Check for BU-----------------------------//
@@ -314,6 +325,6 @@ export default function AdminDashboard() {
       </div>
     </div>
     :
-    <Login/>
+    handleUnauthorized()
   );
 }

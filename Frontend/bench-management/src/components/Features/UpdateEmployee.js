@@ -27,10 +27,13 @@ function UpdateEmployee(props) {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const showDetail = async (id) => {
-        const fetchedData = await axios.get(`http://localhost:2538/api/empdetails/get/${id}`);
+        const fetchedData = await axios.get(`http://localhost:2538/api/empdetails/get/${id}`,
+        {
+          headers : {Authorization : authData.accessToken}
+        });
         fetchedData.data.benchStatus = false;
         setFetchEmpDetail(fetchedData.data);
-
+        console.log(fetchedData.data);
     }
 
 
@@ -40,7 +43,10 @@ function UpdateEmployee(props) {
             console.log(fetchedEmpDetail.benchStatus)
             console.log("new POST DATA " + JSON.stringify(fetchedEmpDetail));
             //    console.log("ID"+empDetail.id);
-            const allEmp = await axios.put(`http://localhost:2538/api/empdetails/update/${fetchedEmpDetail.id}`, fetchedEmpDetail);
+            const allEmp = await axios.put(`http://localhost:2538/api/empdetails/update/${fetchedEmpDetail.id}`, fetchedEmpDetail,
+            {
+              headers : {Authorization : authData.accessToken}
+            });
             //    console.log("Result"+allEmp);
             authData.setPost({});
         }
