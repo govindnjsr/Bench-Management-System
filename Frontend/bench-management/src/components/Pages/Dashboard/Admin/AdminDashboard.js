@@ -125,7 +125,7 @@ export default function AdminDashboard() {
   // console.log("BUSet "+Array.from(authData.buSet));
   // console.log("StatusSet "+Array.from(authData.statusSet));
   // console.log("req dto "+JSON.stringify(authData.requestDto))
-  console.log("block status " + authData.blockStatus)
+  // console.log("block status " + authData.blockStatus)
 
   //--------------------------------
   //Sorting
@@ -187,7 +187,7 @@ export default function AdminDashboard() {
           <div className="actions-admin">
             <p className="employees">EMPLOYEES</p>
             <div className="buttons">
-              <ViewManager />
+              <ViewManager/>
               <button className="button2" onClick={handleReport}>
                 <i className="fa-solid fa-chart-simple"></i> &nbsp; VIEW REPORT
               </button>
@@ -253,7 +253,7 @@ export default function AdminDashboard() {
                         emp.benchStatus == true ? (
                         <tr style={{ color: getColor(emp.blocked) }}>
                           <th className="table-align-left">
-                            <BlockEmployee
+                            <BlockEmployee 
                               id={emp.employeeId}
                               blocked={emp.blocked}
                               name={emp.employeeName}

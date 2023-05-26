@@ -5,13 +5,11 @@ import Table from 'react-bootstrap/Table';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 import AuthContext from '../../../Global/AuthContext.js';
-
+import { memo } from 'react';
 function ViewManager() {
   const authData = useContext(AuthContext);
   const [show, setShow] = useState(false);
   const [managerDetails, setManagerDetails] = useState();
-  const [postResponse, setPostResponse] = useState();
-  const [deleteResponse, setDeleteResponse] = useState();
   const [addlocation, setAddLocation] = useState({
     managerId: null,
     locationId: null
@@ -20,7 +18,10 @@ function ViewManager() {
     setShow(false);
     authData.setPost({});
   }
-  const handleShow = () => setShow(true);
+  const handleShow = () => {
+    setShow(true);
+    fetchManagerData();
+  };
 
   // console.log(deleteResponse)
   const handleAddLocation = (e) => {
@@ -34,15 +35,13 @@ function ViewManager() {
         headers : {Authorization : authData.accessToken}
       })
         .then((response) => {
-          console.log("response " + response.data);
-          setPostResponse(response);
+          // console.log("response " + JSON.stringify(response.data));
+          // setPostResponse(response);
           setAddLocation({
             managerId: null,
             locationId: null
           })
-          authData.setPost(response.data);
           handleClose();
-
         });
 
     }
@@ -56,13 +55,9 @@ function ViewManager() {
     try {
       await axios.delete(`http://localhost:2538/api/manager/delete/${addlocation.managerId}/locationdelete/${addlocation.locationId}`,{
         headers : {Authorization : authData.accessToken}
-      })
-        .then((response) => {
-          console.log("response " + response.data);
-          setDeleteResponse(response);
-          authData.setPost(response.data);
-          handleClose();
-        });
+      });
+      // console.log("response " + response.data);
+      handleClose();
     }
     catch {
       console.log()
@@ -71,24 +66,18 @@ function ViewManager() {
 
   const fetchManagerData = async () => {
     try {
-      const managerApiDetails = await axios.get('http://localhost:2538/api/manager/get',{
+      await axios.get('http://localhost:2538/api/manager/get',{
         headers : {Authorization : authData.accessToken}
+      }).then((res) => {
+        console.log(res.data);
+        setManagerDetails(res.data);
       });
-      setManagerDetails(managerApiDetails.data);
-
     }
     catch {
       console.log()
     }
   }
-  useEffect(() => {
-    fetchManagerData();
-  }, [postResponse, deleteResponse])
 
-  console.log(managerDetails)
-
-  // console.log(managerDetails) 
-  // console.log(addlocation)
   return (
     <>
       <button className='button2' onClick={handleShow}>
@@ -162,4 +151,4 @@ function ViewManager() {
   );
 }
 
-export default ViewManager;
+export default memo(ViewManager);

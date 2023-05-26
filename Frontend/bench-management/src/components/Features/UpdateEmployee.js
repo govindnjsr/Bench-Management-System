@@ -33,7 +33,7 @@ function UpdateEmployee(props) {
         });
         fetchedData.data.benchStatus = false;
         setFetchEmpDetail(fetchedData.data);
-
+        console.log(fetchedData.data);
     }
 
 

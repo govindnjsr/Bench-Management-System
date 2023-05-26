@@ -16,9 +16,10 @@ export default function Login() {
   }
 
   function handleCallbackResponse(response) {
-    // console.log(response.credential);
+    // console.log(response.credential); jwt
     var userObject = jwt_decode(response.credential);
     authData.setGoogleData(userObject);
+
     axios.post(`${REACT_APP_URL}/login/verify`, response.credential, {
       headers: {'Content-Type': 'text/plain'}
     })
