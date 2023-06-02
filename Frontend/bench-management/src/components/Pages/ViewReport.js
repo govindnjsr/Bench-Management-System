@@ -122,7 +122,7 @@ function ViewReport(props) {
 
 
   return (
-    authData.isAuthentication === true ?
+    authData.isAuthentication === true && authData.otpVerify === true?
       (
         <>
           {

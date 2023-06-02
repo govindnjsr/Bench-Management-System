@@ -66,8 +66,9 @@ public class LoginService implements com.example.Bench.Management.Project.Servic
                 List<Login> emails = loginRepo.findAll();
                 for(int i=0; i<emails.size(); i++){
                     if(emails.get(i).getEmail().equals(email)) {
-                        if(emails.get(i).getRole() == 1) return "admin + ApiKey "+ accessKey;
-                        else return Long.toString(emails.get(i).getEmpId()) + " + ApiKey "+ accessKey;
+                        String mfa = emails.get(i).getSecretKey() != null? "1" : "0";
+                        if(emails.get(i).getRole() == 1) return "admin + ApiKey "+ accessKey + " " + mfa;
+                        else return Long.toString(emails.get(i).getEmpId()) + " + ApiKey "+ accessKey + " " + mfa;
                     }
                 }
             }
@@ -79,5 +80,14 @@ public class LoginService implements com.example.Bench.Management.Project.Servic
             return "not verified";
         }
         return "not verified";
+    }
+
+    @Override
+    public void saveSecret(String email, String secretKey) {
+        loginRepo.setSecretByEmail(secretKey, email);
+    }
+
+    public String getSecretKeyByEmail(String email) {
+        return loginRepo.getSecretByEmail(email);
     }
 }

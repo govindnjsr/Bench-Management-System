@@ -56,7 +56,7 @@ console.log(empDetail)
 
   // console.log(empSkills);
   return (
-    authData.isAuthentication === true ?
+    authData.isAuthentication === true && authData.otpVerify === true?
       <div >
         <div className='profile-window'>
 

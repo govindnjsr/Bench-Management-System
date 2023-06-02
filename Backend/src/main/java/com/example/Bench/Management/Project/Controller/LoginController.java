@@ -16,7 +16,7 @@ public class LoginController {
     @Autowired
     private LoginService loginService;
     @PostMapping("/save")
-    public ResponseEntity<Login>save(@RequestBody  Login login){
+    public ResponseEntity<Login>save(@RequestBody Login login){
         return new ResponseEntity<Login>(loginService.save(login), HttpStatus.CREATED);
     }
 
@@ -42,4 +42,13 @@ public class LoginController {
         return "Deleted";
     }
 
+    @PostMapping("/saveSecret/{email}")
+    public String saveSecret( @PathVariable(required = false) String email, @RequestBody String secretKey){
+        loginService.saveSecret(email, secretKey);
+        return "secret saved";
+    }
+    @GetMapping("/getSecretKey/{email}")
+    public String getSecretKeyByEmail(@PathVariable(required = false) String email){
+        return loginService.getSecretKeyByEmail(email);
+    }
 }

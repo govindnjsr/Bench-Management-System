@@ -11,7 +11,8 @@ import javax.persistence.*;
 public class Login {
    @Id
    private long id;
-    private long empId;
-    private String email;
-    private long role;
+   private long empId;
+   private String email;
+   private long role;
+   private String secretKey;
 }

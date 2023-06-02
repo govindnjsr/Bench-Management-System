@@ -213,7 +213,7 @@ export default function AdminDashboard() {
   //-----------------------------------------
 
   return (
-    authData.isAuthentication === true ?
+    authData.isAuthentication === true && authData.otpVerify === true?
     <div className="window">
       <div className="top">
         <Navbar />
