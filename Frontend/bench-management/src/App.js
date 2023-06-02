@@ -11,14 +11,18 @@ import 'react-toastify/dist/ReactToastify.css';
 import ViewReport from './components/Pages/ViewReport.js';
 import ManagerDashboard from './components/Pages/Dashboard/Manager/ManagerDashboard';
 import AdminDashboard from './components/Pages/Dashboard/Admin/AdminDashboard';
+import NewUser from './components/2FaSecurity/NewUser';
+import ExistingUser from './components/2FaSecurity/ExistingUser';
 
 function App() {
   const router = createBrowserRouter([
-    { path: "/", element: <Login/> },
-    { path: "/admin", element: <AdminDashboard/>},
-    { path: "/manager", element: <ManagerDashboard/>},
+    { path: "/", element: <Login /> },
+    { path: "/admin", element: <AdminDashboard /> },
+    { path: "/manager", element: <ManagerDashboard /> },
     { path: "/viewEmployee", element: <ViewEmployee /> },
     { path: "/viewReport", element: <ViewReport /> },
+    { path: "/setup2fa", element: <NewUser /> },
+    { path: "/verify2fa", element: <ExistingUser /> }
   ]);
 
   return (
@@ -26,7 +30,6 @@ function App() {
       <AuthState >
         <RouterProvider router={router} />
       </AuthState>
-
     </div>
   );
 }

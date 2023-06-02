@@ -14,5 +14,7 @@ public interface LoginService {
     //get the id of user
     public long getId(String email);
     public void deleteLoginById(long id);
-    String verify(String token);
+    public String verify(String token);
+    public void saveSecret(String email, String secretKey);
+    public String getSecretKeyByEmail(String email);
 }

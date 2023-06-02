@@ -180,7 +180,7 @@ const handleUnauthorized = () => {
   //-----------------------------------------
 
   return (
-    authData.isAuthentication === true ? 
+    authData.isAuthentication === true && authData.otpVerify === true? 
     ( 
       <>
     <div className="window">
