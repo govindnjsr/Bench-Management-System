@@ -66,6 +66,271 @@
   margin: auto;
 }
 
+/* Css for Existing User page */
+
+.VerifyContainerMain {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.parentVerifyOtpContainer {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  margin: 11% auto;
+  width: 376px;
+  line-height: 1.5;
+  border-radius: 4px;
+  position: relative;
+  background-color: rgb(255, 255, 255);
+  font-family: Roboto, 'Helvetica Neue', Helvetica, 'Segoe UI', Arial, sans-serif;
+  box-shadow: rgba(45, 46, 46, 0.08) 0px 4px 16px 0px, rgba(45, 46, 46, 0.1) 0px 0px 4px 0px;
+}
+
+.parentLogoContainer {
+  position: relative;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+  width: 100%;
+  background-color: rgb(255, 255, 255);
+  z-index: 2;
+  border-bottom: 1px solid rgb(237, 239, 240);
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  padding-top: 24px;
+  padding-bottom: 24px;
+  min-height: 60px;
+  margin-top: 14px;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+.logoContainer {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.logoImage {
+  display: block;
+  margin: 0px auto;
+  max-width: 280px;
+  max-height: 60px;
+  width: auto;
+  height: auto;
+  cursor: pointer;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.childVerifyOtpContainer {
+  height: 100%;
+  overflow-wrap: break-word;
+  display: block;
+  line-height: 1.5;
+}
+
+.lockImageContainer {
+  display: flex;
+  -webkit-box-pack: start;
+  justify-content: flex-start;
+  -webkit-box-align: center;
+  align-items: center;
+  font-size: 22px;
+  line-height: 32px;
+  min-height: 32px;
+  padding: 16px 24px;
+  letter-spacing: 0.4px;
+  color: rgb(63, 64, 64);
+  background-color: rgb(255, 255, 255);
+  border-bottom: 1px solid rgb(232, 234, 235);
+  overflow-wrap: break-word;
+
+}
+
+.lockImage {
+  height: 32px;
+  width: 32px;
+  margin-right: 0px;
+}
+
+.googleAuthContainerContent {
+  display: block;
+  width: calc(100% - 48px);
+  box-sizing: border-box;
+}
+
+.spanClassGoogleAuth {
+  font-size: 22px;
+  line-height: 32px;
+  letter-spacing: 0.4px;
+  color: rgb(63, 64, 64);
+  overflow-wrap: break-word;
+}
+
+.VerifyAuthInputForm {
+  overflow: auto;
+  height: 100%;
+  display: block;
+  margin-top: 0em;
+  overflow-wrap: break-word;
+}
+
+.VerifyAuthInputFormChild1 {
+  display: flex;
+  flex-direction: column;
+  margin: 24px;
+  overflow-wrap: break-word;
+  line-height: 1.5;
+}
+
+.VerifyAuthInputFormLabel {
+  margin-top: 0px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+  color: rgb(88, 89, 89);
+}
+
+.FormLabel1 {
+  font-size: 14px;
+  margin: 0px 0px 8px;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  line-height: 20px;
+  color: rgb(88, 89, 89);
+}
+
+.FormLabel1Child {
+  color: rgb(114, 114, 115);
+  font-weight: 400;
+  font-family: Roboto, "Helvetica Neue", Helvetica, "Segoe UI", Arial, sans-serif;
+  letter-spacing: 0.4px;
+  margin-right: 8px;
+  font-size: 14px;
+}
+
+.FormLabel2 {
+  position: relative;
+  display: block;
+}
+
+.FormLabel2Input {
+  font-size: 16px;
+  height: 48px;
+  box-sizing: border-box;
+  width: 100%;
+  border: 1px solid rgb(222, 224, 224);
+  transition: border-color 0.2s ease 0s;
+  border-radius: 2px;
+  font-family: Roboto, "Helvetica Neue", Helvetica, "Segoe UI", Arial, sans-serif;
+  color: rgb(63, 64, 64);
+  letter-spacing: 0.2px;
+  padding: 0px 12px;
+  line-height: normal;
+  padding-right: 50px;
+}
+
+.showPassword {
+  position: absolute;
+  right: 12px;
+  bottom: 10px;
+  line-height: normal;
+  display: block;
+}
+
+.showPasswordButton {
+  font-size: 14px;
+  min-height: 28px;
+  background-color: transparent;
+  border: none;
+  border-radius: 2px;
+  color: rgb(0, 119, 158);
+  cursor: pointer;
+  font-family: Roboto, "Helvetica Neue", Helvetica, "Segoe UI", Arial, sans-serif;
+  line-height: 1;
+  text-align: left;
+  padding: 4px 0px;
+}
+
+.VerifyAuthInputFormField {
+  display: flex;
+  flex-direction: column;
+  margin: 16px 0px;
+  color: rgb(88, 89, 89);
+  margin-bottom: 0px;
+}
+
+.VerifyAuthButtonContainer {
+  display: block;
+}
+
+.VerifyAuthButtonContainer :hover {
+  opacity: 0.9;
+  background-color: rgb(0, 145, 200);
+}
+
+.VerifyAuthButton {
+  font-size: 16px;
+  line-height: 20px;
+  padding: 0px 20px;
+  margin: 0px;
+  height: 48px;
+  min-width: 112px;
+  font-weight: 400;
+  font-family: Roboto, "Helvetica Neue", Helvetica, "Segoe UI", Arial, sans-serif;
+  border-radius: 2px;
+  letter-spacing: 0.4px;
+  box-shadow: none;
+  text-shadow: none;
+  text-transform: capitalize;
+  border: none;
+  cursor: pointer;
+  outline-offset: -5px;
+  color: white;
+  background-color: rgb(0, 147, 195);
+  width: 100%;
+  overflow-wrap: break-word;
+}
+
+.VerifyAuthButtonSpan {
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 400;
+  font-family: Roboto, "Helvetica Neue", Helvetica, "Segoe UI", Arial, sans-serif;
+  text-shadow: none;
+  text-transform: capitalize;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+  color: white;
+}
+
+/* Css for New User page */
+
+.parentNewUserContainer{
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 376px;
+  margin: 2% auto;
+  line-height: 1.5;
+  border-radius: 4px;
+  position: relative;
+  background-color: rgb(255, 255, 255);
+  font-family: Roboto, 'Helvetica Neue', Helvetica, 'Segoe UI', Arial, sans-serif;
+  box-shadow: rgba(45, 46, 46, 0.08) 0px 4px 16px 0px, rgba(45, 46, 46, 0.1) 0px 0px 4px 0px;
+}
+
+
 /* ///////////////////////////////////////CSS for SideBar//////////////////////////////////////////// */
 
 .filterHeading {
@@ -80,7 +345,7 @@
   height: 7vh;
   font-size: 14px;
   font-weight: bold;
-  margin-top:5%;
+  margin-top: 5%;
 }
 
 .pfilterHeading {
@@ -94,7 +359,7 @@
 .left-panel {
   padding-top: 1%;
   position: fixed;
-  background-color:#f7f8fa;
+  background-color: #f7f8fa;
   height: 86vh;
   overflow-y: scroll;
   width: 18vw;
@@ -110,14 +375,14 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px grey; 
+  box-shadow: inset 0 0 5px grey;
   border-radius: 10px;
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  
-  background:#01070d;  
+
+  background: #01070d;
   border-radius: 10px;
 }
 
@@ -164,12 +429,12 @@
 .form-range::-ms-thumb {
   background: #01070d;
 }
-.form-check-sidebar
-{
+
+.form-check-sidebar {
   padding: 5px;
 }
-.form-check-input
-{
+
+.form-check-input {
   padding: 5px;
 }
 
@@ -205,10 +470,10 @@
 
 .button6 {
   height: 5vh;
-  width:9vw;
+  width: 9vw;
   background-color: #01070d;
   border: none;
-  color:white;
+  color: white;
   padding: 6px 15px 15px 15px;
   margin: 10px 7px 10px 10px;
   text-align: center;
@@ -219,12 +484,13 @@
   border-radius: 12px;
   opacity: 8;
 }
-.button6:hover{
+
+.button6:hover {
   color: white;
   opacity: 0.8;
 }
 
-.accordian{
+.accordian {
   margin-top: 10%;
 }
 
@@ -260,7 +526,7 @@
 }
 
 .NavbarSearch {
-  height:10vh;
+  height: 10vh;
   margin-left: 34%;
   margin-top: 0.1px;
   display: flex;
@@ -271,41 +537,43 @@
   font-weight: 600;
   border-radius: none;
 }
-.search{
+
+.search {
   width: 34vw;
   height: 6.2vh;
-  margin-top:0%;
+  margin-top: 0%;
   margin-left: 0px;
   padding-left: 4.5%;
   border-top-left-radius: 0px;
-  background-color:#020911 ;
-  border:grey;
+  background-color: #020911;
+  border: grey;
   border-width: 0.8px;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
   color: white;
-  border-style:solid;
-  
+  border-style: solid;
+
 }
-.search-icon{
+
+.search-icon {
   align-items: center;
   padding-top: 1.3%;
   width: 3vw;
   height: 6vh;
-  margin-top:0%;
+  margin-top: 0%;
   padding-left: 2.3%;
   padding-bottom: 2%;
   margin-left: 2px;
   border-radius: 0px;
   border-top-left-radius: 10%;
   border-bottom-left-radius: 10%;
-  background-color:white;
+  background-color: white;
 }
 
 
 .profile {
   background-color: #020911;
-  opacity:1;
+  opacity: 1;
   width: 0%;
   height: 10vh;
   display: flex;
@@ -314,31 +582,34 @@
   margin-left: 97%;
 }
 
-.profileUserName{
+.profileUserName {
   background-color: #020911;
   border: none;
-  
-}
-.profileUserName :hover {
- opacity: 1;
- background-color: #020911;
+
 }
 
-.googleImage{
+.profileUserName :hover {
+  opacity: 1;
+  background-color: #020911;
+}
+
+.googleImage {
   height: 30%;
   width: 3vw;
   border-radius: 100%;
   padding: 0px;
   margin: 0px;
   margin-right: 10%;
-  
+
 }
+
 .dropdown-menu {
   margin: 0px;
   padding: 0px;
   min-width: 6vw !important;
   max-height: 6vh !important;
 }
+
 .userIcon {
   margin-right: 6%;
 }
@@ -365,10 +636,10 @@
 
 .button4 {
   height: 5vh;
-  width:9vw;
+  width: 9vw;
   background-color: #01070d;
   border: none;
-  color:white;
+  color: white;
   padding: 6px 15px 15px 15px;
   margin: 0px 0px 0px 45px;
   text-align: center;
@@ -379,10 +650,12 @@
   cursor: pointer;
   border-radius: 12px;
 }
-.button4:hover{
+
+.button4:hover {
   color: white;
   opacity: 0.8;
 }
+
 .employees {
   font-size: 14px;
   font-weight: bold;
@@ -398,7 +671,7 @@
 
 .actions-admin {
   height: 7%;
-  margin-top:0.9%;
+  margin-top: 0.9%;
   color: white;
   background-color: #01070d;
   display: flex;
@@ -408,6 +681,7 @@
   width: 82.8%;
   position: fixed;
 }
+
 .actions-manager {
   height: 7%;
   margin-top: 0.9%;
@@ -432,7 +706,7 @@
   margin-bottom: 4px;
 }
 
-.buttons-manager-dashboard{
+.buttons-manager-dashboard {
   display: flex;
   flex-direction: row;
   gap: 4%;
@@ -446,27 +720,29 @@
   width: 81.7vw;
   margin-top: 5.2%;
   overflow-y: auto;
-  background-color:#ffffff;
+  background-color: #ffffff;
 
 }
 
-.tableHeader{
+.tableHeader {
   position: sticky;
   top: 0px;
-  background-color:#ffffff;
+  background-color: #ffffff;
 }
 
-.pointer-to-profile{
-  text-align:left;
-  color:#489fb5;
+.pointer-to-profile {
+  text-align: left;
+  color: #489fb5;
   width: 18%;
-  
+
 }
-.table-align-left{
-  text-align:left;
+
+.table-align-left {
+  text-align: left;
   /* padding-left: 9%; */
 }
-.block-checkbox{
+
+.block-checkbox {
   display: block;
   position: relative;
   padding-left: 35px;
@@ -480,23 +756,23 @@
   user-select: none;
 }
 
-.pointer-to-profile:hover{
-  cursor:pointer;
-  transition:ease-in-out 0.01s;
+.pointer-to-profile:hover {
+  cursor: pointer;
+  transition: ease-in-out 0.01s;
 
 }
 
-.nopointer-to-profile{
-  cursor:context-menu;
+.nopointer-to-profile {
+  cursor: context-menu;
 }
 
-.button7{
-  background-color:#e6e8eb;
+.button7 {
+  background-color: #e6e8eb;
   border-radius: 30px;
   border: none;
 }
 
-.button8{
+.button8 {
   border: none;
   background-color: white;
   font-weight: bold;
@@ -507,7 +783,7 @@
   width: 0vw;
   background-color: white;
   border: none;
-  color:black;
+  color: black;
   padding: 1px 1px 1px 0px;
   text-align: center;
   display: inline-block;
@@ -519,22 +795,23 @@
   opacity: 8;
   border-radius: 40px;
 }
-.button5:hover{
+
+.button5:hover {
   opacity: 0.8;
 }
 
 thead button {
   text-align: left;
   background-color: white;
-  border:none;
-  font-weight:bold;
+  border: none;
+  font-weight: bold;
   font-size: inherit;
   padding-left: 0px;
   padding-right: 0px;
 }
 
-thead button::after{
-  content:'⇅';
+thead button::after {
+  content: '⇅';
   margin-left: 1em;
 }
 
@@ -575,7 +852,7 @@ tbody tr:hover {
   border-radius: 12px;
 }
 
-.button2:hover{
+.button2:hover {
   opacity: 0.8;
 }
 
@@ -593,11 +870,12 @@ tbody tr:hover {
   cursor: pointer;
   border-radius: 12px;
 }
-.button3:hover{
+
+.button3:hover {
   opacity: 0.8;
 }
 
-.btn-mngr{
+.btn-mngr {
   margin-top: 4%;
   margin-left: 21%;
   margin-bottom: 4%;
@@ -610,18 +888,19 @@ tbody tr:hover {
 .thread1 {
   text-align: center;
 }
+
 /*///////////////////////////////////////////// CSS FOR VIEW EMPLOYEE////////////////////////////////////// */
 
-.profile-window{
+.profile-window {
   display: flex;
   flex-direction: column;
-  gap:0 px
+  gap: 0 px
 }
 
-.viewprofile-heading{
+.viewprofile-heading {
   display: flex;
   flex-direction: row;
-  gap:35%;
+  gap: 35%;
   position: fixed;
   background-color: #01070d;
   color: white;
@@ -630,73 +909,75 @@ tbody tr:hover {
   padding: 0.2% 0% 0% 0.1%;
 }
 
-.profile-photo{
+.profile-photo {
   align-items: center;
   height: 25vh;
   width: 25vh;
   margin: 1% 6% 1% 44%;
 }
 
-.shadow1{
+.shadow1 {
   margin: 8% 4.5% 0% 4.5%;
-  background-color:#e1e1de;
+  background-color: #e1e1de;
   box-shadow: 5px 5px 5px 5px rgb(125, 125, 125);
 }
 
-.shadow2{
+.shadow2 {
   margin: 0% 4.5% 0% 4.5%;
-  background-color:#e1e1de;
+  background-color: #e1e1de;
   box-shadow: 5px 5px 5px 5px rgb(125, 125, 125);
 }
 
-.profile-headings{
+.profile-headings {
   padding-left: 1%;
   margin-top: 0.5%;
   margin-bottom: 3%;
   background-color: #fcfcfa;
-  text-align:left;
+  text-align: left;
   font-size: larger;
-  font-weight:500;
+  font-weight: 500;
   color: white;
 }
 
-.details-personal{
+.details-personal {
   display: flex;
   flex-direction: row;
-  gap:25%;
-}
-.details-work{
-  display: flex;
-  flex-direction: row;
-  gap:23%;
-}
-.details-interview{
-  display: flex;
-  flex-direction: row;
-  gap:27%;
+  gap: 25%;
 }
 
-.labels{
-  color:rgb(146, 144, 144);
+.details-work {
+  display: flex;
+  flex-direction: row;
+  gap: 23%;
+}
+
+.details-interview {
+  display: flex;
+  flex-direction: row;
+  gap: 27%;
+}
+
+.labels {
+  color: rgb(146, 144, 144);
   margin-bottom: 0px;
-  
+
 }
 
-.content{
+.content {
   color: rgb(67, 66, 66);
   margin-top: 0px;
 }
 
 /* ////////////////////////CSS FOR VIEWREPORT//////////////////////////////////////////// */
-.view-report{
- display: flex;
- flex-direction:column;
+.view-report {
+  display: flex;
+  flex-direction: column;
 }
 
-.report-heading{
+.report-heading {
   display: flex;
   flex-direction: row;
-  gap:17.5%;
+  gap: 17.5%;
   position: fixed;
   background-color: #01070d;
   color: white;
@@ -705,29 +986,31 @@ tbody tr:hover {
   padding: 0% 0% 0% 0%;
 }
 
-.h5heading{
+.h5heading {
   padding-left: 6%;
   padding-right: 5.5%;
 }
-.reload{
+
+.reload {
   height: 5vh;
   width: 2vw;
   margin-left: 0%;
-  background-color:#01070d;
+  background-color: #01070d;
   color: white;
   border: 3px;
-  padding-left:0;
+  padding-left: 0;
 }
 
-.representations{
+.representations {
   position: fixed;
   margin-top: 7%;
   padding: 1%;
   display: flex;
   flex-direction: row;
-  gap:0.1%;
+  gap: 0.1%;
 }
-.pie-chart{
+
+.pie-chart {
   position: fixed;
   background-color: white;
   padding: 1% 2% 5% 3%;
@@ -736,7 +1019,7 @@ tbody tr:hover {
   box-shadow: 2px 2px 5px 2px #989a9c;
 }
 
-.bar-graph{
+.bar-graph {
   position: fixed;
   height: 82vh;
   width: 57vw;
