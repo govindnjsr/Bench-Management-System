@@ -16,13 +16,7 @@ export default function NewUser() {
     const [imageURL, setImageURL] = useState(null);
     const [otp, setOTP] = useState("");
     const { REACT_APP_URL } = process.env;
-    // useEffect(generateQR, [imageURL]);
 
-    // const verifyLogin = () => {
-    //     return (
-    //         <ExistingUser/>
-    //     )
-    // }
     function generateQR() {
         // const secret = 'KVKFKRCPNZQUYMLXOVYDSQKJKZDTSRLD';
         // authenticator.options = {
@@ -67,31 +61,40 @@ export default function NewUser() {
     };
 
     return (
-        authData.isAuthentication ?
+        authData.isAuthentication && authData.mfaEnabled == false ?
             <div className='loginContainer'>
                 <div>
                     <img className='logoContainer' src={logoImage} alt="accoliteLogo" />
                 </div>
-                <div className='loginPageContent'>
-                <div className='welcomeHeading'>
-                    <p>1. Open Authenticator app and scan QR bellow</p>
-                    {imageURL !== null && (
-                        <div>
-                            <img alt="qr" src={imageURL}></img>
+                <div className='VerifyContainerMain'>
+                    <div className='parentNewUserContainer'>
+                        <div className='parentLogoContainer'>
+                            <div className='logoContainer'>
+                                <img className='logoImage' src="https://cdn01.onelogin.com/images/brands/logos/login/eaca719f175ab8206ef09707f29ecd2377c9cf29.png?1652130055" alt="accolite-logo" />
+                            </div>
                         </div>
-                    )}
-                </div>
-                <div id='loginButton'>
-                    <p>
-                        2. Input OTP then click <b>Enable MFA</b>
-                    </p>
-                    <input
-                        type="text"
-                        value={otp}
-                        onChange={(e) => setOTP(e.target.value)}
-                    />
-                    <button onClick={verifyOTP}>Enable MFA</button>
-                </div>
+                        <div className="">
+                            <span>Open Authenticator app and scan QR bellow</span>
+                            {imageURL !== null && (
+                                <div className='qrcodeImageContainer'>
+                                    <img alt="qr" src={imageURL}></img>
+                                </div>
+                            )}
+                            <p>Or Paste the Secret Key manually</p>
+                            <span>{newUser.otpSecret}</span>
+                        </div>
+                        <div id='loginButton'>
+                            <p>
+                                Input OTP then click <b>Verify</b>
+                            </p>
+                            <input
+                                type="text"
+                                value={otp}
+                                onChange={(e) => setOTP(e.target.value)}
+                            />
+                            <button onClick={verifyOTP}>Verify</button>
+                        </div>
+                    </div>
                 </div>
             </div>
             :
