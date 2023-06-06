@@ -16,7 +16,7 @@ export default function NewUser() {
     const [imageURL, setImageURL] = useState(null);
     const [otp, setOTP] = useState("");
     const { REACT_APP_URL } = process.env;
-
+    const [passwordType, setPasswordType] = useState("password")
     function generateQR() {
         // const secret = 'KVKFKRCPNZQUYMLXOVYDSQKJKZDTSRLD';
         // authenticator.options = {
@@ -74,26 +74,57 @@ export default function NewUser() {
                             </div>
                         </div>
                         <div className="">
-                            <span>Open Authenticator app and scan QR bellow</span>
+                            <span className='SecretKeySpan'>Open Authenticator app and scan QR bellow</span>
                             {imageURL !== null && (
                                 <div className='qrcodeImageContainer'>
                                     <img alt="qr" src={imageURL}></img>
                                 </div>
                             )}
-                            <p>Or Paste the Secret Key manually</p>
-                            <span>{newUser.otpSecret}</span>
+                            <div className='SecretKeyContainer'>
+                                <span id='SecretKeySpanSeparator'>or</span>
+                                <span className='SecretKeySpan'>Paste the Secret Key manually</span>
+                                <span className='SecretKeySpan2'>{newUser.otpSecret}</span>
+                            </div>
                         </div>
-                        <div id='loginButton'>
-                            <p>
-                                Input OTP then click <b>Verify</b>
-                            </p>
-                            <input
-                                type="text"
-                                value={otp}
-                                onChange={(e) => setOTP(e.target.value)}
-                            />
-                            <button onClick={verifyOTP}>Verify</button>
-                        </div>
+                        <form className='VerifyAuthInputForm'>
+                            <div className='VerifyAuthInputFormChild1'>
+                                <div className='NewUserAuthInputFormLabel'>
+                                    <div className='FormLabel1'>
+                                        <label className='FormLabel1Child' htmlFor="security-code">
+                                            <span>
+                                                Verification code
+                                            </span>
+                                        </label>
+                                    </div>
+                                    <div className='FormLabel2'>
+                                        <input
+                                            className='FormLabel2Input'
+                                            type={passwordType}
+                                            autoComplete='off'
+                                            autoCorrect='off'
+                                            spellCheck='false'
+                                            maxLength={6}
+                                            id='security-code'
+                                            value={otp}
+                                            placeholder='Enter six digit code'
+                                            onChange={(e) => setOTP(e.target.value)}
+                                        />
+                                        <div className='showPassword'>
+                                            <button className='showPasswordButton' type='button' onClick={(e) => { if (passwordType === "password") setPasswordType("text"); else setPasswordType("password") }}>
+                                                <span>{passwordType === "password" ? "Show" : "Hide"}</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className='VerifyAuthInputFormField'>
+                                    <div className='VerifyAuthButtonContainer'>
+                                        <button className='VerifyAuthButton' type='button' onClick={verifyOTP}>
+                                            <span className='VerifyAuthButtonSpan'>Verify</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

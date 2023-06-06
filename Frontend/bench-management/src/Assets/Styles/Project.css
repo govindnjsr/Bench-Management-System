@@ -153,7 +153,6 @@
   background-color: rgb(255, 255, 255);
   border-bottom: 1px solid rgb(232, 234, 235);
   overflow-wrap: break-word;
-
 }
 
 .lockImage {
@@ -225,7 +224,7 @@
 }
 
 .FormLabel2Input {
-  font-size: 16px;
+  font-size: 14px;
   height: 48px;
   box-sizing: border-box;
   width: 100%;
@@ -316,12 +315,12 @@
 
 /* Css for New User page */
 
-.parentNewUserContainer{
+.parentNewUserContainer {
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
   width: 376px;
-  margin: 2% auto;
+  margin: 1.5% auto;
   line-height: 1.5;
   border-radius: 4px;
   position: relative;
@@ -330,6 +329,37 @@
   box-shadow: rgba(45, 46, 46, 0.08) 0px 4px 16px 0px, rgba(45, 46, 46, 0.1) 0px 0px 4px 0px;
 }
 
+.SecretKeyContainer {
+  font-size: 15px;
+  letter-spacing: 0.4px;
+  color: rgb(63, 64, 64);
+  border-bottom: 1px solid rgb(232, 234, 235);
+  padding-bottom: 10px;
+}
+
+#SecretKeySpanSeparator {
+  font-weight: bold;
+  padding-top: 0px;
+}
+
+.SecretKeySpan {
+  display: block;
+  font-size: 14px;
+  color: gray;
+}
+
+.SecretKeySpan2 {
+  font-size: 13px;
+  font-weight: bolder;
+}
+
+.NewUserAuthInputFormLabel{
+  margin-top: 0px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1px;
+  color: rgb(88, 89, 89);
+}
 
 /* ///////////////////////////////////////CSS for SideBar//////////////////////////////////////////// */
 
